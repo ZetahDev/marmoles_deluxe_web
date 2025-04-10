@@ -32,10 +32,15 @@ jobs:
       - name: Create .nojekyll file
         run: touch ./dist/.nojekyll
 
+      - name: Copy asset images to dist/images directory
+        run: |
+          mkdir -p ./dist/images
+          cp -r ./src/assets/images/* ./dist/images/
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          cname: # si tienes un dominio personalizado, agrégalo aquí
+          cname: # si tienes un dominio personalizado, agrégalo aquí (ejemplo: marmoles-deluxe.com)
           force_orphan: true

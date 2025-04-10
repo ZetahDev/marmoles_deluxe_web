@@ -135,13 +135,22 @@ export const quartzProducts = [
   },
 ];
 
+// Función para obtener la ruta correcta de la imagen con la URL base
+function getImagePath(path: string): string {
+  // Extraer solo el nombre del archivo
+  const filename = path.split("/").pop();
+  // Construir la ruta con la URL base (en tiempo de ejecución)
+  const BASE_URL = "/marmoles_deluxe_web";
+  return `${BASE_URL}/images/${filename}`;
+}
+
 export const sinteredStoneProducts = [
   {
     name: "Artisan Silk",
     description: "Piedra sinterizada con un acabado sedoso y elegante.",
     images: [
-      "/src/assets/images/Artisan_Silk.png",
-      "/src/assets/images/Artisan_Silk_designs.png",
+      getImagePath("/src/assets/images/Artisan_Silk.png"),
+      getImagePath("/src/assets/images/Artisan_Silk_designs.png"),
     ],
     features: ["Ultra resistente", "100% reciclable", "Resistente a UV"],
   },
@@ -150,8 +159,8 @@ export const sinteredStoneProducts = [
     description:
       "Piedra sinterizada negra con un acabado sedoso y sofisticado.",
     images: [
-      "/src/assets/images/Black_Obssesion_Silk.png",
-      "/src/assets/images/Black_Obsession_Silk_designs.png",
+      getImagePath("/src/assets/images/Black_Obssesion_Silk.png"),
+      getImagePath("/src/assets/images/Black_Obsession_Silk_designs.png"),
     ],
     features: ["Resistente a rayos UV", "No se mancha", "Apto para exterior"],
   },
@@ -160,8 +169,8 @@ export const sinteredStoneProducts = [
     description:
       "Piedra sinterizada con un diseño inspirado en el mármol Rapolano.",
     images: [
-      "/src/assets/images/Rapolano_Silk.png",
-      "/src/assets/images/Rapolano_Silk_designs.png",
+      getImagePath("/src/assets/images/Rapolano_Silk.png"),
+      getImagePath("/src/assets/images/Rapolano_Silk_designs.png"),
     ],
     features: [
       "Durabilidad excepcional",
@@ -173,8 +182,8 @@ export const sinteredStoneProducts = [
     name: "White Sands Silk",
     description: "Piedra sinterizada blanca con un acabado suave y moderno.",
     images: [
-      "/src/assets/images/WhiteSands_Silk.png",
-      "/src/assets/images/WhiteSands_Silk_designs.png",
+      getImagePath("/src/assets/images/WhiteSands_Silk.png"),
+      getImagePath("/src/assets/images/WhiteSands_Silk_designs.png"),
     ],
     features: [
       "Estilo contemporáneo",
