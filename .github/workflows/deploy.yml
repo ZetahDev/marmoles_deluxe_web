@@ -23,8 +23,13 @@ jobs:
       - name: Build Astro project
         run: npm run build
 
+      - name: Create .nojekyll file
+        run: touch ./dist/.nojekyll
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+          cname: # si tienes un dominio personalizado, agrégalo aquí
+          force_orphan: true
