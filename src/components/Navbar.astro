@@ -41,12 +41,15 @@ const currentPath = Astro.url.pathname;
         {
           navItems.map(({ href, label }) => (
             <a
-              href={href}
+              href={import.meta.env.BASE_URL + href.slice(1)}
               class:list={[
                 "text-sm font-medium transition-colors hover:text-marmoles-gold relative group",
                 {
-                  "text-marmoles-gold": currentPath === href,
-                  "text-gray-800": currentPath !== href,
+                  "text-marmoles-gold":
+                    currentPath === href || currentPath.endsWith(href),
+                  "text-gray-800": !(
+                    currentPath === href || currentPath.endsWith(href)
+                  ),
                 },
               ]}
             >
@@ -67,12 +70,15 @@ const currentPath = Astro.url.pathname;
         {
           navItems.map(({ href, label }) => (
             <a
-              href={href}
+              href={import.meta.env.BASE_URL + href.slice(1)}
               class:list={[
                 "block text-sm font-medium transition-colors hover:text-marmoles-gold",
                 {
-                  "text-marmoles-gold": currentPath === href,
-                  "text-gray-800": currentPath !== href,
+                  "text-marmoles-gold":
+                    currentPath === href || currentPath.endsWith(href),
+                  "text-gray-800": !(
+                    currentPath === href || currentPath.endsWith(href)
+                  ),
                 },
               ]}
             >

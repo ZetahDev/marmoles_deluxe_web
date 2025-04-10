@@ -8,4 +8,14 @@ export default defineConfig({
   integrations: [tailwind(), react()],
   site: 'https://zetahdev.github.io',
   base: '/marmoles_deluxe_web/',
+  vite: {
+    build: {
+      assetsDir: 'assets',
+      rollupOptions: {
+        output: {
+          assetFileNames: 'assets/[name].[hash][extname]'
+        }
+      }
+    }
+  }
 });
