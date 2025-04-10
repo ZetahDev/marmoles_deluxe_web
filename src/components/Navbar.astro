@@ -1,0 +1,112 @@
+---
+const navItems = [
+  { href: "/", label: "Inicio" },
+  { href: "/marmoles", label: "Mármoles" },
+  { href: "/granito", label: "Granito" },
+  { href: "/quartzstone", label: "Quartzstone" },
+  { href: "/piedra-sinterizada", label: "Piedra Sinterizada" },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header
+  class="fixed w-full top-0 left-0 z-50 backdrop-blur-md border-b border-white/20"
+>
+  <nav class="container mx-auto px-4">
+    <div class="flex items-center justify-between h-16">
+      <!-- Botón de menú móvil -->
+      <button
+        class="md:hidden p-2 text-gray-800 hover:text-marmoles-gold transition-colors"
+        id="mobile-menu-button"
+        aria-label="Menú"
+      >
+        <svg
+          class="h-6 w-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+
+      <!-- Menú para escritorio -->
+      <div class="hidden md:flex items-center justify-center space-x-12">
+        {
+          navItems.map(({ href, label }) => (
+            <a
+              href={href}
+              class:list={[
+                "text-sm font-medium transition-colors hover:text-marmoles-gold relative group",
+                {
+                  "text-marmoles-gold": currentPath === href,
+                  "text-gray-800": currentPath !== href,
+                },
+              ]}
+            >
+              {label}
+              <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-marmoles-gold transition-all duration-300 group-hover:w-full" />
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Menú móvil -->
+    <div
+      class="hidden md:hidden absolute top-16 left-0 bg-white/80 backdrop-blur-md border-b border-white/20"
+      id="mobile-menu"
+    >
+      <div class="px-4 py-3 space-y-3">
+        {
+          navItems.map(({ href, label }) => (
+            <a
+              href={href}
+              class:list={[
+                "block text-sm font-medium transition-colors hover:text-marmoles-gold",
+                {
+                  "text-marmoles-gold": currentPath === href,
+                  "text-gray-800": currentPath !== href,
+                },
+              ]}
+            >
+              {label}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const mobileMenuButton = document.getElementById("mobile-menu-button");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  mobileMenuButton?.addEventListener("click", () => {
+    mobileMenu?.classList.toggle("hidden");
+  });
+
+  document.addEventListener("click", (event) => {
+    if (
+      mobileMenu &&
+      !mobileMenu.contains(event.target as Node) &&
+      !mobileMenuButton?.contains(event.target as Node)
+    ) {
+      mobileMenu.classList.add("hidden");
+    }
+  });
+</script>
+
+<style>
+  .backdrop-blur-md {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+</style>

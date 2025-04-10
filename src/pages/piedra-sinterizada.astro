@@ -1,0 +1,27 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ProductCard from "../components/ProductCard.tsx";
+import { sinteredStoneProducts } from "../lib/constants";
+---
+
+<Layout title="Piedra Sinterizada - Mármoles Deluxe">
+  <main class="py-20 pt-24">
+    <div class="container mx-auto px-4">
+      <h1 class="text-4xl md:text-5xl font-bold text-center mb-12">
+        Piedra Sinterizada
+      </h1>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {
+          sinteredStoneProducts.map((product) => (
+            <ProductCard client:load
+              name={product.name}
+              description={product.description}
+              images={product.images}
+              features={product.features}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </main>
+</Layout>
