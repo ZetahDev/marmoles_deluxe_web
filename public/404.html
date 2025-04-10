@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redireccionando...</title>
+    <script>
+      // Obtiene la ruta actual, sin incluir el dominio
+      const path = window.location.pathname;
+      // Si la ruta comienza con la ruta base, retira la ruta base para la redirección
+      const pathWithoutBase = path.startsWith("/marmoles_deluxe_web/")
+        ? path.slice("/marmoles_deluxe_web/".length)
+        : path;
+
+      // Redirige a la página de inicio si es necesario
+      window.location.href =
+        "/marmoles_deluxe_web/" +
+        (pathWithoutBase || "") +
+        window.location.search +
+        window.location.hash;
+    </script>
+  </head>
+  <body>
+    <p>Redireccionando...</p>
+  </body>
+</html>
