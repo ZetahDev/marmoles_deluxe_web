@@ -43,8 +43,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-75 hover:bg-opacity-100 h-9 w-9 rounded-full flex items-center justify-center z-10" />
-            <CarouselNext className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-75 hover:bg-opacity-100 h-9 w-9 rounded-full flex items-center justify-center z-10" />
+            <CarouselPrevious className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-75 hover:bg-opacity-100 h-9 w-9 rounded-full flex items-center justify-center z-10 text-marmoles-gold hover:text-marmoles-gold/80" />
+            <CarouselNext className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-75 hover:bg-opacity-100 h-9 w-9 rounded-full flex items-center justify-center z-10 text-marmoles-gold hover:text-marmoles-gold/80" />
           </Carousel>
 
           {price && (

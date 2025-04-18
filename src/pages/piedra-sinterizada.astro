@@ -1,7 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ProductCard from "../components/ProductCard.tsx";
-import { sinteredStoneProducts } from "../lib/constants";
+import { neolithStones, alteaStones } from "../components/PiedraSinterizada.astro";
+
+interface Stone {
+  name: string;
+  image: string;
+  design: string;
+}
 ---
 
 <Layout title="Piedra Sinterizada - Mármoles Deluxe">
@@ -10,14 +16,40 @@ import { sinteredStoneProducts } from "../lib/constants";
       <h1 class="text-4xl md:text-5xl font-bold text-center mb-12">
         Piedra Sinterizada
       </h1>
+      
+      <h2 class="text-3xl font-bold text-center mb-8">Neolith</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        {
+          neolithStones.map((stone: Stone) => (
+            <ProductCard client:load
+              name={stone.name}
+              description="Piedra sinterizada de alta calidad"
+              images={[stone.image, stone.design]}
+              features={[
+                "Resistente a manchas",
+                "Resistente al calor",
+                "Bajo mantenimiento",
+                "Durabilidad excepcional"
+              ]}
+            />
+          ))
+        }
+      </div>
+
+      <h2 class="text-3xl font-bold text-center mb-8">Altea</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {
-          sinteredStoneProducts.map((product) => (
+          alteaStones.map((stone: Stone) => (
             <ProductCard client:load
-              name={product.name}
-              description={product.description}
-              images={product.images}
-              features={product.features}
+              name={stone.name}
+              description="Piedra sinterizada de alta calidad"
+              images={[stone.image, stone.design]}
+              features={[
+                "Resistente a manchas",
+                "Resistente al calor",
+                "Bajo mantenimiento",
+                "Durabilidad excepcional"
+              ]}
             />
           ))
         }
