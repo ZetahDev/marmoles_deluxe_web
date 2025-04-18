@@ -1,0 +1,68 @@
+---
+// Array con los datos de los logos
+const logos = [
+  { name: "Altea", file: "Altea.png" },
+  { name: "Catemar", file: "catemar.png" },
+  { name: "Dekton", file: "dekton.png" },
+  { name: "Neolith", file: "neolith.webp" },
+  { name: "Sensa", file: "Sensa.webp" },
+  { name: "Silestone", file: "silestone.png" }
+];
+
+// Duplicamos el array para crear un desplazamiento continuo
+const allLogos = [...logos, ...logos];
+---
+
+<section class="bg-marmoles-black py-2 overflow-hidden">
+    <div class="logos-container">
+      <div class="logos-slide">
+        {
+          allLogos.map((logo) => (
+            <div class="logo-item">
+              <img 
+                src={import.meta.env.BASE_URL + "logos/" + logo.file} 
+                alt={`Logo de ${logo.name}`} 
+                class="h-10 w-auto object-contain filter brightness-0 invert opacity-80 hover:opacity-100 transition-opacity duration-300"
+              />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+</section>
+
+<style>
+  .logos-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 1rem 0;
+  }
+
+  .logos-slide {
+    display: flex;
+    gap: 3rem;
+    animation: slide 30s linear infinite;
+    width: max-content;
+  }
+
+  .logo-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @keyframes slide {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Pausa la animación al hacer hover */
+  .logos-container:hover .logos-slide {
+    animation-play-state: paused;
+  }
+</style> 
