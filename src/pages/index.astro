@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import { CarouselWrapper } from "../components/CarouselWrapper";
 import { TestimonialCarousel } from "../components/TestimonialCarousel";
+import ContactForm from "../components/ContactForm";
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
@@ -191,36 +192,7 @@ const projects = [
         Solicita tu Visita Técnica
       </h2>
       <div class="max-w-2xl mx-auto">
-        <form class="space-y-6">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <input
-              type="text"
-              placeholder="Nombre"
-              class="w-full px-4 py-2 border border-marmoles-gold rounded-lg focus:outline-none focus:ring-2 focus:ring-marmoles-gold"
-            />
-            <input
-              type="tel"
-              placeholder="Teléfono"
-              class="w-full px-4 py-2 border border-marmoles-gold rounded-lg focus:outline-none focus:ring-2 focus:ring-marmoles-gold"
-            />
-          </div>
-          <input
-            type="email"
-            placeholder="Email"
-            class="w-full px-4 py-2 border border-marmoles-gold rounded-lg focus:outline-none focus:ring-2 focus:ring-marmoles-gold"
-          />
-          <textarea
-            placeholder="Mensaje"
-            rows="4"
-            class="w-full px-4 py-2 border border-marmoles-gold rounded-lg focus:outline-none focus:ring-2 focus:ring-marmoles-gold"
-          ></textarea>
-          <button
-            type="submit"
-            class="w-full bg-marmoles-gold text-marmoles-black px-8 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all"
-          >
-            Enviar Solicitud
-          </button>
-        </form>
+        <ContactForm client:load />
       </div>
     </div>
   </section>

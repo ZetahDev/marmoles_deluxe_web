@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import ContactForm from "../components/ContactForm";
 ---
 
 <Layout title="Contáctanos - Mármoles Deluxe | Expertos en Piedras Naturales en Cali">
@@ -15,45 +16,9 @@ import Layout from "../layouts/Layout.astro";
       </header>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
-        <!-- Formulario de contacto -->
-        <div class="bg-white shadow-md p-6 sm:p-8 md:p-10 border-l-4 border-marmoles-gold">
-          <h2 class="text-xl sm:text-2xl font-bold text-marmoles-black mb-6">
-            Solicita tu Visita Técnica
-          </h2>
-          <form class="space-y-6">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <input
-                type="text"
-                placeholder="Nombre"
-                class="w-full px-4 py-2 border border-marmoles-gold rounded-lg focus:outline-none focus:ring-2 focus:ring-marmoles-gold"
-                required
-              />
-              <input
-                type="tel"
-                placeholder="Teléfono"
-                class="w-full px-4 py-2 border border-marmoles-gold rounded-lg focus:outline-none focus:ring-2 focus:ring-marmoles-gold"
-                required
-              />
-            </div>
-            <input
-              type="email"
-              placeholder="Email"
-              class="w-full px-4 py-2 border border-marmoles-gold rounded-lg focus:outline-none focus:ring-2 focus:ring-marmoles-gold"
-              required
-            />
-            <textarea
-              placeholder="Mensaje"
-              rows="4"
-              class="w-full px-4 py-2 border border-marmoles-gold rounded-lg focus:outline-none focus:ring-2 focus:ring-marmoles-gold"
-              required
-            ></textarea>
-            <button
-              type="submit"
-              class="w-full bg-marmoles-gold text-white px-8 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all"
-            >
-              Enviar Solicitud
-            </button>
-          </form>
+        <!-- Formulario de contacto con EmailJS -->
+        <div class="border-l-4 border-marmoles-gold">
+          <ContactForm client:load />
         </div>
 
         <!-- Información de contacto -->
@@ -160,18 +125,6 @@ import Layout from "../layouts/Layout.astro";
     </div>
   </main>
 </Layout>
-
-<script>
-  // Opcional: Agregar lógica para el envío del formulario
-  const form = document.querySelector('form');
-  form?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    // Aquí puedes agregar la lógica para enviar el formulario
-    // Por ejemplo, usando fetch para enviar a un endpoint
-    alert('Tu mensaje ha sido enviado. Te contactaremos pronto.');
-    form.reset();
-  });
-</script>
 
 <style>
   iframe {
