@@ -28,14 +28,20 @@ jobs:
 
       - name: Build Astro project
         run: npm run build
+        env:
+          # Asegúrate de que las URLs de S3 estén disponibles durante el build
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET || 'marmolesdeluxe' }}
+          AWS_REGION: ${{ secrets.AWS_REGION || 'us-east-2' }}
 
       - name: Create .nojekyll file
         run: touch ./dist/.nojekyll
 
-      - name: Copy asset images to dist/images directory
+      - name: Create logos directory for local assets
         run: |
-          mkdir -p ./dist/images
-          cp -r ./src/assets/images/* ./dist/images/
+          mkdir -p ./dist/logos
+          if [ -d "./public/logos" ]; then
+            cp -r ./public/logos/* ./dist/logos/
+          fi
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

@@ -84,7 +84,7 @@ import Layout from "../layouts/Layout.astro";
               </div>
               <div>
                 <h3 class="font-semibold text-marmoles-black mb-1">Teléfono</h3>
-                <p class="text-gray-700">+57 312 345 6789</p>
+                <p class="text-gray-700">+57 313 259 2793</p>
               </div>
             </div>
             
@@ -132,25 +132,31 @@ import Layout from "../layouts/Layout.astro";
       </div>
 
       <!-- Mapa -->
-      <div class="mb-16">
-        <div class="bg-white shadow-md p-6 sm:p-8 border-l-4 border-marmoles-gold">
-          <h2 class="text-xl sm:text-2xl font-bold text-marmoles-black mb-6 text-center">
+      <section class="py-20 bg-marmoles-white">
+        <div class="container mx-auto px-4">
+          <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
             Nuestra Ubicación
           </h2>
-          <div class="aspect-video w-full">
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d254508.51141489705!2d-76.5887764!3d3.4216263!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e30a6f0cc4bb3f1%3A0x1f0fb5e952ae6168!2sCali%2C%20Valle%20del%20Cauca!5e0!3m2!1ses!2sco!4v1718482893048!5m2!1ses!2sco" 
-              width="100%" 
-              height="100%" 
-              style="border:0;" 
-              allowfullscreen="" 
-              loading="lazy" 
+          <div class="w-full h-96 rounded-lg overflow-hidden shadow-lg">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.6549444444444!2d-76.53333333333333!3d3.433333333333333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e30a6c7c5c5c5c5%3A0x5c5c5c5c5c5c5c5c!2sCl.%2043a%20Nte.%20%235N%2069%2C%20COMUNA%204%2C%20Cali%2C%20Valle%20del%20Cauca!5e0!3m2!1ses!2sco!4v1620000000000!5m2!1ses!2sco"
+              width="100%"
+              height="100%"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
-              class="w-full h-full">
+            >
             </iframe>
           </div>
+          <div class="mt-8 text-center">
+            <p class="text-lg font-medium">Visítanos en nuestra sede principal</p>
+            <p class="text-marmoles-gold">
+              Cl. 43a Nte. #5N 69, COMUNA 4, Cali, Valle del Cauca
+            </p>
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   </main>
 </Layout>
