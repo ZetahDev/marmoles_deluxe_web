@@ -3,7 +3,7 @@ import "../styles/global.css";
 import { WhatsAppButton } from "../components/WhatsAppButton";
 import Navbar from "../components/Navbar.astro";
 import Footer from '../components/Footer.astro';
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
   title: string;
@@ -29,7 +29,7 @@ const {
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <ViewTransitions />
+    <ClientRouter />
   </head>
   <body class="flex flex-col min-h-screen bg-marmoles-white text-marmoles-black">
     <Navbar />

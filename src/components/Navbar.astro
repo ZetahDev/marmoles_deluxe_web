@@ -14,13 +14,19 @@ const navItems = [
       { href: "/piedra-sinterizada", label: "Piedra Sinterizada" },
     ]
   },
-  { href: "/productos", label: "Productos" },
+  //{ href: "/productos", label: "Productos" },
   { href: "/nosotros", label: "Nosotros" },
+  //{ href: "/otros-servicios", label: "Otros Servicios" },
   { href: "/contactanos", label: "Contáctanos" },
-  { href: "/otros-servicios", label: "Otros Servicios" },
 ];
 
 const currentPath = Astro.url.pathname;
+
+// Helper para verificar si la ruta actual está bajo Materiales
+const isCurrentPathUnderMateriales = () => {
+  const materialesItems = navItems.find(item => item.label === "Materiales")?.items || [];
+  return materialesItems.some(item => currentPath.startsWith(item.href));
+};
 ---
 
 <header
@@ -71,14 +77,8 @@ const currentPath = Astro.url.pathname;
                     class:list={[
                       "text-sm font-medium transition-colors relative group px-2 py-1",
                       {
-                        "text-marmoles-gold": currentPath.startsWith("/marmoles") || 
-                                            currentPath.startsWith("/granito") || 
-                                            currentPath.startsWith("/quartzstone") || 
-                                            currentPath.startsWith("/piedra-sinterizada"),
-                        "text-marmoles-gold/95": !(currentPath.startsWith("/marmoles") || 
-                                                 currentPath.startsWith("/granito") || 
-                                                 currentPath.startsWith("/quartzstone") || 
-                                                 currentPath.startsWith("/piedra-sinterizada")),
+                        "text-marmoles-gold": isCurrentPathUnderMateriales(),
+                        "text-marmoles-gold/95": !isCurrentPathUnderMateriales(),
                       },
                     ]}
                   >
