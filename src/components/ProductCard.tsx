@@ -29,22 +29,24 @@ const ProductCard: React.FC<ProductCardProps> = ({
       <div className="flex-1">
         <div className="relative h-72 w-full mb-8">
           <Carousel className="w-full h-full">
-            <CarouselContent className="flex">
+            <CarouselContent className="h-full">
               {images.map((image, index) => (
                 <CarouselItem
                   key={index}
-                  className="flex-shrink-0 object-cover"
+                  className="h-full w-full"
                 >
-                  <img
-                    src={image}
-                    alt={`${name} - image ${index + 1}`}
-                    className="h-full w-full object-fill"
-                  />
+                  <div className="w-full h-full overflow-hidden">
+                    <img
+                      src={image}
+                      alt={`${name} - image ${index + 1}`}
+                      className="h-full w-full object-fill object-bottom-left"
+                    />
+                  </div>
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-75 hover:bg-opacity-100 h-9 w-9 rounded-full flex items-center justify-center z-10 text-marmoles-gold hover:text-marmoles-gold/80" />
-            <CarouselNext className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-75 hover:bg-opacity-100 h-9 w-9 rounded-full flex items-center justify-center z-10 text-marmoles-gold hover:text-marmoles-gold/80" />
+            <CarouselPrevious className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-75 hover:bg-opacity-100 h-9 w-9 rounded-full flex items-center justify-center z-10 text-marmoles-gold hover:text-marmoles-gold border border-marmoles-gold/20 hover:border-marmoles-gold transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed" />
+            <CarouselNext className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-75 hover:bg-opacity-100 h-9 w-9 rounded-full flex items-center justify-center z-10 text-marmoles-gold hover:text-marmoles-gold border border-marmoles-gold/20 hover:border-marmoles-gold transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed" />
           </Carousel>
 
           {price && (
@@ -83,7 +85,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       </div>
 
       <div className="p-6 mt-auto">
-        <button className="w-full bg-marmoles-black text-white py-3 rounded-lg hover:bg-opacity-90 transition-colors duration-300">
+        <button className="w-full bg-marmoles-black text-white py-3 rounded-lg hover:bg-opacity-90 transition-colors duration-300 focus:ring-2 focus:ring-marmoles-gold focus:outline-none">
           Solicitar Información
         </button>
       </div>
