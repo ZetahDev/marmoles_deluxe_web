@@ -22,9 +22,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
+          cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build Astro project
         run: npm run build
@@ -35,6 +36,9 @@ jobs:
 
       - name: Create .nojekyll file
         run: touch ./dist/.nojekyll
+
+      - name: Copy CNAME file
+        run: cp ./public/CNAME ./dist/
 
       - name: Create logos directory for local assets
         run: |
