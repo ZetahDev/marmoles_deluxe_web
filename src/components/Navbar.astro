@@ -62,9 +62,9 @@ const isCurrentPathUnderMateriales = () => {
           navItems.map((item) => {
             if (item.isLogo) {
               return (
-                <a href={import.meta.env.BASE_URL + item.href.slice(1)}>
+                <a href={item.href}>
                   <img
-                    src={import.meta.env.BASE_URL + "images/logo.png"}
+                    src="/logo.png"
                     alt="Mármoles Deluxe Logo"
                     class="h-12 w-auto logo-gold"
                   />
@@ -91,7 +91,7 @@ const isCurrentPathUnderMateriales = () => {
                     {
                       item.items.map(({ href, label }) => (
                         <a
-                          href={import.meta.env.BASE_URL + href.slice(1)}
+                          href={href}
                           class="block px-4 py-2 text-sm text-gray-800 hover:text-marmoles-gold hover:bg-white/20"
                         >
                           {label}
@@ -104,7 +104,7 @@ const isCurrentPathUnderMateriales = () => {
             }
             return (
               <a
-                href={import.meta.env.BASE_URL + item.href.slice(1)}
+                href={item.href}
                 class:list={[
                   "text-sm font-medium transition-colors hover:text-marmoles-gold relative group",
                   {
@@ -135,9 +135,9 @@ const isCurrentPathUnderMateriales = () => {
           navItems.map((item) => {
             if (item.isLogo) {
               return (
-                <a href={import.meta.env.BASE_URL + item.href.slice(1)} class="block">
+                <a href={item.href} class="block">
                   <img
-                    src={import.meta.env.BASE_URL + "images/logo.png"}
+                    src="/logo.png"
                     alt="Mármoles Deluxe Logo"
                     class="h-12 w-auto mx-auto logo-gold"
                   />
@@ -157,7 +157,7 @@ const isCurrentPathUnderMateriales = () => {
                     {
                       item.items.map(({ href, label }) => (
                         <a
-                          href={import.meta.env.BASE_URL + href.slice(1)}
+                          href={href}
                           class="block text-sm font-medium text-gray-800 hover:text-marmoles-gold"
                         >
                           {label}
@@ -170,7 +170,7 @@ const isCurrentPathUnderMateriales = () => {
             }
             return (
               <a
-                href={import.meta.env.BASE_URL + item.href.slice(1)}
+                href={item.href}
                 class="block text-sm font-medium text-gray-800 hover:text-marmoles-gold"
               >
                 {item.label}

@@ -20,7 +20,7 @@ function getLogoUrl(fileName: string) {
     return `${s3BaseUrl}${fileName}`;
   }
   // En desarrollo, usa archivos locales
-  return `${import.meta.env.BASE_URL}logos/${fileName}`;
+  return `/logos/${fileName}`;
 }
 ---
 
