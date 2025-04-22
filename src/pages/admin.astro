@@ -1,0 +1,14 @@
+---
+import AdminLayout from "../layouts/AdminLayout.astro";
+import AdminLogin from "../components/admin/AdminLogin";
+import AdminDashboard from "../components/admin/AdminDashboard";
+---
+
+<AdminLayout title="Panel de Administrador - Mármoles Deluxe">
+  <div class="w-full max-w-7xl mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-8 text-center">Panel de Administrador</h1>
+    
+    <AdminLogin client:load />
+    <AdminDashboard client:load />
+  </div>
+</AdminLayout> 
