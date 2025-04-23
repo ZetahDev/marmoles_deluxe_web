@@ -140,7 +140,7 @@ function getImagePath(path: string): string {
   // Extraer solo el nombre del archivo
   const filename = path.split("/").pop();
   // Construir la ruta con la URL base (en tiempo de ejecución)
-  const BASE_URL = "/marmoles_deluxe_web";
+  const BASE_URL = "";
   return `${BASE_URL}/images/${filename}`;
 }
 

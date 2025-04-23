@@ -3,24 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Redireccionando...</title>
+    <title>Página no encontrada</title>
     <script>
-      // Obtiene la ruta actual, sin incluir el dominio
-      const path = window.location.pathname;
-      // Si la ruta comienza con la ruta base, retira la ruta base para la redirección
-      const pathWithoutBase = path.startsWith("/marmoles_deluxe_web/")
-        ? path.slice("/marmoles_deluxe_web/".length)
-        : path;
-
-      // Redirige a la página de inicio si es necesario
-      window.location.href =
-        "/marmoles_deluxe_web/" +
-        (pathWithoutBase || "") +
-        window.location.search +
-        window.location.hash;
+      // Redirige a la página de inicio
+      window.location.href = "/" + window.location.search + window.location.hash;
     </script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f9f9f9;
+      }
+      p {
+        font-size: 18px;
+      }
+    </style>
   </head>
   <body>
-    <p>Redireccionando...</p>
+    <p>Página no encontrada. Redireccionando a la página principal...</p>
   </body>
 </html>
