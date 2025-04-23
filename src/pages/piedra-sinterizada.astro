@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ProductCard from "../components/ProductCard.tsx";
-import { neolithStones, alteaStones } from "../components/PiedraSinterizada.astro";
+import { neolithStones, alteaStones, dektonStones, silestoneStones } from "../components/PiedraSinterizada.astro";
 
 interface Stone {
   name: string;
@@ -37,9 +37,47 @@ interface Stone {
       </div>
 
       <h2 class="text-3xl font-bold text-center mb-8">Altea</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
         {
           alteaStones.map((stone: Stone) => (
+            <ProductCard client:load
+              name={stone.name}
+              description="Piedra sinterizada de alta calidad"
+              images={[stone.image, stone.design]}
+              features={[
+                "Resistente a manchas",
+                "Resistente al calor",
+                "Bajo mantenimiento",
+                "Durabilidad excepcional"
+              ]}
+            />
+          ))
+        }
+      </div>
+
+      <h2 class="text-3xl font-bold text-center mb-8">Dekton</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        {
+          dektonStones.map((stone: Stone) => (
+            <ProductCard client:load
+              name={stone.name}
+              description="Piedra sinterizada de alta calidad"
+              images={[stone.image, stone.design]}
+              features={[
+                "Resistente a manchas",
+                "Resistente al calor",
+                "Bajo mantenimiento",
+                "Durabilidad excepcional"
+              ]}
+            />
+          ))
+        }
+      </div>
+
+      <h2 class="text-3xl font-bold text-center mb-8">Silestone</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {
+          silestoneStones.map((stone: Stone) => (
             <ProductCard client:load
               name={stone.name}
               description="Piedra sinterizada de alta calidad"
