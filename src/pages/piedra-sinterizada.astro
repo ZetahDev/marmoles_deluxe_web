@@ -9,6 +9,14 @@ interface Stone {
   design: string;
   features?: string[];
 }
+
+// Estructura para manejar todas las categorías de piedras
+const stoneCategories = [
+  { title: "Neolith", stones: neolithStones },
+  { title: "Altea", stones: alteaStones },
+  { title: "Dekton", stones: dektonStones },
+  { title: "Silestone", stones: silestoneStones }
+];
 ---
 
 <Layout title="Piedra Sinterizada - Mármoles Deluxe">
@@ -18,61 +26,25 @@ interface Stone {
         Piedra Sinterizada
       </h1>
       
-      <h2 class="text-3xl font-bold text-center mb-8">Neolith</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-        {
-          neolithStones.map((stone: Stone) => (
-            <ProductCard client:load
-              name={stone.name}
-              description="Piedra sinterizada de alta calidad"
-              images={[stone.image, stone.design]}
-              features={stone.features}
-            />
-          ))
-        }
-      </div>
-
-      <h2 class="text-3xl font-bold text-center mb-8">Altea</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-        {
-          alteaStones.map((stone: Stone) => (
-            <ProductCard client:load
-              name={stone.name}
-              description="Piedra sinterizada de alta calidad"
-              images={[stone.image, stone.design]}
-              features={stone.features}
-            />
-          ))
-        }
-      </div>
-
-      <h2 class="text-3xl font-bold text-center mb-8">Dekton</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-        {
-          dektonStones.map((stone: Stone) => (
-            <ProductCard client:load
-              name={stone.name}
-              description="Piedra sinterizada de alta calidad"
-              images={[stone.image, stone.design]}
-              features={stone.features}
-            />
-          ))
-        }
-      </div>
-
-      <h2 class="text-3xl font-bold text-center mb-8">Silestone</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {
-          silestoneStones.map((stone: Stone) => (
-            <ProductCard client:load
-              name={stone.name}
-              description="Piedra sinterizada de alta calidad"
-              images={[stone.image, stone.design]}
-              features={stone.features}
-            />
-          ))
-        }
-      </div>
+      {
+        stoneCategories.map((category, index) => (
+          <div>
+            <h2 class="text-3xl font-bold text-center mb-8">{category.title}</h2>
+            <div class={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ${index < stoneCategories.length - 1 ? 'mb-16' : ''}`}>
+              {
+                category.stones.map((stone: Stone) => (
+                  <ProductCard client:load
+                    name={stone.name}
+                    description="Piedra sinterizada de alta calidad"
+                    images={[stone.image, stone.design]}
+                    features={stone.features}
+                  />
+                ))
+              }
+            </div>
+          </div>
+        ))
+      }
     </div>
   </main>
 </Layout>

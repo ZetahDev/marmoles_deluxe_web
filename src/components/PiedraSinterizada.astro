@@ -1,166 +1,67 @@
 ---
 import { neolithStones, alteaStones, dektonStones, silestoneStones, neolithFeatures, alteaFeatures, dektonFeatures, silestoneFeatures } from "../data/piedrasData";
+
+// Estructura para manejar todas las categorías de piedras
+const stoneCategories = [
+  { title: "Neolith", stones: neolithStones, features: neolithFeatures },
+  { title: "Altea", stones: alteaStones, features: alteaFeatures },
+  { title: "Dekton", stones: dektonStones, features: dektonFeatures },
+  { title: "Silestone", stones: silestoneStones, features: silestoneFeatures }
+];
 ---
 
 <div class="container mx-auto px-4 py-16">
-  <h2 class="text-3xl font-bold text-center mb-12">Neolith</h2>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-    {
-      neolithStones.map((stone) => (
-        <div class="group relative overflow-hidden rounded-lg shadow-lg">
-          <div class="relative h-64 overflow-hidden">
-            <img
-              src={stone.image}
-              alt={stone.name}
-              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-            />
-            <img
-              src={stone.design}
-              alt={`${stone.name} design`}
-              class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-            />
-          </div>
-          <div class="absolute bottom-0 left-0 right-0 bg-black/70 text-white p-4 transform translate-y-full transition-transform duration-300 group-hover:translate-y-0">
-            <h3 class="text-lg font-semibold">{stone.name}</h3>
-          </div>
+  {
+    stoneCategories.map((category, index) => (
+      <div>
+        <h2 class={`text-3xl font-bold text-center ${index > 0 ? 'my-12' : 'mb-12'}`}>{category.title}</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {
+            category.stones.map((stone) => (
+              <div class="group relative overflow-hidden rounded-lg shadow-lg">
+                <div class="relative h-64 overflow-hidden">
+                  <img
+                    src={stone.image}
+                    alt={stone.name}
+                    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <img
+                    src={stone.design}
+                    alt={`${stone.name} design`}
+                    class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  />
+                </div>
+                <div class="absolute bottom-0 left-0 right-0 bg-black/70 text-white p-4 transform translate-y-full transition-transform duration-300 group-hover:translate-y-0">
+                  <h3 class="text-lg font-semibold">{stone.name}</h3>
+                </div>
+              </div>
+            ))
+          }
         </div>
-      ))
-    }
-  </div>
-
-  <h2 class="text-3xl font-bold text-center my-12">Altea</h2>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-    {
-      alteaStones.map((stone) => (
-        <div class="group relative overflow-hidden rounded-lg shadow-lg">
-          <div class="relative h-64 overflow-hidden">
-            <img
-              src={stone.image}
-              alt={stone.name}
-              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-            />
-            <img
-              src={stone.design}
-              alt={`${stone.name} design`}
-              class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-            />
-          </div>
-          <div class="absolute bottom-0 left-0 right-0 bg-black/70 text-white p-4 transform translate-y-full transition-transform duration-300 group-hover:translate-y-0">
-            <h3 class="text-lg font-semibold">{stone.name}</h3>
-          </div>
-        </div>
-      ))
-    }
-  </div>
-
-  <h2 class="text-3xl font-bold text-center my-12">Dekton</h2>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-    {
-      dektonStones.map((stone) => (
-        <div class="group relative overflow-hidden rounded-lg shadow-lg">
-          <div class="relative h-64 overflow-hidden">
-            <img
-              src={stone.image}
-              alt={stone.name}
-              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-            />
-            <img
-              src={stone.design}
-              alt={`${stone.name} design`}
-              class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-            />
-          </div>
-          <div class="absolute bottom-0 left-0 right-0 bg-black/70 text-white p-4 transform translate-y-full transition-transform duration-300 group-hover:translate-y-0">
-            <h3 class="text-lg font-semibold">{stone.name}</h3>
-          </div>
-        </div>
-      ))
-    }
-  </div>
-
-  <h2 class="text-3xl font-bold text-center my-12">Silestone</h2>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-    {
-      silestoneStones.map((stone) => (
-        <div class="group relative overflow-hidden rounded-lg shadow-lg">
-          <div class="relative h-64 overflow-hidden">
-            <img
-              src={stone.image}
-              alt={stone.name}
-              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-            />
-            <img
-              src={stone.design}
-              alt={`${stone.name} design`}
-              class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-            />
-          </div>
-          <div class="absolute bottom-0 left-0 right-0 bg-black/70 text-white p-4 transform translate-y-full transition-transform duration-300 group-hover:translate-y-0">
-            <h3 class="text-lg font-semibold">{stone.name}</h3>
-          </div>
-        </div>
-      ))
-    }
-  </div>
+      </div>
+    ))
+  }
 </div>
 
 <!-- Mostrar características -->
 <div class="container mx-auto px-4 py-16 mt-20">
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-    <div>
-      <h3 class="text-2xl font-bold mb-6 text-center">Neolith</h3>
-      <ul class="space-y-2">
-        {neolithFeatures.map(feature => (
-          <li class="flex items-center">
-            <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            {feature}
-          </li>
-        ))}
-      </ul>
-    </div>
-    
-    <div>
-      <h3 class="text-2xl font-bold mb-6 text-center">Altea</h3>
-      <ul class="space-y-2">
-        {alteaFeatures.map(feature => (
-          <li class="flex items-center">
-            <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            {feature}
-          </li>
-        ))}
-      </ul>
-    </div>
-    
-    <div>
-      <h3 class="text-2xl font-bold mb-6 text-center">Dekton</h3>
-      <ul class="space-y-2">
-        {dektonFeatures.map(feature => (
-          <li class="flex items-center">
-            <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            {feature}
-          </li>
-        ))}
-      </ul>
-    </div>
-    
-    <div>
-      <h3 class="text-2xl font-bold mb-6 text-center">Silestone</h3>
-      <ul class="space-y-2">
-        {silestoneFeatures.map(feature => (
-          <li class="flex items-center">
-            <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            {feature}
-          </li>
-        ))}
-      </ul>
-    </div>
+    {
+      stoneCategories.map((category) => (
+        <div>
+          <h3 class="text-2xl font-bold mb-6 text-center">{category.title}</h3>
+          <ul class="space-y-2">
+            {category.features.map(feature => (
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                {feature}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
   </div>
 </div> 
