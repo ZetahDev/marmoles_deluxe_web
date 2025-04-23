@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ProductCard from "../components/ProductCard.tsx";
+import PageLoader from "../components/PageLoader.tsx";
 import { neolithStones, alteaStones, dektonStones, silestoneStones } from "../data/piedrasData";
 
 interface Stone {
@@ -20,6 +21,8 @@ const stoneCategories = [
 ---
 
 <Layout title="Piedra Sinterizada - Mármoles Deluxe">
+  <PageLoader client:load isLoading={true} />
+  
   <main class="py-20 pt-24">
     <div class="container mx-auto px-4">
       <h1 class="text-4xl md:text-5xl font-bold text-center mb-12">
