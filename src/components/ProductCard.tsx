@@ -24,6 +24,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
   price,
   features = [],
 }) => {
+  const handleWhatsAppClick = () => {
+    const message = `Hola, estoy interesado en obtener más información sobre el producto: ${name}. ${description}`;
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappURL = `https://wa.me/+573132592793?text=${encodedMessage}`; // Reemplazar con el número real
+    window.open(whatsappURL, '_blank');
+  };
+
   return (
     <article className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full max-w-md">
       <div className="flex-1">
@@ -91,7 +98,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
       </div>
 
       <div className="px-5 pb-5 mt-auto">
-        <button className="w-full bg-marmoles-black text-white py-3 rounded-lg hover:bg-opacity-90 transition-colors duration-300 focus:ring-2 focus:ring-marmoles-gold focus:outline-none text-sm">
+        <button 
+          onClick={handleWhatsAppClick}
+          className="w-full bg-marmoles-black text-white py-3 rounded-lg hover:bg-opacity-90 transition-colors duration-300 focus:ring-2 focus:ring-marmoles-gold focus:outline-none text-sm"
+        >
           Solicitar Información
         </button>
       </div>

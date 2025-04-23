@@ -1,12 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ProductCard from "../components/ProductCard.tsx";
-import { neolithStones, alteaStones, dektonStones, silestoneStones } from "../components/PiedraSinterizada.astro";
+import { neolithStones, alteaStones, dektonStones, silestoneStones } from "../data/piedrasData";
 
 interface Stone {
   name: string;
   image: string;
   design: string;
+  features?: string[];
 }
 ---
 
@@ -25,12 +26,7 @@ interface Stone {
               name={stone.name}
               description="Piedra sinterizada de alta calidad"
               images={[stone.image, stone.design]}
-              features={[
-                "Resistente a manchas",
-                "Resistente al calor",
-                "Bajo mantenimiento",
-                "Durabilidad excepcional"
-              ]}
+              features={stone.features}
             />
           ))
         }
@@ -44,12 +40,7 @@ interface Stone {
               name={stone.name}
               description="Piedra sinterizada de alta calidad"
               images={[stone.image, stone.design]}
-              features={[
-                "Resistente a manchas",
-                "Resistente al calor",
-                "Bajo mantenimiento",
-                "Durabilidad excepcional"
-              ]}
+              features={stone.features}
             />
           ))
         }
@@ -63,12 +54,7 @@ interface Stone {
               name={stone.name}
               description="Piedra sinterizada de alta calidad"
               images={[stone.image, stone.design]}
-              features={[
-                "Resistente a manchas",
-                "Resistente al calor",
-                "Bajo mantenimiento",
-                "Durabilidad excepcional"
-              ]}
+              features={stone.features}
             />
           ))
         }
@@ -82,12 +68,7 @@ interface Stone {
               name={stone.name}
               description="Piedra sinterizada de alta calidad"
               images={[stone.image, stone.design]}
-              features={[
-                "Resistente a manchas",
-                "Resistente al calor",
-                "Bajo mantenimiento",
-                "Durabilidad excepcional"
-              ]}
+              features={stone.features}
             />
           ))
         }
