@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useCallback, lazy, Suspense } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -26,15 +26,25 @@ const ProductCard: React.FC<ProductCardProps> = ({
   features = [],
   category = "",
 }) => {
-  const handleWhatsAppClick = () => {
+  const [isHovered, setIsHovered] = useState(false);
+  
+  // Optimización: Deferred execution - sólo ejecutar cuando el usuario interactúa
+  const handleWhatsAppClick = useCallback(() => {
     const message = `Hola, estoy interesado en obtener más información sobre la piedra sinterizada: ${category ? `${category} - ` : ""}${name}.`;
     const encodedMessage = encodeURIComponent(message);
     const whatsappURL = `https://wa.me/+573132592793?text=${encodedMessage}`;
     window.open(whatsappURL, '_blank');
-  };
+  }, [category, name]);
 
+  // Optimización: Especificar dimensiones para prevenir layout shifts 
+  const imageHeight = 200;
+  
   return (
-    <article className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full max-w-md">
+    <article 
+      className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full max-w-md"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div className="flex-1">
         <div className="relative aspect-video w-full mb-6 overflow-hidden">
           <Carousel className="w-full h-full absolute inset-0">
@@ -51,17 +61,31 @@ const ProductCard: React.FC<ProductCardProps> = ({
                       className="w-full h-full object-cover rounded-lg"
                       style={{ 
                         objectPosition: "left bottom", 
-                        maxHeight: "100%", 
-                        maxWidth: "100%" 
+                        height: imageHeight,
+                        width: "100%",
+                        contentVisibility: "auto"
                       }}
                       loading="lazy"
+                      decoding="async"
+                      fetchPriority={index === 0 ? "high" : "low"}
+                      onLoad={(e) => {
+                        // Optimización: Marcar la imagen como completamente cargada para Largest Contentful Paint
+                        if (index === 0) {
+                          e.currentTarget.style.contentVisibility = "visible";
+                        }
+                      }}
                     />
                   </div>
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-75 hover:bg-opacity-100 h-8 w-8 rounded-full flex items-center justify-center z-10 text-marmoles-gold hover:text-marmoles-gold border border-marmoles-gold/20 hover:border-marmoles-gold transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed" />
-            <CarouselNext className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-75 hover:bg-opacity-100 h-8 w-8 rounded-full flex items-center justify-center z-10 text-marmoles-gold hover:text-marmoles-gold border border-marmoles-gold/20 hover:border-marmoles-gold transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed" />
+            {/* Solo renderizar los controles cuando se necesiten */}
+            {isHovered && (
+              <>
+                <CarouselPrevious className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-75 hover:bg-opacity-100 h-8 w-8 rounded-full flex items-center justify-center z-10 text-marmoles-gold hover:text-marmoles-gold border border-marmoles-gold/20 hover:border-marmoles-gold transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed" />
+                <CarouselNext className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-75 hover:bg-opacity-100 h-8 w-8 rounded-full flex items-center justify-center z-10 text-marmoles-gold hover:text-marmoles-gold border border-marmoles-gold/20 hover:border-marmoles-gold transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed" />
+              </>
+            )}
           </Carousel>
 
           {price && (
@@ -87,8 +111,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
               >
                 <svg
                   className="w-4 h-4 text-marmoles-gold mr-2"
+                  width="16"
+                  height="16"
                   fill="currentColor"
                   viewBox="0 0 20 20"
+                  aria-hidden="true"
                 >
                   <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" />
                 </svg>
@@ -111,4 +138,5 @@ const ProductCard: React.FC<ProductCardProps> = ({
   );
 };
 
-export default ProductCard;
+// Exportar como componente memoizado para evitar re-renders innecesarios
+export default React.memo(ProductCard);
