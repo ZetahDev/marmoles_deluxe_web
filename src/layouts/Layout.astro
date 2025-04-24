@@ -31,6 +31,21 @@ const {
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+
+<!-- Google Tag -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NXQ0SL5DBV">
+</script>
+<script define:vars={{ id: 'G-NXQ0SL5DBV' }}>
+  // @ts-ignore
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    // @ts-ignore
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', id);
+</script>
+
     <ClientRouter />
   </head>
   <body class="flex flex-col min-h-screen bg-marmoles-white text-marmoles-black">

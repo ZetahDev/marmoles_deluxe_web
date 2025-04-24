@@ -15,6 +15,7 @@ interface ProductCardProps {
   images: string[];
   price?: string;
   features?: string[];
+  category?: string;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
@@ -23,11 +24,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
   images,
   price,
   features = [],
+  category = "",
 }) => {
   const handleWhatsAppClick = () => {
-    const message = `Hola, estoy interesado en obtener más información sobre el producto: ${name}. ${description}`;
+    const message = `Hola, estoy interesado en obtener más información sobre la piedra sinterizada: ${category ? `${category} - ` : ""}${name}.`;
     const encodedMessage = encodeURIComponent(message);
-    const whatsappURL = `https://wa.me/+573132592793?text=${encodedMessage}`; // Reemplazar con el número real
+    const whatsappURL = `https://wa.me/+573132592793?text=${encodedMessage}`;
     window.open(whatsappURL, '_blank');
   };
 
