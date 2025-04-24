@@ -1,8 +1,14 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ProductCard from "../components/ProductCard.tsx";
-import { marbleProducts } from "../lib/constants";
+import { marmoles } from "../components/Marmoles.astro";
 import PageLoader from "../components/PageLoader.tsx";
+
+interface Stone {
+  name: string;
+  image: string;
+  design: string;
+}
 ---
 
 <Layout title="Mármoles - Mármoles Deluxe">
@@ -12,14 +18,24 @@ import PageLoader from "../components/PageLoader.tsx";
       <h1 class="text-4xl md:text-5xl font-bold text-center mb-12">
         Nuestros Mármoles
       </h1>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8 mb-16"
+      >
         {
-          marbleProducts.map((product) => (
+          marmoles.map((stone: Stone) => (
             <ProductCard
-              name={product.name}
-              description={product.description}
-              images={[product.image]}
-              features={product.features}
+              client:load
+              name={stone.name}
+              description="Mármol natural de alta calidad"
+              images={[stone.image, stone.design]}
+              features={[
+                "Elegancia única",
+                "Alta durabilidad",
+                "Belleza natural",
+                "Transforma tu espacio"
+              ]}
+              category="Mármol"
             />
           ))
         }
