@@ -13,7 +13,7 @@ const PageLoader: React.FC<PageLoaderProps> = ({ isLoading: initialLoading }) =>
       // Mantener el loader visible un poco más para una mejor experiencia
       setTimeout(() => {
         setIsLoading(false);
-      }, 1500);
+      }, 700);
     };
 
     // Si la página ya está cargada

@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import PageLoader from "../components/PageLoader.tsx";
 
 interface Service {
   title: string;
@@ -72,6 +73,7 @@ const hardHatIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="
 ---
 
 <Layout title="Otros Servicios - Mármoles Deluxe" description="Más allá de la instalación, te acompañamos en todo el ciclo de vida de tus superficies.">
+  <PageLoader client:load isLoading={true} />
   <div class="pt-24 pb-16">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
       <!-- Encabezado de página -->

@@ -2,9 +2,11 @@
 import Layout from "../layouts/Layout.astro";
 import ProductCard from "../components/ProductCard.tsx";
 import { quartzProducts } from "../lib/constants";
+import PageLoader from "../components/PageLoader.tsx";
 ---
 
 <Layout title="Quartzstone - Mármoles Deluxe">
+  <PageLoader client:load isLoading={true} />
   <main class="py-20 pt-24">
     <div class="container mx-auto px-4">
       <h1 class="text-4xl md:text-5xl font-bold text-center mb-12">
