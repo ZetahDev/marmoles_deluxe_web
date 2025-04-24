@@ -1,4 +1,6 @@
 ---
+import MobileMenu from "./MobileMenu";
+
 const navItems = [
   { 
     href: "/", 
@@ -34,27 +36,8 @@ const isCurrentPathUnderMateriales = () => {
 >
   <nav class="container mx-auto px-4">
     <div class="flex items-center justify-between h-16">
-      <!-- Botón de menú móvil -->
-      <button
-  class="md:hidden p-2 text-marmoles-gold hover:text-marmoles-gold transition-colors"
-  id="mobile-menu-button"
-  aria-label="Menú"
->
-  <svg
-    class="h-6 w-6"
-    fill="none"
-    stroke="currentColor"
-    viewBox="0 0 24 24"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-width="2"
-      d="M4 6h16M4 12h16M4 18h16"
-    ></path>
-  </svg>
-</button>
+      <!-- Menú móvil con zustand (componente de React) -->
+      <MobileMenu navItems={navItems} currentPath={currentPath} client:load />
 
       <!-- Menú para escritorio -->
       <div class="hidden md:flex items-center justify-center space-x-12">
@@ -124,83 +107,8 @@ const isCurrentPathUnderMateriales = () => {
         }
       </div>
     </div>
-
-    <!-- Menú móvil -->
-    <div
-      class="hidden md:hidden absolute top-16 left-0 w-full bg-white/80 backdrop-blur-md border-b border-white/20"
-      id="mobile-menu"
-    >
-      <div class="px-4 py-3 space-y-3">
-        {
-          navItems.map((item) => {
-            if (item.isLogo) {
-              return (
-                <a href={item.href} class="block">
-                  <img
-                    src="/images/logo.png"
-                    alt="Mármoles Deluxe Logo"
-                    class="h-12 w-auto mx-auto logo-gold"
-                  />
-                </a>
-              );
-            }
-            if (item.items) {
-              return (
-                <div class="space-y-2">
-                  <button
-                    class="text-sm font-medium text-gray-800 hover:text-marmoles-gold"
-                    onclick="this.nextElementSibling.classList.toggle('hidden')"
-                  >
-                    {item.label}
-                  </button>
-                  <div class="hidden pl-4 space-y-2">
-                    {
-                      item.items.map(({ href, label }) => (
-                        <a
-                          href={href}
-                          class="block text-sm font-medium text-gray-800 hover:text-marmoles-gold"
-                        >
-                          {label}
-                        </a>
-                      ))
-                    }
-                  </div>
-                </div>
-              );
-            }
-            return (
-              <a
-                href={item.href}
-                class="block text-sm font-medium text-gray-800 hover:text-marmoles-gold"
-              >
-                {item.label}
-              </a>
-            );
-          })
-        }
-      </div>
-    </div>
   </nav>
 </header>
-
-<script>
-  const mobileMenuButton = document.getElementById("mobile-menu-button");
-  const mobileMenu = document.getElementById("mobile-menu");
-
-  mobileMenuButton?.addEventListener("click", () => {
-    mobileMenu?.classList.toggle("hidden");
-  });
-
-  document.addEventListener("click", (event) => {
-    if (
-      mobileMenu &&
-      !mobileMenu.contains(event.target as Node) &&
-      !mobileMenuButton?.contains(event.target as Node)
-    ) {
-      mobileMenu.classList.add("hidden");
-    }
-  });
-</script>
 
 <style>
   .backdrop-blur-md {
