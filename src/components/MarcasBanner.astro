@@ -15,12 +15,16 @@ const allLogos = [...logos, ...logos];
 
 // Función para obtener la URL correcta (local para desarrollo, S3 para producción)
 function getLogoUrl(fileName: string) {
-  // Si estamos en el entorno de producción, usa URLs de S3
-  if (import.meta.env.PROD) {
-    return `${s3BaseUrl}${fileName}`;
-  }
-  // En desarrollo, usa archivos locales
+  // Usar siempre archivos locales por ahora
   return `/logos/${fileName}`;
+  
+  // Código comentado para referencia futura:
+  // // Si estamos en el entorno de producción, usa URLs de S3
+  // if (import.meta.env.PROD) {
+  //   return `${s3BaseUrl}${fileName}`;
+  // }
+  // // En desarrollo, usa archivos locales
+  // return `/logos/${fileName}`;
 }
 ---
 
