@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { Toaster } from "react-hot-toast";
+import SpeedInsights from "@vercel/speed-insights/astro";
 
 interface Props {
   title: string;
@@ -44,5 +45,6 @@ const { title } = Astro.props;
       </footer>
     </div>
     <Toaster position="bottom-right" client:load />
+    <SpeedInsights />
   </body>
 </html> 
