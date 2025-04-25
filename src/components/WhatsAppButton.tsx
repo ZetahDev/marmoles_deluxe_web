@@ -56,8 +56,8 @@ export const WhatsAppButton = () => {
       </svg>
       {tooltipVisible && (
         <span className="absolute right-full mr-3 bg-white text-gray-900 px-2 py-1 rounded text-sm whitespace-nowrap shadow-md">
-          ¡Contáctanos por WhatsApp!
-        </span>
+        ¡Contáctanos por WhatsApp!
+      </span>
       )}
     </a>
   );
