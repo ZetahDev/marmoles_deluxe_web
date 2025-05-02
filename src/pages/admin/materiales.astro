@@ -1,0 +1,136 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import { getMaterials } from '../../lib/api/materials';
+import { uploadFile } from '../../lib/api/uploads';
+
+const materials = await getMaterials();
+---
+
+<AdminLayout title="Materiales">
+  <div class="space-y-6">
+    <div class="bg-white shadow sm:rounded-lg">
+      <div class="px-4 py-5 sm:p-6">
+        <h3 class="text-lg font-medium leading-6 text-gray-900">Nuevo Material</h3>
+        <form id="materialForm" class="mt-5 space-y-4">
+          <div>
+            <label for="nombre" class="block text-sm font-medium text-gray-700">
+              Nombre
+            </label>
+            <input
+              type="text"
+              id="nombre"
+              name="nombre"
+              required
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            />
+          </div>
+
+          <div>
+            <label for="descripcion" class="block text-sm font-medium text-gray-700">
+              Descripción
+            </label>
+            <textarea
+              id="descripcion"
+              name="descripcion"
+              rows="3"
+              required
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            ></textarea>
+          </div>
+
+          <div>
+            <label for="imagen" class="block text-sm font-medium text-gray-700">
+              Imagen
+            </label>
+            <input
+              type="file"
+              id="imagen"
+              name="imagen"
+              accept="image/*"
+              class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
+            />
+          </div>
+
+          <div>
+            <button
+              type="submit"
+              class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            >
+              Guardar Material
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="bg-white shadow sm:rounded-lg">
+      <div class="px-4 py-5 sm:p-6">
+        <h3 class="text-lg font-medium leading-6 text-gray-900">Materiales Existentes</h3>
+        <div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {materials.map((material) => (
+            <div class="bg-white overflow-hidden shadow rounded-lg">
+              <div class="p-5">
+                <div class="flex items-center">
+                  <div class="flex-shrink-0">
+                    <img class="h-12 w-12 rounded-full" src={material.imagen} alt={material.nombre} />
+                  </div>
+                  <div class="ml-4">
+                    <h4 class="text-lg font-medium text-gray-900">{material.nombre}</h4>
+                  </div>
+                </div>
+                <div class="mt-4">
+                  <p class="text-sm text-gray-500">{material.descripcion}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('materialForm');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData(form);
+      const materialData = {
+        nombre: formData.get('nombre'),
+        descripcion: formData.get('descripcion'),
+      };
+
+      try {
+        // Upload image if exists
+        const imageFile = formData.get('imagen');
+        let imageUrl = '';
+        if (imageFile) {
+          imageUrl = await uploadFile(imageFile, 'materiales', 'your-token-here');
+        }
+
+        // Create material
+        const response = await fetch('/api/materiales', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer your-token-here'
+          },
+          body: JSON.stringify({
+            ...materialData,
+            imagen: imageUrl
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to create material');
+        }
+
+        // Refresh the page
+        window.location.reload();
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Error al crear el material');
+      }
+    });
+  </script>
+</AdminLayout> 
