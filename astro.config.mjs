@@ -7,7 +7,7 @@ import vercel from '@astrojs/vercel/serverless';
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), react()],
-  //site: 'https://marmolesdeluxe.com',
+  site: 'https://marmolesdeluxe.com',
   vite: {
     build: {
       assetsDir: 'assets',
@@ -19,5 +19,5 @@ export default defineConfig({
     }
   },
   output: 'server',
-  adapter: vercel({}),
+  adapter: vercel(),
 });

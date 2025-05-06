@@ -156,13 +156,15 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg">
               <Carousel className="w-full h-full">
                 <CarouselContent>
-                  <CarouselItem>
-                    <img
-                      src={allImages[currentImageIndex]}
-                      alt={`${title} - vista ${currentImageIndex + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </CarouselItem>
+                  {allImages.map((img, index) => (
+                    <CarouselItem key={index}>
+                      <img
+                        src={img}
+                        alt={`${title} - vista ${index + 1}`}
+                        className={`w-full h-full object-cover ${currentImageIndex === index ? '' : 'hidden'}`}
+                      />
+                    </CarouselItem>
+                  ))}
                 </CarouselContent>
                 {allImages.length > 1 && (
                   <>
