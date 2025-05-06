@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from 'react';
-import { useNavbarStore } from '../lib/store';
+import { useNavbarStore } from '../store/navbar';
 
 interface NavItem {
   href?: string;
@@ -163,4 +163,4 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ navItems, currentPath }) => {
   );
 };
 
-export default MobileMenu; 
+export default MobileMenu;
