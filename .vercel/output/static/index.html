@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mármoles Deluxe</title>
+    <script>
+      // Forzar HTTPS
+      if (window.location.protocol !== 'https:' && window.location.hostname !== 'localhost') {
+        window.location.href = 'https://' + window.location.hostname + window.location.pathname + window.location.search;
+      } else {
+        // Si ya estamos en HTTPS y en la página raíz, continuar
+        if (window.location.pathname === '/index.html') {
+          window.location.href = '/';
+        }
+      }
+    </script>
+    <meta http-equiv="refresh" content="0;url=/" />
+  </head>
+  <body>
+    Redireccionando...
+  </body>
+</html> 
