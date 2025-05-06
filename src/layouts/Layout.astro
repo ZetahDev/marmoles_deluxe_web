@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import { ClientRouter } from "astro:transitions";
 import SpeedInsights from "@vercel/speed-insights/astro";
+import { ViewTransitions } from 'astro:transitions';
 
 interface Props {
   title: string;
@@ -51,6 +52,7 @@ const {
     </script>
 
     <ClientRouter />
+    <ViewTransitions />
   </head>
   <body
     class="flex flex-col min-h-screen bg-marmoles-white text-marmoles-black"
@@ -62,6 +64,35 @@ const {
     <Footer />
     <WhatsAppButton client:idle />
     <SpeedInsights />
+
+    <script>
+      // Interceptar navegación
+      document.addEventListener('astro:before-navigation', (event) => {
+        // Verificar si hay eventos pendientes antes de la navegación
+        const pendingChanges = document.body.classList.contains('uploading') || 
+          document.body.classList.contains('saving');
+        
+        if (pendingChanges) {
+          const confirmed = confirm('Hay cambios pendientes. ¿Deseas abandonar la página?');
+          if (!confirmed) {
+            event.preventDefault();
+          }
+        }
+      });
+
+      // Escuchar eventos de autenticación
+      window.addEventListener('auth-change', (event) => {
+        const { isAuthenticated } = (event as CustomEvent).detail;
+        // Manejar cambios de autenticación sin forzar recarga
+        const currentPath = window.location.pathname;
+        const isAdminRoute = currentPath.startsWith('/admin');
+
+        if (!isAuthenticated && isAdminRoute && currentPath !== '/admin') {
+          history.pushState({}, '', '/admin');
+          window.dispatchEvent(new PopStateEvent('popstate'));
+        }
+      });
+    </script>
   </body>
 </html>
 

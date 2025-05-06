@@ -7,7 +7,6 @@ interface NavbarState {
   toggleMobileMenu: () => void;
 }
 
-// Create store with persist middleware to keep state across page changes
 export const useNavbarStore = create<NavbarState>()(
   persist(
     (set) => ({
@@ -16,8 +15,8 @@ export const useNavbarStore = create<NavbarState>()(
       toggleMobileMenu: () => set((state) => ({ isMobileMenuOpen: !state.isMobileMenuOpen })),
     }),
     {
-      name: 'navbar-storage', // unique name for localStorage
+      name: 'navbar-storage',
       partialize: (state) => ({ isMobileMenuOpen: state.isMobileMenuOpen })
     }
   )
-); 
+);

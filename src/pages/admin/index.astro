@@ -1,0 +1,16 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AdminDashboard from '../../components/admin/AdminDashboard';
+import AdminLogin from '../../components/admin/AdminLogin';
+import { validateToken } from '../../lib/api/auth';
+import { Toaster } from 'react-hot-toast';
+export const prerender = false;
+const isAuthenticated = await validateToken();
+---
+
+<Layout title="Panel de Administración">
+  <main class="container mx-auto px-4 py-8">
+    {isAuthenticated ? <AdminDashboard client:load /> : <AdminLogin />}
+    <Toaster position="top-right" />
+  </main>
+</Layout>

@@ -1,7 +1,12 @@
 ---
 import AdminLayout from '../../layouts/AdminLayout.astro';
 import { getMaterials } from '../../lib/api/materials';
-import { uploadFile } from '../../lib/api/uploads';
+import { validateToken } from '../../lib/api/auth';
+const isAuthenticated = await validateToken();
+
+if (!isAuthenticated) {
+  return Astro.redirect('/admin');
+}
 
 const materials = await getMaterials();
 ---
@@ -90,47 +95,63 @@ const materials = await getMaterials();
   </div>
 
   <script>
-    const form = document.getElementById('materialForm');
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
+    import { uploadFile } from '../../lib/api/uploads';
+    import { API_URL } from '../../lib/config';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('materialForm') as HTMLFormElement;
       
-      const formData = new FormData(form);
-      const materialData = {
-        nombre: formData.get('nombre'),
-        descripcion: formData.get('descripcion'),
-      };
-
-      try {
-        // Upload image if exists
-        const imageFile = formData.get('imagen');
-        let imageUrl = '';
-        if (imageFile) {
-          imageUrl = await uploadFile(imageFile, 'materiales', 'your-token-here');
-        }
-
-        // Create material
-        const response = await fetch('/api/materiales', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer your-token-here'
-          },
-          body: JSON.stringify({
-            ...materialData,
-            imagen: imageUrl
-          })
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to create material');
-        }
-
-        // Refresh the page
-        window.location.reload();
-      } catch (error) {
-        console.error('Error:', error);
-        alert('Error al crear el material');
+      if (!form) {
+        console.error('Form element not found');
+        return;
       }
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const materialData = {
+          nombre: formData.get('nombre'),
+          descripcion: formData.get('descripcion'),
+        };
+
+        try {
+          // Upload image if exists
+          const imageFile = formData.get('imagen') as File;
+          let imageUrl = '';
+          if (imageFile instanceof File) {
+            imageUrl = await uploadFile(imageFile, 'materiales');
+          }
+
+          // Create material using credentials: 'include' to send cookies
+          const response = await fetch(`${API_URL}/materials`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify({
+              ...materialData,
+              imagen: imageUrl
+            })
+          });
+
+          if (!response.ok) {
+            throw new Error('Failed to create material');
+          }
+
+          // Show success message
+          alert('Material creado exitosamente');
+
+          // Refresh the page in a cleaner way
+          const url = new URL(window.location.href);
+          url.searchParams.set('refresh', Date.now().toString());
+          window.location.href = url.toString();
+        } catch (error) {
+          console.error('Error:', error);
+          alert('Error al crear el material');
+        }
+      });
     });
   </script>
-</AdminLayout> 
+</AdminLayout>

@@ -1,7 +1,12 @@
 ---
 import AdminLayout from '../../layouts/AdminLayout.astro';
 import { getTestimonials } from '../../lib/api/testimonials';
-import { uploadFile } from '../../lib/api/uploads';
+import { validateToken } from '../../lib/api/auth';
+
+const isAuthenticated = await validateToken();
+if (!isAuthenticated) {
+  return Astro.redirect('/admin');
+}
 
 const testimonials = await getTestimonials();
 ---
@@ -103,48 +108,64 @@ const testimonials = await getTestimonials();
   </div>
 
   <script>
-    const form = document.getElementById('testimonialForm');
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
+    import { uploadFile } from '../../lib/api/uploads';
+    import { API_URL } from '../../lib/config';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('testimonialForm') as HTMLFormElement;
       
-      const formData = new FormData(form);
-      const testimonialData = {
-        nombre: formData.get('nombre'),
-        texto: formData.get('texto'),
-        instagram: formData.get('instagram'),
-      };
-
-      try {
-        // Upload image if exists
-        const imageFile = formData.get('imagen');
-        let imageUrl = '';
-        if (imageFile) {
-          imageUrl = await uploadFile(imageFile, 'testimonios', 'your-token-here');
-        }
-
-        // Create testimonial
-        const response = await fetch('/api/testimonios', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer your-token-here'
-          },
-          body: JSON.stringify({
-            ...testimonialData,
-            imagen: imageUrl
-          })
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to create testimonial');
-        }
-
-        // Refresh the page
-        window.location.reload();
-      } catch (error) {
-        console.error('Error:', error);
-        alert('Error al crear el testimonio');
+      if (!form) {
+        console.error('Form element not found');
+        return;
       }
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData(form);
+        const testimonialData = {
+          nombre: formData.get('nombre'),
+          texto: formData.get('texto'),
+          instagram: formData.get('instagram'),
+        };
+
+        try {
+          // Upload image if exists
+          const imageFile = formData.get('imagen') as File;
+          let imageUrl = '';
+          if (imageFile instanceof File) {
+            imageUrl = await uploadFile(imageFile, 'testimonios');
+          }
+
+          // Create testimonial using credentials: 'include' to send cookies
+          const response = await fetch(`${API_URL}/testimonials`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            credentials: 'include', // This will send the auth cookie automatically
+            body: JSON.stringify({
+              ...testimonialData,
+              imagen: imageUrl
+            })
+          });
+
+          if (!response.ok) {
+            throw new Error('Failed to create testimonial');
+          }
+
+          // Show success message
+          alert('Testimonio creado exitosamente');
+
+          // Refresh the page in a cleaner way
+          const url = new URL(window.location.href);
+          url.searchParams.set('refresh', Date.now().toString());
+          window.location.href = url.toString();
+        } catch (error) {
+          console.error('Error:', error);
+          alert('Error al crear el testimonio');
+        }
+      });
     });
   </script>
-</AdminLayout> 
+</AdminLayout>

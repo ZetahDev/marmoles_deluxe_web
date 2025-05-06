@@ -1,5 +1,4 @@
 import { useState, useRef } from 'react';
-import { uploadFile } from '../../lib/uploadthing';
 import toast from 'react-hot-toast';
 
 export default function FileUploader({ onFileUpload, contentType }) {
@@ -45,7 +44,6 @@ export default function FileUploader({ onFileUpload, contentType }) {
   };
 
   const processFile = async (file) => {
-    // Validar que sea una imagen
     if (!file.type.startsWith('image/')) {
       toast.error('Por favor, sube solo imágenes');
       return;
@@ -54,8 +52,11 @@ export default function FileUploader({ onFileUpload, contentType }) {
     setIsUploading(true);
     setUploadProgress(0);
 
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('folder', contentType);
+
     try {
-      // Simular progreso
       const progressInterval = setInterval(() => {
         setUploadProgress(prev => {
           const newProgress = prev + 10;
@@ -67,38 +68,40 @@ export default function FileUploader({ onFileUpload, contentType }) {
         });
       }, 300);
 
-      // Usar nuestro servicio de carga
-      const result = await uploadFile(file, contentType);
-      
-      // Completar el progreso
+      const response = await fetch('/api/files/upload', {
+        method: 'POST',
+        body: formData
+      });
+
       clearInterval(progressInterval);
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Error al subir el archivo');
+      }
+
+      const result = await response.json();
       setUploadProgress(100);
-      
-      // Crea un nuevo objeto con la información del archivo y la respuesta del servidor
+
       const fileData = {
-        ...file,
         id: Date.now().toString(),
         name: file.name,
         url: result.url,
         type: contentType,
-        uploadedAt: result.uploadedAt,
+        uploadedAt: new Date().toISOString(),
         size: file.size,
         key: result.key
       };
-      
-      // Pasar el archivo al componente padre
+
       onFileUpload(fileData);
-      
       toast.success('Archivo subido correctamente');
 
     } catch (error) {
       console.error('Error al subir el archivo:', error);
-      toast.error('Hubo un error al subir el archivo. Por favor, intenta de nuevo.');
+      toast.error(error.message || 'Error al subir el archivo');
     } finally {
       setIsUploading(false);
       setUploadProgress(0);
-      
-      // Limpiar el input
       if (fileInputRef.current) {
         fileInputRef.current.value = '';
       }
@@ -106,7 +109,7 @@ export default function FileUploader({ onFileUpload, contentType }) {
   };
 
   return (
-    <div 
+    <div
       className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors ${
         isDragging ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:border-gray-400'
       }`}
@@ -160,4 +163,4 @@ export default function FileUploader({ onFileUpload, contentType }) {
       )}
     </div>
   );
-} 
+}
