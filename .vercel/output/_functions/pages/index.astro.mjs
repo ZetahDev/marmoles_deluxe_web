@@ -1,7 +1,7 @@
-/* empty css                                 */
-import { c as createAstro, a as createComponent, e as renderComponent, f as renderTemplate, m as maybeRenderHead } from '../chunks/astro/server_Cx8UOM8M.mjs';
+/* empty css                                       */
+import { e as createAstro, c as createComponent, r as renderComponent, a as renderTemplate, m as maybeRenderHead } from '../chunks/astro/server_PWDZLNn0.mjs';
 import 'kleur/colors';
-import { $ as $$Layout } from '../chunks/Layout_C4WX7Gd5.mjs';
+import { $ as $$Layout } from '../chunks/Layout_BXjG78Yq.mjs';
 import { jsx, jsxs } from 'react/jsx-runtime';
 import 'react';
 import { C as Carousel, a as CarouselContent, b as CarouselItem, c as CarouselPrevious, d as CarouselNext } from '../chunks/carousel_Iwv_yVgi.mjs';

@@ -1,13 +1,11 @@
-import { c as createAstro, a as createComponent, m as maybeRenderHead, e as renderComponent, b as addAttribute, f as renderTemplate, g as renderScript, d as renderSlot, r as renderHead } from './astro/server_Cx8UOM8M.mjs';
+import { e as createAstro, c as createComponent, m as maybeRenderHead, r as renderComponent, b as addAttribute, a as renderTemplate, d as renderScript, h as renderSlot, i as renderHead } from './astro/server_PWDZLNn0.mjs';
 import 'kleur/colors';
-/* empty css                              */
+/* empty css                               */
 import { jsxs, jsx, Fragment } from 'react/jsx-runtime';
 import { useState, useEffect } from 'react';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-/* empty css                         */
 import 'clsx';
-import { $ as $$Index } from './index_LJJs1GYQ.mjs';
 
 const WhatsAppButton = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -212,9 +210,9 @@ const MobileMenu = ({ navItems, currentPath }) => {
   ] });
 };
 
-const $$Astro$2 = createAstro("https://marmolesdeluxe.com");
+const $$Astro$3 = createAstro("https://marmolesdeluxe.com");
 const $$Navbar = createComponent(($$result, $$props, $$slots) => {
-  const Astro2 = $$result.createAstro($$Astro$2, $$props, $$slots);
+  const Astro2 = $$result.createAstro($$Astro$3, $$props, $$slots);
   Astro2.self = $$Navbar;
   const navItems = [
     {
@@ -289,13 +287,22 @@ Más de 16 años de experiencia en el suministro e instalación de superficies e
 </p> </div> </div> </footer> `;
 }, "C:/Users/57313/Desktop/marmoles_deluxe_web/src/components/Footer.astro", void 0);
 
-const $$Astro$1 = createAstro("https://marmolesdeluxe.com");
+const $$Astro$2 = createAstro("https://marmolesdeluxe.com");
 const $$ClientRouter = createComponent(($$result, $$props, $$slots) => {
-  const Astro2 = $$result.createAstro($$Astro$1, $$props, $$slots);
+  const Astro2 = $$result.createAstro($$Astro$2, $$props, $$slots);
   Astro2.self = $$ClientRouter;
   const { fallback = "animate" } = Astro2.props;
   return renderTemplate`<meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback"${addAttribute(fallback, "content")}>${renderScript($$result, "C:/Users/57313/Desktop/marmoles_deluxe_web/node_modules/astro/components/ClientRouter.astro?astro&type=script&index=0&lang.ts")}`;
 }, "C:/Users/57313/Desktop/marmoles_deluxe_web/node_modules/astro/components/ClientRouter.astro", void 0);
+
+const $$Astro$1 = createAstro("https://marmolesdeluxe.com");
+const $$Index = createComponent(($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$1, $$props, $$slots);
+  Astro2.self = $$Index;
+  const propsStr = JSON.stringify(Astro2.props);
+  const paramsStr = JSON.stringify(Astro2.params);
+  return renderTemplate`${renderComponent($$result, "vercel-speed-insights", "vercel-speed-insights", { "data-props": propsStr, "data-params": paramsStr, "data-pathname": Astro2.url.pathname })} ${renderScript($$result, "C:/Users/57313/Desktop/marmoles_deluxe_web/node_modules/@vercel/speed-insights/dist/astro/index.astro?astro&type=script&index=0&lang.ts")}`;
+}, "C:/Users/57313/Desktop/marmoles_deluxe_web/node_modules/@vercel/speed-insights/dist/astro/index.astro", void 0);
 
 var __freeze = Object.freeze;
 var __defProp = Object.defineProperty;

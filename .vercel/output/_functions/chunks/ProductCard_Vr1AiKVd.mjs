@@ -148,14 +148,14 @@ const MaterialModal = ({
               /* @__PURE__ */ jsxs("div", { className: "grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6", children: [
                 /* @__PURE__ */ jsxs("div", { className: "space-y-2", children: [
                   /* @__PURE__ */ jsx("div", { className: "relative aspect-[4/3] w-full overflow-hidden rounded-lg", children: /* @__PURE__ */ jsxs(Carousel, { className: "w-full h-full", children: [
-                    /* @__PURE__ */ jsx(CarouselContent, { children: /* @__PURE__ */ jsx(CarouselItem, { children: /* @__PURE__ */ jsx(
+                    /* @__PURE__ */ jsx(CarouselContent, { children: allImages.map((img, index) => /* @__PURE__ */ jsx(CarouselItem, { children: /* @__PURE__ */ jsx(
                       "img",
                       {
-                        src: allImages[currentImageIndex],
-                        alt: `${title} - vista ${currentImageIndex + 1}`,
-                        className: "w-full h-full object-cover"
+                        src: img,
+                        alt: `${title} - vista ${index + 1}`,
+                        className: `w-full h-full object-cover ${currentImageIndex === index ? "" : "hidden"}`
                       }
-                    ) }) }),
+                    ) }, index)) }),
                     allImages.length > 1 && /* @__PURE__ */ jsxs(Fragment, { children: [
                       /* @__PURE__ */ jsx(CarouselPrevious, { onClick: () => setCurrentImageIndex((currentImageIndex - 1 + allImages.length) % allImages.length), className: "absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white h-8 w-8 rounded-full flex items-center justify-center z-10 text-marmoles-gold border border-marmoles-gold/20 hover:border-marmoles-gold transition-all duration-200" }),
                       /* @__PURE__ */ jsx(CarouselNext, { onClick: () => setCurrentImageIndex((currentImageIndex + 1) % allImages.length), className: "absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white h-8 w-8 rounded-full flex items-center justify-center z-10 text-marmoles-gold border border-marmoles-gold/20 hover:border-marmoles-gold transition-all duration-200" })

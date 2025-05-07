@@ -1,1 +1,0 @@
-console.log("Environment variables:",{PUBLIC_API_URL:void 0,DEV:!1,PROD:!0});const n="http://localhost:3000",l=async(e,t)=>{const a=new FormData;a.append("file",e);const o=await fetch(`${n}/uploads/${t}`,{method:"POST",credentials:"include",body:a});if(!o.ok)throw new Error("Failed to upload file");return(await o.json()).url};export{n as A,l as u};

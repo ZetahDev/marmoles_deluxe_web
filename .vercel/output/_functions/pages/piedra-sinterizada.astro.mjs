@@ -1,8 +1,8 @@
-/* empty css                                 */
-import { a as createComponent, e as renderComponent, g as renderScript, f as renderTemplate, m as maybeRenderHead, b as addAttribute } from '../chunks/astro/server_Cx8UOM8M.mjs';
+/* empty css                                       */
+import { c as createComponent, r as renderComponent, d as renderScript, a as renderTemplate, m as maybeRenderHead, b as addAttribute } from '../chunks/astro/server_PWDZLNn0.mjs';
 import 'kleur/colors';
-import { $ as $$Layout } from '../chunks/Layout_C4WX7Gd5.mjs';
-import { P as ProductCard } from '../chunks/ProductCard_BBpe3mai.mjs';
+import { $ as $$Layout } from '../chunks/Layout_BXjG78Yq.mjs';
+import { P as ProductCard } from '../chunks/ProductCard_Vr1AiKVd.mjs';
 import { P as PageLoader } from '../chunks/PageLoader_CIKNeNPW.mjs';
 export { renderers } from '../renderers.mjs';
 
