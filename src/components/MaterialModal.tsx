@@ -103,7 +103,7 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
       <div className={`fixed inset-0 bg-black/70 backdrop-blur-md transition-all duration-500 ${isOpen ? 'opacity-100' : 'opacity-0'}`} />
       <div
         ref={modalRef}
-        className={`relative w-full max-w-2xl sm:max-w-3xl lg:max-w-4xl transform overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl bg-white/95 backdrop-blur-sm p-4 pt-12 sm:py-12 md:p-5 lg:p-6 shadow-2xl transition-all duration-500 ${isOpen ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-4 opacity-0 scale-95'}`}
+        className={`relative w-full max-w-2xl sm:max-w-3xl lg:max-w-4xl transform overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl bg-white/95 backdrop-blur-sm p-4 pt-12 sm:py-12 sm:my-4 md:p-5 lg:p-6 shadow-2xl transition-all duration-500 ${isOpen ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-4 opacity-0 scale-95'}`}
       >
         {/* Header - Adjusted for better mobile visibility */}
         <div className="absolute right-2 top-2 sm:right-3 sm:top-3 flex gap-2 z-10">
