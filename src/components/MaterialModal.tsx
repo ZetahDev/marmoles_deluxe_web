@@ -98,58 +98,58 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 sm:py-8 transition-all duration-500 ${isOpen ? 'opacity-100 backdrop-blur-sm' : 'pointer-events-none opacity-0'}`}
+      className={`fixed inset-0 z-50 flex items-center justify-center p-2 px-2 pb-4 pt-10 sm:p-6 sm:pb-8 sm:pt-14 transition-all duration-300 ${isOpen ? 'opacity-100 backdrop-blur-[4px]' : 'pointer-events-none opacity-0'}`}
     >
-      <div className={`fixed inset-0 bg-black/70 backdrop-blur-md transition-all duration-500 ${isOpen ? 'opacity-100' : 'opacity-0'}`} />
-      
-      {/* Header buttons - Positioned outside the modal container to ensure visibility */}
-      <div className="fixed right-3 top-3 sm:right-5 sm:top-5 flex gap-2 z-20">
-        <button
-          className="rounded-full p-2 bg-white/90 shadow-md text-gray-700 hover:bg-white transition-colors"
-          onClick={handleShare}
-          title="Compartir"
-        >
-          <svg
-            className="h-5 w-5 sm:h-6 sm:w-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-            />
-          </svg>
-        </button>
-        <button
-          className="rounded-full p-2 bg-white/90 shadow-md text-gray-700 hover:bg-white transition-colors"
-          onClick={onClose}
-          title="Cerrar"
-        >
-          <svg
-            className="h-5 w-5 sm:h-6 sm:w-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
-      </div>
+      <div className={`fixed inset-0 bg-black/75 backdrop-blur-sm transition-all duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'}`} />
       
       <div
         ref={modalRef}
-        className={`relative w-full max-w-2xl sm:max-w-3xl lg:max-w-4xl transform overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl bg-white/95 backdrop-blur-sm p-4 pt-8 sm:py-8 sm:my-4 md:p-5 lg:p-6 shadow-2xl transition-all duration-500 ${isOpen ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-4 opacity-0 scale-95'}`}
+        className={`relative w-full max-h-[90vh] overflow-y-auto max-w-xl sm:max-w-2xl lg:max-w-4xl transform overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl bg-white/95 backdrop-blur-sm p-3 pt-6 sm:p-5 md:p-5 lg:p-6 shadow-xl shadow-black/20 transition-all duration-300 ${isOpen ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-4 opacity-0 scale-95'}`}
       >
+        {/* Header buttons - Now positioned within the modal container */}
+        <div className="absolute right-2 top-2 flex gap-2 z-10">
+          <button
+            className="rounded-full p-1.5 bg-white/90 shadow-sm text-gray-700 hover:bg-white hover:scale-105 transition-all"
+            onClick={handleShare}
+            title="Compartir"
+          >
+            <svg
+              className="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+              />
+            </svg>
+          </button>
+          <button
+            className="rounded-full p-1.5 bg-white/90 shadow-sm text-gray-700 hover:bg-white hover:scale-105 transition-all"
+            onClick={onClose}
+            title="Cerrar"
+          >
+            <svg
+              className="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+        
         {/* Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-5">
           {/* Images */}
           <div className="space-y-2">
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg" style={{ maxWidth: '100%' }}>
@@ -200,20 +200,20 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
           </div>
 
           {/* Info */}
-          <div className="space-y-4">
-            <span className="inline-block px-3 py-1 rounded-full text-sm font-medium bg-marmoles-gold/10 text-marmoles-gold mb-2">
+          <div className="space-y-3">
+            <span className="inline-block px-3 py-1 rounded-full text-sm font-medium bg-marmoles-gold/10 text-marmoles-gold mb-1">
               {category}
             </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">{title}</h2>
-            <p className="mt-2 text-gray-600 leading-relaxed">{description}</p>
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 leading-tight">{title}</h2>
+            <p className="mt-1 text-gray-600 leading-snug text-sm sm:text-base">{description}</p>
             {features.length > 0 && (
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Características</h3>
-                <ul className="space-y-2">
+              <div className="space-y-1">
+                <h3 className="text-base font-semibold text-gray-900 mb-1">Características</h3>
+                <ul className="space-y-1.5">
                   {features.map((feature, index) => (
                     <li key={index} className="flex items-start text-gray-600">
                       <svg
-                        className="w-5 h-5 text-marmoles-gold mt-0.5 mr-2 flex-shrink-0"
+                        className="w-4 h-4 sm:w-5 sm:h-5 text-marmoles-gold mt-0.5 mr-2 flex-shrink-0"
                         fill="currentColor"
                         viewBox="0 0 20 20"
                       >
@@ -223,20 +223,20 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
                           clipRule="evenodd"
                         />
                       </svg>
-                      <span>{feature}</span>
+                      <span className="text-sm sm:text-base">{feature}</span>
                     </li>
                   ))}
                 </ul>
               </div>
             )}
-            <div className="pt-2">
+            <div className="pt-1 sm:pt-2">
               <button
                 onClick={() => {
                   const message = `Hola, estoy interesado en obtener más información sobre ${category ? `${category} - ` : ""}${title}.`;
                   const encodedMessage = encodeURIComponent(message);
                   window.open(`https://wa.me/+573132592793?text=${encodedMessage}`, '_blank');
                 }}
-                className="w-full bg-marmoles-black text-white py-3 rounded-lg hover:bg-opacity-90 transition-colors duration-300 focus:ring-2 focus:ring-marmoles-gold focus:outline-none text-sm font-medium"
+                className="w-full bg-marmoles-black text-white py-2.5 rounded-lg hover:bg-opacity-90 transition-colors duration-300 focus:ring-2 focus:ring-marmoles-gold focus:outline-none text-sm font-medium"
               >
                 Solicitar Información
               </button>
