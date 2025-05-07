@@ -101,52 +101,53 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
       className={`fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 sm:py-8 transition-all duration-500 ${isOpen ? 'opacity-100 backdrop-blur-sm' : 'pointer-events-none opacity-0'}`}
     >
       <div className={`fixed inset-0 bg-black/70 backdrop-blur-md transition-all duration-500 ${isOpen ? 'opacity-100' : 'opacity-0'}`} />
+      
+      {/* Header buttons - Positioned outside the modal container to ensure visibility */}
+      <div className="fixed right-3 top-3 sm:right-5 sm:top-5 flex gap-2 z-20">
+        <button
+          className="rounded-full p-2 bg-white/90 shadow-md text-gray-700 hover:bg-white transition-colors"
+          onClick={handleShare}
+          title="Compartir"
+        >
+          <svg
+            className="h-5 w-5 sm:h-6 sm:w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+            />
+          </svg>
+        </button>
+        <button
+          className="rounded-full p-2 bg-white/90 shadow-md text-gray-700 hover:bg-white transition-colors"
+          onClick={onClose}
+          title="Cerrar"
+        >
+          <svg
+            className="h-5 w-5 sm:h-6 sm:w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+      
       <div
         ref={modalRef}
-        className={`relative w-full max-w-2xl sm:max-w-3xl lg:max-w-4xl transform overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl bg-white/95 backdrop-blur-sm p-4 pt-12 sm:py-12 sm:my-4 md:p-5 lg:p-6 shadow-2xl transition-all duration-500 ${isOpen ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-4 opacity-0 scale-95'}`}
+        className={`relative w-full max-w-2xl sm:max-w-3xl lg:max-w-4xl transform overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl bg-white/95 backdrop-blur-sm p-4 pt-8 sm:py-8 sm:my-4 md:p-5 lg:p-6 shadow-2xl transition-all duration-500 ${isOpen ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-4 opacity-0 scale-95'}`}
       >
-        {/* Header - Adjusted for better mobile visibility */}
-        <div className="absolute right-2 top-2 sm:right-3 sm:top-3 flex gap-2 z-10">
-          <button
-            className="rounded-full p-1.5 sm:p-2 text-gray-600 bg-white/80 hover:bg-white hover:text-gray-700 transition-colors shadow-sm"
-            onClick={handleShare}
-            title="Compartir"
-          >
-            <svg
-              className="h-5 w-5 sm:h-6 sm:w-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-              />
-            </svg>
-          </button>
-          <button
-            className="rounded-full p-1.5 sm:p-2 text-gray-600 bg-white/80 hover:bg-white hover:text-gray-700 transition-colors shadow-sm"
-            onClick={onClose}
-            title="Cerrar"
-          >
-            <svg
-              className="h-5 w-5 sm:h-6 sm:w-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-        </div>
-
         {/* Content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
           {/* Images */}
