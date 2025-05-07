@@ -103,17 +103,17 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
       <div className={`fixed inset-0 bg-black/70 backdrop-blur-md transition-all duration-500 ${isOpen ? 'opacity-100' : 'opacity-0'}`} />
       <div
         ref={modalRef}
-        className={`relative w-full max-w-2xl sm:max-w-3xl lg:max-w-4xl transform overflow-hidden rounded-2xl bg-white/95 backdrop-blur-sm p-2 sm:p-4 lg:p-6 shadow-2xl transition-all duration-500 ${isOpen ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-4 opacity-0 scale-95'}`}
+        className={`relative w-full max-w-2xl sm:max-w-3xl lg:max-w-4xl transform overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl bg-white/95 backdrop-blur-sm p-4 pt-12 sm:py-12 md:p-5 lg:p-6 shadow-2xl transition-all duration-500 ${isOpen ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-4 opacity-0 scale-95'}`}
       >
-        {/* Header */}
-        <div className="absolute right-2 top-2 flex gap-2 z-10">
+        {/* Header - Adjusted for better mobile visibility */}
+        <div className="absolute right-2 top-2 sm:right-3 sm:top-3 flex gap-2 z-10">
           <button
-            className="rounded-full p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 transition-colors"
+            className="rounded-full p-1.5 sm:p-2 text-gray-600 bg-white/80 hover:bg-white hover:text-gray-700 transition-colors shadow-sm"
             onClick={handleShare}
             title="Compartir"
           >
             <svg
-              className="h-6 w-6"
+              className="h-5 w-5 sm:h-6 sm:w-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -127,12 +127,12 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
             </svg>
           </button>
           <button
-            className="rounded-full p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 transition-colors"
+            className="rounded-full p-1.5 sm:p-2 text-gray-600 bg-white/80 hover:bg-white hover:text-gray-700 transition-colors shadow-sm"
             onClick={onClose}
             title="Cerrar"
           >
             <svg
-              className="h-6 w-6"
+              className="h-5 w-5 sm:h-6 sm:w-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
