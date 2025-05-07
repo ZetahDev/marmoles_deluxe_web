@@ -1,11 +1,4 @@
-import React, { useEffect, useRef } from 'react';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "../components/ui/carousel";
+import React, { useEffect, useRef, useState } from 'react';
 import { useMaterialModalStore } from '../store/materialModalStore';
 
 interface MaterialModalProps {
@@ -30,8 +23,7 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
   onClose,
 }) => {
   const allImages = images.length > 0 ? images : [image];
-  const currentImageIndex = useMaterialModalStore((state) => state.currentImageIndex);
-  const setCurrentImageIndex = useMaterialModalStore((state) => state.setCurrentImageIndex);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const resetImageIndex = useMaterialModalStore((state) => state.resetImageIndex);
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -82,13 +74,20 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
     }
   }, [isOpen]);
 
+  // Nuevo efecto para resetear el índice al abrir el modal
+  useEffect(() => {
+    if (isOpen) {
+      setCurrentImageIndex(0);
+    }
+  }, [isOpen]);
+
   // Share logic
   const handleShare = () => {
     const url = window.location.href;
     if (navigator.share) {
       navigator.share({
         title: `${title} - Mármoles Deluxe`,
-        text: `¡Mira este hermoso ${category?.toLowerCase() || ''} de Mármoles Deluxe!`,
+        text: `¡Mira este hermoso material ${category?.toLowerCase() || ''} de Mármoles Deluxe!`,
         url,
       });
     } else {
@@ -106,7 +105,6 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
       <div
         ref={modalRef}
         className={`relative w-full max-w-2xl sm:max-w-3xl lg:max-w-4xl transform overflow-hidden rounded-2xl bg-white/95 backdrop-blur-sm p-2 sm:p-4 lg:p-6 shadow-2xl transition-all duration-500 ${isOpen ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-4 opacity-0 scale-95'}`}
-        style={{ maxWidth: '100vw', width: '100%', boxSizing: 'border-box' }}
       >
         {/* Header */}
         <div className="absolute right-2 top-2 flex gap-2 z-10">
@@ -155,26 +153,32 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
           {/* Images */}
           <div className="space-y-2">
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg" style={{ maxWidth: '100%' }}>
-              <Carousel className="w-full h-full">
-                <CarouselContent>
-                  {allImages.map((img, index) => (
-                    <CarouselItem key={index}>
-                      <img
-                        src={img}
-                        alt={`${title} - vista ${index + 1}`}
-                        className={`w-full h-full object-cover ${currentImageIndex === index ? '' : 'hidden'}`}
-                        style={{ maxWidth: '100%', height: 'auto', display: 'block' }}
-                      />
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                {allImages.length > 1 && (
-                  <>
-                    <CarouselPrevious onClick={() => setCurrentImageIndex((currentImageIndex - 1 + allImages.length) % allImages.length)} className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white h-8 w-8 rounded-full flex items-center justify-center z-10 text-marmoles-gold border border-marmoles-gold/20 hover:border-marmoles-gold transition-all duration-200" />
-                    <CarouselNext onClick={() => setCurrentImageIndex((currentImageIndex + 1) % allImages.length)} className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white h-8 w-8 rounded-full flex items-center justify-center z-10 text-marmoles-gold border border-marmoles-gold/20 hover:border-marmoles-gold transition-all duration-200" />
-                  </>
-                )}
-              </Carousel>
+              <img
+                src={allImages[currentImageIndex]}
+                alt={`${title} - vista ${currentImageIndex + 1}`}
+                className="w-full h-full object-cover"
+                style={{ maxWidth: '100%', height: 'auto', display: 'block' }}
+              />
+              {allImages.length > 1 && (
+                <>
+                  <button
+                    onClick={() => setCurrentImageIndex((currentImageIndex - 1 + allImages.length) % allImages.length)}
+                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white h-8 w-8 rounded-full flex items-center justify-center z-10 text-marmoles-gold border border-marmoles-gold/20 hover:border-marmoles-gold transition-all duration-200"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+                      <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={() => setCurrentImageIndex((currentImageIndex + 1) % allImages.length)}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white h-8 w-8 rounded-full flex items-center justify-center z-10 text-marmoles-gold border border-marmoles-gold/20 hover:border-marmoles-gold transition-all duration-200"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+                      <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                  </button>
+                </>
+              )}
             </div>
             {allImages.length > 1 && (
               <div className="grid grid-cols-4 gap-2">
