@@ -98,8 +98,7 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 transition-all duration-500 ${isOpen ? 'opacity-100 backdrop-blur-sm' : 'pointer-events-none opacity-0'}`}
-      style={{ minHeight: '100dvh' }}
+      className={`fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 sm:py-8 transition-all duration-500 ${isOpen ? 'opacity-100 backdrop-blur-sm' : 'pointer-events-none opacity-0'}`}
     >
       <div className={`fixed inset-0 bg-black/70 backdrop-blur-md transition-all duration-500 ${isOpen ? 'opacity-100' : 'opacity-0'}`} />
       <div
