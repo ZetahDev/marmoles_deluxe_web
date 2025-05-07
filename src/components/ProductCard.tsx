@@ -17,6 +17,7 @@ interface ProductCardProps {
   price?: string;
   features?: string[];
   category?: string;
+  slug: string;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
@@ -26,6 +27,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   price,
   features = [],
   category = "",
+  slug,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -44,7 +46,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   useEffect(() => {
     const handleModalStateChange = (e: CustomEvent) => {
       const { id } = e.detail;
-      setIsModalOpen(id === name);
+      setIsModalOpen(id === slug);
     };
 
     const handleModalClose = () => {
@@ -58,11 +60,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
       document.removeEventListener('modal-state-change', handleModalStateChange as EventListener);
       document.removeEventListener('modal-close', handleModalClose);
     };
-  }, [name]);
+  }, [slug]);
 
   const handleClick = () => {
     const event = new CustomEvent('modal-state-change', {
-      detail: { id: name }
+      detail: { id: slug }
     });
     document.dispatchEvent(event);
   };
@@ -70,10 +72,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
   return (
     <>
     <article 
-      className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full max-w-md"
+      className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full max-w-md w-full overflow-hidden"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-        onClick={handleClick}
+      onClick={handleClick}
+      style={{ maxWidth: '100%' }}
     >
       <div className="flex-1">
         <div className="relative aspect-video w-full mb-6 overflow-hidden">
@@ -93,7 +96,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
                         objectPosition: "left bottom", 
                         height: imageHeight,
                         width: "100%",
-                        contentVisibility: "auto"
+                        contentVisibility: "auto",
+                        maxWidth: '100%',
+                        display: 'block',
                       }}
                       loading="lazy"
                       decoding="async"

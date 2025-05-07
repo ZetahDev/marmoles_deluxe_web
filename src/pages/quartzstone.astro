@@ -20,6 +20,7 @@ interface Stone {
       </h1>
       <div
         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8 mb-16"
+        id="quartzstone-grid"
       >
         {
           quarstone.map((stone: Stone) => (
@@ -35,6 +36,7 @@ interface Stone {
                 "Amplia gama de colores"
               ]}
               category="Quartzstone"
+              slug={stone.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
             />
           ))
         }
@@ -46,4 +48,20 @@ interface Stone {
 <script>
   import { initModal } from '../scripts/modal';
   initModal();
+
+  // --- Abrir modal automáticamente por parámetro 'material' ---
+  if (typeof window !== 'undefined') {
+    window.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const material = params.get('material');
+      if (material) {
+        setTimeout(() => {
+          const event = new CustomEvent('modal-state-change', {
+            detail: { id: material }
+          });
+          document.dispatchEvent(event);
+        }, 500);
+      }
+    });
+  }
 </script>

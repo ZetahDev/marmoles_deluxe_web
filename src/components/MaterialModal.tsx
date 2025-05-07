@@ -106,6 +106,7 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
       <div
         ref={modalRef}
         className={`relative w-full max-w-2xl sm:max-w-3xl lg:max-w-4xl transform overflow-hidden rounded-2xl bg-white/95 backdrop-blur-sm p-2 sm:p-4 lg:p-6 shadow-2xl transition-all duration-500 ${isOpen ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-4 opacity-0 scale-95'}`}
+        style={{ maxWidth: '100vw', width: '100%', boxSizing: 'border-box' }}
       >
         {/* Header */}
         <div className="absolute right-2 top-2 flex gap-2 z-10">
@@ -153,7 +154,7 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
           {/* Images */}
           <div className="space-y-2">
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg" style={{ maxWidth: '100%' }}>
               <Carousel className="w-full h-full">
                 <CarouselContent>
                   {allImages.map((img, index) => (
@@ -162,6 +163,7 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
                         src={img}
                         alt={`${title} - vista ${index + 1}`}
                         className={`w-full h-full object-cover ${currentImageIndex === index ? '' : 'hidden'}`}
+                        style={{ maxWidth: '100%', height: 'auto', display: 'block' }}
                       />
                     </CarouselItem>
                   ))}

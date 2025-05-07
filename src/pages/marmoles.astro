@@ -13,7 +13,7 @@ interface Stone {
 
 <Layout title="Mármoles - Mármoles Deluxe">
   <PageLoader client:load isLoading={true} />
-  <main class="py-20 pt-24">
+  <main class="py-20 pt-24 overflow-x-hidden">
     <div class="container mx-auto px-4">
       <h1 class="text-4xl md:text-5xl font-bold text-center mb-12">
         Nuestros Mármoles
@@ -21,6 +21,7 @@ interface Stone {
 
       <div
         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8 mb-16"
+        id="marmoles-grid"
       >
         {
           marmoles.map((stone: Stone) => (
@@ -36,6 +37,7 @@ interface Stone {
                 "Transforma tu espacio"
               ]}
               category="Mármol"
+              slug={stone.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
             />
           ))
         }
@@ -47,4 +49,21 @@ interface Stone {
 <script>
   import { initModal } from '../scripts/modal';
   initModal();
+
+  // --- Abrir modal automáticamente por parámetro 'material' ---
+  if (typeof window !== 'undefined') {
+    window.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const material = params.get('material');
+      if (material) {
+        // Disparar evento para abrir el modal del material
+        setTimeout(() => {
+          const event = new CustomEvent('modal-state-change', {
+            detail: { id: material }
+          });
+          document.dispatchEvent(event);
+        }, 500);
+      }
+    });
+  }
 </script>
