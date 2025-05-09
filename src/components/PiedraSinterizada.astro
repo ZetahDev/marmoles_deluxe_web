@@ -1,13 +1,83 @@
 ---
-import { neolithStones, alteaStones, dektonStones, silestoneStones, neolithFeatures, alteaFeatures, dektonFeatures, silestoneFeatures } from "../data/piedrasData";
+import { listStonesFromS3, type Stone } from '../lib/utils/s3Utils';
 
-// Estructura para manejar todas las categorías de piedras
-const stoneCategories = [
-  { title: "Neolith", stones: neolithStones, features: neolithFeatures },
-  { title: "Altea", stones: alteaStones, features: alteaFeatures },
-  { title: "Dekton", stones: dektonStones, features: dektonFeatures },
-  { title: "Silestone", stones: silestoneStones, features: silestoneFeatures }
+// Define stone type structure
+interface StoneType {
+  title: "Neolith" | "Altea" | "Dekton" | "Silestone";
+  folder: string;
+}
+
+// Define los tipos de piedra sinterizada
+const stoneTypes: StoneType[] = [
+  { title: "Neolith", folder: "PIEDRA+SINTERIZADA/NEOLITH" },
+  { title: "Altea", folder: "PIEDRA+SINTERIZADA/ALTEA" },
+  { title: "Dekton", folder: "PIEDRA+SINTERIZADA/DEKTON" },
+  { title: "Silestone", folder: "PIEDRA+SINTERIZADA/SILESTONE" }
 ];
+
+// Define characteristics by stone type
+type FeatureMap = {
+  [key in StoneType["title"]]: string[];
+};
+
+// Define características por tipo de piedra (solo las 6 más importantes)
+const features: FeatureMap = {
+  "Neolith": [
+    "Resistente a la abrasión y al rayado",
+    "Resistente a altas temperaturas",
+    "Resistente a químicos, ácidos y solventes",
+    "Baja absorción de líquidos",
+    "Adecuado para manipular alimentos",
+    "Puede usarse en interiores o exteriores",
+    "25 años de garantía"
+  ],
+  "Altea": [
+    "Resistente a la abrasión y al rayado",
+    "Resistente a altas temperaturas",
+    "Resistente a químicos, ácidos y solventes",
+    "Baja absorción de líquidos",
+    "Adecuado para manipular alimentos",
+    "Puede usarse en interiores o exteriores",
+    "10 años de garantía"
+  ],
+  "Dekton": [
+    "Resistente a la abrasión y al rayado",
+    "Resistente a altas temperaturas",
+    "Resistente a químicos, ácidos y solventes",
+    "Baja absorción de líquidos",
+    "Adecuado para manipular alimentos",
+    "Puede usarse en interiores o exteriores",
+    "25 años de garantía"
+  ],
+  "Silestone": [
+    "Resistente a la abrasión y al rayado",
+    "Resistente a altas temperaturas",
+    "25 años de garantía",
+    "Resistente a químicos, ácidos y solventes",
+    "Baja absorción de líquidos",
+    "Adecuado para manipular alimentos",
+    "Puede usarse en interiores o exteriores"
+  ]
+};
+
+// Define category result structure
+interface StoneCategory {
+  title: StoneType["title"];
+  stones: Stone[];
+  features: string[];
+}
+
+// Fetch stone data for each category at build time
+const stoneCategories: StoneCategory[] = await Promise.all(
+  stoneTypes.map(async (type) => {
+    const stones = await listStonesFromS3(type.folder);
+    return {
+      title: type.title,
+      stones: stones,
+      features: features[type.title]
+    };
+  })
+);
 ---
 
 <div class="container mx-auto px-4 py-16">
@@ -51,7 +121,7 @@ const stoneCategories = [
         <div>
           <h3 class="text-2xl font-bold mb-6 text-center">{category.title}</h3>
           <ul class="space-y-2">
-            {category.features.map(feature => (
+            {category.features.map((feature: string) => (
               <li class="flex items-center">
                 <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>

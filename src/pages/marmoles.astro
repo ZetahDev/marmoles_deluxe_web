@@ -1,17 +1,54 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ProductCard from "../components/ProductCard.tsx";
-import { marmoles } from "../components/Marmoles.astro";
 import PageLoader from "../components/PageLoader.tsx";
+import SEOSchemaData from "../components/SEOSchemaData.tsx";
+import { listStonesFromS3, type Stone } from "../lib/utils/s3Utils";
 
-interface Stone {
-  name: string;
-  image: string;
-  design: string;
-}
+// Metadatos SEO para la página
+const metaTitle = "Mármoles - Mármoles Deluxe";
+const metaDescription = "Descubre nuestra exclusiva colección de mármoles naturales para encimeras, pisos y proyectos arquitectónicos. Belleza atemporal y elegancia para cualquier espacio.";
+const metaImage = "/images/marmoles-hero.jpg";
+const pageUrl = new URL(Astro.url.pathname, Astro.site).toString();
+
+// Fetch marble data at build time
+const marmoles = await listStonesFromS3('MARMOL');
+
+// Configurar datos para schema.org
+const schemaStones = marmoles.map((stone: Stone) => ({
+  name: stone.name,
+  image: stone.image
+}));
+
+// Canonical URL (importante para SEO)
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
-<Layout title="Mármoles - Mármoles Deluxe">
+<Layout title={metaTitle}>
+  <!-- Agregar metadatos SEO dinámicos -->
+  <meta slot="head" name="description" content={metaDescription} />
+  <meta slot="head" property="og:title" content={metaTitle} />
+  <meta slot="head" property="og:description" content={metaDescription} />
+  <meta slot="head" property="og:image" content={metaImage} />
+  <meta slot="head" property="og:type" content="website" />
+  <meta slot="head" property="og:url" content={pageUrl} />
+  <meta slot="head" name="twitter:card" content="summary_large_image" />
+  <meta slot="head" name="twitter:title" content={metaTitle} />
+  <meta slot="head" name="twitter:description" content={metaDescription} />
+  <meta slot="head" name="twitter:image" content={metaImage} />
+  <link slot="head" rel="canonical" href={canonicalURL.toString()} />
+  
+  <!-- Agregar datos estructurados schema.org para SEO -->
+  <SEOSchemaData 
+    client:load
+    pageTitle={metaTitle}
+    pageDescription={metaDescription}
+    pageUrl={pageUrl}
+    pageImage={metaImage}
+    category="Mármol"
+    stones={schemaStones}
+  />
+
   <PageLoader client:load isLoading={true} />
   <main class="py-20 pt-24 overflow-x-hidden">
     <div class="container mx-auto px-4">

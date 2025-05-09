@@ -3,6 +3,16 @@ import Layout from "../layouts/Layout.astro";
 import { CarouselWrapper } from "../components/CarouselWrapper";
 import { TestimonialCarousel } from "../components/TestimonialCarousel";
 import ContactForm from "../components/ContactForm";
+import SEOSchemaData from "../components/SEOSchemaData.tsx";
+
+// Metadatos SEO para la página
+const metaTitle = "Mármoles Deluxe - La calidad del mármol en el corazón de Cali";
+const metaDescription = "Empresa familiar con 16 años de experiencia en suministro e instalación de superficies en piedras naturales y sinterizadas en Cali y Valle del Cauca.";
+const metaImage = "/images/home-hero.jpg";
+const pageUrl = new URL(Astro.url.pathname, Astro.site).toString();
+
+// Canonical URL (importante para SEO)
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
@@ -80,7 +90,29 @@ const projects = [
 ];
 ---
 
-<Layout title="Mármoles Deluxe - La calidad del mármol en el corazón de Cali">
+<Layout title={metaTitle}>
+  <!-- Agregar metadatos SEO dinámicos -->
+  <meta slot="head" name="description" content={metaDescription} />
+  <meta slot="head" property="og:title" content={metaTitle} />
+  <meta slot="head" property="og:description" content={metaDescription} />
+  <meta slot="head" property="og:image" content={metaImage} />
+  <meta slot="head" property="og:type" content="website" />
+  <meta slot="head" property="og:url" content={pageUrl} />
+  <meta slot="head" name="twitter:card" content="summary_large_image" />
+  <meta slot="head" name="twitter:title" content={metaTitle} />
+  <meta slot="head" name="twitter:description" content={metaDescription} />
+  <meta slot="head" name="twitter:image" content={metaImage} />
+  <link slot="head" rel="canonical" href={canonicalURL.toString()} />
+  
+  <!-- Agregar datos estructurados schema.org para SEO -->
+  <SEOSchemaData 
+    client:load
+    pageTitle={metaTitle}
+    pageDescription={metaDescription}
+    pageUrl={pageUrl}
+    pageImage={metaImage}
+  />
+
   <!-- Hero Section -->
   <section
     class="relative h-screen flex items-center justify-center text-marmoles-white"

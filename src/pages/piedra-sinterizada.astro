@@ -2,26 +2,171 @@
 import Layout from "../layouts/Layout.astro";
 import ProductCard from "../components/ProductCard.tsx";
 import PageLoader from "../components/PageLoader.tsx";
-import { neolithStones, alteaStones, dektonStones, silestoneStones } from "../data/piedrasData";
+import CategoryFilter from "../components/CategoryFilter.tsx";
+import CategoryWrapper from "../components/CategoryWrapper.tsx";
+import SEOSchemaData from "../components/SEOSchemaData.tsx";
+import { listStonesFromS3, type Stone } from "../lib/utils/s3Utils";
 
-interface Stone {
-  name: string;
-  image: string;
-  design: string;
-  features?: string[];
+// Define stone type features
+interface StoneTypeFeatures {
+  [key: string]: string[];
 }
 
-// Estructura para manejar todas las categorías de piedras
-const stoneCategories = [
-  { title: "Neolith", stones: neolithStones },
-  { title: "Altea", stones: alteaStones },
-  { title: "Dekton", stones: dektonStones },
-  { title: "Silestone", stones: silestoneStones }
+// Configuración: usar anclas (#neolith) en lugar de parámetros (?categoria=neolith)
+const useAnchorLinks = true;
+
+// Generate category descriptions for SEO
+const categoryDescriptions = {
+  "Neolith": "Descubre nuestra colección de piedras sinterizadas Neolith, reconocidas por su durabilidad, resistencia a altas temperaturas y 25 años de garantía.",
+  "Altea": "Explora nuestras piedras sinterizadas Altea, una opción premium con resistencia superior a químicos, ácidos y solventes, y 10 años de garantía.",
+  "Dekton": "Conoce nuestra línea de piedras sinterizadas Dekton, con características excepcionales como resistencia a la abrasión y 25 años de garantía.",
+  "Silestone": "Encuentra las mejores piedras sinterizadas Silestone, ideales para cocinas y baños por su baja absorción y adecuación para manipular alimentos."
+};
+
+const features: StoneTypeFeatures = {
+  "Neolith": [
+    "Resistente a la abrasión y al rayado",
+    "Resistente a altas temperaturas",
+    "Resistente a químicos, ácidos y solventes",
+    "Baja absorción de líquidos",
+    "Adecuado para manipular alimentos",
+    "Puede usarse en interiores o exteriores",
+    "25 años de garantía"
+  ],
+  "Altea": [
+    "Resistente a la abrasión y al rayado",
+    "Resistente a altas temperaturas",
+    "Resistente a químicos, ácidos y solventes",
+    "Baja absorción de líquidos",
+    "Adecuado para manipular alimentos",
+    "Puede usarse en interiores o exteriores",
+    "10 años de garantía"
+  ],
+  "Dekton": [
+    "Resistente a la abrasión y al rayado",
+    "Resistente a altas temperaturas",
+    "Resistente a químicos, ácidos y solventes",
+    "Baja absorción de líquidos",
+    "Adecuado para manipular alimentos",
+    "Puede usarse en interiores o exteriores",
+    "25 años de garantía"
+  ],
+  "Silestone": [
+    "Resistente a la abrasión y al rayado",
+    "Resistente a altas temperaturas",
+    "25 años de garantía",
+    "Resistente a químicos, ácidos y solventes",
+    "Baja absorción de líquidos",
+    "Adecuado para manipular alimentos",
+    "Puede usarse en interiores o exteriores"
+  ]
+};
+
+// Define stone categories
+const stoneTypes = [
+  { title: "Neolith", folder: "PIEDRA+SINTERIZADA/NEOLITH" },
+  { title: "Altea", folder: "PIEDRA+SINTERIZADA/ALTEA" },
+  { title: "Dekton", folder: "PIEDRA+SINTERIZADA/DEKTON" },
+  { title: "Silestone", folder: "PIEDRA+SINTERIZADA/SILESTONE" }
 ];
+
+// Fetch stone data for each category at build time
+const stoneCategories = await Promise.all(
+  stoneTypes.map(async (type) => {
+    const stones = await listStonesFromS3(type.folder);
+    // Add features to each stone
+    const stonesWithFeatures = stones.map(stone => ({
+      ...stone,
+      features: features[type.title]
+    }));
+    return {
+      title: type.title,
+      stones: stonesWithFeatures
+    };
+  })
+);
+
+// Get the category from URL for server-side rendering of metadata
+const { url } = Astro;
+const params = url.searchParams;
+const categoryParam = params.get('categoria')?.toLowerCase();
+// También revisar el hash para el SEO si estamos usando anclas
+const hash = url.hash ? url.hash.substring(1) : null;
+const effectiveCategory = useAnchorLinks ? (hash || categoryParam) : categoryParam;
+
+// Default metadata
+let metaTitle = "Piedra Sinterizada - Mármoles Deluxe";
+let metaDescription = "Explora nuestra colección de piedras sinterizadas de alta calidad: Neolith, Altea, Dekton y Silestone. Material premium para encimeras y superficies.";
+let metaImage = "/images/piedra-sinterizada-hero.jpg"; // Asegúrate de tener esta imagen o cambia la ruta
+
+// Prepare data for schema.org
+let schemaCategory: string | undefined;
+let schemaStones: Array<{ name: string, image: string }> = [];
+
+// Update metadata if a valid category is specified
+if (effectiveCategory) {
+  const formattedCategory = 
+    effectiveCategory === 'neolith' ? 'Neolith' :
+    effectiveCategory === 'altea' ? 'Altea' :
+    effectiveCategory === 'dekton' ? 'Dekton' :
+    effectiveCategory === 'silestone' ? 'Silestone' : null;
+  
+  if (formattedCategory) {
+    metaTitle = `${formattedCategory} - Piedra Sinterizada | Mármoles Deluxe`;
+    metaDescription = categoryDescriptions[formattedCategory];
+    // Ideally, you would have category-specific images
+    metaImage = `/images/piedra-sinterizada-${effectiveCategory}.jpg`;
+    
+    // Set schema.org data for this category
+    schemaCategory = formattedCategory;
+    const categoryData = stoneCategories.find(cat => cat.title === formattedCategory);
+    if (categoryData) {
+      schemaStones = categoryData.stones.map(stone => ({
+        name: stone.name,
+        image: stone.image
+      }));
+    }
+  }
+}
+
+// Canonical URL (important for SEO)
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+if (useAnchorLinks && effectiveCategory) {
+  // Si usamos anclas, el canonical debe incluir el hash
+  canonicalURL.hash = `#${effectiveCategory}`;
+} else if (categoryParam) {
+  // Si usamos parámetros, incluirlos en el canonical
+  canonicalURL.searchParams.set('categoria', categoryParam);
+}
 ---
 
-<Layout title="Piedra Sinterizada - Mármoles Deluxe">
+<Layout title={metaTitle}>
+  <!-- Add dynamic SEO meta tags -->
+  <meta slot="head" name="description" content={metaDescription} />
+  <meta slot="head" property="og:title" content={metaTitle} />
+  <meta slot="head" property="og:description" content={metaDescription} />
+  <meta slot="head" property="og:image" content={metaImage} />
+  <meta slot="head" property="og:type" content="website" />
+  <meta slot="head" property="og:url" content={Astro.url.href} />
+  <meta slot="head" name="twitter:card" content="summary_large_image" />
+  <meta slot="head" name="twitter:title" content={metaTitle} />
+  <meta slot="head" name="twitter:description" content={metaDescription} />
+  <meta slot="head" name="twitter:image" content={metaImage} />
+  <link slot="head" rel="canonical" href={canonicalURL.toString()} />
+  
+  <!-- Add Schema.org structured data for SEO -->
+  <SEOSchemaData 
+    client:load
+    pageTitle={metaTitle}
+    pageDescription={metaDescription}
+    pageUrl={Astro.url.href}
+    pageImage={metaImage}
+    category={schemaCategory}
+    stones={schemaStones}
+  />
+  
   <PageLoader client:load isLoading={true} />
+  <CategoryFilter client:load />
   
   <main class="py-20 pt-24">
     <div class="container mx-auto px-4">
@@ -29,27 +174,7 @@ const stoneCategories = [
         Piedra Sinterizada
       </h1>
       
-      {
-        stoneCategories.map((category, index) => (
-          <div>
-            <h2 class="text-3xl font-bold text-center mb-8">{category.title}</h2>
-            <div class={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ${index < stoneCategories.length - 1 ? 'mb-16' : ''}`}>
-              {
-                category.stones.map((stone: Stone) => (
-                  <ProductCard client:load
-                    name={stone.name}
-                    description="Piedra sinterizada de alta calidad"
-                    images={[stone.image, stone.design]}
-                    features={stone.features}
-                    category={category.title}
-                    slug={stone.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
-                  />
-                ))
-              }
-            </div>
-          </div>
-        ))
-      }
+      <CategoryWrapper client:load categories={stoneCategories} useAnchorLinks={useAnchorLinks} />
     </div>
   </main>
 </Layout>

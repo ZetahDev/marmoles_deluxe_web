@@ -1,11 +1,42 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import SEOSchemaData from "../components/SEOSchemaData.tsx";
 
-const seoDescription = "Mármoles Deluxe, empresa familiar con 16 años de experiencia en Cali. Expertos en suministro e instalación de piedras naturales y sinterizadas de alta calidad.";
-const seoKeywords = "mármoles Cali, piedras naturales Cali, instalación de piedras Cali, granito Cali, piedra sinterizada Cali";
+// Metadatos SEO para la página
+const metaTitle = "Nosotros - Mármoles Deluxe | Expertos en Piedras Naturales en Cali";
+const metaDescription = "Mármoles Deluxe, empresa familiar con 16 años de experiencia en Cali. Expertos en suministro e instalación de piedras naturales y sinterizadas de alta calidad.";
+const metaKeywords = "mármoles Cali, piedras naturales Cali, instalación de piedras Cali, granito Cali, piedra sinterizada Cali";
+const metaImage = "/images/nosotros-hero.jpg";
+const pageUrl = new URL(Astro.url.pathname, Astro.site).toString();
+
+// Canonical URL (importante para SEO)
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
-<Layout title="Nosotros - Mármoles Deluxe | Expertos en Piedras Naturales en Cali">
+<Layout title={metaTitle}>
+  <!-- Agregar metadatos SEO dinámicos -->
+  <meta slot="head" name="description" content={metaDescription} />
+  <meta slot="head" name="keywords" content={metaKeywords} />
+  <meta slot="head" property="og:title" content={metaTitle} />
+  <meta slot="head" property="og:description" content={metaDescription} />
+  <meta slot="head" property="og:image" content={metaImage} />
+  <meta slot="head" property="og:type" content="website" />
+  <meta slot="head" property="og:url" content={pageUrl} />
+  <meta slot="head" name="twitter:card" content="summary_large_image" />
+  <meta slot="head" name="twitter:title" content={metaTitle} />
+  <meta slot="head" name="twitter:description" content={metaDescription} />
+  <meta slot="head" name="twitter:image" content={metaImage} />
+  <link slot="head" rel="canonical" href={canonicalURL.toString()} />
+  
+  <!-- Agregar datos estructurados schema.org para SEO -->
+  <SEOSchemaData 
+    client:load
+    pageTitle={metaTitle}
+    pageDescription={metaDescription}
+    pageUrl={pageUrl}
+    pageImage={metaImage}
+  />
+
   <main class="py-20 pt-24">
     <div class="container mx-auto px-4 sm:px-6 max-w-6xl">
       <header class="text-center mb-12 md:mb-16">

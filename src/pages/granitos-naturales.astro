@@ -1,17 +1,54 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ProductCard from "../components/ProductCard.tsx";
-import { granitosNaturales } from "../components/GranitosNaturales.astro";
 import PageLoader from "../components/PageLoader.tsx";
+import SEOSchemaData from "../components/SEOSchemaData.tsx";
+import { listStonesFromS3, type Stone } from "../lib/utils/s3Utils";
 
-interface Stone {
-  name: string;
-  image: string;
-  design: string;
-}
+// Metadatos SEO para la página
+const metaTitle = "Granitos Naturales - Mármoles Deluxe";
+const metaDescription = "Explora nuestra colección de granitos naturales de alta calidad para encimeras, pisos y superficies. Material elegante y duradero para tu hogar u oficina.";
+const metaImage = "/images/granitos-naturales-hero.jpg";
+const pageUrl = new URL(Astro.url.pathname, Astro.site).toString();
+
+// Fetch granite data at build time
+const granitosNaturales = await listStonesFromS3('GRANITOS+NATURALES');
+
+// Configurar datos para schema.org
+const schemaStones = granitosNaturales.map((stone: Stone) => ({
+  name: stone.name,
+  image: stone.image
+}));
+
+// Canonical URL (importante para SEO)
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
-<Layout title="Granitos Naturales - Mármoles Deluxe">
+<Layout title={metaTitle}>
+  <!-- Agregar metadatos SEO dinámicos -->
+  <meta slot="head" name="description" content={metaDescription} />
+  <meta slot="head" property="og:title" content={metaTitle} />
+  <meta slot="head" property="og:description" content={metaDescription} />
+  <meta slot="head" property="og:image" content={metaImage} />
+  <meta slot="head" property="og:type" content="website" />
+  <meta slot="head" property="og:url" content={pageUrl} />
+  <meta slot="head" name="twitter:card" content="summary_large_image" />
+  <meta slot="head" name="twitter:title" content={metaTitle} />
+  <meta slot="head" name="twitter:description" content={metaDescription} />
+  <meta slot="head" name="twitter:image" content={metaImage} />
+  <link slot="head" rel="canonical" href={canonicalURL.toString()} />
+  
+  <!-- Agregar datos estructurados schema.org para SEO -->
+  <SEOSchemaData 
+    client:load
+    pageTitle={metaTitle}
+    pageDescription={metaDescription}
+    pageUrl={pageUrl}
+    pageImage={metaImage}
+    category="Granitos Naturales"
+    stones={schemaStones}
+  />
+
   <PageLoader client:load isLoading={true} />
   <main class="py-20 pt-24">
     <div class="container mx-auto px-4">

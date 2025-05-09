@@ -1,50 +1,43 @@
 ---
-interface Stone {
-  name: string;
-  image: string;
-  design: string;
-}
+import { listStonesFromS3, type Stone } from '../lib/utils/s3Utils';
 
-export const quarstone: Stone[] = [
-  {
-    name: "Blanco Estelar",
-    image: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Blanco_Estelar%20.png",
-    design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Blanco_Estelar_desing.png"
-  },
-  {
-    name: "Blanco Extra",
-    image: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Blanco_Extra.png",
-    design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Blanco_Extra_desing.png"
-  },
-  {
-    name: "Blanco Polar",
-    image: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Blanco_Polar%20.png",
-    design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Blanco_Polar_desing.png"
-  },
-  {
-    name: "Gris Estelar",
-    image: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Gris_Estelar.png",
-    design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Gris_Estelar_desing.png"
-  },
-  {
-    name: "Negro Estelar",
-    image: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Negro_estelar.png",
-    design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Negro_estelar_desing.png"
-  },
-  {
-    name: "Quarstone Beige",
-    image: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Quarstone_Beige%20.png",
-    design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Quarstone_Beige_desing.png"
-  },
-  {
-    name: "Quarstone Gris Clásico",
-    image: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Quarstone_Gris_Clasico.png",
-    design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Quarstone_Gris_Clasico_desing.png"
-  },
-  {
-    name: "Rojo Estelar",
-    image: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Rojo_Estelar%20.png",
-    design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Rojo_Estelar_desing%20.png"
-  }
-];
+// Fetch quartzstone data at build time
+const quarstone: Stone[] = await listStonesFromS3('QUARSTONE');
+---
+
+<div class="container mx-auto px-4 py-16">
+  <h2 class="text-3xl font-bold text-center mb-12">Quarstone</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    {
+      quarstone.map((stone, index) => (
+        <div class="group relative overflow-hidden rounded-lg shadow-lg">
+          <div class="relative h-64 overflow-hidden bg-gray-100">
+            <img
+              src={stone.image}
+              alt={stone.name}
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              loading="lazy"
+              decoding="async"
+              fetchpriority={index < 4 ? "high" : "low"}
+              width="400"
+              height="256"
+            />
+            <img
+              src={stone.design}
+              alt={`${stone.name} diseño`}
+              class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              loading="lazy"
+              decoding="async"
+              width="400"
+              height="256"
+            />
+          </div>
+          <div class="absolute bottom-0 left-0 right-0 bg-black/70 text-white p-4 transform translate-y-full transition-transform duration-300 group-hover:translate-y-0">
+            <h3 class="text-lg font-semibold">{stone.name}</h3>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>
 --- 

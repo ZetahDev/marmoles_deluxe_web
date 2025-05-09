@@ -118,3 +118,33 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+## AWS S3 Integration
+
+This project dynamically loads stone product images from an AWS S3 bucket during the build process. To set up the AWS integration:
+
+1. Create a `.env` file in the root of the project with the following variables:
+
+```
+PUBLIC_AWS_ACCESS_KEY_ID=your_access_key_here
+PUBLIC_AWS_SECRET_ACCESS_KEY=your_secret_key_here
+PUBLIC_AWS_REGION=us-east-2
+PUBLIC_AWS_BUCKET_NAME=marmolesdeluxe
+```
+
+2. Replace the values with your actual AWS credentials.
+
+3. The stone images should be organized in the S3 bucket according to the following structure:
+   - `FOTOS/MARMOL/` - for marble images
+   - `FOTOS/QUARSTONE/` - for quartzstone images  
+   - `FOTOS/GRANITOS+NATURALES/` - for natural granite images
+   - `FOTOS/PIEDRA+SINTERIZADA/NEOLITH/` - for Neolith synthetic stone images
+   - `FOTOS/PIEDRA+SINTERIZADA/ALTEA/` - for Altea synthetic stone images
+   - `FOTOS/PIEDRA+SINTERIZADA/DEKTON/` - for Dekton synthetic stone images
+   - `FOTOS/PIEDRA+SINTERIZADA/SILESTONE/` - for Silestone synthetic stone images
+
+4. Each stone should have two images:
+   - A base image (e.g., `Stone_Name.png`)
+   - A design image with the same name plus `_desing` suffix (e.g., `Stone_Name_desing.png`)
+
+The system will automatically find these image pairs and create the stone catalog during the build process.

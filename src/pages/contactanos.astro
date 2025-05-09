@@ -1,9 +1,41 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ContactForm from "../components/ContactForm";
+import SEOSchemaData from "../components/SEOSchemaData.tsx";
+
+// Metadatos SEO para la página
+const metaTitle = "Contáctanos - Mármoles Deluxe | Expertos en Piedras Naturales en Cali";
+const metaDescription = "Ponte en contacto con nuestro equipo de expertos en mármoles, granitos y piedras sinterizadas en Cali. ¡Transforma tu espacio con superficies de la más alta calidad!";
+const metaImage = "/images/contacto-hero.jpg";
+const pageUrl = new URL(Astro.url.pathname, Astro.site).toString();
+
+// Canonical URL (importante para SEO)
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
-<Layout title="Contáctanos - Mármoles Deluxe | Expertos en Piedras Naturales en Cali">
+<Layout title={metaTitle}>
+  <!-- Agregar metadatos SEO dinámicos -->
+  <meta slot="head" name="description" content={metaDescription} />
+  <meta slot="head" property="og:title" content={metaTitle} />
+  <meta slot="head" property="og:description" content={metaDescription} />
+  <meta slot="head" property="og:image" content={metaImage} />
+  <meta slot="head" property="og:type" content="website" />
+  <meta slot="head" property="og:url" content={pageUrl} />
+  <meta slot="head" name="twitter:card" content="summary_large_image" />
+  <meta slot="head" name="twitter:title" content={metaTitle} />
+  <meta slot="head" name="twitter:description" content={metaDescription} />
+  <meta slot="head" name="twitter:image" content={metaImage} />
+  <link slot="head" rel="canonical" href={canonicalURL.toString()} />
+  
+  <!-- Agregar datos estructurados schema.org para SEO -->
+  <SEOSchemaData 
+    client:load
+    pageTitle={metaTitle}
+    pageDescription={metaDescription}
+    pageUrl={pageUrl}
+    pageImage={metaImage}
+  />
+
   <main class="py-20 pt-24">
     <div class="container mx-auto px-4 sm:px-6 max-w-6xl">
       <header class="text-center mb-12 md:mb-16">
