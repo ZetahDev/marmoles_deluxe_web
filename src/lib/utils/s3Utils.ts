@@ -55,9 +55,34 @@ const fallbackData: Record<string, Stone[]> = {
       design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Blanco_Extra_desing.png"
     },
     {
+      name: "Blanco Polar",
+      image: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Blanco_Polar%20.png",
+      design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Blanco_Polar_desing.png"
+    },
+    {
+      name: "Gris Estelar",
+      image: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Gris_Estelar.png",
+      design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Gris_Estelar_desing.png"
+    },
+    {
       name: "Negro Estelar",
       image: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Negro_estelar.png",
       design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Negro_estelar_desing.png"
+    },
+    {
+      name: "Quarstone Beige",
+      image: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Quarstone_Beige%20.png",
+      design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Quarstone_Beige_desing.png"
+    },
+    {
+      name: "Quarstone Gris Clasico",
+      image: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Quarstone_Gris_Clasico.png",
+      design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Quarstone_Gris_Clasico_desing.png"
+    },
+    {
+      name: "Rojo Estelar",
+      image: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Rojo_Estelar%20.png",
+      design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Rojo_Estelar_desing%20.png"
     }
   ],
   'GRANITOS+NATURALES': [
@@ -67,14 +92,79 @@ const fallbackData: Record<string, Stone[]> = {
       design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Amariilo_Ornamental%20_desing.png"
     },
     {
+      name: "Artic Cream",
+      image: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Artic_Cream.png",
+      design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Artic_Cream_designs.png"
+    },
+    {
       name: "Bengal Black",
       image: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Bengal_Black.png",
       design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Bengal_Black_designs.png"
     },
     {
+      name: "Bianco Azurro",
+      image: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Bianco_Azurro.png",
+      design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Bianco_Azurro_designs.png"
+    },
+    {
+      name: "Bianco Miramare",
+      image: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Bianco_Miramare.png",
+      design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Bianco_Miramare_designs.png"
+    },
+    {
+      name: "Black River",
+      image: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Black_River.png",
+      design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Black_River_designs.png"
+    },
+    {
       name: "Blue Fantasy",
       image: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Blue_Fantasy.png",
       design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Blue_Fantasy_designs.png"
+    },
+    {
+      name: "Blue Sky",
+      image: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Blue_Sky.png",
+      design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Blue_Sky_designs.png"
+    },
+    {
+      name: "Delicatus",
+      image: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Delicatus.png",
+      design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Delicatus_designs.png"
+    },
+    {
+      name: "Golden White",
+      image: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Golden_Withe.png",
+      design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Golden_Withe_designs.png"
+    },
+    {
+      name: "Negro San Gabriel",
+      image: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Negro_San_Gabriel.jpg",
+      design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Negro_San_Gabriel_desing.png"
+    },
+    {
+      name: "Roma Exotico",
+      image: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Roma_Exotico.png",
+      design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Roma_Exotico_desing.png"
+    },
+    {
+      name: "Royal Gold",
+      image: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Royal_Gold.png",
+      design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Royal_Gold_designs.png"
+    },
+    {
+      name: "Silver Gray",
+      image: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Silver_Gray.png",
+      design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Silver_Gray_desing.png"
+    },
+    {
+      name: "Verde Ubatuba",
+      image: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Verde_Ubatuba.png",
+      design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Verde_Ubatuba_designs.png"
+    },
+    {
+      name: "White Delicatus",
+      image: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/White_Delicatus.png",
+      design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/White_Delicatus_designs.png"
     }
   ],
   'PIEDRA+SINTERIZADA/NEOLITH': [
