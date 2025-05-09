@@ -153,8 +153,8 @@ const fallbackData: Record<string, Stone[]> = {
     },
     {
       name: "Silver Gray",
-      image: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Silver_Gray.png",
-      design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Silver_Gray_desing.png"
+      image: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Silver_Gray_desing.png",
+      design: "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/GRANITOS+NATURALES/Silver_Gray.png"
     },
     {
       name: "Verde Ubatuba",
