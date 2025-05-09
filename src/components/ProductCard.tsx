@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -31,6 +31,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const carouselRef = useRef<HTMLDivElement>(null);
   
   // Optimización: Deferred execution - sólo ejecutar cuando el usuario interactúa
   const handleWhatsAppClick = useCallback(() => {
@@ -62,7 +63,19 @@ const ProductCard: React.FC<ProductCardProps> = ({
     };
   }, [slug]);
 
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent) => {
+    // Verificar si el clic fue en un botón de navegación o dentro del carrusel
+    if (carouselRef.current && (
+        e.target instanceof Node &&  
+        (carouselRef.current.contains(e.target) && 
+         (e.target.closest('button') || e.target.closest('svg') || e.target.closest('path'))
+        )
+      )) {
+      // Si es un clic en los botones de navegación, no abrir el modal
+      return;
+    }
+    
+    // De lo contrario, abrir el modal
     const event = new CustomEvent('modal-state-change', {
       detail: { id: slug }
     });
@@ -80,7 +93,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
     >
       <div className="flex-1">
         <div className="relative aspect-video w-full mb-6 overflow-hidden">
-          <Carousel className="w-full h-full absolute inset-0">
+          <Carousel className="w-full h-full absolute inset-0" ref={carouselRef}>
             <CarouselContent className="h-full">
               {images.map((image, index) => (
                 <CarouselItem
