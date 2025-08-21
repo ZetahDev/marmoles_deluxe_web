@@ -226,7 +226,7 @@ export default function PromoBlancoPolarModal() {
                       }}
                     >
                       &#10003;
-                    </span>
+                    </span>{" "}
                     Estilo moderno y luminoso
                   </li>
                   <li
@@ -244,7 +244,7 @@ export default function PromoBlancoPolarModal() {
                       }}
                     >
                       &#10003;
-                    </span>
+                    </span>{" "}
                     Fácil limpieza y bajo mantenimiento
                   </li>
                   <li
@@ -262,7 +262,7 @@ export default function PromoBlancoPolarModal() {
                       }}
                     >
                       &#10003;
-                    </span>
+                    </span>{" "}
                     Durabilidad garantizada
                   </li>
                   <li
@@ -280,7 +280,7 @@ export default function PromoBlancoPolarModal() {
                       }}
                     >
                       &#10003;
-                    </span>
+                    </span>{" "}
                     Oferta exclusiva por tiempo limitado
                   </li>
                 </ul>
