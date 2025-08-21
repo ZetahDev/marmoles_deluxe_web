@@ -1,3 +1,4 @@
+console.log("PromoBlancoPolarModal montado");
 import React, { useRef, useState } from "react";
 
 const carouselImgs = [
@@ -8,7 +9,9 @@ const carouselImgs = [
 export default function PromoBlancoPolarModal() {
   const [open, setOpen] = useState(false);
   const [carouselIndex, setCarouselIndex] = useState(0);
-  const modalRef = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<HTMLDialogElement>(null);
+  // Ref para el primer elemento del modal
+  const firstModalElementRef = useRef<HTMLButtonElement>(null);
 
   const handlePrev = () => {
     setCarouselIndex(
@@ -19,7 +22,8 @@ export default function PromoBlancoPolarModal() {
     setCarouselIndex((prev) => (prev + 1) % carouselImgs.length);
   };
 
-  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDialogElement>) => {
+    // Solo cerrar si el click es en el fondo, no en el contenido
     if (e.target === modalRef.current) setOpen(false);
   };
 
@@ -29,8 +33,20 @@ export default function PromoBlancoPolarModal() {
     };
     if (open) {
       window.addEventListener("keydown", handleEsc);
+      document.body.style.overflow = "hidden";
+      // Forzar foco al primer elemento del modal
+      setTimeout(() => {
+        if (firstModalElementRef.current) {
+          firstModalElementRef.current.focus();
+        }
+      }, 100);
+    } else {
+      document.body.style.overflow = "";
     }
-    return () => window.removeEventListener("keydown", handleEsc);
+    return () => {
+      window.removeEventListener("keydown", handleEsc);
+      document.body.style.overflow = "";
+    };
   }, [open]);
 
   return (
@@ -40,7 +56,10 @@ export default function PromoBlancoPolarModal() {
         <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-center gap-8">
           <button
             type="button"
-            onClick={() => setOpen(true)}
+            onClick={() => {
+              console.log("Botón de imagen clickeado, abriendo modal...");
+              setOpen(true);
+            }}
             className="mb-4 md:mb-0 rounded-lg shadow-lg border border-marmoles-gold focus:outline-none focus:ring-2 focus:ring-marmoles-gold"
             style={{
               padding: 0,
@@ -49,6 +68,7 @@ export default function PromoBlancoPolarModal() {
               cursor: "pointer",
             }}
             aria-label="Abrir promoción Blanco Polar"
+            tabIndex={0}
           >
             <img
               src={carouselImgs[0]}
@@ -82,231 +102,244 @@ export default function PromoBlancoPolarModal() {
         </div>
 
         {/* Modal */}
-        {open && (
-          <div
-            ref={modalRef}
-            onClick={handleBackdropClick}
-            style={{
-              display: "flex",
-              position: "fixed",
-              top: 0,
-              left: 0,
-              width: "100vw",
-              height: "100vh",
-              zIndex: 9999,
-              background: "rgba(0,0,0,0.6)",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <div
+        {open &&
+          ((() => {
+            console.log("Modal renderizado, open:", open);
+            return null;
+          })(),
+          (
+            <dialog
+              ref={modalRef}
+              open={open}
+              onClick={handleBackdropClick}
               style={{
-                background: "white",
-                borderRadius: "1rem",
-                maxWidth: 500,
-                width: "90vw",
-                padding: "2rem",
-                boxShadow: "0 8px 32px rgba(0,0,0,0.2)",
-                position: "relative",
+                display: "flex",
+                position: "fixed",
+                top: 0,
+                left: 0,
+                width: "100vw",
+                height: "100vh",
+                zIndex: 9999,
+                background: "rgba(0,0,0,0.6)",
+                justifyContent: "center",
+                alignItems: "center",
+                border: "none",
+                padding: 0,
+                margin: 0,
               }}
             >
-              <button
-                onClick={() => setOpen(false)}
-                style={{
-                  position: "absolute",
-                  top: "1rem",
-                  right: "1rem",
-                  background: "transparent",
-                  border: "none",
-                  fontSize: "1.5rem",
-                  cursor: "pointer",
-                }}
-              >
-                &times;
-              </button>
               <div
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  width: "100%",
-                  marginBottom: "1rem",
-                  gap: "1rem",
+                  background: "white",
+                  borderRadius: "1rem",
+                  maxWidth: 500,
+                  width: "90vw",
+                  padding: "2rem",
+                  boxShadow: "0 8px 32px rgba(0,0,0,0.2)",
+                  position: "relative",
                 }}
               >
                 <button
-                  onClick={handlePrev}
+                  ref={firstModalElementRef}
+                  onClick={() => setOpen(false)}
                   style={{
-                    background: "#fff",
-                    border: "1px solid #e6c200",
-                    borderRadius: "50%",
-                    width: 40,
-                    height: 40,
+                    position: "absolute",
+                    top: "1rem",
+                    right: "1rem",
+                    background: "transparent",
+                    border: "none",
                     fontSize: "1.5rem",
                     cursor: "pointer",
                   }}
+                  aria-label="Cerrar modal"
                 >
-                  &#8592;
+                  &times;
                 </button>
                 <div
                   style={{
-                    width: 400,
-                    height: 180,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
+                    width: "100%",
+                    marginBottom: "1rem",
+                    gap: "1rem",
                   }}
                 >
-                  <img
-                    src={carouselImgs[carouselIndex]}
-                    alt="Blanco Polar"
+                  <button
+                    onClick={handlePrev}
                     style={{
-                      width: "100%",
-                      maxWidth: 400,
+                      background: "#fff",
+                      border: "1px solid #e6c200",
+                      borderRadius: "50%",
+                      width: 40,
+                      height: 40,
+                      fontSize: "1.5rem",
+                      cursor: "pointer",
+                    }}
+                    aria-label="Imagen anterior"
+                  >
+                    &#8592;
+                  </button>
+                  <div
+                    style={{
+                      width: 400,
                       height: 180,
-                      objectFit: "contain",
-                      borderRadius: "0.5rem",
-                      border: "2px solid #e6c200",
-                      display: "block",
-                      margin: "0 auto",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
                     }}
-                  />
+                  >
+                    <img
+                      src={carouselImgs[carouselIndex]}
+                      alt="Blanco Polar"
+                      style={{
+                        width: "100%",
+                        maxWidth: 400,
+                        height: 180,
+                        objectFit: "contain",
+                        borderRadius: "0.5rem",
+                        border: "2px solid #e6c200",
+                        display: "block",
+                        margin: "0 auto",
+                      }}
+                    />
+                  </div>
+                  <button
+                    onClick={handleNext}
+                    style={{
+                      background: "#fff",
+                      border: "1px solid #e6c200",
+                      borderRadius: "50%",
+                      width: 40,
+                      height: 40,
+                      fontSize: "1.5rem",
+                      cursor: "pointer",
+                    }}
+                    aria-label="Imagen siguiente"
+                  >
+                    &#8594;
+                  </button>
                 </div>
-                <button
-                  onClick={handleNext}
+                <h2
                   style={{
-                    background: "#fff",
-                    border: "1px solid #e6c200",
-                    borderRadius: "50%",
-                    width: 40,
-                    height: 40,
                     fontSize: "1.5rem",
-                    cursor: "pointer",
+                    fontWeight: "bold",
+                    color: "#222",
+                    marginBottom: "0.5rem",
                   }}
                 >
-                  &#8594;
-                </button>
+                  Blanco Polar
+                </h2>
+                <p
+                  style={{
+                    color: "#444",
+                    marginBottom: "1rem",
+                    fontSize: "1.1rem",
+                  }}
+                >
+                  Transforma tu cocina o baño con el cuarzo Blanco Polar.
+                  Moderniza tu espacio, aumenta el valor de tu hogar y disfruta
+                  de una superficie luminosa, resistente y fácil de limpiar.
+                </p>
+                <div style={{ width: "100%", marginBottom: "2rem" }}>
+                  <strong>Beneficios</strong>
+                  <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                    <li
+                      style={{
+                        marginBottom: "0.5rem",
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      <span
+                        style={{
+                          color: "#e6c200",
+                          fontSize: "1.2rem",
+                          marginRight: "0.5rem",
+                        }}
+                      >
+                        &#10003;
+                      </span>{" "}
+                      Estilo moderno y luminoso
+                    </li>
+                    <li
+                      style={{
+                        marginBottom: "0.5rem",
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      <span
+                        style={{
+                          color: "#e6c200",
+                          fontSize: "1.2rem",
+                          marginRight: "0.5rem",
+                        }}
+                      >
+                        &#10003;
+                      </span>{" "}
+                      Fácil limpieza y bajo mantenimiento
+                    </li>
+                    <li
+                      style={{
+                        marginBottom: "0.5rem",
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      <span
+                        style={{
+                          color: "#e6c200",
+                          fontSize: "1.2rem",
+                          marginRight: "0.5rem",
+                        }}
+                      >
+                        &#10003;
+                      </span>{" "}
+                      Durabilidad garantizada
+                    </li>
+                    <li
+                      style={{
+                        marginBottom: "0.5rem",
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      <span
+                        style={{
+                          color: "#e6c200",
+                          fontSize: "1.2rem",
+                          marginRight: "0.5rem",
+                        }}
+                      >
+                        &#10003;
+                      </span>{" "}
+                      Oferta exclusiva por tiempo limitado
+                    </li>
+                  </ul>
+                </div>
+                <a
+                  href="https://wa.me/+573132592793?text=Hola,%20quiero%20aprovechar%20la%20promoci%C3%B3n%20de%20Blanco%20Polar%20Quartzstone%20con%2030%%20de%20descuento.%20%C2%A1Contáctenme!"
+                  target="_blank"
+                  rel="noopener"
+                  style={{
+                    display: "block",
+                    width: "100%",
+                    background: "#222",
+                    color: "#fff",
+                    fontWeight: "bold",
+                    padding: "0.75rem",
+                    borderRadius: "0.5rem",
+                    textAlign: "center",
+                    textDecoration: "none",
+                    marginTop: "1rem",
+                  }}
+                >
+                  Solicitar por WhatsApp
+                </a>
               </div>
-              <h2
-                style={{
-                  fontSize: "1.5rem",
-                  fontWeight: "bold",
-                  color: "#222",
-                  marginBottom: "0.5rem",
-                }}
-              >
-                Blanco Polar
-              </h2>
-              <p
-                style={{
-                  color: "#444",
-                  marginBottom: "1rem",
-                  fontSize: "1.1rem",
-                }}
-              >
-                Transforma tu cocina o baño con el cuarzo Blanco Polar.
-                Moderniza tu espacio, aumenta el valor de tu hogar y disfruta de
-                una superficie luminosa, resistente y fácil de limpiar.
-              </p>
-              <div style={{ width: "100%", marginBottom: "1rem" }}>
-                <strong>Beneficios</strong>
-                <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-                  <li
-                    style={{
-                      marginBottom: "0.5rem",
-                      display: "flex",
-                      alignItems: "center",
-                    }}
-                  >
-                    <span
-                      style={{
-                        color: "#e6c200",
-                        fontSize: "1.2rem",
-                        marginRight: "0.5rem",
-                      }}
-                    >
-                      &#10003;
-                    </span>{" "}
-                    Estilo moderno y luminoso
-                  </li>
-                  <li
-                    style={{
-                      marginBottom: "0.5rem",
-                      display: "flex",
-                      alignItems: "center",
-                    }}
-                  >
-                    <span
-                      style={{
-                        color: "#e6c200",
-                        fontSize: "1.2rem",
-                        marginRight: "0.5rem",
-                      }}
-                    >
-                      &#10003;
-                    </span>{" "}
-                    Fácil limpieza y bajo mantenimiento
-                  </li>
-                  <li
-                    style={{
-                      marginBottom: "0.5rem",
-                      display: "flex",
-                      alignItems: "center",
-                    }}
-                  >
-                    <span
-                      style={{
-                        color: "#e6c200",
-                        fontSize: "1.2rem",
-                        marginRight: "0.5rem",
-                      }}
-                    >
-                      &#10003;
-                    </span>{" "}
-                    Durabilidad garantizada
-                  </li>
-                  <li
-                    style={{
-                      marginBottom: "0.5rem",
-                      display: "flex",
-                      alignItems: "center",
-                    }}
-                  >
-                    <span
-                      style={{
-                        color: "#e6c200",
-                        fontSize: "1.2rem",
-                        marginRight: "0.5rem",
-                      }}
-                    >
-                      &#10003;
-                    </span>{" "}
-                    Oferta exclusiva por tiempo limitado
-                  </li>
-                </ul>
-              </div>
-              <a
-                href="https://wa.me/+573132592793?text=Hola,%20quiero%20aprovechar%20la%20promoci%C3%B3n%20de%20Blanco%20Polar%20Quartzstone%20con%2030%%20de%20descuento.%20%C2%A1Contáctenme!"
-                target="_blank"
-                rel="noopener"
-                style={{
-                  display: "block",
-                  width: "100%",
-                  background: "#222",
-                  color: "#fff",
-                  fontWeight: "bold",
-                  padding: "0.75rem",
-                  borderRadius: "0.5rem",
-                  textAlign: "center",
-                  textDecoration: "none",
-                  marginTop: "1rem",
-                }}
-              >
-                Solicitar por WhatsApp
-              </a>
-            </div>
-          </div>
-        )}
+            </dialog>
+          ))}
       </section>
     </>
   );

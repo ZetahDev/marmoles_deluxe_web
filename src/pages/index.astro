@@ -7,8 +7,10 @@ import SEOSchemaData from "../components/SEOSchemaData.tsx";
 import PromoBlancoPolarModal from "@/components/PromoBlancoPolarModal";
 
 // Metadatos SEO para la página
-const metaTitle = "Mármoles Deluxe - La calidad del mármol en el corazón de Cali";
-const metaDescription = "Empresa familiar con 16 años de experiencia en suministro e instalación de superficies en piedras naturales y sinterizadas en Cali y Valle del Cauca.";
+const metaTitle =
+  "Mármoles Deluxe - La calidad del mármol en el corazón de Cali";
+const metaDescription =
+  "Empresa familiar con 16 años de experiencia en suministro e instalación de superficies en piedras naturales y sinterizadas en Cali y Valle del Cauca.";
 const metaImage = "/images/home-hero.jpg";
 const pageUrl = new URL(Astro.url.pathname, Astro.site).toString();
 
@@ -104,9 +106,9 @@ const projects = [
   <meta slot="head" name="twitter:description" content={metaDescription} />
   <meta slot="head" name="twitter:image" content={metaImage} />
   <link slot="head" rel="canonical" href={canonicalURL.toString()} />
-  
+
   <!-- Agregar datos estructurados schema.org para SEO -->
-  <SEOSchemaData 
+  <SEOSchemaData
     client:load
     pageTitle={metaTitle}
     pageDescription={metaDescription}
@@ -124,10 +126,12 @@ const projects = [
       <h1 class="text-4xl md:text-6xl font-bold mb-4">
         <span class="text-marmoles-gold">Mármoles</span> Deluxe
       </h1>
-      <p class="text-base md:text-lg italic font-light tracking-wide mb-12 text-gray-200">
+      <p
+        class="text-base md:text-lg italic font-light tracking-wide mb-12 text-gray-200"
+      >
         "La elegancia del mármol en el corazón de tu hogar"
       </p>
-      
+
       <div class="mt-12">
         <p class="text-xl md:text-2xl my-12">
           Instalación profesional de mármoles en 5 días hábiles
@@ -142,8 +146,8 @@ const projects = [
     </div>
   </section>
 
-<!--  Promocion blanco polar  -->
-  <PromoBlancoPolarModal/>
+  <!--  Promocion blanco polar  -->
+  <PromoBlancoPolarModal client:load />
 
   <!-- Services Section -->
   <section class="py-20 bg-marmoles-white">
@@ -156,9 +160,7 @@ const projects = [
           <h3 class="text-xl font-semibold mb-4 text-marmoles-gold">
             Instalación
           </h3>
-          <p>
-            Instalación profesional con los más altos estándares de calidad
-          </p>
+          <p>Instalación profesional con los más altos estándares de calidad</p>
         </div>
         <div class="p-6 border border-marmoles-gold rounded-lg text-center">
           <h3 class="text-xl font-semibold mb-4 text-marmoles-gold">
