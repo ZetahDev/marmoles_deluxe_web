@@ -84,7 +84,7 @@ export default function PromoBlancoPolarModal() {
             </h2>
             <p className="text-lg md:text-xl font-semibold text-marmoles-black mb-2">
               Quartzstone Blanco Polar con{" "}
-              <span className="text-marmoles-gold">30% de descuento</span>
+              <span className="text-marmoles-gold">15% de descuento</span>
             </p>
             <p className="text-base text-gray-700 mb-4">
               Aprovecha la elegancia y resistencia del cuarzo Blanco Polar para
