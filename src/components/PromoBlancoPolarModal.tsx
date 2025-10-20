@@ -76,15 +76,16 @@ export default function PromoBlancoPolarModal() {
           </button>
           <div className="flex-1 text-center md:text-left">
             <h2 className="text-2xl md:text-3xl font-bold text-marmoles-gold mb-2">
-              ¡Promoción exclusiva!
+              ¡Promoción exclusiva en Stock!
             </h2>
             <p className="text-lg md:text-xl font-semibold text-marmoles-black mb-2">
               Quartzstone Blanco Polar con{" "}
-              <span className="text-marmoles-gold">15% de descuento</span>
+              <span className="text-marmoles-gold">30% de descuento</span>
             </p>
             <p className="text-base text-gray-700 mb-4">
-              Aprovecha la elegancia y resistencia del cuarzo Blanco Polar para
-              tu cocina, baño o proyecto especial. Oferta por tiempo limitado.
+              Material en stock disponible inmediatamente. Aprovecha la
+              elegancia y resistencia del cuarzo Blanco Polar para tu cocina,
+              baño o proyecto especial. ¡Cantidades limitadas!
             </p>
             <a
               href="https://wa.me/+573132592793?text=Hola,%20estoy%20interesado%20en%20la%20promoci%C3%B3n%20de%20Blanco%20Polar%20Quartzstone%20con%2030%%20de%20descuento.%20%C2%A1Quiero%20m%C3%A1s%20informaci%C3%B3n!"
