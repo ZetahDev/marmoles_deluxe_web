@@ -2,37 +2,52 @@
 import Layout from "../layouts/Layout.astro";
 import SEOSchemaData from "../components/SEOSchemaData.tsx";
 
-// Metadatos SEO para la página
-const metaTitle = "Nosotros - Mármoles Deluxe | Expertos en Piedras Naturales en Cali";
-const metaDescription = "Mármoles Deluxe, empresa familiar con 16 años de experiencia en Cali. Expertos en suministro e instalación de piedras naturales y sinterizadas de alta calidad.";
-const metaKeywords = "mármoles Cali, piedras naturales Cali, instalación de piedras Cali, granito Cali, piedra sinterizada Cali";
-const metaImage = "/images/nosotros-hero.jpg";
-const pageUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const title =
+  "Nosotros - Mármoles Deluxe | Expertos en Piedras Naturales en Cali";
+const description =
+  "Mármoles Deluxe, empresa familiar con 16 años de experiencia en Cali. Expertos en suministro e instalación de piedras naturales y sinterizadas de alta calidad.";
 
-// Canonical URL (importante para SEO)
+const keywords =
+  "mármoles Cali, piedras naturales Cali, instalación de piedras Cali, granito Cali, piedra sinterizada Cali, empresa familiar Cali, 16 años experiencia, misión visión valores";
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const pageUrl = canonicalURL.toString();
+const metaImage = new URL("/images/contactanos-og.jpg", Astro.site).toString();
 ---
 
-<Layout title={metaTitle}>
-  <!-- Agregar metadatos SEO dinámicos -->
-  <meta slot="head" name="description" content={metaDescription} />
-  <meta slot="head" name="keywords" content={metaKeywords} />
-  <meta slot="head" property="og:title" content={metaTitle} />
-  <meta slot="head" property="og:description" content={metaDescription} />
-  <meta slot="head" property="og:image" content={metaImage} />
-  <meta slot="head" property="og:type" content="website" />
-  <meta slot="head" property="og:url" content={pageUrl} />
-  <meta slot="head" name="twitter:card" content="summary_large_image" />
-  <meta slot="head" name="twitter:title" content={metaTitle} />
-  <meta slot="head" name="twitter:description" content={metaDescription} />
-  <meta slot="head" name="twitter:image" content={metaImage} />
-  <link slot="head" rel="canonical" href={canonicalURL.toString()} />
-  
+<Layout title={title} description={description}>
+  <Fragment slot="head">
+    <!-- SEO Meta Tags -->
+    <meta name="keywords" content={keywords} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Mármoles Deluxe" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:site_name" content="Mármoles Deluxe" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Geo Tags -->
+    <meta name="geo.region" content="CO-VAC" />
+    <meta name="geo.placename" content="Cali" />
+    <meta name="geo.position" content="3.4516;-76.5320" />
+    <meta name="ICBM" content="3.4516, -76.5320" />
+  </Fragment>
+
   <!-- Agregar datos estructurados schema.org para SEO -->
-  <SEOSchemaData 
+  <SEOSchemaData
     client:load
-    pageTitle={metaTitle}
-    pageDescription={metaDescription}
+    pageTitle={title}
+    pageDescription={description}
     pageUrl={pageUrl}
     pageImage={metaImage}
   />
@@ -40,117 +55,219 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <main class="py-20 pt-24">
     <div class="container mx-auto px-4 sm:px-6 max-w-6xl">
       <header class="text-center mb-12 md:mb-16">
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-marmoles-black mb-4">
+        <h1
+          class="text-3xl sm:text-4xl md:text-5xl font-bold text-marmoles-black mb-4"
+        >
           Nosotros
         </h1>
         <p class="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto">
-          Conoce más sobre quiénes somos y lo que nos inspira en Mármoles Deluxe Cali.
+          Conoce más sobre quiénes somos y lo que nos inspira en Mármoles Deluxe
+          Cali.
         </p>
       </header>
 
       <section class="mb-12 md:mb-16">
-        <div class="bg-white shadow-md p-6 sm:p-8 md:p-10 border-l-4 border-marmoles-gold">
+        <div
+          class="bg-white shadow-md p-6 sm:p-8 md:p-10 border-l-4 border-marmoles-gold"
+        >
           <h2 class="text-xl sm:text-2xl font-bold text-marmoles-black mb-4">
             Nuestro Negocio
           </h2>
           <p class="text-gray-700 leading-relaxed">
-            Somos una empresa familiar con 16 años de experiencia en el suministro e instalación de superficies en piedras naturales y sinterizadas en Cali y el Valle del Cauca, brindando soluciones de la más alta calidad para hogares y empresas.
+            Somos una empresa familiar con 16 años de experiencia en el
+            suministro e instalación de superficies en piedras naturales y
+            sinterizadas en Cali y el Valle del Cauca, brindando soluciones de
+            la más alta calidad para hogares y empresas.
           </p>
         </div>
       </section>
 
-      <section class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-12 md:mb-16">
+      <section
+        class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-12 md:mb-16"
+      >
         <div class="bg-white shadow-md p-6 sm:p-8">
           <div class="flex flex-col items-center mb-6">
             <div class="w-24 h-24 mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full text-marmoles-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2L4 8v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8L12 2Z"></path>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-full h-full text-marmoles-gold"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 2L4 8v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8L12 2Z"
+                ></path>
                 <path d="M9 17v-5a3 3 0 0 1 6 0v5"></path>
                 <path d="M9 17h6"></path>
               </svg>
             </div>
-            <h2 class="text-xl sm:text-2xl font-bold text-marmoles-black text-center">Misión</h2>
+            <h2
+              class="text-xl sm:text-2xl font-bold text-marmoles-black text-center"
+            >
+              Misión
+            </h2>
           </div>
           <p class="text-gray-700 leading-relaxed text-center">
-            Somos especialistas en la transformación de piedras naturales y sinterizadas, enfocándonos en las necesidades específicas de cada cliente en Cali con el objetivo de convertir sus proyectos en una realidad duradera y elegante.
+            Somos especialistas en la transformación de piedras naturales y
+            sinterizadas, enfocándonos en las necesidades específicas de cada
+            cliente en Cali con el objetivo de convertir sus proyectos en una
+            realidad duradera y elegante.
           </p>
         </div>
 
         <div class="bg-white shadow-md p-6 sm:p-8">
           <div class="flex flex-col items-center mb-6">
             <div class="w-24 h-24 mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full text-marmoles-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-full h-full text-marmoles-gold"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
                 <circle cx="12" cy="12" r="10"></circle>
                 <path d="m15 9-6 6"></path>
                 <path d="m9 9 6 6"></path>
               </svg>
             </div>
-            <h2 class="text-xl sm:text-2xl font-bold text-marmoles-black text-center">Visión</h2>
+            <h2
+              class="text-xl sm:text-2xl font-bold text-marmoles-black text-center"
+            >
+              Visión
+            </h2>
           </div>
           <p class="text-gray-700 leading-relaxed text-center">
-            Queremos ser reconocidos como la empresa líder en Cali y el Valle del Cauca, no solo como instaladores sino como proveedores de piedras naturales y sinterizadas de la más alta calidad, innovación y diseño.
+            Queremos ser reconocidos como la empresa líder en Cali y el Valle
+            del Cauca, no solo como instaladores sino como proveedores de
+            piedras naturales y sinterizadas de la más alta calidad, innovación
+            y diseño.
           </p>
         </div>
       </section>
 
       <section class="mb-12 md:mb-16">
-        <div class="bg-white shadow-md p-6 sm:p-8 md:p-10 border-l-4 border-marmoles-gold">
-          <h2 class="text-xl sm:text-2xl font-bold text-marmoles-black text-center mb-8">Valores Fundamentales</h2>
+        <div
+          class="bg-white shadow-md p-6 sm:p-8 md:p-10 border-l-4 border-marmoles-gold"
+        >
+          <h2
+            class="text-xl sm:text-2xl font-bold text-marmoles-black text-center mb-8"
+          >
+            Valores Fundamentales
+          </h2>
 
-          <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+          <div
+            class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8"
+          >
             <div class="flex flex-col items-center">
               <div class="w-16 h-16 mb-3">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full text-marmoles-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                  <path d="M12 12v10M2 7v10l10 5 10-5V7"/>
-                  <path d="M12 22l-3-12 3-3 3 3-3 12z"/>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-full h-full text-marmoles-gold"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                  <path d="M12 12v10M2 7v10l10 5 10-5V7"></path>
+                  <path d="M12 22l-3-12 3-3 3 3-3 12z"></path>
                 </svg>
               </div>
-              <h3 class="text-base font-semibold text-marmoles-black text-center">Responsabilidad</h3>
+              <h3
+                class="text-base font-semibold text-marmoles-black text-center"
+              >
+                Responsabilidad
+              </h3>
             </div>
 
             <div class="flex flex-col items-center">
               <div class="w-16 h-16 mb-3">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full text-marmoles-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-full h-full text-marmoles-gold"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <path
+                    d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"
+                  ></path>
                 </svg>
               </div>
-              <h3 class="text-base font-semibold text-marmoles-black text-center">Compromiso</h3>
+              <h3
+                class="text-base font-semibold text-marmoles-black text-center"
+              >
+                Compromiso
+              </h3>
             </div>
 
             <div class="flex flex-col items-center">
               <div class="w-16 h-16 mb-3">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full text-marmoles-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <circle cx="12" cy="12" r="10"/>
-                  <path d="M12 8v8M8 12h8"/>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-full h-full text-marmoles-gold"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M12 8v8M8 12h8"></path>
                 </svg>
               </div>
-              <h3 class="text-base font-semibold text-marmoles-black text-center">Cumplimiento</h3>
+              <h3
+                class="text-base font-semibold text-marmoles-black text-center"
+              >
+                Cumplimiento
+              </h3>
             </div>
 
             <div class="flex flex-col items-center">
               <div class="w-16 h-16 mb-3">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full text-marmoles-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M4 6h16M4 12h16M4 18h16"/>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-full h-full text-marmoles-gold"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <path d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
               </div>
-              <h3 class="text-base font-semibold text-marmoles-black text-center">Honestidad</h3>
+              <h3
+                class="text-base font-semibold text-marmoles-black text-center"
+              >
+                Honestidad
+              </h3>
             </div>
           </div>
         </div>
       </section>
 
       <section class="mb-12 md:mb-16">
-        <div class="bg-gray-50 p-6 sm:p-8 md:p-10 shadow-md text-center border-l-4 border-marmoles-gold">
-          <h2 class="text-xl sm:text-2xl font-bold text-marmoles-black mb-4 sm:mb-6">
+        <div
+          class="bg-gray-50 p-6 sm:p-8 md:p-10 shadow-md text-center border-l-4 border-marmoles-gold"
+        >
+          <h2
+            class="text-xl sm:text-2xl font-bold text-marmoles-black mb-4 sm:mb-6"
+          >
             ¿Listo para transformar tu espacio en Cali?
           </h2>
           <p class="text-gray-700 mb-6 sm:mb-8 max-w-2xl mx-auto">
-            Con 16 años de experiencia en Cali y un compromiso inquebrantable con la calidad, 
-            estamos listos para convertir tu visión en una realidad impresionante.
+            Con 16 años de experiencia en Cali y un compromiso inquebrantable
+            con la calidad, estamos listos para convertir tu visión en una
+            realidad impresionante.
           </p>
-          <a 
-            href="/contactanos" 
+          <a
+            href="/contactanos"
             class="inline-block bg-marmoles-gold text-white py-2 sm:py-3 px-4 sm:px-6 shadow-md hover:bg-opacity-90 hover:shadow-lg transition-all duration-300"
           >
             Contáctanos
@@ -211,4 +328,5 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       "https://www.instagram.com/marmolesdeluxe"
     ]
   }
-</script> 
+</script>
+

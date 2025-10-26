@@ -1,0 +1,66 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PaymentConfirmation from "../components/PaymentConfirmation";
+
+// Obtener parámetros de la URL
+const id = Astro.url.searchParams.get('id') || undefined;
+
+// Metadata para SEO
+const title = "Confirmación de Pago - Mármoles Deluxe";
+const description = "Confirmación de tu transacción de pago";
+---
+
+<Layout title={title} description={description}>
+  <main
+    class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4"
+  >
+    <div class="container mx-auto">
+      <!-- Header -->
+      <div class="text-center mb-8">
+        <a href="/" class="inline-block mb-4">
+          <img
+            src="/logos/logo.png"
+            alt="Mármoles Deluxe"
+            class="h-16 mx-auto"
+            onerror="this.style.display='none'"
+          />
+        </a>
+      </div>
+
+      <!-- Componente de Confirmación -->
+      <PaymentConfirmation client:load transactionId={id} />
+
+      <!-- Información Adicional -->
+      <div class="max-w-3xl mx-auto mt-12 text-center">
+        <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+          <h3 class="font-semibold text-gray-900 mb-2">
+            🔒 Pago Seguro con Wompi
+          </h3>
+          <p class="text-sm text-gray-600">
+            Todos los pagos son procesados de forma segura por Wompi, cumpliendo
+            con los estándares PCI DSS para la protección de datos financieros.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  @media print {
+    /* Estilos para impresión del comprobante */
+    nav,
+    footer,
+    button {
+      display: none !important;
+    }
+
+    main {
+      background: white !important;
+    }
+
+    @page {
+      margin: 1cm;
+    }
+  }
+</style>

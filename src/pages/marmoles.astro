@@ -5,44 +5,60 @@ import PageLoader from "../components/PageLoader.tsx";
 import SEOSchemaData from "../components/SEOSchemaData.tsx";
 import { listStonesFromS3, type Stone } from "../lib/utils/s3Utils";
 
-// Metadatos SEO para la página
-const metaTitle = "Mármoles - Mármoles Deluxe";
-const metaDescription = "Descubre nuestra exclusiva colección de mármoles naturales para encimeras, pisos y proyectos arquitectónicos. Belleza atemporal y elegancia para cualquier espacio.";
-const metaImage = "/images/marmoles-hero.jpg";
-const pageUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const title = "Mármoles Naturales Cali - Mármoles Deluxe | Encimeras y Pisos";
+const description =
+  "Descubre nuestra exclusiva colección de mármoles naturales para encimeras, pisos y proyectos arquitectónicos. Belleza atemporal y elegancia para cualquier espacio.";
+
+const keywords =
+  "mármoles naturales Cali, mármol blanco, mármol negro, encimeras mármol Cali, pisos mármol, mármol cocina, mármol baño, mármol italiano, instalación mármol Valle del Cauca";
 
 // Fetch marble data at build time
-const marmoles = await listStonesFromS3('MARMOL');
+const marmoles = await listStonesFromS3("MARMOL");
 
 // Configurar datos para schema.org
 const schemaStones = marmoles.map((stone: Stone) => ({
   name: stone.name,
-  image: stone.image
+  image: stone.image,
 }));
 
-// Canonical URL (importante para SEO)
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const pageUrl = canonicalURL.toString();
+const metaImage = new URL("/images/contactanos-og.jpg", Astro.site).toString();
 ---
 
-<Layout title={metaTitle}>
-  <!-- Agregar metadatos SEO dinámicos -->
-  <meta slot="head" name="description" content={metaDescription} />
-  <meta slot="head" property="og:title" content={metaTitle} />
-  <meta slot="head" property="og:description" content={metaDescription} />
-  <meta slot="head" property="og:image" content={metaImage} />
-  <meta slot="head" property="og:type" content="website" />
-  <meta slot="head" property="og:url" content={pageUrl} />
-  <meta slot="head" name="twitter:card" content="summary_large_image" />
-  <meta slot="head" name="twitter:title" content={metaTitle} />
-  <meta slot="head" name="twitter:description" content={metaDescription} />
-  <meta slot="head" name="twitter:image" content={metaImage} />
-  <link slot="head" rel="canonical" href={canonicalURL.toString()} />
-  
+<Layout title={title} description={description}>
+  <Fragment slot="head">
+    <!-- SEO Meta Tags -->
+    <meta name="keywords" content={keywords} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Mármoles Deluxe" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:site_name" content="Mármoles Deluxe" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Geo Tags -->
+    <meta name="geo.region" content="CO-VAC" />
+    <meta name="geo.placename" content="Cali" />
+    <meta name="geo.position" content="3.4516;-76.5320" />
+    <meta name="ICBM" content="3.4516, -76.5320" />
+  </Fragment>
+
   <!-- Agregar datos estructurados schema.org para SEO -->
-  <SEOSchemaData 
+  <SEOSchemaData
     client:load
-    pageTitle={metaTitle}
-    pageDescription={metaDescription}
+    pageTitle={title}
+    pageDescription={description}
     pageUrl={pageUrl}
     pageImage={metaImage}
     category="Mármol"
@@ -71,10 +87,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
                 "Elegancia única",
                 "Alta durabilidad",
                 "Belleza natural",
-                "Transforma tu espacio"
+                "Transforma tu espacio",
               ]}
               category="Mármol"
-              slug={stone.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
+              slug={stone.name
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, "-")
+                .replace(/(^-|-$)/g, "")}
             />
           ))
         }
@@ -84,19 +103,19 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 </Layout>
 
 <script>
-  import { initModal } from '../scripts/modal';
+  import { initModal } from "../scripts/modal";
   initModal();
 
   // --- Abrir modal automáticamente por parámetro 'material' ---
-  if (typeof window !== 'undefined') {
-    window.addEventListener('DOMContentLoaded', () => {
+  if (typeof window !== "undefined") {
+    window.addEventListener("DOMContentLoaded", () => {
       const params = new URLSearchParams(window.location.search);
-      const material = params.get('material');
+      const material = params.get("material");
       if (material) {
         // Disparar evento para abrir el modal del material
         setTimeout(() => {
-          const event = new CustomEvent('modal-state-change', {
-            detail: { id: material }
+          const event = new CustomEvent("modal-state-change", {
+            detail: { id: material },
           });
           document.dispatchEvent(event);
         }, 500);

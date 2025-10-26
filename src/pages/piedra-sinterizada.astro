@@ -113,13 +113,11 @@ const effectiveCategory = useAnchorLinks
   : categoryParam;
 
 // Default metadata - Optimizado para SEO con enfoque en Altea
-let metaTitle =
-  "Piedra Sinterizada Altea, Dekton y Neolith Cali | Mármoles Deluxe";
-let metaDescription =
+let title = "Piedra Sinterizada Altea, Dekton y Neolith Cali | Mármoles Deluxe";
+let description =
   "Distribuidor oficial de piedra sinterizada en Cali: Altea, Dekton, Neolith y Silestone. Encimeras de cocina y baños con garantía. Instalación profesional en Valle del Cauca. ¡Cotización gratis!";
-let metaImage = "/images/piedra-sinterizada-hero.jpg"; // Asegúrate de tener esta imagen o cambia la ruta
-let metaKeywords =
-  "piedra sinterizada cali, altea cali, dekton cali, neolith cali, encimeras cocina cali, encimeras baño cali, superficies cocina, mármoles cali, granito cali, cuarzo cali";
+let keywords =
+  "piedra sinterizada cali, altea cali, dekton cali, neolith cali, silestone cali, encimeras cocina cali, encimeras baño cali, superficies cocina, resistente calor, ultracompacto";
 
 // Prepare data for schema.org
 let schemaCategory: string | undefined;
@@ -139,10 +137,8 @@ if (effectiveCategory) {
             : null;
 
   if (formattedCategory) {
-    metaTitle = `${formattedCategory} - Piedra Sinterizada | Mármoles Deluxe`;
-    metaDescription = categoryDescriptions[formattedCategory];
-    // Ideally, you would have category-specific images
-    metaImage = `/images/piedra-sinterizada-${effectiveCategory}.jpg`;
+    title = `${formattedCategory} - Piedra Sinterizada | Mármoles Deluxe`;
+    description = categoryDescriptions[formattedCategory];
 
     // Set schema.org data for this category
     schemaCategory = formattedCategory;
@@ -167,30 +163,46 @@ if (useAnchorLinks && effectiveCategory) {
   // Si usamos parámetros, incluirlos en el canonical
   canonicalURL.searchParams.set("categoria", categoryParam);
 }
+
+// Default image for SEO
+const image = "/images/piedra-sinterizada-og.jpg";
 ---
 
-<Layout title={metaTitle}>
-  <!-- Add dynamic SEO meta tags -->
-  <meta slot="head" name="description" content={metaDescription} />
-  <meta slot="head" name="keywords" content={metaKeywords} />
-  <meta slot="head" property="og:title" content={metaTitle} />
-  <meta slot="head" property="og:description" content={metaDescription} />
-  <meta slot="head" property="og:image" content={metaImage} />
-  <meta slot="head" property="og:type" content="website" />
-  <meta slot="head" property="og:url" content={Astro.url.href} />
-  <meta slot="head" name="twitter:card" content="summary_large_image" />
-  <meta slot="head" name="twitter:title" content={metaTitle} />
-  <meta slot="head" name="twitter:description" content={metaDescription} />
-  <meta slot="head" name="twitter:image" content={metaImage} />
-  <link slot="head" rel="canonical" href={canonicalURL.toString()} />
+<Layout title={title} description={description}>
+  <Fragment slot="head">
+    <!-- SEO Meta Tags -->
+    <meta name="keywords" content={keywords} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Mármoles Deluxe" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:site_name" content="Mármoles Deluxe" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Geo Tags -->
+    <meta name="geo.region" content="CO-VAC" />
+    <meta name="geo.placename" content="Cali" />
+    <meta name="geo.position" content="3.4516;-76.5320" />
+    <meta name="ICBM" content="3.4516, -76.5320" />
+  </Fragment>
 
   <!-- Add Schema.org structured data for SEO -->
   <SEOSchemaData
     client:load
-    pageTitle={metaTitle}
-    pageDescription={metaDescription}
+    pageTitle={title}
+    pageDescription={description}
     pageUrl={Astro.url.href}
-    pageImage={metaImage}
+    pageImage={image}
     category={schemaCategory}
     stones={schemaStones}
   />

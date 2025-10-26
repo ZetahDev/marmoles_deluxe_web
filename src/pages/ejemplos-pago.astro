@@ -1,0 +1,304 @@
+---
+import Layout from "../layouts/Layout.astro";
+import WompiPaymentButton from "../components/WompiPaymentButton";
+
+const title = "Ejemplos de Pago - Mármoles Deluxe";
+const description = "Ejemplos de integración de pagos con Wompi";
+---
+
+<Layout title={title} description={description}>
+  <main
+    class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4"
+  >
+    <div class="container mx-auto max-w-7xl">
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold text-gray-900 mb-3">
+          💳 Ejemplos de Pago con Wompi
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Diferentes escenarios de pago implementados en el sitio
+        </p>
+      </div>
+
+      <!-- Grid de Ejemplos -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <!-- Ejemplo 1: Anticipo de Mármol -->
+        <div
+          class="bg-white rounded-xl shadow-lg p-6 border-2 border-gray-200 hover:border-[#8B4513] transition-all"
+        >
+          <div class="text-center mb-4">
+            <div class="text-5xl mb-3">🏛️</div>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">
+              Anticipo de Mármol
+            </h3>
+            <p class="text-sm text-gray-600 mb-4">
+              Pago del 50% de anticipo para reservar tu mármol blanco polar
+            </p>
+            <div class="bg-gray-50 rounded-lg p-3 mb-4">
+              <p class="text-2xl font-bold text-[#8B4513]">$500.000 COP</p>
+              <p class="text-xs text-gray-500">Anticipo sobre $1.000.000</p>
+            </div>
+          </div>
+
+          <WompiPaymentButton
+            client:load
+            paymentType="ANTICIPO"
+            productName="Mármol Blanco Polar - Anticipo 50%"
+            productDescription="Anticipo del 50% para reservar 5m² de Mármol Blanco Polar de primera calidad"
+            price={500000}
+            quantity={1}
+            sku="MAR-BP-001-ANT"
+            buttonText="Pagar Anticipo"
+            className="w-full"
+          />
+        </div>
+
+        <!-- Ejemplo 2: Servicio de Instalación -->
+        <div
+          class="bg-white rounded-xl shadow-lg p-6 border-2 border-gray-200 hover:border-[#8B4513] transition-all"
+        >
+          <div class="text-center mb-4">
+            <div class="text-5xl mb-3">🔧</div>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">
+              Servicio de Instalación
+            </h3>
+            <p class="text-sm text-gray-600 mb-4">
+              Instalación profesional de encimera de cocina
+            </p>
+            <div class="bg-gray-50 rounded-lg p-3 mb-4">
+              <p class="text-2xl font-bold text-[#8B4513]">$350.000 COP</p>
+              <p class="text-xs text-gray-500">
+                Incluye mano de obra y materiales
+              </p>
+            </div>
+          </div>
+
+          <WompiPaymentButton
+            client:load
+            paymentType="SERVICIO"
+            productName="Instalación de Encimera de Cocina"
+            productDescription="Servicio profesional de instalación de encimera de 2.5m lineales, incluye corte, pulido y sellado"
+            price={350000}
+            quantity={1}
+            sku="SRV-INST-001"
+            buttonText="Contratar Servicio"
+            className="w-full"
+          />
+        </div>
+
+        <!-- Ejemplo 3: Producto del Catálogo -->
+        <div
+          class="bg-white rounded-xl shadow-lg p-6 border-2 border-gray-200 hover:border-[#8B4513] transition-all"
+        >
+          <div class="text-center mb-4">
+            <div class="text-5xl mb-3">✨</div>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">
+              Granito Negro Absoluto
+            </h3>
+            <p class="text-sm text-gray-600 mb-4">
+              Granito negro de alta calidad, acabado pulido
+            </p>
+            <div class="bg-gray-50 rounded-lg p-3 mb-4">
+              <p class="text-2xl font-bold text-[#8B4513]">$280.000 COP</p>
+              <p class="text-xs text-gray-500">Por metro cuadrado</p>
+            </div>
+          </div>
+
+          <WompiPaymentButton
+            client:load
+            paymentType="PRODUCTO_CATALOGO"
+            productName="Granito Negro Absoluto - 3m²"
+            productDescription="3 metros cuadrados de Granito Negro Absoluto con acabado pulido espejo, 2cm de espesor"
+            price={280000}
+            quantity={3}
+            sku="GRA-NA-001"
+            buttonText="Comprar Ahora"
+            className="w-full"
+          />
+        </div>
+
+        <!-- Ejemplo 4: Servicio de Pulido -->
+        <div
+          class="bg-white rounded-xl shadow-lg p-6 border-2 border-gray-200 hover:border-[#8B4513] transition-all"
+        >
+          <div class="text-center mb-4">
+            <div class="text-5xl mb-3">💎</div>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">
+              Pulido y Cristalizado
+            </h3>
+            <p class="text-sm text-gray-600 mb-4">
+              Servicio de pulido y cristalizado de pisos de mármol
+            </p>
+            <div class="bg-gray-50 rounded-lg p-3 mb-4">
+              <p class="text-2xl font-bold text-[#8B4513]">$450.000 COP</p>
+              <p class="text-xs text-gray-500">Hasta 30m²</p>
+            </div>
+          </div>
+
+          <WompiPaymentButton
+            client:load
+            paymentType="SERVICIO"
+            productName="Pulido y Cristalizado de Mármol"
+            productDescription="Servicio completo de pulido diamantado y cristalizado para pisos de mármol hasta 30m²"
+            price={450000}
+            quantity={1}
+            sku="SRV-PUL-001"
+            buttonText="Agendar Servicio"
+            className="w-full"
+          />
+        </div>
+
+        <!-- Ejemplo 5: Piedra Sinterizada -->
+        <div
+          class="bg-white rounded-xl shadow-lg p-6 border-2 border-gray-200 hover:border-[#8B4513] transition-all"
+        >
+          <div class="text-center mb-4">
+            <div class="text-5xl mb-3">🪨</div>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">
+              Piedra Sinterizada Calacatta
+            </h3>
+            <p class="text-sm text-gray-600 mb-4">
+              Losa de piedra sinterizada imitación mármol Calacatta
+            </p>
+            <div class="bg-gray-50 rounded-lg p-3 mb-4">
+              <p class="text-2xl font-bold text-[#8B4513]">$420.000 COP</p>
+              <p class="text-xs text-gray-500">Losa 1.2m x 2.4m</p>
+            </div>
+          </div>
+
+          <WompiPaymentButton
+            client:load
+            paymentType="PRODUCTO_CATALOGO"
+            productName="Piedra Sinterizada Calacatta 1.2x2.4m"
+            productDescription="Losa de piedra sinterizada de última generación, diseño Calacatta, resistente a manchas y rayones"
+            price={420000}
+            quantity={1}
+            sku="SIN-CAL-001"
+            buttonText="Comprar Losa"
+            className="w-full"
+          />
+        </div>
+
+        <!-- Ejemplo 6: Paquete Completo -->
+        <div
+          class="bg-white rounded-xl shadow-lg p-6 border-2 border-[#8B4513] hover:shadow-xl transition-all relative overflow-hidden"
+        >
+          <div
+            class="absolute top-0 right-0 bg-[#8B4513] text-white px-3 py-1 text-xs font-bold rounded-bl-lg"
+          >
+            ⭐ POPULAR
+          </div>
+          <div class="text-center mb-4 mt-4">
+            <div class="text-5xl mb-3">📦</div>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">
+              Paquete Baño Completo
+            </h3>
+            <p class="text-sm text-gray-600 mb-4">
+              Mármol + Instalación + Accesorios
+            </p>
+            <div class="bg-gray-50 rounded-lg p-3 mb-4">
+              <p class="text-2xl font-bold text-[#8B4513]">$1.200.000 COP</p>
+              <p class="text-xs text-gray-500">Ahorra $150.000</p>
+              <p class="text-xs text-gray-400 line-through">
+                Antes: $1.350.000
+              </p>
+            </div>
+          </div>
+
+          <WompiPaymentButton
+            client:load
+            paymentType="PRODUCTO_CATALOGO"
+            productName="Paquete Baño Completo Premium"
+            productDescription="Incluye: Mármol Blanco Carrara (4m²), instalación profesional, mesón con lavamanos, backsplash y sellado"
+            price={1200000}
+            quantity={1}
+            sku="PKG-BANO-001"
+            buttonText="Comprar Paquete"
+            className="w-full"
+          />
+        </div>
+      </div>
+
+      <!-- Información Adicional -->
+      <div class="grid md:grid-cols-3 gap-8 mb-12">
+        <div
+          class="bg-blue-50 border-2 border-blue-200 rounded-xl p-8 text-center hover:shadow-lg transition-shadow"
+        >
+          <div class="text-5xl mb-4">🔒</div>
+          <h4 class="font-bold text-gray-900 mb-3 text-lg">Pago Seguro</h4>
+          <p class="text-sm text-gray-600">
+            Procesado por Wompi, certificado PCI DSS
+          </p>
+        </div>
+
+        <div
+          class="bg-green-50 border-2 border-green-200 rounded-xl p-8 text-center hover:shadow-lg transition-shadow"
+        >
+          <div class="text-5xl mb-4">✉️</div>
+          <h4 class="font-bold text-gray-900 mb-3 text-lg">
+            Confirmación Instantánea
+          </h4>
+          <p class="text-sm text-gray-600">
+            Recibe tu comprobante por email al instante
+          </p>
+        </div>
+
+        <div
+          class="bg-purple-50 border-2 border-purple-200 rounded-xl p-8 text-center hover:shadow-lg transition-shadow"
+        >
+          <div class="text-5xl mb-4">💳</div>
+          <h4 class="font-bold text-gray-900 mb-3 text-lg">
+            Múltiples Métodos
+          </h4>
+          <p class="text-sm text-gray-600">Tarjetas, PSE, Nequi y más</p>
+        </div>
+      </div>
+
+      <!-- Nota de Ambiente -->
+      <div class="mt-8 text-center">
+        <div
+          class="inline-block bg-yellow-100 border-2 border-yellow-300 rounded-lg px-6 py-3"
+        >
+          <p class="text-sm font-medium text-yellow-800">
+            ⚠️ <strong>Ambiente de Prueba:</strong> Estos son ejemplos demostrativos.
+            Usa la tarjeta 4242 4242 4242 4242 para simular pagos.
+          </p>
+        </div>
+      </div>
+
+      <!-- Botones de Navegación -->
+      <div class="mt-12 text-center space-x-4">
+        <a
+          href="/"
+          class="inline-block bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold px-6 py-3 rounded-lg transition-colors"
+        >
+          🏠 Volver al Inicio
+        </a>
+        <a
+          href="/contactanos"
+          class="inline-block bg-[#8B4513] hover:bg-[#6d3410] text-white font-semibold px-6 py-3 rounded-lg transition-colors"
+        >
+          📞 Contactanos
+        </a>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  /* Animación sutil para las tarjetas */
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+
+  .bg-white:hover {
+    animation: float 2s ease-in-out infinite;
+  }
+</style>

@@ -3,29 +3,44 @@ import Layout from "../layouts/Layout.astro";
 import ContactForm from "../components/ContactForm";
 import SEOSchemaData from "../components/SEOSchemaData.tsx";
 
-// Metadatos SEO para la página
 const metaTitle = "Contáctanos - Mármoles Deluxe | Expertos en Piedras Naturales en Cali";
 const metaDescription = "Ponte en contacto con nuestro equipo de expertos en mármoles, granitos y piedras sinterizadas en Cali. ¡Transforma tu espacio con superficies de la más alta calidad!";
-const metaImage = "/images/contacto-hero.jpg";
-const pageUrl = new URL(Astro.url.pathname, Astro.site).toString();
 
-// Canonical URL (importante para SEO)
+const keywords =
+  "contacto mármoles Cali, cotización mármol Cali, asesoría piedras naturales, teléfono mármoles Cali, email mármoles deluxe, visita técnica Cali, whatsapp mármoles";
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const pageUrl = canonicalURL.toString();
+const metaImage = new URL('/images/contactanos-og.jpg', Astro.site).toString();
 ---
 
-<Layout title={metaTitle}>
-  <!-- Agregar metadatos SEO dinámicos -->
-  <meta slot="head" name="description" content={metaDescription} />
-  <meta slot="head" property="og:title" content={metaTitle} />
-  <meta slot="head" property="og:description" content={metaDescription} />
-  <meta slot="head" property="og:image" content={metaImage} />
-  <meta slot="head" property="og:type" content="website" />
-  <meta slot="head" property="og:url" content={pageUrl} />
-  <meta slot="head" name="twitter:card" content="summary_large_image" />
-  <meta slot="head" name="twitter:title" content={metaTitle} />
-  <meta slot="head" name="twitter:description" content={metaDescription} />
-  <meta slot="head" name="twitter:image" content={metaImage} />
-  <link slot="head" rel="canonical" href={canonicalURL.toString()} />
+<Layout title={metaTitle} description={metaDescription}>
+  <Fragment slot="head">
+    <!-- SEO Meta Tags -->
+    <meta name="keywords" content={keywords} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Mármoles Deluxe" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={metaTitle} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:site_name" content="Mármoles Deluxe" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={metaTitle} />
+    <meta name="twitter:description" content={metaDescription} />
+
+    <!-- Geo Tags -->
+    <meta name="geo.region" content="CO-VAC" />
+    <meta name="geo.placename" content="Cali" />
+    <meta name="geo.position" content="3.4516;-76.5320" />
+    <meta name="ICBM" content="3.4516, -76.5320" />
+  </Fragment>
   
   <!-- Agregar datos estructurados schema.org para SEO -->
   <SEOSchemaData 

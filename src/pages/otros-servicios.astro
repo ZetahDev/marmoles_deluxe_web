@@ -3,14 +3,17 @@ import Layout from "../layouts/Layout.astro";
 import PageLoader from "../components/PageLoader.tsx";
 import SEOSchemaData from "../components/SEOSchemaData.tsx";
 
-// Metadatos SEO para la página
-const metaTitle = "Otros Servicios - Mármoles Deluxe";
-const metaDescription = "Descubre nuestra amplia gama de servicios adicionales: mantenimiento, reparación, asesoría en diseño, personalización de piezas y más. Soluciones integrales para tus superficies en piedra.";
-const metaImage = "/images/otros-servicios-hero.jpg";
-const pageUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const title = "Otros Servicios - Mármoles Deluxe | Mantenimiento y Reparación";
+const description =
+  "Descubre nuestra amplia gama de servicios adicionales: mantenimiento, reparación, asesoría en diseño, personalización de piezas y más. Soluciones integrales para tus superficies en piedra.";
 
-// Canonical URL (importante para SEO)
+const keywords =
+  "mantenimiento mármol Cali, reparación granito, pulido piedras, sellado superficies, asesoría diseño Cali, modificación mesones, limpieza profesional piedras, transporte especializado";
+
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const pageUrl = canonicalURL.toString();
+const metaImage = new URL('/images/contactanos-og.jpg', Astro.site).toString();
 
 interface Service {
   title: string;
@@ -82,25 +85,39 @@ const penToolIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="
 const hardHatIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8"><path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v2z"></path><path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"></path><path d="M4 15v-3a6 6 0 0 1 6-6h0"></path><path d="M14 6h0a6 6 0 0 1 6 6v3"></path></svg>`;
 ---
 
-<Layout title={metaTitle}>
-  <!-- Agregar metadatos SEO dinámicos -->
-  <meta slot="head" name="description" content={metaDescription} />
-  <meta slot="head" property="og:title" content={metaTitle} />
-  <meta slot="head" property="og:description" content={metaDescription} />
-  <meta slot="head" property="og:image" content={metaImage} />
-  <meta slot="head" property="og:type" content="website" />
-  <meta slot="head" property="og:url" content={pageUrl} />
-  <meta slot="head" name="twitter:card" content="summary_large_image" />
-  <meta slot="head" name="twitter:title" content={metaTitle} />
-  <meta slot="head" name="twitter:description" content={metaDescription} />
-  <meta slot="head" name="twitter:image" content={metaImage} />
-  <link slot="head" rel="canonical" href={canonicalURL.toString()} />
-  
+<Layout title={title} description={description}>
+  <Fragment slot="head">
+    <!-- SEO Meta Tags -->
+    <meta name="keywords" content={keywords} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Mármoles Deluxe" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:site_name" content="Mármoles Deluxe" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Geo Tags -->
+    <meta name="geo.region" content="CO-VAC" />
+    <meta name="geo.placename" content="Cali" />
+    <meta name="geo.position" content="3.4516;-76.5320" />
+    <meta name="ICBM" content="3.4516, -76.5320" />
+  </Fragment>
+
   <!-- Agregar datos estructurados schema.org para SEO -->
-  <SEOSchemaData 
+  <SEOSchemaData
     client:load
-    pageTitle={metaTitle}
-    pageDescription={metaDescription}
+    pageTitle={title}
+    pageDescription={description}
     pageUrl={pageUrl}
     pageImage={metaImage}
   />
@@ -114,7 +131,8 @@ const hardHatIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="
           Otros Servicios
         </h1>
         <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-          Más allá de la instalación, te acompañamos en todo el ciclo de vida de tus superficies.
+          Más allá de la instalación, te acompañamos en todo el ciclo de vida de
+          tus superficies.
         </p>
       </div>
 
@@ -129,27 +147,30 @@ const hardHatIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="
           </h2>
         </div>
         <p class="text-gray-600 mb-8 ml-11">
-          Soluciones precisas para restaurar, mejorar o adaptar tus superficies en piedra.
+          Soluciones precisas para restaurar, mejorar o adaptar tus superficies
+          en piedra.
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {technicalServices.map((service) => (
-            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100">
-              <div class="flex items-start gap-4">
-                <div class="bg-marmoles-gold/10 p-3 rounded-full text-marmoles-gold">
-                  <Fragment set:html={service.icon} />
-                </div>
-                <div>
-                  <h3 class="font-semibold text-lg text-marmoles-black mb-2">
-                    {service.title}
-                  </h3>
-                  {service.description && (
-                    <p class="text-gray-600 text-sm">{service.description}</p>
-                  )}
+          {
+            technicalServices.map((service) => (
+              <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100">
+                <div class="flex items-start gap-4">
+                  <div class="bg-marmoles-gold/10 p-3 rounded-full text-marmoles-gold">
+                    <Fragment set:html={service.icon} />
+                  </div>
+                  <div>
+                    <h3 class="font-semibold text-lg text-marmoles-black mb-2">
+                      {service.title}
+                    </h3>
+                    {service.description && (
+                      <p class="text-gray-600 text-sm">{service.description}</p>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          }
         </div>
       </section>
 
@@ -164,27 +185,30 @@ const hardHatIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="
           </h2>
         </div>
         <p class="text-gray-600 mb-8 ml-11">
-          Convierte tus ideas en realidad con nuestra experiencia en personalización y asesoría.
+          Convierte tus ideas en realidad con nuestra experiencia en
+          personalización y asesoría.
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {creativeServices.map((service) => (
-            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100">
-              <div class="flex items-start gap-4">
-                <div class="bg-marmoles-gold/10 p-3 rounded-full text-marmoles-gold">
-                  <Fragment set:html={service.icon} />
-                </div>
-                <div>
-                  <h3 class="font-semibold text-lg text-marmoles-black mb-2">
-                    {service.title}
-                  </h3>
-                  {service.description && (
-                    <p class="text-gray-600 text-sm">{service.description}</p>
-                  )}
+          {
+            creativeServices.map((service) => (
+              <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100">
+                <div class="flex items-start gap-4">
+                  <div class="bg-marmoles-gold/10 p-3 rounded-full text-marmoles-gold">
+                    <Fragment set:html={service.icon} />
+                  </div>
+                  <div>
+                    <h3 class="font-semibold text-lg text-marmoles-black mb-2">
+                      {service.title}
+                    </h3>
+                    {service.description && (
+                      <p class="text-gray-600 text-sm">{service.description}</p>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          }
         </div>
       </section>
 
@@ -203,23 +227,25 @@ const hardHatIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {constructionServices.map((service) => (
-            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100">
-              <div class="flex items-start gap-4">
-                <div class="bg-marmoles-gold/10 p-3 rounded-full text-marmoles-gold">
-                  <Fragment set:html={service.icon} />
-                </div>
-                <div>
-                  <h3 class="font-semibold text-lg text-marmoles-black mb-2">
-                    {service.title}
-                  </h3>
-                  {service.description && (
-                    <p class="text-gray-600 text-sm">{service.description}</p>
-                  )}
+          {
+            constructionServices.map((service) => (
+              <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100">
+                <div class="flex items-start gap-4">
+                  <div class="bg-marmoles-gold/10 p-3 rounded-full text-marmoles-gold">
+                    <Fragment set:html={service.icon} />
+                  </div>
+                  <div>
+                    <h3 class="font-semibold text-lg text-marmoles-black mb-2">
+                      {service.title}
+                    </h3>
+                    {service.description && (
+                      <p class="text-gray-600 text-sm">{service.description}</p>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          }
         </div>
       </section>
 
@@ -229,12 +255,17 @@ const hardHatIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="
           ¿Tienes un proyecto en mente o una necesidad específica?
         </h2>
         <p class="text-white/80 mb-8 max-w-2xl mx-auto">
-          Nuestro equipo de expertos está listo para asesorarte y ofrecerte la mejor solución para tu proyecto.
+          Nuestro equipo de expertos está listo para asesorarte y ofrecerte la
+          mejor solución para tu proyecto.
         </p>
-        <a href="/contactanos" class="inline-block bg-marmoles-gold text-marmoles-black font-semibold px-8 py-3 rounded-lg hover:bg-marmoles-gold/90 transition-colors duration-300">
+        <a
+          href="/contactanos"
+          class="inline-block bg-marmoles-gold text-marmoles-black font-semibold px-8 py-3 rounded-lg hover:bg-marmoles-gold/90 transition-colors duration-300"
+        >
           Contáctanos
         </a>
       </section>
     </div>
   </div>
-</Layout> 
+</Layout>
+
