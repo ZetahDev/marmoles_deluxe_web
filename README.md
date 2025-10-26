@@ -2,12 +2,59 @@
 
 Sitio web oficial de Mármoles Deluxe, especialistas en instalación de superficies en piedras naturales y sinterizadas.
 
-## Tecnologías
+## 🚀 Tecnologías
 
-- Astro
-- TailwindCSS
-- React (componentes interactivos)
-- AWS S3 (almacenamiento de imágenes)
+- **Astro** - Framework web estático
+- **TailwindCSS** - Estilos
+- **React** - Componentes interactivos
+- **AWS S3** - Almacenamiento de imágenes
+- **Wompi** - Pasarela de pagos
+- **N8N** - Automatizaciones
+- **Google Sheets** - Base de datos de transacciones
+
+## 💳 Sistema de Pagos con Wompi
+
+Este proyecto incluye una integración completa con Wompi para procesar pagos online de:
+
+- Anticipos de productos
+- Servicios específicos
+- Productos del catálogo
+
+### Características
+
+✅ Procesamiento de pagos seguro con Wompi  
+✅ Página de confirmación con detalles de transacción  
+✅ Automatización completa con N8N  
+✅ Registro en Google Sheets  
+✅ Emails de confirmación al cliente  
+✅ Notificaciones a Telegram para el equipo
+
+### 📚 Documentación de Pagos
+
+- **[🚀 Inicio Rápido](./INICIO_RAPIDO.md)** - Empieza aquí
+- **[📖 Guía Completa](./README_PAGOS_WOMPI.md)** - Documentación detallada
+- **[🔄 Setup N8N](./SETUP_N8N.md)** - Configuración de automatizaciones
+- **[🏗️ Arquitectura](./ARQUITECTURA.md)** - Diagramas y flujos
+- **[❓ FAQ](./FAQ_PAGOS.md)** - Preguntas frecuentes
+
+### 🎯 Ejemplo de Uso
+
+```astro
+---
+import WompiPaymentButton from '../components/WompiPaymentButton';
+---
+
+<WompiPaymentButton
+  client:load
+  paymentType="ANTICIPO"
+  productName="Mármol Blanco Polar"
+  productDescription="Anticipo del 50%"
+  price={500000}
+  sku="MAR-BP-001"
+/>
+```
+
+Ver más ejemplos en: `/ejemplos-pago`
 
 ## Estructura de Recursos
 
@@ -16,7 +63,8 @@ Sitio web oficial de Mármoles Deluxe, especialistas en instalación de superfic
 El sitio utiliza dos fuentes principales para sus recursos:
 
 1. **Imágenes Locales (desarrollo)**:
-   - Carpeta `public/logos/`: Logotipos de marcas 
+
+   - Carpeta `public/logos/`: Logotipos de marcas
    - Carpeta `public/images/`: Imágenes generales
 
 2. **AWS S3 (producción)**:
@@ -28,6 +76,7 @@ El sitio utiliza dos fuentes principales para sus recursos:
 ### Manejo de Recursos
 
 El componente `MarcasBanner.astro` tiene implementada una lógica que detecta automáticamente el entorno:
+
 - En desarrollo: usa imágenes locales de `/public/logos/`
 - En producción: usa imágenes de S3 (`https://marmolesdeluxe.s3.us-east-2.amazonaws.com/logos/`)
 
@@ -135,8 +184,9 @@ PUBLIC_AWS_BUCKET_NAME=marmolesdeluxe
 2. Replace the values with your actual AWS credentials.
 
 3. The stone images should be organized in the S3 bucket according to the following structure:
+
    - `FOTOS/MARMOL/` - for marble images
-   - `FOTOS/QUARSTONE/` - for quartzstone images  
+   - `FOTOS/QUARSTONE/` - for quartzstone images
    - `FOTOS/GRANITOS+NATURALES/` - for natural granite images
    - `FOTOS/PIEDRA+SINTERIZADA/NEOLITH/` - for Neolith synthetic stone images
    - `FOTOS/PIEDRA+SINTERIZADA/ALTEA/` - for Altea synthetic stone images

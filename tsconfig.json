@@ -4,11 +4,12 @@
   "exclude": ["dist"],
   "compilerOptions": {
     "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "bundler",
     "paths": {
-        "@/*": [
-          "./src/*"
-        ]
-      }
+      "@/*": ["./src/*"]
     }
-
+  }
 }

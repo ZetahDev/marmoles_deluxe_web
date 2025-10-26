@@ -2,23 +2,24 @@
 import MobileMenu from "./MobileMenu";
 
 const navItems = [
-  { 
-    href: "/", 
+  {
+    href: "/",
     label: "Logo",
-    isLogo: true
+    isLogo: true,
   },
-  { 
+  {
     label: "Materiales",
     items: [
       { href: "/marmoles", label: "Mármoles" },
       { href: "/granitos-naturales", label: "Granito" },
       { href: "/quartzstone", label: "Quartzstone" },
       { href: "/piedra-sinterizada", label: "Piedra Sinterizada" },
-    ]
+    ],
   },
   //{ href: "/productos", label: "Productos" },
   { href: "/nosotros", label: "Nosotros" },
   { href: "/otros-servicios", label: "Otros Servicios" },
+  { href: "/politicas-garantia", label: "Garantías" },
   { href: "/contactanos", label: "Contáctanos" },
 ];
 
@@ -26,8 +27,9 @@ const currentPath = Astro.url.pathname;
 
 // Helper para verificar si la ruta actual está bajo Materiales
 const isCurrentPathUnderMateriales = () => {
-  const materialesItems = navItems.find(item => item.label === "Materiales")?.items || [];
-  return materialesItems.some(item => currentPath.startsWith(item.href));
+  const materialesItems =
+    navItems.find((item) => item.label === "Materiales")?.items || [];
+  return materialesItems.some((item) => currentPath.startsWith(item.href));
 };
 ---
 
@@ -35,17 +37,19 @@ const isCurrentPathUnderMateriales = () => {
   class="fixed w-full top-0 left-0 z-50 backdrop-blur-md border-b border-white/20"
 >
   <nav class="container mx-auto px-4">
-    <div class="flex items-center justify-between h-16">
+    <div class="flex items-center justify-center h-16">
       <!-- Menú móvil con zustand (componente de React) -->
-      <MobileMenu navItems={navItems} currentPath={currentPath} client:load />
+      <div class="md:hidden absolute left-4">
+        <MobileMenu navItems={navItems} currentPath={currentPath} client:load />
+      </div>
 
       <!-- Menú para escritorio -->
-      <div class="hidden md:flex items-center justify-center space-x-12">
+      <div class="hidden md:flex items-center justify-center space-x-8">
         {
           navItems.map((item) => {
             if (item.isLogo) {
               return (
-                <a href={item.href}>
+                <a href={item.href} class="mx-4">
                   <img
                     src="/images/logo.png"
                     alt="Mármoles Deluxe Logo"
@@ -62,7 +66,8 @@ const isCurrentPathUnderMateriales = () => {
                       "text-sm font-medium transition-colors relative group px-2 py-1",
                       {
                         "text-marmoles-gold": isCurrentPathUnderMateriales(),
-                        "text-marmoles-gold/95": !isCurrentPathUnderMateriales(),
+                        "text-marmoles-gold/95":
+                          !isCurrentPathUnderMateriales(),
                       },
                     ]}
                   >
@@ -70,17 +75,15 @@ const isCurrentPathUnderMateriales = () => {
                     <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-marmoles-gold transition-all duration-300 group-hover:w-full" />
                   </button>
                   <div class="absolute hidden group-hover:block w-48 bg-white/80 backdrop-blur-md border border-white/20 rounded-md shadow-lg py-2 mt-2">
-                    <div class="absolute -top-2 left-0 right-0 h-4 bg-transparent"></div>
-                    {
-                      item.items.map(({ href, label }) => (
-                        <a
-                          href={href}
-                          class="block px-4 py-2 text-sm text-gray-800 hover:text-marmoles-gold hover:bg-white/20"
-                        >
-                          {label}
-                        </a>
-                      ))
-                    }
+                    <div class="absolute -top-2 left-0 right-0 h-4 bg-transparent" />
+                    {item.items.map(({ href, label }) => (
+                      <a
+                        href={href}
+                        class="block px-4 py-2 text-sm text-gray-800 hover:text-marmoles-gold hover:bg-white/20"
+                      >
+                        {label}
+                      </a>
+                    ))}
                   </div>
                 </div>
               );
@@ -92,9 +95,11 @@ const isCurrentPathUnderMateriales = () => {
                   "text-sm font-medium transition-colors hover:text-marmoles-gold relative group",
                   {
                     "text-marmoles-gold":
-                      currentPath === item.href || currentPath.endsWith(item.href),
+                      currentPath === item.href ||
+                      currentPath.endsWith(item.href),
                     "text-marmoles-gold/95": !(
-                      currentPath === item.href || currentPath.endsWith(item.href)
+                      currentPath === item.href ||
+                      currentPath.endsWith(item.href)
                     ),
                   },
                 ]}
@@ -115,8 +120,9 @@ const isCurrentPathUnderMateriales = () => {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
   }
-  
+
   .logo-gold {
-    filter: brightness(0) saturate(100%) invert(80%) sepia(38%) saturate(636%) hue-rotate(358deg) brightness(90%) contrast(85%);
+    filter: brightness(0) saturate(100%) invert(80%) sepia(38%) saturate(636%)
+      hue-rotate(358deg) brightness(90%) contrast(85%);
   }
 </style>
