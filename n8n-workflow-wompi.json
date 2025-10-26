@@ -1,0 +1,261 @@
+{
+  "name": "Wompi Payment Processing - Mármoles Deluxe",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "wompi-payment",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "webhook-wompi",
+      "name": "Webhook Wompi",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [250, 300],
+      "webhookId": "wompi-payment-webhook"
+    },
+    {
+      "parameters": {
+        "functionCode": "// Procesar datos del webhook de Wompi\nconst webhookData = $input.item.json;\nconst transaction = webhookData.data?.transaction;\n\nif (!transaction) {\n  return { json: { error: 'No transaction data found' } };\n}\n\n// Formatear datos para Google Sheets y notificaciones\nconst formattedData = {\n  // Timestamp y referencias\n  timestamp: new Date().toLocaleString('es-CO', { timeZone: 'America/Bogota' }),\n  transactionId: transaction.id || 'N/A',\n  reference: transaction.reference || 'N/A',\n  status: transaction.status || 'UNKNOWN',\n  \n  // Tipo de pago y producto\n  paymentType: transaction.metadata?.paymentType || 'N/A',\n  productName: transaction.metadata?.productName || 'N/A',\n  quantity: transaction.metadata?.quantity || 1,\n  \n  // Datos del cliente\n  customerName: transaction.customer_data?.full_name || 'N/A',\n  customerEmail: transaction.customer_email || 'N/A',\n  customerPhone: transaction.customer_data?.phone_number || 'N/A',\n  \n  // Información financiera\n  amountCents: transaction.amount_in_cents || 0,\n  amount: (transaction.amount_in_cents / 100) || 0,\n  amountFormatted: new Intl.NumberFormat('es-CO', { \n    style: 'currency', \n    currency: 'COP',\n    minimumFractionDigits: 0\n  }).format((transaction.amount_in_cents / 100) || 0),\n  currency: transaction.currency || 'COP',\n  paymentMethod: transaction.payment_method_type || 'N/A',\n  \n  // Metadata adicional\n  metadata: JSON.stringify(transaction.metadata || {}),\n  \n  // URLs y fechas\n  createdAt: transaction.created_at || new Date().toISOString(),\n  finalizedAt: transaction.finalized_at || 'N/A'\n};\n\nreturn { json: formattedData };"
+      },
+      "id": "process-data",
+      "name": "Procesar Datos Wompi",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.status }}",
+              "operation": "equals",
+              "value2": "APPROVED"
+            }
+          ]
+        }
+      },
+      "id": "if-approved",
+      "name": "Si Pago Aprobado",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "{{ $env.GOOGLE_SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Sheet1",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Timestamp": "={{ $json.timestamp }}",
+            "ID Transacción": "={{ $json.transactionId }}",
+            "Referencia": "={{ $json.reference }}",
+            "Estado": "={{ $json.status }}",
+            "Tipo de Pago": "={{ $json.paymentType }}",
+            "Cliente": "={{ $json.customerName }}",
+            "Email": "={{ $json.customerEmail }}",
+            "Teléfono": "={{ $json.customerPhone }}",
+            "Producto": "={{ $json.productName }}",
+            "Cantidad": "={{ $json.quantity }}",
+            "Monto": "={{ $json.amount }}",
+            "Método de Pago": "={{ $json.paymentMethod }}",
+            "Metadata": "={{ $json.metadata }}"
+          }
+        },
+        "options": {}
+      },
+      "id": "google-sheets",
+      "name": "Guardar en Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [850, 200],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "google-sheets-oauth",
+          "name": "Google Sheets Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "noreply@marmolesdeluxe.com",
+        "toEmail": "={{ $json.customerEmail }}",
+        "subject": "✅ Confirmación de Pago - Mármoles Deluxe",
+        "emailType": "html",
+        "message": "=<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"UTF-8\">\n  <style>\n    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }\n    .container { max-width: 600px; margin: 0 auto; padding: 20px; }\n    .header { background: linear-gradient(135deg, #8B4513 0%, #6d3410 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }\n    .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px; }\n    .detail-box { background: white; border-left: 4px solid #8B4513; padding: 15px; margin: 15px 0; }\n    .detail-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; }\n    .detail-label { font-weight: bold; color: #666; }\n    .detail-value { color: #333; }\n    .amount { font-size: 28px; color: #8B4513; font-weight: bold; text-align: center; margin: 20px 0; }\n    .steps { background: #e3f2fd; padding: 20px; border-radius: 8px; margin: 20px 0; }\n    .step { margin: 15px 0; padding-left: 30px; position: relative; }\n    .step:before { content: '✓'; position: absolute; left: 0; color: #4caf50; font-weight: bold; font-size: 18px; }\n    .footer { text-align: center; color: #666; font-size: 12px; margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; }\n    .contact { background: #fff3cd; padding: 15px; border-radius: 8px; margin: 20px 0; }\n  </style>\n</head>\n<body>\n  <div class=\"container\">\n    <div class=\"header\">\n      <h1 style=\"margin: 0;\">🏛️ Mármoles Deluxe</h1>\n      <p style=\"margin: 10px 0 0 0; font-size: 18px;\">¡Pago Recibido Exitosamente!</p>\n    </div>\n    \n    <div class=\"content\">\n      <p>Hola <strong>{{ $json.customerName }}</strong>,</p>\n      \n      <p>¡Gracias por tu pago! Hemos recibido tu transacción correctamente.</p>\n      \n      <div class=\"amount\">\n        {{ $json.amountFormatted }}\n      </div>\n      \n      <div class=\"detail-box\">\n        <h3 style=\"margin-top: 0; color: #8B4513;\">📋 Detalles de tu Transacción</h3>\n        \n        <div class=\"detail-row\">\n          <span class=\"detail-label\">ID de Transacción:</span>\n          <span class=\"detail-value\">{{ $json.transactionId }}</span>\n        </div>\n        \n        <div class=\"detail-row\">\n          <span class=\"detail-label\">Referencia:</span>\n          <span class=\"detail-value\">{{ $json.reference }}</span>\n        </div>\n        \n        <div class=\"detail-row\">\n          <span class=\"detail-label\">Producto/Servicio:</span>\n          <span class=\"detail-value\">{{ $json.productName }}</span>\n        </div>\n        \n        <div class=\"detail-row\">\n          <span class=\"detail-label\">Cantidad:</span>\n          <span class=\"detail-value\">{{ $json.quantity }}</span>\n        </div>\n        \n        <div class=\"detail-row\">\n          <span class=\"detail-label\">Método de Pago:</span>\n          <span class=\"detail-value\">{{ $json.paymentMethod }}</span>\n        </div>\n        \n        <div class=\"detail-row\">\n          <span class=\"detail-label\">Fecha:</span>\n          <span class=\"detail-value\">{{ $json.timestamp }}</span>\n        </div>\n      </div>\n      \n      <div class=\"steps\">\n        <h3 style=\"margin-top: 0; color: #1976d2;\">🎯 Próximos Pasos</h3>\n        \n        <div class=\"step\">\n          <strong>Confirmación Registrada</strong><br>\n          Tu pago ha sido procesado y registrado en nuestro sistema\n        </div>\n        \n        <div class=\"step\">\n          <strong>Coordinación de Servicio</strong><br>\n          Nuestro equipo se pondrá en contacto contigo en las próximas 24 horas\n        </div>\n        \n        <div class=\"step\">\n          <strong>Ejecución</strong><br>\n          Realizaremos el servicio o enviaremos tu producto según lo acordado\n        </div>\n      </div>\n      \n      <div class=\"contact\">\n        <h3 style=\"margin-top: 0;\">📞 ¿Necesitas Ayuda?</h3>\n        <p style=\"margin: 5px 0;\"><strong>Email:</strong> info@marmolesdeluxe.com</p>\n        <p style=\"margin: 5px 0;\"><strong>WhatsApp:</strong> +57 300 123 4567</p>\n        <p style=\"margin: 5px 0;\"><strong>Horario:</strong> Lun-Vie 8AM-6PM, Sáb 9AM-2PM</p>\n      </div>\n      \n      <p style=\"text-align: center; color: #666; font-size: 14px;\">\n        Gracias por confiar en <strong>Mármoles Deluxe</strong> 🏛️\n      </p>\n    </div>\n    \n    <div class=\"footer\">\n      <p>Este es un correo automático. Por favor no respondas a este mensaje.</p>\n      <p>Para soporte, contacta a info@marmolesdeluxe.com</p>\n      <p style=\"margin-top: 15px;\">© 2025 Mármoles Deluxe. Todos los derechos reservados.</p>\n    </div>\n  </div>\n</body>\n</html>",
+        "options": {}
+      },
+      "id": "email-cliente",
+      "name": "Email al Cliente",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [850, 300],
+      "credentials": {
+        "smtp": {
+          "id": "smtp-credentials",
+          "name": "SMTP Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $env.TELEGRAM_CHAT_ID }}",
+        "text": "=🔔 *NUEVO PAGO RECIBIDO*\n\n💰 *Monto:* {{ $json.amountFormatted }}\n\n👤 *Cliente*\n• Nombre: {{ $json.customerName }}\n• Email: {{ $json.customerEmail }}\n• Teléfono: {{ $json.customerPhone }}\n\n📦 *Producto/Servicio*\n• {{ $json.productName }}\n• Cantidad: {{ $json.quantity }}\n• Tipo: {{ $json.paymentType }}\n\n💳 *Detalles del Pago*\n• Método: {{ $json.paymentMethod }}\n• Referencia: `{{ $json.reference }}`\n• ID: `{{ $json.transactionId }}`\n\n⏰ *Fecha:* {{ $json.timestamp }}\n✅ *Estado:* {{ $json.status }}\n\n━━━━━━━━━━━━━━━━━━━━\n_Notificación automática - Mármoles Deluxe_",
+        "additionalFields": {
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "telegram-notification",
+      "name": "Notificación Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [850, 400],
+      "credentials": {
+        "telegramApi": {
+          "id": "telegram-bot",
+          "name": "Telegram Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"status\": \"success\", \"message\": \"Pago procesado correctamente\", \"reference\": $json.reference } }}"
+      },
+      "id": "respond-webhook",
+      "name": "Responder a Wompi",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1050, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"status\": \"pending\", \"message\": \"Pago en estado: \" + $json.status } }}"
+      },
+      "id": "respond-webhook-pending",
+      "name": "Responder Pendiente",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [850, 500]
+    }
+  ],
+  "connections": {
+    "Webhook Wompi": {
+      "main": [
+        [
+          {
+            "node": "Procesar Datos Wompi",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Procesar Datos Wompi": {
+      "main": [
+        [
+          {
+            "node": "Si Pago Aprobado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Si Pago Aprobado": {
+      "main": [
+        [
+          {
+            "node": "Guardar en Google Sheets",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Email al Cliente",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Notificación Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Responder Pendiente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardar en Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Responder a Wompi",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email al Cliente": {
+      "main": [
+        [
+          {
+            "node": "Responder a Wompi",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notificación Telegram": {
+      "main": [
+        [
+          {
+            "node": "Responder a Wompi",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-10-25T12:00:00.000Z",
+      "updatedAt": "2025-10-25T12:00:00.000Z",
+      "id": "1",
+      "name": "Pagos"
+    },
+    {
+      "createdAt": "2025-10-25T12:00:00.000Z",
+      "updatedAt": "2025-10-25T12:00:00.000Z",
+      "id": "2",
+      "name": "Wompi"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2025-10-25T12:00:00.000Z",
+  "versionId": "1"
+}
