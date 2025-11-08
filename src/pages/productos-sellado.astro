@@ -292,7 +292,9 @@ const productos = [
                     📍 Disponible en Cali con entrega a domicilio
                   </p>
                   <a
-                    href="/contactanos"
+                    href={`https://wa.me/+573132592793?text=${encodeURIComponent(`Hola, estoy interesado en obtener más información sobre el sellador: ${producto.marca} - ${producto.nombre}`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     class="bg-marmoles-gold text-black font-bold px-6 py-3 rounded-lg hover:bg-marmoles-gold/90 transition-colors shadow-md inline-flex items-center gap-2"
                   >
                     <span>💬</span> Consultar disponibilidad
