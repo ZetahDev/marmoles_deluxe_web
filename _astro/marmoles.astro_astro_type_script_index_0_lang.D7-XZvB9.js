@@ -1,0 +1,1 @@
+import{i as a}from"./modal.BK1Sf2Fz.js";a();typeof window<"u"&&window.addEventListener("DOMContentLoaded",()=>{const e=new URLSearchParams(window.location.search).get("material");e&&setTimeout(()=>{const t=new CustomEvent("modal-state-change",{detail:{id:e}});document.dispatchEvent(t)},500)});
