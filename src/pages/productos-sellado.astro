@@ -1,0 +1,441 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const title = "Productos de Sellado Certificados - Mármoles Deluxe Cali";
+const description =
+  "Selladores profesionales certificados para mármol, granito y piedra sinterizada. Productos de marcas líderes: Mapei, Sika, Bostik, Tenax. Protección garantizada para sus superficies en Cali.";
+
+const keywords =
+  "selladores mármol Cali, silicona neutra piedra, Mapei Mapesil, Sika sellador, productos sellado granito, adhesivos piedra natural, selladores profesionales Cali, mantenimiento mármol, protección granito";
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const productos = [
+  {
+    nombre: "Mapesil LM",
+    marca: "MAPEI",
+    tipo: "Silicona neutra (neutral cure) específica para piedra/mármol",
+    tecnologia: "Anti-moho BioBlock",
+    materiales: ["Mármol", "Granito", "Piedra natural", "Juntas en encimeras"],
+    presentacion: "Cartucho 280ml",
+    colores: "Transparente + 9 colores",
+    icono: "🟦",
+    color: "blue",
+  },
+  {
+    nombre: "Mapesil GP",
+    marca: "MAPEI",
+    tipo: "Silicona neutra para juntas de dilatación",
+    tecnologia: "Similar a Mapesil LM",
+    materiales: ["Mármol", "Granito", "Cerámica", "Juntas"],
+    presentacion: "Cartucho 280ml",
+    colores: "Blanco + otros",
+    icono: "🟦",
+    color: "blue",
+  },
+  {
+    nombre: "Sikasil C / Sikasil E",
+    marca: "SIKA",
+    tipo: "Silicona neutra antihongos para construcción",
+    tecnologia: "Protección antihongos",
+    materiales: [
+      "Vidrio",
+      "Aluminio",
+      "Piedra",
+      "Granito",
+      "Mármol",
+      "Juntas cocina/baño",
+    ],
+    presentacion: "Cartucho 280ml",
+    colores: "Transparente / Blanco",
+    icono: "🟨",
+    color: "yellow",
+  },
+  {
+    nombre: "Silicona Neutra S345",
+    marca: "BOSTIK",
+    tipo: "Silicona neutra / sellador profesional",
+    tecnologia: "Varios SKUs disponibles",
+    materiales: ["Mármol", "Granito", "Juntas sanitarias", "Juntas de cocina"],
+    presentacion: "Cartucho 280ml / Tubos",
+    colores: "Transparente / Blanco",
+    icono: "🟧",
+    color: "orange",
+  },
+  {
+    nombre: "Multibond / Multibond MS",
+    marca: "SOUDAL",
+    tipo: "Polímero híbrido / silicona para mármol",
+    tecnologia: "Adhesivo-sellador híbrido",
+    materiales: ["Mármol", "Granito", "Piedra natural", "Zonas húmedas"],
+    presentacion: "Cartucho 290ml",
+    colores: "Gris / Otros",
+    icono: "🟩",
+    color: "green",
+  },
+  {
+    nombre: "Tenax Proseal / Hydrex",
+    marca: "TENAX",
+    tipo: "Selladores formulados específicamente para piedra",
+    tecnologia: "Productos especializados para piedra natural",
+    materiales: ["Mármol", "Granito", "Cuarzo", "Concreto"],
+    presentacion: "Cartucho 250-300ml / Frascos",
+    colores: "Transparente / Específicos",
+    icono: "🟪",
+    color: "purple",
+  },
+  {
+    nombre: "Selladores para Sinterizados",
+    marca: "COMPAC / Dekton / Neolith",
+    tipo: "Siliconas neutras o adhesivos especialmente formulados",
+    tecnologia: "Juntas coloreadas / Top-coated",
+    materiales: [
+      "Piedra sinterizada",
+      "Neolith",
+      "Dekton",
+      "Compac",
+      "Cuarzo sinterizado",
+    ],
+    presentacion: "Cartuchos / Kits de junta coloreada",
+    colores: "Colores que empatan con la lámina",
+    icono: "💎",
+    color: "indigo",
+  },
+  {
+    nombre: "Vulkem (Poliuretano)",
+    marca: "TREMCO",
+    tipo: "Poliuretano semi-nivelante para juntas",
+    tecnologia: "Alternativa no-silicona",
+    materiales: ["Piedra caliza", "Juntas de gran formato", "Juntas de piso"],
+    presentacion: "Tubo/Cartucho / Cajas",
+    colores: "Varios colores",
+    icono: "🔶",
+    color: "amber",
+  },
+];
+---
+
+<Layout title={title} description={description}>
+  <Fragment slot="head">
+    <!-- SEO Meta Tags -->
+    <meta name="keywords" content={keywords} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+  </Fragment>
+
+  <div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <!-- Hero Section -->
+    <section
+      class="bg-gradient-to-r from-gray-900 via-black to-black text-white py-20 relative overflow-hidden"
+    >
+      <div
+        class="absolute inset-0 bg-gradient-to-br from-marmoles-gold/10 to-transparent"
+      >
+      </div>
+      <div class="container mx-auto px-4 max-w-6xl relative z-10">
+        <div class="text-center">
+          <h1 class="text-5xl font-bold mb-6">
+            🧴 Productos de Sellado Certificados
+          </h1>
+          <p class="text-xl text-white/90 max-w-3xl mx-auto mb-4">
+            Proteja su inversión con los mejores selladores profesionales del
+            mercado
+          </p>
+          <p class="text-lg text-white/80 max-w-2xl mx-auto">
+            Productos certificados de marcas líderes mundiales para el
+            mantenimiento y protección de mármol, granito y piedra sinterizada
+          </p>
+          <div class="mt-8 flex flex-wrap justify-center gap-3">
+            <span
+              class="bg-blue-500/20 border border-blue-400/30 px-4 py-2 rounded-full text-sm"
+              >✓ Mapei</span
+            >
+            <span
+              class="bg-yellow-500/20 border border-yellow-400/30 px-4 py-2 rounded-full text-sm"
+              >✓ Sika</span
+            >
+            <span
+              class="bg-orange-500/20 border border-orange-400/30 px-4 py-2 rounded-full text-sm"
+              >✓ Bostik</span
+            >
+            <span
+              class="bg-green-500/20 border border-green-400/30 px-4 py-2 rounded-full text-sm"
+              >✓ Soudal</span
+            >
+            <span
+              class="bg-purple-500/20 border border-purple-400/30 px-4 py-2 rounded-full text-sm"
+              >✓ Tenax</span
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Información Importante -->
+    <section class="container mx-auto px-4 max-w-6xl py-8">
+      <div
+        class="bg-marmoles-gold/10 border-l-4 border-marmoles-gold rounded-r-lg p-6"
+      >
+        <h2
+          class="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2"
+        >
+          <span>⚠️</span> Mantenimiento Requerido para Garantías
+        </h2>
+        <div class="grid md:grid-cols-2 gap-4 text-gray-700">
+          <div>
+            <p class="font-semibold mb-2">📅 Frecuencia de sellado:</p>
+            <ul class="ml-6 space-y-1">
+              <li>• <strong>Mármol:</strong> Trimestral (cada 3 meses)</li>
+              <li>
+                • <strong>Granito:</strong> Semestral (cada 6 meses, según color)
+              </li>
+              <li>
+                • <strong>Cuarzo/Sinterizado:</strong> No requiere sellado
+              </li>
+            </ul>
+          </div>
+          <div>
+            <p class="font-semibold mb-2">✅ Productos aprobados:</p>
+            <p class="text-sm">
+              Todos los productos listados en esta página cumplen con las
+              especificaciones técnicas requeridas para mantener la validez de
+              su garantía. Use exclusivamente siliconas neutras o selladores
+              especializados.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Catálogo de Productos -->
+    <section class="container mx-auto px-4 max-w-6xl pb-16">
+      <h2 class="text-4xl font-bold text-gray-900 mb-8 text-center">
+        Catálogo de Productos Certificados
+      </h2>
+
+      <div class="grid gap-6">
+        {
+          productos.map((producto) => (
+            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-8 border-{producto.color}-500 hover:shadow-xl transition-shadow">
+              <div class="grid md:grid-cols-3 gap-6">
+                {/* Columna 1: Info Principal */}
+                <div class="md:col-span-1">
+                  <div class="flex items-start gap-3 mb-4">
+                    <span class="text-4xl">{producto.icono}</span>
+                    <div>
+                      <h3 class="text-2xl font-bold text-gray-900">
+                        {producto.nombre}
+                      </h3>
+                      <p class="text-lg font-semibold text-{producto.color}-600">
+                        {producto.marca}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="space-y-2 text-sm">
+                    <div class="bg-gray-50 rounded-lg p-3">
+                      <p class="font-semibold text-gray-700 mb-1">
+                        📦 Presentación:
+                      </p>
+                      <p class="text-gray-600">{producto.presentacion}</p>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg p-3">
+                      <p class="font-semibold text-gray-700 mb-1">
+                        🎨 Colores:
+                      </p>
+                      <p class="text-gray-600">{producto.colores}</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Columna 2: Tipo y Tecnología */}
+                <div class="md:col-span-1">
+                  <div class="mb-4">
+                    <p class="font-bold text-gray-900 mb-2 flex items-center gap-2">
+                      <span>🔬</span> Tipo:
+                    </p>
+                    <p class="text-gray-700 text-sm">{producto.tipo}</p>
+                  </div>
+                  <div class="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                    <p class="font-semibold text-blue-900 mb-1 text-sm">
+                      ✨ Tecnología:
+                    </p>
+                    <p class="text-blue-800 text-sm">{producto.tecnologia}</p>
+                  </div>
+                </div>
+
+                {/* Columna 3: Materiales Compatibles */}
+                <div class="md:col-span-1">
+                  <p class="font-bold text-gray-900 mb-3 flex items-center gap-2">
+                    <span>✅</span> Materiales compatibles:
+                  </p>
+                  <div class="flex flex-wrap gap-2">
+                    {producto.materiales.map((material: string) => (
+                      <span class="bg-green-100 text-green-800 text-xs font-medium px-3 py-1 rounded-full border border-green-300">
+                        {material}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Botón de contacto */}
+              <div class="mt-6 pt-6 border-t border-gray-200">
+                <div class="flex flex-wrap gap-4 items-center justify-between">
+                  <p class="text-sm text-gray-600">
+                    📍 Disponible en Cali con entrega a domicilio
+                  </p>
+                  <a
+                    href="/contactanos"
+                    class="bg-marmoles-gold text-black font-bold px-6 py-3 rounded-lg hover:bg-marmoles-gold/90 transition-colors shadow-md inline-flex items-center gap-2"
+                  >
+                    <span>💬</span> Consultar disponibilidad
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Puntos de Venta -->
+    <section class="container mx-auto px-4 max-w-6xl pb-16">
+      <div class="bg-white rounded-2xl shadow-xl p-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">
+          📍 Puntos de Venta en Cali
+        </h2>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="border-2 border-gray-200 rounded-xl p-6">
+            <h3 class="font-bold text-xl text-gray-900 mb-4">
+              🏪 Tiendas Físicas
+            </h3>
+            <ul class="space-y-3 text-gray-700">
+              <li class="flex items-start gap-2">
+                <span class="text-marmoles-gold mt-1">•</span>
+                <span>
+                  <strong>Homecenter</strong> - Varios productos Sika y Mapei
+                </span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-marmoles-gold mt-1">•</span>
+                <span>
+                  <strong>Distribuidores especializados</strong> - Productos profesionales
+                </span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-marmoles-gold mt-1">•</span>
+                <span>
+                  <strong>Ferreterías grandes</strong> - Línea Bostik y Soudal
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="border-2 border-gray-200 rounded-xl p-6">
+            <h3 class="font-bold text-xl text-gray-900 mb-4">
+              🚚 Compra con Mármoles Deluxe
+            </h3>
+            <p class="text-gray-700 mb-4">
+              Facilitamos la adquisición de productos certificados con entrega
+              directa en su obra o domicilio en Cali.
+            </p>
+            <a
+              href="/contactanos"
+              class="block text-center bg-gray-900 text-white font-bold px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors"
+            >
+              Solicitar cotización
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recomendaciones de Uso -->
+    <section class="container mx-auto px-4 max-w-6xl pb-16">
+      <div
+        class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 border-2 border-blue-200"
+      >
+        <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">
+          📖 Recomendaciones de Uso
+        </h2>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3
+              class="font-bold text-lg text-gray-900 mb-3 flex items-center gap-2"
+            >
+              <span class="text-green-600">✓</span> Buenas Prácticas
+            </h3>
+            <ul class="space-y-2 text-gray-700 text-sm">
+              <li>• Limpie y seque bien la superficie antes de aplicar</li>
+              <li>• Use solo siliconas neutras (nunca ácidas) en mármol</li>
+              <li>• Aplique en ambiente seco (evite días lluviosos)</li>
+              <li>• Respete tiempo de curado (24-48 horas)</li>
+              <li>• Almacene en lugar fresco y seco</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3
+              class="font-bold text-lg text-gray-900 mb-3 flex items-center gap-2"
+            >
+              <span class="text-red-600">✗</span> Evite
+            </h3>
+            <ul class="space-y-2 text-gray-700 text-sm">
+              <li>• NO use siliconas ácidas en mármol (causan manchas)</li>
+              <li>• NO aplique sobre superficies húmedas</li>
+              <li>• NO mezcle productos de diferentes marcas</li>
+              <li>• NO use productos vencidos</li>
+              <li>
+                • NO aplique en temperaturas extremas (&lt;5°C o &gt;40°C)
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="container mx-auto px-4 max-w-6xl pb-16">
+      <div
+        class="bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white rounded-2xl p-12 text-center relative overflow-hidden"
+      >
+        <div
+          class="absolute inset-0 bg-gradient-to-br from-marmoles-gold/10 to-transparent"
+        >
+        </div>
+        <div class="relative z-10">
+          <h2 class="text-3xl font-bold mb-4">
+            ¿Necesita asesoría para elegir el producto correcto?
+          </h2>
+          <p class="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
+            Nuestro equipo técnico le ayudará a seleccionar el sellador ideal
+            para su tipo de piedra y aplicación específica.
+          </p>
+          <div class="flex flex-wrap gap-4 justify-center">
+            <a
+              href="/contactanos"
+              class="bg-marmoles-gold text-black font-bold px-8 py-4 rounded-lg hover:bg-marmoles-gold/90 transition-colors shadow-lg inline-flex items-center gap-2"
+            >
+              <span>📞</span> Contactar ahora
+            </a>
+            <a
+              href="/politicas-garantia"
+              class="bg-white/10 backdrop-blur-sm text-white font-bold px-8 py-4 rounded-lg hover:bg-white/20 transition-colors border border-white/30 inline-flex items-center gap-2"
+            >
+              <span>📋</span> Ver garantías
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
