@@ -8,9 +8,20 @@ interface ImportMetaEnv {
   readonly PUBLIC_AWS_BUCKET_NAME?: string;
 
   // Wompi Payment Gateway
-  readonly PUBLIC_WOMPI_PUBLIC_KEY: string;
-  readonly WOMPI_PRIVATE_KEY?: string;
   readonly PUBLIC_WOMPI_ENVIRONMENT: "test" | "production";
+
+  // Llaves de TEST
+  readonly PUBLIC_WOMPI_PUBLIC_KEY_TEST?: string;
+  readonly WOMPI_PRIVATE_KEY_TEST?: string;
+  readonly PUBLIC_WOMPI_EVENTS_SECRET_TEST?: string;
+  readonly PUBLIC_WOMPI_INTEGRITY_SECRET_TEST?: string;
+
+  // Llaves de PRODUCCIÓN
+  readonly PUBLIC_WOMPI_PUBLIC_KEY_PROD?: string;
+  readonly WOMPI_PRIVATE_KEY_PROD?: string;
+  readonly PUBLIC_WOMPI_EVENTS_SECRET_PROD?: string;
+  readonly PUBLIC_WOMPI_INTEGRITY_SECRET_PROD?: string;
+
   readonly PUBLIC_SITE_URL: string;
 
   // N8N Webhook

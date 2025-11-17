@@ -1,13 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import type { PaymentType, WompiCustomer, WompiProduct } from "../types/wompi";
 import {
-  generateWompiPaymentUrl,
   generateReference,
   pesosTosCents,
+  generateIntegritySignature,
 } from "../types/wompi";
 import { wompiConfig } from "../lib/wompiConfig";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
+
+// Declarar tipos globales de Wompi
+declare global {
+  interface Window {
+    WidgetCheckout?: new (config: {
+      currency: string;
+      amountInCents: number;
+      reference: string;
+      publicKey: string;
+      signature: {
+        integrity: string;
+      };
+      redirectUrl?: string;
+      expirationTime?: string;
+      taxInCents?: {
+        vat?: number;
+        consumption?: number;
+      };
+      customerData?: {
+        email: string;
+        fullName: string;
+        phoneNumber: string;
+        phoneNumberPrefix?: string;
+        legalId?: string;
+        legalIdType?: string;
+      };
+      shippingAddress?: {
+        addressLine1: string;
+        city: string;
+        phoneNumber: string;
+        region: string;
+        country: string;
+        addressLine2?: string;
+        name?: string;
+        postalCode?: string;
+      };
+    }) => {
+      open: (callback: (result: any) => void) => void;
+    };
+  }
+}
 
 interface WompiPaymentButtonProps {
   paymentType: PaymentType;
@@ -37,8 +78,52 @@ export default function WompiPaymentButton({
     phone: "",
   });
   const [isGenerating, setIsGenerating] = useState(false);
+  const [widgetLoaded, setWidgetLoaded] = useState(false);
 
-  const handleGeneratePaymentLink = () => {
+  // Función para cargar el script de Wompi Widget bajo demanda
+  const loadWompiWidget = (): Promise<void> => {
+    return new Promise((resolve, reject) => {
+      // Verificar si el widget ya está disponible
+      if (window.WidgetCheckout) {
+        setWidgetLoaded(true);
+        resolve();
+        return;
+      }
+
+      // Verificar si el script ya está cargado
+      const existingScript = document.getElementById("wompi-widget-script");
+      if (existingScript) {
+        // Script existe pero widget no está listo, esperar un poco
+        setTimeout(() => {
+          if (window.WidgetCheckout) {
+            setWidgetLoaded(true);
+            resolve();
+          } else {
+            reject(new Error("Widget no se cargó correctamente"));
+          }
+        }, 1000);
+        return;
+      }
+
+      // Cargar el script
+      const script = document.createElement("script");
+      script.id = "wompi-widget-script";
+      script.src = "https://checkout.wompi.co/widget.js";
+      script.async = true;
+      script.onload = () => {
+        console.log("✅ Wompi Widget cargado correctamente");
+        setWidgetLoaded(true);
+        resolve();
+      };
+      script.onerror = () => {
+        console.error("❌ Error cargando Wompi Widget");
+        reject(new Error("Error cargando el widget de pago"));
+      };
+      document.body.appendChild(script);
+    });
+  };
+
+  const handleGeneratePaymentLink = async () => {
     // Validar datos del cliente
     if (!customerData.name || !customerData.email || !customerData.phone) {
       alert("Por favor completa todos los campos del formulario");
@@ -63,50 +148,134 @@ export default function WompiPaymentButton({
 
     setIsGenerating(true);
 
-    // Generar referencia única
-    const reference = generateReference(paymentType);
+    try {
+      // Cargar el widget de Wompi si no está cargado
+      if (!widgetLoaded) {
+        try {
+          await loadWompiWidget();
+        } catch (error) {
+          console.error("Error cargando Wompi Widget:", error);
+          alert(
+            "Error cargando el sistema de pagos. Por favor recarga la página e intenta nuevamente."
+          );
+          setIsGenerating(false);
+          return;
+        }
+      }
 
-    // Crear producto
-    const product: WompiProduct = {
-      name: productName,
-      description: productDescription,
-      price: price,
-      quantity: quantity,
-      type: paymentType,
-      sku: sku,
-    };
+      // Verificar que el widget esté cargado
+      if (!window.WidgetCheckout) {
+        alert(
+          "El widget de pago aún no está cargado. Por favor espera un momento e intenta nuevamente."
+        );
+        setIsGenerating(false);
+        return;
+      }
 
-    // Calcular monto total en centavos
-    const totalAmount = pesosTosCents(price * quantity);
+      // Debug: Verificar configuración
+      if (import.meta.env.DEV) {
+        console.log("🔍 Wompi Config Check:", {
+          environment: wompiConfig.environment,
+          publicKey: wompiConfig.publicKey,
+          hasIntegritySecret: !!wompiConfig.integritySecret,
+          integritySecretPreview: wompiConfig.integritySecret
+            ? wompiConfig.integritySecret.substring(0, 25) + "..."
+            : "NO CONFIGURADO ❌",
+        });
+      }
 
-    // Generar URL de pago
-    const paymentUrl = generateWompiPaymentUrl({
-      publicKey: wompiConfig.publicKey,
-      reference: reference,
-      amount: totalAmount,
-      currency: "COP",
-      customer: customerData,
-      products: [product],
-      redirectUrl: wompiConfig.redirectUrl,
-      metadata: {
-        paymentType: paymentType,
-        sku: sku,
-        quantity: quantity,
-      },
-    });
+      // Generar referencia única
+      const reference = generateReference(paymentType);
 
-    // Log para debugging (en desarrollo)
-    if (import.meta.env.DEV) {
-      console.log("🔗 Payment Link Generated:", {
-        reference,
-        amount: totalAmount,
-        customer: customerData,
-        product,
+      // Calcular monto total en centavos
+      const totalAmount = pesosTosCents(price * quantity);
+
+      // Generar firma de integridad (OBLIGATORIA según documentación)
+      if (!wompiConfig.integritySecret) {
+        alert(
+          "Error de configuración: No se encontró el secreto de integridad. Por favor contacta al administrador."
+        );
+        setIsGenerating(false);
+        return;
+      }
+
+      const signatureString = `${reference}${totalAmount}COP${wompiConfig.integritySecret}`;
+      const signature = await generateIntegritySignature(signatureString);
+
+      if (import.meta.env.DEV) {
+        console.log("🔐 Firma de Integridad:", {
+          reference,
+          amount: totalAmount,
+          currency: "COP",
+          integritySecret: wompiConfig.integritySecret.substring(0, 25) + "...",
+          signatureString: signatureString.substring(0, 60) + "...",
+          signature: signature,
+        });
+      }
+
+      // Configurar el Widget de Wompi según documentación oficial
+      const widgetConfig = {
+        currency: "COP" as const,
+        amountInCents: totalAmount,
+        reference: reference,
+        publicKey: wompiConfig.publicKey,
+        signature: {
+          integrity: signature,
+        },
+        redirectUrl: wompiConfig.redirectUrl,
+        customerData: {
+          email: customerData.email,
+          fullName: customerData.name,
+          phoneNumber: customerData.phone,
+          phoneNumberPrefix: "+57",
+        },
+      };
+
+      if (import.meta.env.DEV) {
+        console.log("🎯 Configurando Wompi Widget:", widgetConfig);
+      }
+
+      // Crear instancia del checkout según documentación: new WidgetCheckout({...})
+      const checkout = new window.WidgetCheckout(widgetConfig);
+
+      // Abrir el widget
+      checkout.open((result: any) => {
+        if (import.meta.env.DEV) {
+          console.log("💳 Resultado del pago:", result);
+        }
+
+        setIsGenerating(false);
+
+        if (result.transaction) {
+          const transaction = result.transaction;
+          const transactionStatus = transaction.status;
+
+          if (transactionStatus === "APPROVED") {
+            // Redirigir a página de confirmación
+            window.location.href = `${wompiConfig.redirectUrl}?id=${transaction.id}&reference=${reference}&status=APPROVED`;
+          } else if (transactionStatus === "DECLINED") {
+            alert(
+              "❌ Tu pago fue rechazado. Por favor intenta con otro método de pago."
+            );
+          } else if (transactionStatus === "PENDING") {
+            window.location.href = `${wompiConfig.redirectUrl}?id=${transaction.id}&reference=${reference}&status=PENDING`;
+          } else if (transactionStatus === "ERROR") {
+            alert(
+              "❌ Ocurrió un error procesando tu pago. Por favor intenta nuevamente."
+            );
+          }
+        } else {
+          // Usuario cerró el widget sin completar
+          console.log("⚠️ Usuario cerró el widget sin completar el pago");
+        }
       });
-    }
 
-    // Redirigir a Wompi
-    window.location.href = paymentUrl;
+      setIsGenerating(false);
+    } catch (error) {
+      console.error("Error generando link de pago:", error);
+      alert("Error al generar el link de pago. Por favor intenta nuevamente.");
+      setIsGenerating(false);
+    }
   };
 
   const getPaymentTypeLabel = () => {

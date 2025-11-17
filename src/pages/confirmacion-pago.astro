@@ -3,7 +3,12 @@ import Layout from "../layouts/Layout.astro";
 import PaymentConfirmation from "../components/PaymentConfirmation";
 
 // Obtener parámetros de la URL
-const id = Astro.url.searchParams.get('id') || undefined;
+const id = Astro.url.searchParams.get("id");
+const reference = Astro.url.searchParams.get("reference");
+const status = Astro.url.searchParams.get("status");
+
+// Log para debugging
+console.log("🔍 Parámetros de confirmación:", { id, reference, status });
 
 // Metadata para SEO
 const title = "Confirmación de Pago - Mármoles Deluxe";
@@ -28,7 +33,12 @@ const description = "Confirmación de tu transacción de pago";
       </div>
 
       <!-- Componente de Confirmación -->
-      <PaymentConfirmation client:load transactionId={id} />
+      <PaymentConfirmation
+        client:load
+        transactionId={id}
+        reference={reference}
+        status={status}
+      />
 
       <!-- Información Adicional -->
       <div class="max-w-3xl mx-auto mt-12 text-center">

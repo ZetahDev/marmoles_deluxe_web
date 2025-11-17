@@ -31,11 +31,54 @@ Este proyecto incluye una integración completa con Wompi para procesar pagos on
 
 ### 📚 Documentación de Pagos
 
+- **[🔧 Setup Completo de Wompi](./WOMPI_SETUP.md)** - Guía paso a paso con webhooks y secretos ⭐
+- **[🌐 Webhooks en Desarrollo Local](./WEBHOOKS_DESARROLLO.md)** - Usar ngrok/cloudflare para testing ⭐ **NUEVO**
 - **[🚀 Inicio Rápido](./INICIO_RAPIDO.md)** - Empieza aquí
 - **[📖 Guía Completa](./README_PAGOS_WOMPI.md)** - Documentación detallada
 - **[🔄 Setup N8N](./SETUP_N8N.md)** - Configuración de automatizaciones
 - **[🏗️ Arquitectura](./ARQUITECTURA.md)** - Diagramas y flujos
 - **[❓ FAQ](./FAQ_PAGOS.md)** - Preguntas frecuentes
+
+### 🧪 Desarrollo Local - Webhooks
+
+⚠️ **Importante:** Wompi NO puede enviar webhooks a `localhost` directamente.
+
+Para testing local, necesitas un túnel:
+
+```powershell
+# Opción 1: ngrok (recomendado)
+ngrok http 4321
+
+# Opción 2: Cloudflare Tunnel
+cloudflared tunnel --url http://localhost:4321
+```
+
+Luego configura la URL del túnel en Wompi. Ver guía completa: [WEBHOOKS_DESARROLLO.md](./WEBHOOKS_DESARROLLO.md)
+
+### 🔐 Seguridad de Webhooks
+
+La integración incluye validación de firma de webhooks usando el `WOMPI_INTEGRITY_SECRET`:
+
+```typescript
+// Endpoint automático para recibir webhooks de Wompi
+// URL: https://tudominio.com/api/wompi-webhook
+// Valida automáticamente la firma usando SHA256
+```
+
+### ⚙️ Verificar Configuración
+
+Antes de comenzar, verifica que tu configuración esté correcta:
+
+```bash
+npm run check-wompi
+```
+
+Este script verificará:
+
+- ✅ Llaves de autenticación (public/private)
+- ✅ Secretos de integración (events/integrity)
+- ✅ Consistencia entre ambientes (test vs prod)
+- ✅ URLs de webhooks y redirección
 
 ### 🎯 Ejemplo de Uso
 

@@ -5,42 +5,73 @@ import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 
 interface PaymentConfirmationProps {
-  transactionId?: string;
+  transactionId?: string | null;
+  reference?: string | null;
+  status?: string | null;
 }
 
 export default function PaymentConfirmation({
   transactionId,
+  reference,
+  status,
 }: PaymentConfirmationProps) {
   const [transaction, setTransaction] = useState<WompiTransaction | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    console.log("🔍 PaymentConfirmation recibió:", {
+      transactionId,
+      reference,
+      status,
+    });
+
     if (transactionId) {
       fetchTransactionDetails(transactionId);
+    } else if (status && reference) {
+      // Si no hay ID pero tenemos status y reference, mostrar información básica
+      console.log("ℹ️ Mostrando confirmación básica sin consultar API");
+      setLoading(false);
     } else {
       setLoading(false);
       setError("No se proporcionó un ID de transacción");
     }
-  }, [transactionId]);
+  }, [transactionId, reference, status]);
 
   const fetchTransactionDetails = async (id: string) => {
     try {
       setLoading(true);
+      console.log("🌐 Consultando API de Wompi para transacción:", id);
+
       // Llamada a la API pública de Wompi para obtener detalles de la transacción
       const response = await fetch(
         `https://production.wompi.co/v1/transactions/${id}`
       );
 
       if (!response.ok) {
+        console.warn("⚠️ API de Wompi no disponible, usando datos de URL");
+        // Si la API falla pero tenemos datos de la URL, usarlos
+        if (status && reference) {
+          setTransaction(null); // Dejar transaction null para usar el fallback
+          setLoading(false);
+          return;
+        }
         throw new Error("No se pudo obtener la información de la transacción");
       }
 
       const data = await response.json();
+      console.log("✅ Datos recibidos de Wompi:", data);
       setTransaction(data.data);
     } catch (err) {
       console.error("Error fetching transaction:", err);
-      setError("Error al obtener los detalles de la transacción");
+
+      // Si tenemos datos de la URL, no mostramos error
+      if (status && reference) {
+        console.log("ℹ️ Usando datos de URL como fallback");
+        setTransaction(null);
+      } else {
+        setError("Error al obtener los detalles de la transacción");
+      }
     } finally {
       setLoading(false);
     }
@@ -118,7 +149,7 @@ export default function PaymentConfirmation({
     );
   }
 
-  if (error || !transaction) {
+  if (error || (!transaction && !status)) {
     return (
       <Card className="p-8 max-w-2xl mx-auto text-center">
         <div className="text-6xl mb-4">⚠️</div>
@@ -135,7 +166,9 @@ export default function PaymentConfirmation({
     );
   }
 
-  const statusInfo = getStatusInfo(transaction.status);
+  // Usar datos de la transacción si están disponibles, sino usar datos de URL
+  const displayStatus = transaction?.status || status || "UNKNOWN";
+  const statusInfo = getStatusInfo(displayStatus);
 
   return (
     <div className="max-w-3xl mx-auto space-y-6">
@@ -150,57 +183,74 @@ export default function PaymentConfirmation({
         </p>
       </Card>
 
-      {/* Detalles de la Transacción */}
       <Card className="p-6">
         <h2 className="text-xl font-bold text-gray-900 mb-4 border-b pb-2">
           📋 Detalles de la Transacción
         </h2>
 
         <div className="space-y-3">
-          <div className="flex justify-between py-2 border-b">
-            <span className="text-gray-600">ID de Transacción:</span>
-            <span className="font-mono text-sm font-semibold">
-              {transaction.id}
-            </span>
-          </div>
+          {(transaction?.id || transactionId) && (
+            <div className="flex justify-between py-2 border-b">
+              <span className="text-gray-600">ID de Transacción:</span>
+              <span className="font-mono text-sm font-semibold">
+                {transaction?.id || transactionId}
+              </span>
+            </div>
+          )}
 
-          <div className="flex justify-between py-2 border-b">
-            <span className="text-gray-600">Referencia:</span>
-            <span className="font-mono text-sm font-semibold">
-              {transaction.reference}
-            </span>
-          </div>
+          {(transaction?.reference || reference) && (
+            <div className="flex justify-between py-2 border-b">
+              <span className="text-gray-600">Referencia:</span>
+              <span className="font-mono text-sm font-semibold">
+                {transaction?.reference || reference}
+              </span>
+            </div>
+          )}
 
-          <div className="flex justify-between py-2 border-b">
-            <span className="text-gray-600">Monto:</span>
-            <span className="text-xl font-bold text-[#8B4513]">
-              {formatPrice(transaction.amount_in_cents)}
-            </span>
-          </div>
+          {transaction?.amount_in_cents && (
+            <div className="flex justify-between py-2 border-b">
+              <span className="text-gray-600">Monto:</span>
+              <span className="text-xl font-bold text-[#8B4513]">
+                {formatPrice(transaction.amount_in_cents)}
+              </span>
+            </div>
+          )}
 
-          <div className="flex justify-between py-2 border-b">
-            <span className="text-gray-600">Método de Pago:</span>
-            <span className="font-medium capitalize">
-              {transaction.payment_method_type.replace("_", " ")}
-            </span>
-          </div>
+          {transaction?.payment_method_type && (
+            <div className="flex justify-between py-2 border-b">
+              <span className="text-gray-600">Método de Pago:</span>
+              <span className="font-medium capitalize">
+                {transaction.payment_method_type.replace("_", " ")}
+              </span>
+            </div>
+          )}
 
-          <div className="flex justify-between py-2 border-b">
-            <span className="text-gray-600">Fecha:</span>
-            <span className="font-medium">
-              {formatDate(transaction.created_at)}
-            </span>
-          </div>
+          {transaction?.created_at && (
+            <div className="flex justify-between py-2 border-b">
+              <span className="text-gray-600">Fecha:</span>
+              <span className="font-medium">
+                {formatDate(transaction.created_at)}
+              </span>
+            </div>
+          )}
 
-          <div className="flex justify-between py-2">
-            <span className="text-gray-600">Email:</span>
-            <span className="font-medium">{transaction.customer_email}</span>
-          </div>
+          {transaction?.customer_email && (
+            <div className="flex justify-between py-2">
+              <span className="text-gray-600">Email:</span>
+              <span className="font-medium">{transaction.customer_email}</span>
+            </div>
+          )}
+
+          {!transaction && (
+            <div className="text-center py-4 text-gray-500 text-sm">
+              <p>Los detalles completos se enviarán a tu correo electrónico</p>
+            </div>
+          )}
         </div>
       </Card>
 
       {/* Próximos Pasos */}
-      {transaction.status === "APPROVED" && (
+      {displayStatus === "APPROVED" && (
         <Card className="p-6 bg-gradient-to-br from-blue-50 to-indigo-50">
           <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
             <span className="mr-2">🎯</span> Próximos Pasos
@@ -316,7 +366,7 @@ export default function PaymentConfirmation({
       </div>
 
       {/* Nota sobre Email */}
-      {transaction.status === "APPROVED" && (
+      {displayStatus === "APPROVED" && (
         <div className="text-center">
           <p className="text-sm text-gray-500 italic">
             📬 Un comprobante detallado ha sido enviado a tu correo electrónico

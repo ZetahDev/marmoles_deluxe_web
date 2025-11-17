@@ -119,13 +119,18 @@ export interface ConfirmationPageParams {
 export interface WompiConfig {
   publicKey: string;
   privateKey?: string; // Solo para backend (no lo usaremos)
+  eventsSecret?: string; // Para validar webhooks (prod_events_)
+  integritySecret?: string; // Para validar checksum (prod_integrity_)
   environment: "test" | "production";
   webhookUrl?: string; // URL del webhook de N8N
   redirectUrl: string; // URL base de confirmación
 }
 
 // Utilidad para generar URL de pago de Wompi
-export function generateWompiPaymentUrl(data: WompiPaymentLink): string {
+export async function generateWompiPaymentUrl(
+  data: WompiPaymentLink,
+  integritySecret?: string
+): Promise<string> {
   const params = new URLSearchParams({
     "public-key": data.publicKey,
     currency: data.currency,
@@ -148,7 +153,50 @@ export function generateWompiPaymentUrl(data: WompiPaymentLink): string {
     params.append("expiration-time", data.expirationTime);
   }
 
-  return `https://checkout.wompi.co/p/?${params.toString()}`;
+  // Generar firma de integridad si se proporciona el secret
+  if (integritySecret) {
+    const signatureString = `${data.reference}${data.amount}${data.currency}${integritySecret}`;
+    const signature = await generateIntegritySignature(signatureString);
+    params.append("signature:integrity", signature);
+
+    // Debug log
+    if (typeof window !== "undefined" && import.meta.env.DEV) {
+      console.log("🔐 Firma de Integridad Generada:", {
+        reference: data.reference,
+        amount: data.amount,
+        currency: data.currency,
+        integritySecret: integritySecret.substring(0, 20) + "...",
+        signatureString: signatureString.substring(0, 50) + "...",
+        signature: signature.substring(0, 20) + "...",
+      });
+    }
+  } else {
+    // Warning si no hay integrity secret
+    if (typeof window !== "undefined" && import.meta.env.DEV) {
+      console.warn("⚠️ No se proporcionó integritySecret - El pago fallará");
+    }
+  }
+
+  const finalUrl = `https://checkout.wompi.co/card?${params.toString()}`;
+
+  // Debug log de URL final
+  if (typeof window !== "undefined" && import.meta.env.DEV) {
+    console.log("🔗 URL de Pago Generada:", finalUrl);
+    console.log("📋 Parámetros:", Object.fromEntries(params));
+  }
+
+  return finalUrl;
+}
+
+// Generar firma de integridad SHA256
+export async function generateIntegritySignature(
+  data: string
+): Promise<string> {
+  const encoder = new TextEncoder();
+  const dataBuffer = encoder.encode(data);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", dataBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
 }
 
 // Generar referencia única
@@ -172,4 +220,42 @@ export function pesosTosCents(pesos: number): number {
 // Convertir centavos a pesos
 export function centsToPesos(cents: number): number {
   return cents / 100;
+}
+
+// Validar firma de webhook de Wompi
+export async function validateWebhookSignature(
+  webhookEvent: WompiWebhookEvent,
+  integritySecret: string
+): Promise<boolean> {
+  try {
+    const { checksum, properties } = webhookEvent.signature;
+
+    // Construir la cadena a validar usando las propiedades especificadas
+    const dataToSign = properties
+      .map((prop) => {
+        // Navegar por el objeto usando la notación de punto
+        const value = prop
+          .split(".")
+          .reduce((obj: any, key) => obj?.[key], webhookEvent);
+        return String(value ?? "");
+      })
+      .join("");
+
+    // Agregar el secret al final
+    const signatureString = dataToSign + integritySecret;
+
+    // Generar hash SHA256
+    const encoder = new TextEncoder();
+    const data = encoder.encode(signatureString);
+    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const calculatedChecksum = hashArray
+      .map((b) => b.toString(16).padStart(2, "0"))
+      .join("");
+
+    return calculatedChecksum === checksum;
+  } catch (error) {
+    console.error("Error validating webhook signature:", error);
+    return false;
+  }
 }

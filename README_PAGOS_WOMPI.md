@@ -2,6 +2,8 @@
 
 Esta guía te ayudará a implementar completamente el sistema de pagos con Wompi en tu sitio de Mármoles Deluxe.
 
+> **📖 Nueva Guía Completa Disponible:** Para una configuración paso a paso completa incluyendo webhooks, secretos de integración y validación de firmas, consulta [WOMPI_SETUP.md](./WOMPI_SETUP.md)
+
 ## 📑 Índice
 
 1. [Configuración Inicial](#1-configuración-inicial)
@@ -23,10 +25,12 @@ Esta guía te ayudará a implementar completamente el sistema de pagos con Wompi
    - Regístrate como comercio
    - Completa la verificación
 
-2. **Obtener credenciales de prueba:**
-   - Panel → API Keys
-   - Copia tu `Public Key` (empieza con `pub_test_`)
-   - Copia tu `Private Key` (empieza con `prv_test_`)
+2. **Obtener credenciales completas:**
+   - Panel → **Desarrollo** → **Programadores**
+   - Copia tu `Public Key` (empieza con `pub_test_` o `pub_prod_`)
+   - Copia tu `Private Key` (empieza con `prv_test_` o `prv_prod_`)
+   - **NUEVO:** Copia tu `Events Secret` (empieza con `test_events_` o `prod_events_`)
+   - **NUEVO:** Copia tu `Integrity Secret` (empieza con `test_integrity_` o `prod_integrity_`)
 
 ### Paso 2: Configurar Variables de Entorno
 
@@ -40,8 +44,15 @@ Esta guía te ayudará a implementar completamente el sistema de pagos con Wompi
 
    ```env
    # WOMPI
+   # Llaves de autenticación
    PUBLIC_WOMPI_PUBLIC_KEY=pub_test_tu_clave_aqui
    WOMPI_PRIVATE_KEY=prv_test_tu_clave_aqui
+
+   # Secretos de integración técnica (para validar webhooks)
+   WOMPI_EVENTS_SECRET=test_events_tu_secret_aqui
+   WOMPI_INTEGRITY_SECRET=test_integrity_tu_secret_aqui
+
+   # Configuración
    PUBLIC_WOMPI_ENVIRONMENT=test
    PUBLIC_SITE_URL=http://localhost:4321
 
