@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { useStoneCategoryStore } from '../store/stoneCategoryStore';
-import ProductCard from './ProductCard';
+import React, { useEffect } from "react";
+import { useStoneCategoryStore } from "../store/stoneCategoryStore";
+import ProductCard from "./ProductCard";
 
 interface Stone {
   name: string;
@@ -12,6 +12,9 @@ interface Stone {
 interface Category {
   title: string;
   stones: Stone[];
+  features?: string[];
+  precioPublico?: number;
+  unidad?: string;
 }
 
 interface CategoryWrapperProps {
@@ -23,43 +26,43 @@ interface CategoryWrapperProps {
  * Componente que maneja todo el sistema de filtrado y renderizado de categorías
  * Este componente reemplaza FilteredCategoryView pero es más fácil de integrar en Astro
  */
-export default function CategoryWrapper({ 
+export default function CategoryWrapper({
   categories,
-  useAnchorLinks = false
+  useAnchorLinks = false,
 }: CategoryWrapperProps) {
   const { activeCategory, resetCategory } = useStoneCategoryStore();
 
   // Efecto para actualizar la URL cuando cambia la categoría activa
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    
+    if (typeof window === "undefined") return;
+
     if (activeCategory) {
       const category = activeCategory.toLowerCase();
-      
+
       if (useAnchorLinks) {
         // Si usamos anclas, actualizar el hash sin recargar la página
         const newHash = `#${category}`;
         if (window.location.hash !== newHash) {
           // Actualizar hash sin causar recargas
-          history.replaceState(null, '', newHash);
+          history.replaceState(null, "", newHash);
         }
       } else {
         // Si usamos parámetros, actualizar el parámetro
         const url = new URL(window.location.href);
-        url.searchParams.set('categoria', category);
-        history.replaceState(null, '', url);
+        url.searchParams.set("categoria", category);
+        history.replaceState(null, "", url);
       }
     } else {
       // Si no hay categoría activa, limpiar URL
       if (useAnchorLinks) {
         if (window.location.hash) {
-          history.replaceState(null, '', window.location.pathname);
+          history.replaceState(null, "", window.location.pathname);
         }
       } else {
         const url = new URL(window.location.href);
-        if (url.searchParams.has('categoria')) {
-          url.searchParams.delete('categoria');
-          history.replaceState(null, '', url);
+        if (url.searchParams.has("categoria")) {
+          url.searchParams.delete("categoria");
+          history.replaceState(null, "", url);
         }
       }
     }
@@ -67,7 +70,7 @@ export default function CategoryWrapper({
 
   // Si hay una categoría activa, filtramos las categorías
   const categoriesToShow = activeCategory
-    ? categories.filter(cat => cat.title === activeCategory)
+    ? categories.filter((cat) => cat.title === activeCategory)
     : categories;
 
   // Función para limpiar el filtro
@@ -85,32 +88,74 @@ export default function CategoryWrapper({
             className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-md text-sm flex items-center transition-colors"
           >
             <span className="mr-2">Viendo solo: {activeCategory}</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <line x1="18" y1="6" x2="6" y2="18"></line>
               <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
           </button>
         </div>
       )}
-      
+
       {/* Renderizar las categorías filtradas */}
       {categoriesToShow.map((category, index) => (
-        <div 
+        <div
           key={category.title}
-          id={category.title.toLowerCase()} 
+          id={category.title.toLowerCase()}
           className="scroll-mt-24"
         >
-          <h2 className="text-3xl font-bold text-center mb-8">{category.title}</h2>
-          <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ${index < categoriesToShow.length - 1 ? 'mb-16' : ''}`}>
+          <h2 className="text-3xl font-bold text-center mb-4">
+            {category.title}
+          </h2>
+
+          {/* Features como subtítulo */}
+          {category.features && category.features.length > 0 && (
+            <div className="max-w-5xl mx-auto mb-8">
+              <div className="bg-gradient-to-r from-gray-50 to-white p-6 rounded-lg shadow-sm border border-gray-100">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {category.features.map((feature, idx) => (
+                    <div
+                      key={idx}
+                      className="flex items-start text-sm text-gray-700"
+                    >
+                      <span className="mr-2 flex-shrink-0">
+                        {feature.split(" ")[0]}
+                      </span>
+                      <span>{feature.substring(feature.indexOf(" ") + 1)}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div
+            className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ${
+              index < categoriesToShow.length - 1 ? "mb-16" : ""
+            }`}
+          >
             {category.stones.map((stone) => (
               <ProductCard
                 key={stone.name}
                 name={stone.name}
                 description="Piedra sinterizada de alta calidad"
                 images={[stone.image, stone.design]}
-                features={stone.features}
                 category={category.title}
-                slug={stone.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
+                slug={stone.name
+                  .toLowerCase()
+                  .replace(/[^a-z0-9]+/g, "-")
+                  .replace(/(^-|-$)/g, "")}
+                precioPublico={category.precioPublico}
+                unidad={category.unidad}
               />
             ))}
           </div>
@@ -118,4 +163,4 @@ export default function CategoryWrapper({
       ))}
     </>
   );
-} 
+}
