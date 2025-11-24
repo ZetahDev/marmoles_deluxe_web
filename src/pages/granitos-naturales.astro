@@ -7,20 +7,21 @@ import { listStonesFromS3, type Stone } from "../lib/utils/s3Utils";
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const pageUrl = canonicalURL.toString();
-const metaImage = new URL('/images/contactanos-og.jpg', Astro.site).toString();
+const metaImage = new URL("/images/contactanos-og.jpg", Astro.site).toString();
 const title = "Granitos Naturales Cali - Mármoles Deluxe | Encimeras Durables";
-const description = "Explora nuestra colección de granitos naturales de alta calidad para encimeras, pisos y superficies. Material elegante y duradero para tu hogar u oficina.";
+const description =
+  "Explora nuestra colección de granitos naturales de alta calidad para encimeras, pisos y superficies. Material elegante y duradero para tu hogar u oficina.";
 
 const keywords =
   "granitos naturales Cali, granito negro, granito blanco, encimeras granito Cali, pisos granito, granito cocina, granito baño, granito brasileño, instalación granito Valle del Cauca";
 
 // Fetch granite data at build time
-const granitosNaturales = await listStonesFromS3('GRANITOS+NATURALES');
+const granitosNaturales = await listStonesFromS3("GRANITOS+NATURALES");
 
 // Configurar datos para schema.org
 const schemaStones = granitosNaturales.map((stone: Stone) => ({
   name: stone.name,
-  image: stone.image
+  image: stone.image,
 }));
 ---
 
@@ -51,9 +52,9 @@ const schemaStones = granitosNaturales.map((stone: Stone) => ({
     <meta name="geo.position" content="3.4516;-76.5320" />
     <meta name="ICBM" content="3.4516, -76.5320" />
   </Fragment>
-  
+
   <!-- Agregar datos estructurados schema.org para SEO -->
-  <SEOSchemaData 
+  <SEOSchemaData
     client:load
     pageTitle={title}
     pageDescription={description}
@@ -66,9 +67,35 @@ const schemaStones = granitosNaturales.map((stone: Stone) => ({
   <PageLoader client:load isLoading={true} />
   <main class="py-20 pt-24">
     <div class="container mx-auto px-4">
-      <h1 class="text-4xl md:text-5xl font-bold text-center mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold text-center mb-4">
         Granitos Naturales
       </h1>
+
+      <!-- Features como subtítulo -->
+      <div class="max-w-5xl mx-auto mb-12">
+        <div
+          class="bg-gradient-to-r from-gray-50 to-white p-6 rounded-lg shadow-sm border border-gray-100"
+        >
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div class="flex items-start text-sm text-gray-700">
+              <span class="mr-2 flex-shrink-0">🛡️</span>
+              <span>Resistente a manchas y líquidos</span>
+            </div>
+            <div class="flex items-start text-sm text-gray-700">
+              <span class="mr-2 flex-shrink-0">💪</span>
+              <span>Alta durabilidad y longevidad</span>
+            </div>
+            <div class="flex items-start text-sm text-gray-700">
+              <span class="mr-2 flex-shrink-0">✨</span>
+              <span>Elegancia natural única</span>
+            </div>
+            <div class="flex items-start text-sm text-gray-700">
+              <span class="mr-2 flex-shrink-0">🔥</span>
+              <span>Resistente al calor intenso</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div
         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8 mb-16"
@@ -81,13 +108,11 @@ const schemaStones = granitosNaturales.map((stone: Stone) => ({
               name={stone.name}
               description="Granito natural de alta calidad"
               images={[stone.image, stone.design]}
-              features={[
-                "Resistente a manchas",
-                "Alta durabilidad",
-                "Elegancia natural",
-                "Resistente al calor",
-              ]}
-              slug={stone.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
+              category="Granito Natural"
+              slug={stone.name
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, "-")
+                .replace(/(^-|-$)/g, "")}
             />
           ))
         }
@@ -97,18 +122,18 @@ const schemaStones = granitosNaturales.map((stone: Stone) => ({
 </Layout>
 
 <script>
-  import { initModal } from '../scripts/modal';
+  import { initModal } from "../scripts/modal";
   initModal();
 
   // --- Abrir modal automáticamente por parámetro 'material' ---
-  if (typeof window !== 'undefined') {
-    window.addEventListener('DOMContentLoaded', () => {
+  if (typeof window !== "undefined") {
+    window.addEventListener("DOMContentLoaded", () => {
       const params = new URLSearchParams(window.location.search);
-      const material = params.get('material');
+      const material = params.get("material");
       if (material) {
         setTimeout(() => {
-          const event = new CustomEvent('modal-state-change', {
-            detail: { id: material }
+          const event = new CustomEvent("modal-state-change", {
+            detail: { id: material },
           });
           document.dispatchEvent(event);
         }, 500);
