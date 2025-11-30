@@ -2,12 +2,12 @@
 // Array con los datos de los logos - ahora usando URLs de S3
 const s3BaseUrl = "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/logos/";
 const logos = [
-  { name: "Altea", file: "Altea.png" },
-  { name: "Catemar", file: "catemar.png" },
-  { name: "Dekton", file: "dekton.png" },
+  { name: "Altea", file: "Altea.webp" },
+  { name: "Catemar", file: "catemar.webp" },
+  { name: "Dekton", file: "dekton.webp" },
   { name: "Neolith", file: "neolith.webp" },
   { name: "Sensa", file: "Sensa.webp" },
-  { name: "Silestone", file: "silestone.png" }
+  { name: "Silestone", file: "silestone.webp" },
 ];
 
 // Duplicamos el array para crear un desplazamiento continuo
@@ -17,7 +17,7 @@ const allLogos = [...logos, ...logos];
 function getLogoUrl(fileName: string) {
   // Usar siempre archivos locales por ahora
   return `/logos/${fileName}`;
-  
+
   // Código comentado para referencia futura:
   // // Si estamos en el entorno de producción, usa URLs de S3
   // if (import.meta.env.PROD) {
@@ -29,21 +29,21 @@ function getLogoUrl(fileName: string) {
 ---
 
 <section class="bg-marmoles-black py-2 overflow-hidden">
-    <div class="logos-container">
-      <div class="logos-slide">
-        {
-          allLogos.map((logo) => (
-            <div class="logo-item">
-              <img 
-                src={getLogoUrl(logo.file)} 
-                alt={`Logo de ${logo.name}`} 
-                class="h-10 w-auto object-contain filter brightness-0 invert opacity-80 hover:opacity-100 transition-opacity duration-300"
-              />
-            </div>
-          ))
-        }
-      </div>
+  <div class="logos-container">
+    <div class="logos-slide">
+      {
+        allLogos.map((logo) => (
+          <div class="logo-item">
+            <img
+              src={getLogoUrl(logo.file)}
+              alt={`Logo de ${logo.name}`}
+              class="h-10 w-auto object-contain filter brightness-0 invert opacity-80 hover:opacity-100 transition-opacity duration-300"
+            />
+          </div>
+        ))
+      }
     </div>
+  </div>
 </section>
 
 <style>
@@ -80,4 +80,4 @@ function getLogoUrl(fileName: string) {
   .logos-container:hover .logos-slide {
     animation-play-state: paused;
   }
-</style> 
+</style>

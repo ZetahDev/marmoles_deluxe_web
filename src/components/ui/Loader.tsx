@@ -15,7 +15,7 @@ const Loader: React.FC<LoaderProps> = ({ size = "md" }) => {
     <div className="flex items-center justify-center w-full h-full bg-white bg-opacity-80 absolute inset-0 z-10">
       <div className={`relative animate-pulse ${sizeClasses[size]}`}>
         <img
-          src="/images/logo.png"
+          src="/images/logo.webp"
           alt="Mármoles Deluxe"
           className="w-full h-full object-contain"
         />
@@ -25,4 +25,4 @@ const Loader: React.FC<LoaderProps> = ({ size = "md" }) => {
   );
 };
 
-export default Loader; 
+export default Loader;

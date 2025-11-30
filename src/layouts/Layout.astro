@@ -188,7 +188,7 @@ const {
     if ("requestIdleCallback" in window) {
       requestIdleCallback(() => {
         // Precargar logos cuando el navegador esté inactivo
-        const imagesToPreload = ["/logos/Altea.png", "/logos/silestone.png"];
+        const imagesToPreload = ["/logos/Altea.webp", "/logos/silestone.webp"];
         imagesToPreload.forEach((src) => {
           const img = new Image();
           img.src = src;
