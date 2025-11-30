@@ -46,37 +46,37 @@ const projects = [
     title: "Cocina Moderna",
     description: "Diseño contemporáneo con mármol de alta calidad",
     image:
-      "https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=1000",
+      "https://images.unsplash.com/photo-1556911220-bff31c812dba?q=75&w=800&auto=format&fit=crop",
   },
   {
     title: "Baño de Lujo",
     description: "Acabados premium en mármol natural",
     image:
-      "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1000",
+      "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=75&w=800&auto=format&fit=crop",
   },
   {
     title: "Isla de Cocina",
     description: "Centro de entretenimiento con acabados de lujo",
     image:
-      "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=1000",
+      "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=75&w=800&auto=format&fit=crop",
   },
   {
     title: "Sala Principal",
     description: "Diseño elegante con mármol italiano",
     image:
-      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1000",
+      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=75&w=800&auto=format&fit=crop",
   },
   {
     title: "Baño Principal",
     description: "Espacio de relax con acabados premium",
     image:
-      "https://images.unsplash.com/photo-1584622781564-4f00a87b4046?q=80&w=1000",
+      "https://images.unsplash.com/photo-1584622781564-4f00a87b4046?q=75&w=800&auto=format&fit=crop",
   },
   {
     title: "Comedor Formal",
     description: "Elegancia y estilo en cada detalle",
     image:
-      "https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?q=80&w=1000",
+      "https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?q=75&w=800&auto=format&fit=crop",
   },
 ];
 ---
@@ -107,6 +107,14 @@ const projects = [
     <meta name="geo.placename" content="Cali" />
     <meta name="geo.position" content="3.4516;-76.5320" />
     <meta name="ICBM" content="3.4516, -76.5320" />
+
+    <!-- Preload critical LCP image -->
+    <link
+      rel="preload"
+      as="image"
+      href="https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=1920"
+      fetchpriority="high"
+    />
   </Fragment>
 
   <!-- Agregar datos estructurados schema.org para SEO -->
@@ -121,8 +129,15 @@ const projects = [
   <!-- Hero Section -->
   <section
     class="relative h-screen flex items-center justify-center text-marmoles-white"
-    style="background-image: url('https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=1000'); background-size: cover; background-position: center;"
   >
+    <img
+      src="https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=1920&auto=format"
+      alt="Cocina moderna con encimera de mármol"
+      class="absolute inset-0 w-full h-full object-cover"
+      width="1920"
+      height="1080"
+      fetchpriority="high"
+    />
     <div class="absolute inset-0 bg-black/60 backdrop-blur-sm z-10"></div>
     <div class="container mx-auto px-4 z-20 text-center">
       <h1 class="text-4xl md:text-6xl font-bold mb-4">
@@ -261,6 +276,7 @@ const projects = [
           allowfullscreen=""
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
+          title="Ubicación de Mármoles Deluxe en Cali"
         >
         </iframe>
       </div>
