@@ -1,13 +1,18 @@
-"use client"
+"use client";
 
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "./ui/carousel"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "./ui/carousel";
 
 interface TestimonialCarouselProps {
   testimonies: Array<{
-    name: string
-    text: string
-    image: string
-  }>
+    name: string;
+    text: string;
+  }>;
 }
 
 export function TestimonialCarousel({ testimonies }: TestimonialCarouselProps) {
@@ -18,16 +23,13 @@ export function TestimonialCarousel({ testimonies }: TestimonialCarouselProps) {
           {testimonies.map((testimony) => (
             <CarouselItem key={testimony.name} className="basis-full">
               <div className="p-4">
-                <div className="bg-marbles-black text-marbles-white p-6 rounded-lg h-full flex flex-col items-center">
-                  <div className="w-24 h-24 rounded-full overflow-hidden mb-4">
-                    <img 
-                      src={testimony.image} 
-                      alt={testimony.name} 
-                      className="w-full h-full object-cover" 
-                    />
-                  </div>
-                  <p className="text-lg mb-4 text-center max-w-2xl">{testimony.text}</p>
-                  <p className="font-semibold text-marbles-gold">{testimony.name}</p>
+                <div className="bg-marbles-black text-marbles-white p-6 rounded-lg h-full flex flex-col items-center justify-center">
+                  <p className="text-lg mb-4 text-center max-w-2xl">
+                    {testimony.text}
+                  </p>
+                  <p className="font-semibold text-marbles-gold">
+                    {testimony.name}
+                  </p>
                 </div>
               </div>
             </CarouselItem>
@@ -39,5 +41,5 @@ export function TestimonialCarousel({ testimonies }: TestimonialCarouselProps) {
         </div>
       </Carousel>
     </div>
-  )
-} 
+  );
+}

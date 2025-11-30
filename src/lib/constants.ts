@@ -6,7 +6,7 @@ export const testimonies = [
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000",
   },
   {
-    name: "Juan Pérez",
+    name: "Sebastian Castro",
     text: "Muy satisfecho con el servicio. Cumplieron con los tiempos y la calidad es excepcional.",
     image:
       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000",
