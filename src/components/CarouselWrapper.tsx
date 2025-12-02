@@ -30,8 +30,8 @@ export const CarouselWrapper: React.FC<CarouselWrapperProps> = ({ items }) => {
                     src={item.image}
                     alt={item.title}
                     className="w-full h-80 object-cover"
-                    width="1000"
-                    height="667"
+                    width="600"
+                    height="400"
                     loading="lazy"
                   />
                   <div className="p-6">
