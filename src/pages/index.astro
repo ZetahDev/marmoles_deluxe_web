@@ -77,6 +77,25 @@ const projects = [
 
 <Layout title={title} description={description}>
   <Fragment slot="head">
+    <!-- Critical CSS inline para LCP -->
+    <style>
+      /* Critical styles for hero section */
+      .hero-critical {
+        position: relative;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .hero-critical img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    </style>
+
     <!-- SEO Meta Tags -->
     <meta name="keywords" content={keywords} />
     <link rel="canonical" href={canonicalURL} />
@@ -113,7 +132,7 @@ const projects = [
 
   <!-- Agregar datos estructurados schema.org para SEO -->
   <SEOSchemaData
-    client:load
+    client:idle
     pageTitle={title}
     pageDescription={description}
     pageUrl={pageUrl}
@@ -158,7 +177,7 @@ const projects = [
   </section>
 
   <!--  Promocion blanco polar  -->
-  <PromoBlancoPolarModal client:load />
+  <PromoBlancoPolarModal client:visible />
 
   <!-- Services Section -->
   <section class="py-20 bg-marmoles-white">
@@ -195,7 +214,7 @@ const projects = [
       <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
         Nuestros Proyectos
       </h2>
-      <CarouselWrapper client:load items={projects} />
+      <CarouselWrapper client:visible items={projects} />
     </div>
   </section>
 
@@ -205,7 +224,7 @@ const projects = [
       <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
         Testimonios
       </h2>
-      <TestimonialCarousel client:load testimonies={testimonies} />
+      <TestimonialCarousel client:visible testimonies={testimonies} />
     </div>
   </section>
 
@@ -250,7 +269,7 @@ const projects = [
         ¡15% de descuento en tu compra a través de la página web!
       </p>
       <div class="max-w-2xl mx-auto">
-        <ContactForm client:load />
+        <ContactForm client:visible />
       </div>
     </div>
   </section>
