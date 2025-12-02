@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
 
 const carouselImgs = [
-  "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Blanco_Polar%20.png",
-  "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Blanco_Polar_desing.png",
+  "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Blanco_Polar.webp",
+  "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Blanco_Polar_desing.webp",
 ];
 
 export default function PromoBlancoPolarModal() {
@@ -79,16 +79,26 @@ export default function PromoBlancoPolarModal() {
               ¡Promoción exclusiva en Stock!
             </h2>
             <p className="text-lg md:text-xl font-semibold text-marmoles-black mb-2">
-              Quartzstone Blanco Polar con{" "}
-              <span className="text-marmoles-gold">30% de descuento</span>
+              Quartzstone Blanco Polar
             </p>
+            <div className="flex items-center justify-center md:justify-start gap-3 mb-3">
+              <span className="text-2xl font-bold text-marmoles-gold">
+                $550.000/m²
+              </span>
+              <span className="text-lg text-gray-500 line-through">
+                $750.000/m²
+              </span>
+              <span className="bg-marmoles-gold text-marmoles-black px-3 py-1 rounded-full text-sm font-bold">
+                26% OFF
+              </span>
+            </div>
             <p className="text-base text-gray-700 mb-4">
               Material en stock disponible inmediatamente. Aprovecha la
               elegancia y resistencia del cuarzo Blanco Polar para tu cocina,
               baño o proyecto especial. ¡Cantidades limitadas!
             </p>
             <a
-              href="https://wa.me/+573132592793?text=Hola,%20estoy%20interesado%20en%20la%20promoci%C3%B3n%20de%20Blanco%20Polar%20Quartzstone%20con%2030%%20de%20descuento.%20%C2%A1Quiero%20m%C3%A1s%20informaci%C3%B3n!"
+              href="https://wa.me/+573132592793?text=Hola,%20estoy%20interesado%20en%20la%20promoci%C3%B3n%20de%20Blanco%20Polar%20Quartzstone%20a%20$550.000/m%C2%B2%20(26%%20de%20descuento).%20%C2%A1Quiero%20m%C3%A1s%20informaci%C3%B3n!"
               target="_blank"
               rel="noopener"
               className="bg-marmoles-gold text-marmoles-black px-6 py-2 rounded-lg font-semibold shadow hover:bg-opacity-90 transition-all"
@@ -220,8 +230,47 @@ export default function PromoBlancoPolarModal() {
                   marginBottom: "0.5rem",
                 }}
               >
-                Blanco Polar
+                Blanco Polar - Quartzstone
               </h2>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "1rem",
+                  marginBottom: "1rem",
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: "1.75rem",
+                    fontWeight: "bold",
+                    color: "#e6c200",
+                  }}
+                >
+                  $550.000/m²
+                </span>
+                <span
+                  style={{
+                    fontSize: "1.1rem",
+                    color: "#888",
+                    textDecoration: "line-through",
+                  }}
+                >
+                  $750.000/m²
+                </span>
+                <span
+                  style={{
+                    background: "#e6c200",
+                    color: "#222",
+                    padding: "0.25rem 0.75rem",
+                    borderRadius: "1rem",
+                    fontSize: "0.9rem",
+                    fontWeight: "bold",
+                  }}
+                >
+                  26% OFF
+                </span>
+              </div>
               <p
                 style={{
                   color: "#444",
@@ -311,7 +360,7 @@ export default function PromoBlancoPolarModal() {
                 </ul>
               </div>
               <a
-                href="https://wa.me/+573132592793?text=Hola,%20quiero%20aprovechar%20la%20promoci%C3%B3n%20de%20Blanco%20Polar%20Quartzstone%20con%2030%%20de%20descuento.%20%C2%A1Contáctenme!"
+                href="https://wa.me/+573132592793?text=Hola,%20quiero%20aprovechar%20la%20promoci%C3%B3n%20de%20Blanco%20Polar%20Quartzstone%20a%20$550.000/m%C2%B2%20(antes%20$750.000/m%C2%B2%20-%2026%%20de%20descuento).%20%C2%A1Cont%C3%A1ctenme!"
                 target="_blank"
                 rel="noopener"
                 style={{
