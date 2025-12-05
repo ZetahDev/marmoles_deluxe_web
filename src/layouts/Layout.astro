@@ -21,21 +21,6 @@ const {
 <!doctype html>
 <html lang="es">
   <head>
-    <!-- Google Tag Manager -->
-    <script is:inline>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != "dataLayer" ? "&l=" + l : "";
-        j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", "GTM-W5PGFXQG");
-    </script>
-    <!-- End Google Tag Manager -->
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
@@ -51,33 +36,79 @@ const {
       onload="this.media='all'"
     />
 
-    <!-- Meta Pixel Code -->
+    <meta
+      name="facebook-domain-verification"
+      content="v2kxgywlwg2k962jr77ep47ryjagd5"
+    />
+
+    <slot name="head" />
+  </head>
+  <body
+    class="flex flex-col min-h-screen bg-marmoles-white text-marmoles-black"
+  >
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-W5PGFXQG"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"></iframe></noscript
+    >
+    <!-- End Google Tag Manager (noscript) -->
+
+    <Navbar />
+    <main class="flex-grow">
+      <slot />
+    </main>
+    <Footer />
+    <WhatsAppButton client:load />
+    <SpeedInsights />
+
+    <!-- Google Tag Manager - Cargado después de React -->
     <script is:inline>
-      !(function (f, b, e, v, n, t, s) {
-        if (f.fbq) return;
-        n = f.fbq = function () {
-          n.callMethod
-            ? n.callMethod.apply(n, arguments)
-            : n.queue.push(arguments);
-        };
-        if (!f._fbq) f._fbq = n;
-        n.push = n;
-        n.loaded = !0;
-        n.version = "2.0";
-        n.queue = [];
-        t = b.createElement(e);
-        t.async = !0;
-        t.src = v;
-        s = b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t, s);
-      })(
-        window,
-        document,
-        "script",
-        "https://connect.facebook.net/en_US/fbevents.js"
-      );
-      fbq("init", "1756574061191176");
-      fbq("track", "PageView");
+      window.addEventListener("load", function () {
+        (function (w, d, s, l, i) {
+          w[l] = w[l] || [];
+          w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+          var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s),
+            dl = l != "dataLayer" ? "&l=" + l : "";
+          j.async = true;
+          j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+          f.parentNode.insertBefore(j, f);
+        })(window, document, "script", "dataLayer", "GTM-W5PGFXQG");
+      });
+    </script>
+
+    <!-- Meta Pixel - Cargado después de React -->
+    <script is:inline>
+      window.addEventListener("load", function () {
+        !(function (f, b, e, v, n, t, s) {
+          if (f.fbq) return;
+          n = f.fbq = function () {
+            n.callMethod
+              ? n.callMethod.apply(n, arguments)
+              : n.queue.push(arguments);
+          };
+          if (!f._fbq) f._fbq = n;
+          n.push = n;
+          n.loaded = !0;
+          n.version = "2.0";
+          n.queue = [];
+          t = b.createElement(e);
+          t.async = !0;
+          t.src = v;
+          s = b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t, s);
+        })(
+          window,
+          document,
+          "script",
+          "https://connect.facebook.net/en_US/fbevents.js"
+        );
+        fbq("init", "1756574061191176");
+        fbq("track", "PageView");
+      });
     </script>
     <noscript
       ><img
@@ -87,113 +118,88 @@ const {
         src="https://www.facebook.com/tr?id=1756574061191176&ev=PageView&noscript=1"
       /></noscript
     >
-    <!-- End Meta Pixel Code -->
 
-    <meta
-      name="facebook-domain-verification"
-      content="v2kxgywlwg2k962jr77ep47ryjagd5"
-    />
-  </head>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NXQ0SL5DBV"
+    ></script>
+    <script>
+      // @ts-ignore
+      window.dataLayer = window.dataLayer || [];
+      // @ts-ignore
+      function gtag() {
+        window.dataLayer.push(arguments);
+      }
+      // @ts-ignore
+      gtag("js", new Date());
+      // @ts-ignore
+      gtag("config", "G-NXQ0SL5DBV");
+    </script>
 
-  <!-- Google Tag -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NXQ0SL5DBV"
-  ></script>
-  <script>
-    // @ts-ignore
-    window.dataLayer = window.dataLayer || [];
-    // @ts-ignore
-    function gtag() {
-      window.dataLayer.push(arguments);
-    }
-    // @ts-ignore
-    gtag("js", new Date());
-    // @ts-ignore
-    gtag("config", "G-NXQ0SL5DBV");
-  </script>
+    <script>
+      // Interceptar navegación
+      document.addEventListener("astro:before-navigation", (event) => {
+        // Verificar si hay eventos pendientes antes de la navegación
+        const pendingChanges =
+          document.body.classList.contains("uploading") ||
+          document.body.classList.contains("saving");
 
-  <ClientRouter />
-  <ViewTransitions />
-</html>
-<body class="flex flex-col min-h-screen bg-marmoles-white text-marmoles-black">
-  <!-- Google Tag Manager (noscript) -->
-  <noscript
-    ><iframe
-      src="https://www.googletagmanager.com/ns.html?id=GTM-W5PGFXQG"
-      height="0"
-      width="0"
-      style="display:none;visibility:hidden"></iframe></noscript
-  >
-  <!-- End Google Tag Manager (noscript) -->
-
-  <Navbar />
-  <main class="flex-grow">
-    <slot />
-  </main>
-  <Footer />
-  <WhatsAppButton client:load />
-  <SpeedInsights />
-
-  <script>
-    // Interceptar navegación
-    document.addEventListener("astro:before-navigation", (event) => {
-      // Verificar si hay eventos pendientes antes de la navegación
-      const pendingChanges =
-        document.body.classList.contains("uploading") ||
-        document.body.classList.contains("saving");
-
-      if (pendingChanges) {
-        const confirmed = confirm(
-          "Hay cambios pendientes. ¿Deseas abandonar la página?"
-        );
-        if (!confirmed) {
-          event.preventDefault();
+        if (pendingChanges) {
+          const confirmed = confirm(
+            "Hay cambios pendientes. ¿Deseas abandonar la página?"
+          );
+          if (!confirmed) {
+            event.preventDefault();
+          }
         }
+      });
+
+      // Escuchar eventos de autenticación
+      window.addEventListener("auth-change", (event) => {
+        const { isAuthenticated } = (event as CustomEvent).detail;
+        // Manejar cambios de autenticación sin forzar recarga
+        const currentPath = window.location.pathname;
+        const isAdminRoute = currentPath.startsWith("/admin");
+
+        if (!isAuthenticated && isAdminRoute && currentPath !== "/admin") {
+          history.pushState({}, "", "/admin");
+          window.dispatchEvent(new PopStateEvent("popstate"));
+        }
+      });
+    </script>
+  </body>
+
+  <style>
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Prevenir Layout Shifts */
+    @media (prefers-reduced-motion: no-preference) {
+      html {
+        scroll-behavior: smooth;
       }
-    });
+    }
+  </style>
 
-    // Escuchar eventos de autenticación
-    window.addEventListener("auth-change", (event) => {
-      const { isAuthenticated } = (event as CustomEvent).detail;
-      // Manejar cambios de autenticación sin forzar recarga
-      const currentPath = window.location.pathname;
-      const isAdminRoute = currentPath.startsWith("/admin");
-
-      if (!isAuthenticated && isAdminRoute && currentPath !== "/admin") {
-        history.pushState({}, "", "/admin");
-        window.dispatchEvent(new PopStateEvent("popstate"));
+  <!-- Precargar imágenes críticas después de la carga inicial -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if ("requestIdleCallback" in window) {
+        requestIdleCallback(() => {
+          // Precargar logos cuando el navegador esté inactivo
+          const imagesToPreload = [
+            "/logos/Altea.webp",
+            "/logos/silestone.webp",
+          ];
+          imagesToPreload.forEach((src) => {
+            const img = new Image();
+            img.src = src;
+          });
+        });
       }
     });
   </script>
-</body>
-
-<style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  /* Prevenir Layout Shifts */
-  @media (prefers-reduced-motion: no-preference) {
-    html {
-      scroll-behavior: smooth;
-    }
-  }
-</style>
-
-<!-- Precargar imágenes críticas después de la carga inicial -->
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    if ("requestIdleCallback" in window) {
-      requestIdleCallback(() => {
-        // Precargar logos cuando el navegador esté inactivo
-        const imagesToPreload = ["/logos/Altea.webp", "/logos/silestone.webp"];
-        imagesToPreload.forEach((src) => {
-          const img = new Image();
-          img.src = src;
-        });
-      });
-    }
-  });
-</script>
+</html>
