@@ -22,15 +22,22 @@ const {
 <html lang="es">
   <head>
     <!-- Google Tag Manager -->
-    <script is:inline>
+    <script>
+      // @ts-ignore
       (function (w, d, s, l, i) {
+        // @ts-ignore
         w[l] = w[l] || [];
+        // @ts-ignore
         w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        // @ts-ignore
         var f = d.getElementsByTagName(s)[0],
           j = d.createElement(s),
           dl = l != "dataLayer" ? "&l=" + l : "";
+        // @ts-ignore
         j.async = true;
+        // @ts-ignore
         j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        // @ts-ignore
         f.parentNode.insertBefore(j, f);
       })(window, document, "script", "dataLayer", "GTM-W5PGFXQG");
     </script>
@@ -52,23 +59,39 @@ const {
     />
 
     <!-- Meta Pixel Code -->
-    <script is:inline>
-      !(function (f, b, e, v, n, t, s) {
+    <script>
+      // @ts-ignore
+      (function (f, b, e, v, n, t, s) {
+        // @ts-ignore
         if (f.fbq) return;
+        // @ts-ignore
         n = f.fbq = function () {
+          // @ts-ignore
           n.callMethod
+          // @ts-ignore
             ? n.callMethod.apply(n, arguments)
+          // @ts-ignore
             : n.queue.push(arguments);
         };
+        // @ts-ignore
         if (!f._fbq) f._fbq = n;
+        // @ts-ignore
         n.push = n;
+        // @ts-ignore
         n.loaded = !0;
+        // @ts-ignore
         n.version = "2.0";
+        // @ts-ignore
         n.queue = [];
+        // @ts-ignore
         t = b.createElement(e);
+        // @ts-ignore
         t.async = !0;
+        // @ts-ignore
         t.src = v;
+        // @ts-ignore
         s = b.getElementsByTagName(e)[0];
+        // @ts-ignore
         s.parentNode.insertBefore(t, s);
       })(
         window,
@@ -76,7 +99,9 @@ const {
         "script",
         "https://connect.facebook.net/en_US/fbevents.js"
       );
+      // @ts-ignore
       fbq("init", "1756574061191176");
+      // @ts-ignore
       fbq("track", "PageView");
     </script>
     <noscript

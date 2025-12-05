@@ -1,5 +1,4 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { create } from "zustand";
 
 interface NavbarState {
   isMobileMenuOpen: boolean;
@@ -7,16 +6,9 @@ interface NavbarState {
   toggleMobileMenu: () => void;
 }
 
-export const useNavbarStore = create<NavbarState>()(
-  persist(
-    (set) => ({
-      isMobileMenuOpen: false,
-      setMobileMenuOpen: (isOpen) => set({ isMobileMenuOpen: isOpen }),
-      toggleMobileMenu: () => set((state) => ({ isMobileMenuOpen: !state.isMobileMenuOpen })),
-    }),
-    {
-      name: 'navbar-storage',
-      partialize: (state) => ({ isMobileMenuOpen: state.isMobileMenuOpen })
-    }
-  )
-);
+export const useNavbarStore = create<NavbarState>()((set) => ({
+  isMobileMenuOpen: false,
+  setMobileMenuOpen: (isOpen) => set({ isMobileMenuOpen: isOpen }),
+  toggleMobileMenu: () =>
+    set((state) => ({ isMobileMenuOpen: !state.isMobileMenuOpen })),
+}));
