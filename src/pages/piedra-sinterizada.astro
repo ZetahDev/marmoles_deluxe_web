@@ -1,7 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ProductCard from "../components/ProductCard.tsx";
-import PageLoader from "../components/PageLoader.tsx";
 import CategoryFilter from "../components/CategoryFilter.tsx";
 import CategoryWrapper from "../components/CategoryWrapper.tsx";
 import SEOSchemaData from "../components/SEOSchemaData.tsx";
@@ -221,7 +220,6 @@ const image = "/images/piedra-sinterizada-og.jpg";
     stones={schemaStones}
   />
 
-  <PageLoader client:visible isLoading={true} />
   <CategoryFilter client:idle />
 
   <!-- Hero Section optimizado para SEO -->

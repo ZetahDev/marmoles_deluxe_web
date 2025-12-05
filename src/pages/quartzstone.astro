@@ -1,7 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ProductCard from "../components/ProductCard.tsx";
-import PageLoader from "../components/PageLoader.tsx";
 import SEOSchemaData from "../components/SEOSchemaData.tsx";
 import { listStonesFromS3, type Stone } from "../lib/utils/s3Utils";
 
@@ -64,7 +63,6 @@ const schemaStones = quarstone.map((stone: Stone) => ({
     stones={schemaStones}
   />
 
-  <PageLoader client:visible isLoading={true} />
   <main class="py-20 pt-24">
     <div class="container mx-auto px-4">
       <h1 class="text-4xl md:text-5xl font-bold text-center mb-4">
