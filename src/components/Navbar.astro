@@ -40,7 +40,7 @@ const isCurrentPathUnderMateriales = () => {
     <div class="flex items-center justify-center h-16">
       <!-- Menú móvil con zustand (componente de React) -->
       <div class="md:hidden absolute left-4">
-        <MobileMenu navItems={navItems} currentPath={currentPath} client:idle />
+        <MobileMenu navItems={navItems} currentPath={currentPath} client:load />
       </div>
 
       <!-- Menú para escritorio -->

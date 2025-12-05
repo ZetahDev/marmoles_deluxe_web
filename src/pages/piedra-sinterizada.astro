@@ -222,7 +222,7 @@ const image = "/images/piedra-sinterizada-og.jpg";
   />
 
   <PageLoader client:visible isLoading={true} />
-  <CategoryFilter client:load />
+  <CategoryFilter client:idle />
 
   <!-- Hero Section optimizado para SEO -->
   <section
@@ -299,7 +299,7 @@ const image = "/images/piedra-sinterizada-og.jpg";
       </div>
 
       <CategoryWrapper
-        client:load
+        client:idle
         categories={stoneCategories}
         useAnchorLinks={useAnchorLinks}
       />
