@@ -17,15 +17,22 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ navItems, currentPath }) => {
   const { isMobileMenuOpen, toggleMobileMenu, setMobileMenuOpen } =
     useNavbarStore();
 
+  console.log('[MobileMenu] Component mounted');
+  console.log('[MobileMenu] isMobileMenuOpen:', isMobileMenuOpen);
+
   // Close menu when clicking outside
   useEffect(() => {
+    console.log('[MobileMenu] useEffect running, isMobileMenuOpen:', isMobileMenuOpen);
+    
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
+      console.log('[MobileMenu] Click detected:', target);
       if (
         isMobileMenuOpen &&
         !target.closest("#mobile-menu") &&
         !target.closest("#mobile-menu-button")
       ) {
+        console.log('[MobileMenu] Closing menu - click outside');
         setMobileMenuOpen(false);
       }
     };
@@ -33,6 +40,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ navItems, currentPath }) => {
     // Close menu when pressing escape
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
+        console.log('[MobileMenu] Closing menu - ESC pressed');
         setMobileMenuOpen(false);
       }
     };
@@ -41,6 +49,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ navItems, currentPath }) => {
     document.addEventListener("keydown", handleEscape);
 
     return () => {
+      console.log('[MobileMenu] Cleaning up event listeners');
       document.removeEventListener("click", handleClickOutside);
       document.removeEventListener("keydown", handleEscape);
     };
@@ -62,7 +71,11 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ navItems, currentPath }) => {
         className="md:hidden p-2 text-marmoles-gold hover:text-marmoles-gold transition-colors"
         id="mobile-menu-button"
         aria-label="Menú"
-        onClick={toggleMobileMenu}
+        onClick={() => {
+          console.log('[MobileMenu] Button clicked! Current state:', isMobileMenuOpen);
+          toggleMobileMenu();
+          console.log('[MobileMenu] After toggle');
+        }}
         aria-expanded={isMobileMenuOpen}
       >
         <svg

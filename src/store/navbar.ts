@@ -8,7 +8,17 @@ interface NavbarState {
 
 export const useNavbarStore = create<NavbarState>()((set) => ({
   isMobileMenuOpen: false,
-  setMobileMenuOpen: (isOpen) => set({ isMobileMenuOpen: isOpen }),
-  toggleMobileMenu: () =>
-    set((state) => ({ isMobileMenuOpen: !state.isMobileMenuOpen })),
+  setMobileMenuOpen: (isOpen) => {
+    console.log('[Zustand] setMobileMenuOpen called with:', isOpen);
+    set({ isMobileMenuOpen: isOpen });
+  },
+  toggleMobileMenu: () => {
+    console.log('[Zustand] toggleMobileMenu called');
+    set((state) => {
+      console.log('[Zustand] Current state:', state.isMobileMenuOpen);
+      const newState = !state.isMobileMenuOpen;
+      console.log('[Zustand] New state:', newState);
+      return { isMobileMenuOpen: newState };
+    });
+  },
 }));
