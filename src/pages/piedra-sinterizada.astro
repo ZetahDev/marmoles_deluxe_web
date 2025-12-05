@@ -212,7 +212,7 @@ const image = "/images/piedra-sinterizada-og.jpg";
 
   <!-- Add Schema.org structured data for SEO -->
   <SEOSchemaData
-    client:load
+    client:idle
     pageTitle={title}
     pageDescription={description}
     pageUrl={Astro.url.href}
@@ -221,7 +221,7 @@ const image = "/images/piedra-sinterizada-og.jpg";
     stones={schemaStones}
   />
 
-  <PageLoader client:load isLoading={true} />
+  <PageLoader client:visible isLoading={true} />
   <CategoryFilter client:load />
 
   <!-- Hero Section optimizado para SEO -->

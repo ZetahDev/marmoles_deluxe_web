@@ -10,10 +10,9 @@ const description =
 const keywords =
   "mantenimiento mármol Cali, reparación granito, pulido piedras, sellado superficies, asesoría diseño Cali, modificación mesones, limpieza profesional piedras, transporte especializado";
 
-
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const pageUrl = canonicalURL.toString();
-const metaImage = new URL('/images/contactanos-og.jpg', Astro.site).toString();
+const metaImage = new URL("/images/contactanos-og.jpg", Astro.site).toString();
 
 interface Service {
   title: string;
@@ -122,7 +121,7 @@ const hardHatIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="
     pageImage={metaImage}
   />
 
-  <PageLoader client:load isLoading={true} />
+  <PageLoader client:visible isLoading={true} />
   <div class="pt-24 pb-16">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
       <!-- Encabezado de página -->
@@ -268,4 +267,3 @@ const hardHatIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="
     </div>
   </div>
 </Layout>
-
