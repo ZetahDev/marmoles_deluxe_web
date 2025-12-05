@@ -68,10 +68,10 @@ const {
         n = f.fbq = function () {
           // @ts-ignore
           n.callMethod
-          // @ts-ignore
-            ? n.callMethod.apply(n, arguments)
-          // @ts-ignore
-            : n.queue.push(arguments);
+            ? // @ts-ignore
+              n.callMethod.apply(n, arguments)
+            : // @ts-ignore
+              n.queue.push(arguments);
         };
         // @ts-ignore
         if (!f._fbq) f._fbq = n;
