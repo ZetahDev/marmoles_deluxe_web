@@ -1,0 +1,141 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Test Analytics - Mármoles Deluxe">
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6">🧪 Test de Analytics</h1>
+
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+      <h2 class="text-xl font-semibold mb-4">Eventos Trackeados</h2>
+      <p class="mb-4 text-gray-600">
+        Abre la consola del navegador (F12) para ver los eventos en tiempo real.
+        Revisa también el Network tab filtrando por "analytics", "gtm", o "fbq".
+      </p>
+
+      <div class="space-y-4">
+        <div>
+          <button
+            id="test-product-click"
+            class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          >
+            Test: Product Click
+          </button>
+        </div>
+
+        <div>
+          <button
+            id="test-whatsapp-click"
+            class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+          >
+            Test: WhatsApp Click
+          </button>
+        </div>
+
+        <div>
+          <button
+            id="test-form-start"
+            class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
+          >
+            Test: Form Start
+          </button>
+        </div>
+
+        <div>
+          <button
+            id="test-scroll-tracking"
+            class="bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700"
+          >
+            Test: Scroll al 50% (scroll down)
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-gray-50 rounded-lg p-6 mb-6">
+      <h2 class="text-xl font-semibold mb-4">Información de Sesión</h2>
+      <div class="space-y-2 text-sm">
+        <p>
+          <strong>Fuente de tráfico:</strong>
+          <span id="traffic-source"></span>
+        </p>
+        <p><strong>UTM Source:</strong> <span id="utm-source"></span></p>
+        <p><strong>UTM Campaign:</strong> <span id="utm-campaign"></span></p>
+        <p><strong>Google Click ID:</strong> <span id="gclid"></span></p>
+      </div>
+    </div>
+
+    <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+      <h3 class="font-semibold mb-2">⚠️ Notas para Testing</h3>
+      <ul class="list-disc list-inside space-y-1 text-sm">
+        <li>Los eventos se envían a GA4, Facebook Pixel y GTM</li>
+        <li>En DEV mode, los eventos también se loggean en consola</li>
+        <li>
+          Para testear UTM params, agrega:
+          ?utm_source=google&utm_medium=cpc&utm_campaign=test
+        </li>
+        <li>Verifica en Google Analytics 4 → Realtime → Events</li>
+        <li>Verifica en Facebook Events Manager → Test Events</li>
+      </ul>
+    </div>
+
+    <!-- Spacer para testing de scroll -->
+    <div class="h-screen"></div>
+  </div>
+</Layout>
+
+<script>
+  import {
+    trackProductClick,
+    trackWhatsAppClick,
+    trackFormStart,
+    getTrafficSource,
+    getUTMParams,
+  } from "../lib/analytics";
+
+  // Mostrar info de sesión
+  document.addEventListener("DOMContentLoaded", () => {
+    const trafficSource = getTrafficSource();
+    const utmParams = getUTMParams();
+
+    document.getElementById("traffic-source")!.textContent = trafficSource;
+    document.getElementById("utm-source")!.textContent =
+      utmParams.utm_source || "N/A";
+    document.getElementById("utm-campaign")!.textContent =
+      utmParams.utm_campaign || "N/A";
+    document.getElementById("gclid")!.textContent = utmParams.gclid || "N/A";
+  });
+
+  // Test: Product Click
+  document
+    .getElementById("test-product-click")
+    ?.addEventListener("click", () => {
+      trackProductClick("Blanco Polar Test", "Quartzstone", 650000);
+      alert('✅ Evento "product_click" enviado! Revisa la consola.');
+    });
+
+  // Test: WhatsApp Click
+  document
+    .getElementById("test-whatsapp-click")
+    ?.addEventListener("click", () => {
+      trackWhatsAppClick("test_page", "Blanco Polar Test");
+      alert('✅ Evento "whatsapp_click" enviado! Revisa la consola.');
+    });
+
+  // Test: Form Start
+  document.getElementById("test-form-start")?.addEventListener("click", () => {
+    trackFormStart("test_form");
+    alert('✅ Evento "contact_form_start" enviado! Revisa la consola.');
+  });
+
+  // Test: Scroll Tracking
+  document
+    .getElementById("test-scroll-tracking")
+    ?.addEventListener("click", () => {
+      window.scrollTo({
+        top: document.documentElement.scrollHeight * 0.5,
+        behavior: "smooth",
+      });
+      alert("📜 Scroll al 50%. El evento se enviará automáticamente.");
+    });
+</script>

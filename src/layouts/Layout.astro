@@ -183,6 +183,19 @@ const {
         document.head.appendChild(gaScript);
       });
     </script>
+
+    <!-- Analytics del Embudo de Ventas -->
+    <script>
+      import { initializeAnalytics } from "../lib/analytics";
+
+      // Esperar a que el DOM y los scripts de analytics carguen
+      window.addEventListener("load", function () {
+        // Dar tiempo para que GTM, GA y FB Pixel se inicialicen
+        setTimeout(() => {
+          initializeAnalytics();
+        }, 1000);
+      });
+    </script>
   </body>
 
   <style>

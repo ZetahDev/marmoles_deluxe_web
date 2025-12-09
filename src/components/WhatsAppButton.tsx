@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { trackWhatsAppClick } from "../lib/analytics";
 
 export const WhatsAppButton = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -15,7 +16,7 @@ export const WhatsAppButton = () => {
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, 2000);
-    
+
     return () => clearTimeout(timer);
   }, []);
 
@@ -32,20 +33,23 @@ export const WhatsAppButton = () => {
       onMouseEnter={() => setTooltipVisible(true)}
       onMouseLeave={() => setTooltipVisible(false)}
       onClick={(e) => {
+        // Trackear clic en WhatsApp
+        trackWhatsAppClick("floating_button", "15% descuento web");
+
         // Utilizar requestIdleCallback para navegar solo cuando el thread esté libre
         e.preventDefault();
-        if ('requestIdleCallback' in window) {
+        if ("requestIdleCallback" in window) {
           window.requestIdleCallback(() => {
-            (window as Window).open(whatsappUrl, '_blank');
+            (window as Window).open(whatsappUrl, "_blank");
           });
         } else {
-          (window as Window).open(whatsappUrl, '_blank');
+          (window as Window).open(whatsappUrl, "_blank");
         }
       }}
     >
       <svg
         className="w-8 h-8"
-        width="32" 
+        width="32"
         height="32"
         fill="currentColor"
         viewBox="0 0 24 24"
@@ -56,8 +60,8 @@ export const WhatsAppButton = () => {
       </svg>
       {tooltipVisible && (
         <span className="absolute right-full mr-3 bg-white text-gray-900 px-2 py-1 rounded text-sm whitespace-nowrap shadow-md">
-        ¡Contáctanos por WhatsApp!
-      </span>
+          ¡Contáctanos por WhatsApp!
+        </span>
       )}
     </a>
   );

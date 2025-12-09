@@ -1,5 +1,10 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import emailjs from "@emailjs/browser";
+import {
+  trackFormStart,
+  trackFormSubmit,
+  trackFormAbandonment,
+} from "../lib/analytics";
 
 // EmailJS configuration - ACTUALIZA ESTOS VALORES CON TUS CREDENCIALES
 const SERVICE_ID = "service_na9o3ub"; // TODO: Actualizar con tu Service ID
@@ -21,6 +26,21 @@ const ContactForm = () => {
   const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
+  const [formStarted, setFormStarted] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  // Trackear abandono de formulario al desmontar
+  useEffect(() => {
+    return () => {
+      if (formStarted && !formSubmitted) {
+        const totalFields = 4;
+        const completedFields = Object.values(formData).filter(
+          (v) => v.trim() !== ""
+        ).length;
+        trackFormAbandonment("contact_form", completedFields, totalFields);
+      }
+    };
+  }, [formStarted, formSubmitted, formData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -104,6 +124,14 @@ ${formData.message}
       )}`;
       window.open(whatsappUrl, "_blank");
 
+      // Trackear envío exitoso
+      setFormSubmitted(true);
+      trackFormSubmit("contact_form", {
+        has_phone: !!formData.phone,
+        has_email: !!formData.email,
+        message_length: formData.message.length,
+      });
+
       // Mostrar mensaje de éxito y resetear formulario
       setSuccess(true);
       setFormData({ name: "", phone: "", email: "", message: "" });
@@ -159,6 +187,12 @@ ${formData.message}
               name="name"
               value={formData.name}
               onChange={handleChange}
+              onFocus={() => {
+                if (!formStarted) {
+                  setFormStarted(true);
+                  trackFormStart("contact_form");
+                }
+              }}
               className={`w-full px-4 py-3 rounded-lg border ${
                 errors.name ? "border-red-500" : "border-marmoles-gold"
               } focus:outline-none focus:ring-2 focus:ring-marmoles-gold transition-all`}

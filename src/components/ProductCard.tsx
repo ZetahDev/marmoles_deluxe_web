@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useCallback, useEffect, useRef } from "react";
+import { trackProductClick, trackWhatsAppClick } from "../lib/analytics";
 import {
   Carousel,
   CarouselContent,
@@ -61,6 +62,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
       return;
     }
 
+    // Trackear clic en WhatsApp con cotización
+    trackWhatsAppClick(
+      "product_quote",
+      `${category ? `${category} - ` : ""}${name}`
+    );
+
     const message =
       `Hola, me interesa una cotización para:\n\n` +
       `📐 Material: ${category ? `${category} - ` : ""}${name}\n` +
@@ -77,6 +84,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
   // Optimización: Deferred execution - sólo ejecutar cuando el usuario interactúa
   const handleWhatsAppClick = useCallback(() => {
+    // Trackear clic en WhatsApp
+    trackWhatsAppClick(
+      "product_info",
+      `${category ? `${category} - ` : ""}${name}`
+    );
+
     const message = `Hola, estoy interesado en obtener más información sobre la piedra sinterizada: ${
       category ? `${category} - ` : ""
     }${name}.`;
@@ -126,6 +139,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
       // Si es un clic en los botones de navegación, no abrir el modal
       return;
     }
+
+    // Trackear clic en producto
+    trackProductClick(name, category || "producto", precioPublico);
 
     // Guardar cotización en Zustand si existe
     if (precioCalculado && metros) {
