@@ -142,6 +142,27 @@ export function trackFacebookEvent({
 }: AnalyticsEvent) {
   if (typeof window === "undefined" || !window.fbq) return;
 
+  // Eventos estándar de Facebook (deben usar 'track')
+  const standardEvents = [
+    "ViewContent",
+    "AddToCart",
+    "AddToWishlist",
+    "InitiateCheckout",
+    "AddPaymentInfo",
+    "Purchase",
+    "Lead",
+    "CompleteRegistration",
+    "Contact",
+    "CustomizeProduct",
+    "Donate",
+    "FindLocation",
+    "Schedule",
+    "StartTrial",
+    "SubmitApplication",
+    "Subscribe",
+    "Search",
+  ];
+
   // Mapeo de eventos personalizados a eventos estándar de Facebook
   const fbEventMap: Record<string, string> = {
     [FunnelEvent.PRODUCT_VIEW]: "ViewContent",
@@ -154,11 +175,18 @@ export function trackFacebookEvent({
 
   const fbEvent = fbEventMap[event] || event;
 
-  window.fbq("track", fbEvent, {
+  const eventData = {
     ...properties,
     value,
     currency: "COP",
-  });
+  };
+
+  // Si es un evento estándar, usar 'track', si no, usar 'trackCustom'
+  if (standardEvents.includes(fbEvent)) {
+    window.fbq("track", fbEvent, eventData);
+  } else {
+    window.fbq("trackCustom", fbEvent, eventData);
+  }
 }
 
 /**
