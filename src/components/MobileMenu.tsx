@@ -17,16 +17,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ navItems, currentPath }) => {
   const { isMobileMenuOpen, toggleMobileMenu, setMobileMenuOpen } =
     useNavbarStore();
 
-  console.log("[MobileMenu] Component mounted");
-  console.log("[MobileMenu] isMobileMenuOpen:", isMobileMenuOpen);
-
   // Close menu when clicking outside
   useEffect(() => {
-    console.log(
-      "[MobileMenu] useEffect running, isMobileMenuOpen:",
-      isMobileMenuOpen
-    );
-
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
       console.log("[MobileMenu] Click detected:", target);

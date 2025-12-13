@@ -1,0 +1,438 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SEOSchemaData from "../components/SEOSchemaData.tsx";
+import ContactFormB2B from "../components/ContactFormB2B";
+
+const title = "Proyectos - Mármoles Deluxe | Soluciones para Arquitectos y Constructoras";
+const description =
+  "Soluciones en gran formato para arquitectos, constructoras y proyectos comerciales. Suministro mayorista de piedras naturales y sinterizadas con precios especiales por volumen.";
+
+const keywords =
+  "gran formato Cali, suministro constructoras, piedra arquitectura, proyecto comercial mármol, venta mayorista granito, arquitectos Cali, constructoras Valle del Cauca, láminas gran formato";
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const pageUrl = canonicalURL.toString();
+const metaImage = new URL("/images/contactanos-og.jpg", Astro.site).toString();
+
+const benefits = [
+  {
+    title: "Precios Especiales por Volumen",
+    description: "Descuentos progresivos según cantidad. Cotizaciones personalizadas para proyectos grandes.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
+  },
+  {
+    title: "Asesoría Técnica Especializada",
+    description: "Equipo de expertos para especificaciones técnicas, selección de materiales y optimización de costos.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>`,
+  },
+  {
+    title: "Plazos de Entrega Garantizados",
+    description: "Cronogramas de suministro ajustados a tu obra. Stock permanente de materiales premium.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
+  },
+  {
+    title: "Logística Especializada",
+    description: "Transporte dedicado para grandes volúmenes. Entregas programadas según avance de obra.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 17h4V5H2v12h3"/><path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>`,
+  },
+  {
+    title: "Soporte Post-Venta",
+    description: "Garantías extendidas y mantenimiento preventivo para proyectos comerciales.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>`,
+  },
+  {
+    title: "Facturación Flexible",
+    description: "Opciones de pago adaptadas a flujos de proyecto. Crédito disponible para clientes frecuentes.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>`,
+  },
+];
+
+const applications = [
+  {
+    title: "Proyectos Residenciales de Lujo",
+    description: "Torres, conjuntos cerrados, urbanizaciones premium",
+    examples: ["Lobbies", "Áreas comunes", "Cocinas integrales", "Baños master"],
+  },
+  {
+    title: "Centros Comerciales",
+    description: "Retail, food courts, áreas de alto tráfico",
+    examples: ["Pisos de circulación", "Mesones de locales", "Fachadas interiores", "Zonas húmedas"],
+  },
+  {
+    title: "Edificios Corporativos",
+    description: "Oficinas, sedes empresariales, coworking",
+    examples: ["Recepciones", "Salas de juntas", "Cafeterías", "Baños ejecutivos"],
+  },
+  {
+    title: "Hoteles y Restaurantes",
+    description: "Proyectos de hospitalidad y gastronomía",
+    examples: ["Barras de restaurante", "Mesas", "Recubrimientos", "Baños públicos"],
+  },
+];
+
+const materials = [
+  {
+    name: "Piedra Sinterizada Gran Formato",
+    formats: ["320x160 cm", "320x144 cm", "260x120 cm"],
+    applications: "Fachadas, pisos, recubrimientos de gran impacto",
+    brands: "Dekton, Neolith, Lapitec, Altea",
+  },
+  {
+    name: "Quartzstone",
+    formats: ["305x140 cm", "300x200 cm"],
+    applications: "Mesones, islas, barras de cocina",
+    brands: "Caesarstone, Silestone, Quartzstone Premium",
+  },
+  {
+    name: "Granito Natural",
+    formats: ["280x180 cm (planchas)", "Cortes personalizados"],
+    applications: "Pisos, escaleras, fachadas ventiladas",
+    brands: "Importación Brasil, India, China",
+  },
+  {
+    name: "Mármol Natural",
+    formats: ["Variable según cantera", "Láminas personalizadas"],
+    applications: "Recubrimientos decorativos, mesas, baños premium",
+    brands: "Carrara, Calacatta, Statuario, Emperador",
+  },
+];
+
+const process = [
+  {
+    step: "01",
+    title: "Contacto Inicial",
+    description: "Completa el formulario con detalles de tu proyecto. Te responderemos en máximo 24 horas.",
+  },
+  {
+    step: "02",
+    title: "Reunión Técnica",
+    description: "Revisamos planos, especificaciones y necesidades. Visitamos la obra si es necesario.",
+  },
+  {
+    step: "03",
+    title: "Cotización Personalizada",
+    description: "Propuesta con precios por volumen, cronograma de entregas y condiciones comerciales.",
+  },
+  {
+    step: "04",
+    title: "Aprobación y Contrato",
+    description: "Firma de contrato con términos claros. Definición de hitos de entrega.",
+  },
+  {
+    step: "05",
+    title: "Suministro y Logística",
+    description: "Entregas programadas según cronograma. Seguimiento en tiempo real.",
+  },
+  {
+    step: "06",
+    title: "Instalación y Soporte",
+    description: "Coordinación con instaladores certificados. Supervisión técnica disponible.",
+  },
+];
+---
+
+<Layout title={title} description={description}>
+  <Fragment slot="head">
+    <!-- SEO Meta Tags -->
+    <meta name="keywords" content={keywords} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={metaImage} />
+
+    <!-- Geo Tags -->
+    <meta name="geo.region" content="CO-VAC" />
+    <meta name="geo.placename" content="Cali" />
+  </Fragment>
+
+  <SEOSchemaData
+    client:load
+    pageTitle={title}
+    pageDescription={description}
+    pageUrl={pageUrl}
+    pageImage={metaImage}
+  />
+
+  <main class="pt-24 pb-16">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-marmoles-black via-gray-900 to-marmoles-black text-white py-20">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <div class="text-center max-w-4xl mx-auto">
+          <div class="inline-block bg-marmoles-gold/20 text-marmoles-gold px-4 py-2 rounded-full text-sm font-semibold mb-6">
+            Soluciones B2B
+          </div>
+          <h1 class="text-4xl md:text-6xl font-bold mb-6">
+            Gran Formato para <span class="text-marmoles-gold">Proyectos Arquitectónicos</span>
+          </h1>
+          <p class="text-xl md:text-2xl text-gray-300 mb-8">
+            Suministro especializado para constructoras, arquitectos y diseñadores. 
+            <strong class="text-marmoles-gold">Precios mayoristas</strong> y asesoría técnica de alto nivel.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="#contacto-b2b"
+              class="bg-marmoles-gold text-marmoles-black px-8 py-4 rounded-lg font-bold text-lg hover:bg-opacity-90 transition-all shadow-xl"
+            >
+              Solicitar Cotización
+            </a>
+            <a
+              href="#materiales"
+              class="bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white/20 transition-all border border-white/30"
+            >
+              Ver Materiales
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-marmoles-black mb-4">
+            ¿Por qué elegirnos para tu proyecto?
+          </h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            16 años de experiencia suministrando materiales para los proyectos más exigentes en Cali y el Valle del Cauca
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {benefits.map((benefit) => (
+            <div class="bg-gradient-to-br from-gray-50 to-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100">
+              <div class="bg-marmoles-gold/10 w-16 h-16 rounded-full flex items-center justify-center mb-6 text-marmoles-gold">
+                <Fragment set:html={benefit.icon} />
+              </div>
+              <h3 class="text-xl font-bold text-marmoles-black mb-3">
+                {benefit.title}
+              </h3>
+              <p class="text-gray-600">
+                {benefit.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Applications Section -->
+    <section class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-marmoles-black mb-4">
+            Tipos de Proyectos que Atendemos
+          </h2>
+          <p class="text-xl text-gray-600">
+            Experiencia comprobada en múltiples sectores
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {applications.map((app) => (
+            <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow border-l-4 border-marmoles-gold">
+              <h3 class="text-2xl font-bold text-marmoles-black mb-3">
+                {app.title}
+              </h3>
+              <p class="text-gray-600 mb-4">
+                {app.description}
+              </p>
+              <div class="flex flex-wrap gap-2">
+                {app.examples.map((example) => (
+                  <span class="bg-marmoles-gold/10 text-marmoles-black px-3 py-1 rounded-full text-sm font-medium">
+                    {example}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Materials Section -->
+    <section id="materiales" class="py-20 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-marmoles-black mb-4">
+            Materiales en Gran Formato
+          </h2>
+          <p class="text-xl text-gray-600">
+            Stock permanente de las mejores marcas internacionales
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {materials.map((material) => (
+            <div class="bg-gradient-to-br from-white to-gray-50 p-8 rounded-xl shadow-lg border border-gray-200">
+              <h3 class="text-2xl font-bold text-marmoles-black mb-4">
+                {material.name}
+              </h3>
+              
+              <div class="space-y-4">
+                <div>
+                  <span class="text-sm font-semibold text-marmoles-gold uppercase tracking-wide">Formatos Disponibles</span>
+                  <div class="flex flex-wrap gap-2 mt-2">
+                    {material.formats.map((format) => (
+                      <span class="bg-marmoles-black text-white px-3 py-1 rounded text-sm font-mono">
+                        {format}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <span class="text-sm font-semibold text-marmoles-gold uppercase tracking-wide">Aplicaciones</span>
+                  <p class="text-gray-700 mt-1">{material.applications}</p>
+                </div>
+
+                <div>
+                  <span class="text-sm font-semibold text-marmoles-gold uppercase tracking-wide">Marcas</span>
+                  <p class="text-gray-700 mt-1 italic">{material.brands}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="mt-12 text-center bg-marmoles-gold/10 rounded-xl p-8">
+          <p class="text-lg text-gray-800">
+            <strong>¿Necesitas un material específico?</strong> Trabajamos con las principales importadoras y podemos conseguir referencias especiales para tu proyecto.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="py-20 bg-marmoles-black text-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">
+            Proceso de Trabajo B2B
+          </h2>
+          <p class="text-xl text-gray-300">
+            Metodología probada para garantizar el éxito de tu proyecto
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {process.map((item) => (
+            <div class="relative">
+              <div class="absolute -top-4 -left-4 text-6xl font-bold text-marmoles-gold/20">
+                {item.step}
+              </div>
+              <div class="relative bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 hover:bg-white/15 transition-all">
+                <h3 class="text-xl font-bold text-marmoles-gold mb-3">
+                  {item.title}
+                </h3>
+                <p class="text-gray-300">
+                  {item.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div>
+            <div class="text-4xl md:text-5xl font-bold text-marmoles-gold mb-2">16+</div>
+            <div class="text-gray-600 font-medium">Años de Experiencia</div>
+          </div>
+          <div>
+            <div class="text-4xl md:text-5xl font-bold text-marmoles-gold mb-2">500+</div>
+            <div class="text-gray-600 font-medium">Proyectos Completados</div>
+          </div>
+          <div>
+            <div class="text-4xl md:text-5xl font-bold text-marmoles-gold mb-2">50+</div>
+            <div class="text-gray-600 font-medium">Arquitectos Aliados</div>
+          </div>
+          <div>
+            <div class="text-4xl md:text-5xl font-bold text-marmoles-gold mb-2">98%</div>
+            <div class="text-gray-600 font-medium">Satisfacción</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="contacto-b2b" class="py-20 bg-gradient-to-br from-gray-50 to-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-marmoles-black mb-4">
+            Solicita tu Cotización B2B
+          </h2>
+          <p class="text-xl text-gray-600">
+            Completa el formulario y nuestro equipo comercial te contactará en máximo 24 horas
+          </p>
+        </div>
+
+        <ContactFormB2B client:load />
+      </div>
+    </section>
+
+    <!-- Additional Info Section -->
+    <section class="py-16 bg-marmoles-black text-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+          <div>
+            <h3 class="text-xl font-bold text-marmoles-gold mb-3">Catálogos Técnicos</h3>
+            <p class="text-gray-300 mb-4">
+              Solicita fichas técnicas completas con especificaciones de todos nuestros materiales
+            </p>
+            <a href="#contacto-b2b" class="text-marmoles-gold hover:underline font-semibold">
+              Solicitar Catálogos →
+            </a>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-bold text-marmoles-gold mb-3">Muestras Físicas</h3>
+            <p class="text-gray-300 mb-4">
+              Envío de muestras a tu oficina u obra para validación con tu equipo
+            </p>
+            <a href="#contacto-b2b" class="text-marmoles-gold hover:underline font-semibold">
+              Solicitar Muestras →
+            </a>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-bold text-marmoles-gold mb-3">Visita a Showroom</h3>
+            <p class="text-gray-300 mb-4">
+              Agenda una cita para conocer nuestras instalaciones y ver materiales en vivo
+            </p>
+            <a href="#contacto-b2b" class="text-marmoles-gold hover:underline font-semibold">
+              Agendar Visita →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  /* Animaciones suaves */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  section > div {
+    animation: fadeIn 0.6s ease-out;
+  }
+</style>
