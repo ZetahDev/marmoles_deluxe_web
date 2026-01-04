@@ -13,15 +13,29 @@ const S3_BASE_URL = `https://${S3_BUCKET}.s3.${S3_REGION}.amazonaws.com`;
  * @param filename The raw filename from S3
  * @returns Formatted name with spaces instead of underscores and without extension
  */
+/**
+ * Formats a filename into a human-readable name
+ * @param filename The raw filename from S3
+ * @returns Formatted name with spaces instead of underscores and without extension
+ */
 function formatStoneName(filename: string): string {
-  // Remove file extension and path
-  const baseFilename = filename.split("/").pop()?.split(".")[0] || "";
+  // Remove path
+  const baseFilename = filename.split("/").pop() || "";
+
+  // Remove extension (handle "File .png" case)
+  const nameWithoutExt = baseFilename.replace(/\.[^/.]+$/, "");
 
   // Normalize and remove design suffixes if present (accept "design", "designs", "desing", etc.)
-  const cleanBase = baseFilename.replace(/_(?:desing|design)s?$/i, "");
+  // Handles cases like "Name_desing .png" or "Name_designs"
+  const cleanBase = nameWithoutExt
+    .replace(/_(?:desing|design)s?\s*$/i, "")
+    .trim();
 
   // Replace underscores with spaces and capitalize words
-  return cleanBase.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+  return cleanBase
+    .replace(/_/g, " ")
+    .trim()
+    .replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
 /**
@@ -72,31 +86,50 @@ function groupStoneFiles(files: string[]): Stone[] {
 
   files.forEach((file) => {
     const filename = file.split("/").pop() || "";
-    const baseName = filename.replace(/\.(webp|png|jpg|jpeg)$/i, "");
+    // Remove extension to get the "stem"
+    const nameStem = filename.replace(/\.[^/.]+$/, "");
 
-    // Detect design files by known suffixes and normalize main name
-    const isDesign = /_(?:desing|design)s?$/i.test(baseName);
-    const mainName = isDesign
-      ? baseName.replace(/_(?:desing|design)s?$/i, "")
-      : baseName;
+    // Check if this stem looks like a design variation
+    // Matches: _desing, _design, _designs, optionally followed by spaces
+    const designSuffixRegex = /_(?:desing|design)s?\s*$/i;
+    const isDesign = designSuffixRegex.test(nameStem);
 
-    const existing = stoneMap.get(mainName) || {};
+    // Determine the "canonical" key for this stone
+    // If it's a design, strip the suffix. If it's main, just trim.
+    let canonicalKey = nameStem;
     if (isDesign) {
-      stoneMap.set(mainName, { ...existing, design: `${S3_BASE_URL}/${file}` });
+      canonicalKey = nameStem.replace(designSuffixRegex, "");
+    }
+
+    // Clean up any trailing spaces or underscores that might remain
+    canonicalKey = canonicalKey.trim().replace(/_+$/, "");
+
+    const fullUrl = `${S3_BASE_URL}/${file}`;
+    const existing = stoneMap.get(canonicalKey) || {};
+
+    if (isDesign) {
+      // If we already have a design, we probably only want one, but we'll overwrite or keep first.
+      // Let's keep the most "recent" one encountered, or just set it.
+      stoneMap.set(canonicalKey, { ...existing, design: fullUrl });
     } else {
-      stoneMap.set(mainName, { ...existing, image: `${S3_BASE_URL}/${file}` });
+      stoneMap.set(canonicalKey, { ...existing, image: fullUrl });
     }
   });
 
   // Convert map to Stone array
   const stones: Stone[] = [];
   stoneMap.forEach((value, key) => {
-    if (value.image) {
-      // Only include if main image exists
+    // Only include if we have at least one valid image (main or design)
+    // Ideally we want the main image, but if we only have design, we can use it as main too or skip.
+    // Logic: Use main image if available, else use design as main.
+    const mainImage = value.image || value.design;
+    const designImage = value.design || value.image;
+
+    if (mainImage) {
       stones.push({
         name: formatStoneName(key),
-        image: value.image,
-        design: value.design || value.image, // Fallback to main image if no design
+        image: mainImage,
+        design: designImage || mainImage,
       });
     }
   });

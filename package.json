@@ -14,7 +14,7 @@
   "dependencies": {
     "@astrojs/react": "^4.4.2",
     "@astrojs/tailwind": "^6.0.2",
-    "@astrojs/vercel": "^9.0.0",
+    "@astrojs/vercel": "^9.0.2",
     "@auth/core": "^0.37.4",
     "@auth/prisma-adapter": "^2.9.0",
     "@emailjs/browser": "^4.4.1",
@@ -23,7 +23,7 @@
     "@shadcn/ui": "^0.0.4",
     "@uploadthing/react": "^7.3.0",
     "@vercel/speed-insights": "^1.2.0",
-    "astro": "^5.15.4",
+    "astro": "^5.16.6",
     "astro-icon": "^1.1.5",
     "autoprefixer": "^10.4.21",
     "class-variance-authority": "^0.7.1",
