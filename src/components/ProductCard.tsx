@@ -98,9 +98,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
     window.open(whatsappURL, "_blank");
   }, [category, name]);
 
-  // Optimización: Especificar dimensiones para prevenir layout shifts
-  const imageHeight = 200;
-
   useEffect(() => {
     const handleModalStateChange = (e: CustomEvent) => {
       const { id } = e.detail;
@@ -180,24 +177,21 @@ const ProductCard: React.FC<ProductCardProps> = ({
               <CarouselContent className="h-full">
                 {images.map((image, index) => (
                   <CarouselItem key={index} className="h-full w-full">
-                    <div className="w-full h-full overflow-hidden bg-gray-100">
+                    <div className="w-full h-full flex items-center justify-center overflow-hidden bg-gray-100">
                       <img
                         src={image}
                         alt={`${name} ${index === 0 ? "" : "- diseño"}`}
-                        className="w-full h-full object-cover rounded-lg"
+                        className="w-full h-full object-contain md:object-cover object-center rounded-lg"
                         style={{
-                          objectPosition: "left bottom",
-                          height: imageHeight,
-                          width: "100%",
                           contentVisibility: "auto",
                           maxWidth: "100%",
                           display: "block",
+                          height: "100%",
                         }}
                         loading="lazy"
                         decoding="async"
                         fetchPriority={index === 0 ? "high" : "low"}
                         onLoad={(e) => {
-                          // Optimización: Marcar la imagen como completamente cargada para Largest Contentful Paint
                           if (index === 0) {
                             e.currentTarget.style.contentVisibility = "visible";
                           }

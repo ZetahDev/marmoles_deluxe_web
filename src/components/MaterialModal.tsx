@@ -187,8 +187,8 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
               <img
                 src={allImages[currentImageIndex]}
                 alt={`${title} - vista ${currentImageIndex + 1}`}
-                className="w-full h-full object-cover"
-                style={{ maxWidth: "100%", height: "auto", display: "block" }}
+                className="w-full h-full object-contain sm:object-cover object-center"
+                style={{ maxWidth: "100%", height: "100%", display: "block" }}
               />
               {allImages.length > 1 && (
                 <>
