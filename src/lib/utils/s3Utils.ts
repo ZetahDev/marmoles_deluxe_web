@@ -17,15 +17,11 @@ function formatStoneName(filename: string): string {
   // Remove file extension and path
   const baseFilename = filename.split("/").pop()?.split(".")[0] || "";
 
-  // Skip design files (they end with _desing or _designs)
-  if (baseFilename.endsWith("_desing") || baseFilename.endsWith("_designs")) {
-    return "";
-  }
+  // Normalize and remove design suffixes if present (accept "design", "designs", "desing", etc.)
+  const cleanBase = baseFilename.replace(/_(?:desing|design)s?$/i, "");
 
   // Replace underscores with spaces and capitalize words
-  return baseFilename
-    .replace(/_/g, " ")
-    .replace(/\b\w/g, (c) => c.toUpperCase());
+  return cleanBase.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
 /**
@@ -78,14 +74,17 @@ function groupStoneFiles(files: string[]): Stone[] {
     const filename = file.split("/").pop() || "";
     const baseName = filename.replace(/\.(webp|png|jpg|jpeg)$/i, "");
 
-    // Check if it's a design file
-    if (baseName.endsWith("_desing") || baseName.endsWith("_designs")) {
-      const mainName = baseName.replace(/_desing(s)?$/, "");
-      const existing = stoneMap.get(mainName) || {};
+    // Detect design files by known suffixes and normalize main name
+    const isDesign = /_(?:desing|design)s?$/i.test(baseName);
+    const mainName = isDesign
+      ? baseName.replace(/_(?:desing|design)s?$/i, "")
+      : baseName;
+
+    const existing = stoneMap.get(mainName) || {};
+    if (isDesign) {
       stoneMap.set(mainName, { ...existing, design: `${S3_BASE_URL}/${file}` });
     } else {
-      const existing = stoneMap.get(baseName) || {};
-      stoneMap.set(baseName, { ...existing, image: `${S3_BASE_URL}/${file}` });
+      stoneMap.set(mainName, { ...existing, image: `${S3_BASE_URL}/${file}` });
     }
   });
 
