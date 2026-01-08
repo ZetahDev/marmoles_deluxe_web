@@ -23,13 +23,14 @@ export function TestimonialCarousel({ testimonies }: TestimonialCarouselProps) {
           {testimonies.map((testimony) => (
             <CarouselItem key={testimony.name} className="basis-full">
               <div className="p-4">
-                <div className="bg-marbles-black text-marbles-white p-6 rounded-lg h-full flex flex-col items-center justify-center">
-                  <p className="text-lg mb-4 text-center max-w-2xl">
-                    {testimony.text}
+                <div className="bg-marmoles-black text-marmoles-white p-6 rounded-lg h-full flex flex-col items-center justify-center">
+                  <p className="text-lg mb-4 text-center max-w-2xl text-gray-300 italic">
+                    "{testimony.text}"
                   </p>
-                  <p className="font-semibold text-marbles-gold">
-                    {testimony.name}
-                  </p>
+                  <div className="flex items-center gap-2">
+                    <span className="text-marmoles-gold">★★★★★</span>
+                    <p className="font-semibold text-white">{testimony.name}</p>
+                  </div>
                 </div>
               </div>
             </CarouselItem>
