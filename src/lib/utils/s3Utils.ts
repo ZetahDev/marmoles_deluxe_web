@@ -137,6 +137,50 @@ function groupStoneFiles(files: string[]): Stone[] {
   return stones;
 }
 
+/**
+ * Fetches ALL design images from known categories for the gallery/Pinterest layout.
+ * Filters for files containing "design" or "desing" in the name/path.
+ */
+export async function fetchAllDesignImages(): Promise<
+  { url: string; category: string; name: string }[]
+> {
+  const categories = [
+    "MARMOL",
+    "QUARSTONE",
+    "GRANITOS+NATURALES",
+    "PIEDRA+SINTERIZADA/ALTEA",
+    "PIEDRA+SINTERIZADA/DEKTON",
+    "PIEDRA+SINTERIZADA/NEOLITH",
+    "PIEDRA+SINTERIZADA/SILESTONE",
+    "PIEDRA+SINTERIZADA/ARTEMARMOL",
+  ];
+
+  const allDesigns: { url: string; category: string; name: string }[] = [];
+
+  try {
+    const promises = categories.map(async (cat) => {
+      const files = await listS3Files(cat);
+      // Filter for design images
+      const designs = files.filter((f) =>
+        /_(?:desing|design)s?\s*(?:\.[^.]+)?$/i.test(f.replace(/\.[^/.]+$/, ""))
+      );
+
+      return designs.map((d) => ({
+        url: `${S3_BASE_URL}/${d}`,
+        category: cat.split("/").pop() || cat,
+        name: formatStoneName(d),
+      }));
+    });
+
+    const results = await Promise.all(promises);
+    results.forEach((group) => allDesigns.push(...group));
+  } catch (error) {
+    console.error("Error fetching all design images:", error);
+  }
+
+  return allDesigns.sort(() => Math.random() - 0.5); // Random shuffle for masonry effect
+}
+
 // Default fallback data when S3 fetching fails
 const fallbackData: Record<string, Stone[]> = {
   MARMOL: [
