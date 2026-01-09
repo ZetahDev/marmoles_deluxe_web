@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useStoneCategoryStore } from "../store/stoneCategoryStore";
 import ProductCard from "./ProductCard";
+import CategorySection from "./CategorySection";
 
 interface Stone {
   name: string;
@@ -108,58 +109,11 @@ export default function CategoryWrapper({
 
       {/* Renderizar las categorías filtradas */}
       {categoriesToShow.map((category, index) => (
-        <div
+        <CategorySection
           key={category.title}
-          id={category.title.toLowerCase()}
-          className="scroll-mt-24"
-        >
-          <h2 className="text-3xl font-bold text-center mb-4">
-            {category.title}
-          </h2>
-
-          {/* Features como subtítulo */}
-          {category.features && category.features.length > 0 && (
-            <div className="max-w-5xl mx-auto mb-8">
-              <div className="bg-gradient-to-r from-gray-50 to-white p-6 rounded-lg shadow-sm border border-gray-100">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {category.features.map((feature, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-start text-sm text-gray-700"
-                    >
-                      <span className="mr-2 flex-shrink-0">
-                        {feature.split(" ")[0]}
-                      </span>
-                      <span>{feature.substring(feature.indexOf(" ") + 1)}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-
-          <div
-            className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ${
-              index < categoriesToShow.length - 1 ? "mb-16" : ""
-            }`}
-          >
-            {category.stones.map((stone) => (
-              <ProductCard
-                key={stone.name}
-                name={stone.name}
-                description="Piedra sinterizada de alta calidad"
-                images={[stone.image, stone.design]}
-                category={category.title}
-                slug={stone.name
-                  .toLowerCase()
-                  .replace(/[^a-z0-9]+/g, "-")
-                  .replace(/(^-|-$)/g, "")}
-                precioPublico={category.precioPublico}
-                unidad={category.unidad}
-              />
-            ))}
-          </div>
-        </div>
+          category={category}
+          itemsPerPage={12}
+        />
       ))}
     </>
   );

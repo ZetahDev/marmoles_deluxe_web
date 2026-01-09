@@ -547,6 +547,30 @@ const fallbackData: Record<string, Stone[]> = {
         "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/PIEDRA+SINTERIZADA/SILESTONE/Rougui_designs.png",
     },
   ],
+  "PIEDRA+SINTERIZADA/ARTEMARMOL": [
+    // Datos de respaldo por si falla S3 (idealmente se llenará dinámicamente)
+    {
+      name: "Estatuario",
+      image:
+        "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/PIEDRA+SINTERIZADA/ARTEMARMOL/Estatuario.webp",
+      design:
+        "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/PIEDRA+SINTERIZADA/ARTEMARMOL/Estatuario_design.webp",
+    },
+    {
+      name: "Calacatta Gold",
+      image:
+        "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/PIEDRA+SINTERIZADA/ARTEMARMOL/Calacatta_Gold.webp",
+      design:
+        "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/PIEDRA+SINTERIZADA/ARTEMARMOL/Calacatta_Gold_design.webp",
+    },
+    {
+      name: "Nero Marquina",
+      image:
+        "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/PIEDRA+SINTERIZADA/ARTEMARMOL/Nero_Marquina.webp",
+      design:
+        "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/PIEDRA+SINTERIZADA/ARTEMARMOL/Nero_Marquina_design.webp",
+    },
+  ],
 };
 
 /**

@@ -24,6 +24,8 @@ const categoryDescriptions = {
     "Neolith encimeras de cocina Cali | Piedra sinterizada de lujo con 25 años de garantía. Resistente a rayones, manchas, UV y calor extremo. Ideal para cocinas modernas, baños y exteriores | Distribuidor autorizado Cali | Mejor precio.",
   Silestone:
     "Silestone cuarzo Cali | Superficies de cuarzo para cocinas y baños con tecnología antibacteriana. 25 años de garantía, variedad de colores y diseños. Distribuidor oficial Valle del Cauca | Instalación certificada | Financiación disponible.",
+  Artemarmol:
+    "Artemarmol piedra sinterizada Cali | Diseños exclusivos y sofisticados con tecnología de última generación. Alta resistencia y formatos grandes para superficies continuas. Distribuidor oficial.",
 };
 
 const features: StoneTypeFeatures = {
@@ -75,10 +77,24 @@ const features: StoneTypeFeatures = {
     "💪 Alta resistencia al uso diario",
     "🏠 Ideal para cocinas y baños",
   ],
+  Artemarmol: [
+    "✨ Diseños de vanguardia de alta definición",
+    "🔥 Resistente al calor y al fuego",
+    "💎 Superficie ultracompacta resistente a rayones",
+    "💧 Impermeable y fácil de limpiar",
+    "🍳 Apto para contacto con alimentos",
+    "☀️ Resistente a rayos UV para exteriores",
+    "🦶 Alto tránsito y resistencia a la abrasión",
+    "🏠 Formatos grandes para menos juntas",
+    "⭐ Calidad premium garantizada",
+    "♻️ Sostenible y eco-amigable",
+  ],
 };
 
-// Define stone categories - ORDEN PRIORITARIO: Altea > Dekton > Neolith > Silestone
+// Define stone categories - ORDEN PRIORITARIO: Artemarmol > Altea > Dekton > Neolith > Silestone
+// Define stone categories - ORDEN PRIORITARIO: Artemarmol > Altea > Dekton > Neolith > Silestone
 const stoneTypes = [
+  { title: "Artemarmol", folder: "PIEDRA+SINTERIZADA/ARTEMARMOL" },
   { title: "Altea", folder: "PIEDRA+SINTERIZADA/ALTEA" },
   { title: "Dekton", folder: "PIEDRA+SINTERIZADA/DEKTON" },
   { title: "Neolith", folder: "PIEDRA+SINTERIZADA/NEOLITH" },
@@ -97,6 +113,7 @@ const preciosPorMarca: Record<
   Dekton: null, // Sin calculadora
   Neolith: null, // Sin calculadora
   Silestone: null, // Sin calculadora
+  Artemarmol: null, // Sin calculadora
 };
 
 // Fetch stone data for each category at build time
@@ -147,7 +164,9 @@ if (effectiveCategory) {
           ? "Dekton"
           : effectiveCategory === "silestone"
             ? "Silestone"
-            : null;
+            : effectiveCategory === "artemarmol"
+              ? "Artemarmol"
+              : null;
 
   if (formattedCategory) {
     title = `${formattedCategory} - Piedra Sinterizada | Mármoles Deluxe`;
@@ -234,29 +253,36 @@ const image = "/images/piedra-sinterizada-og.jpg";
         Distribuidor Oficial en Cali y Valle del Cauca
       </p>
       <p class="text-lg mb-8 max-w-3xl mx-auto">
-        Especialistas en <strong>Altea</strong>, <strong>Dekton</strong>, <strong
-          >Neolith</strong
-        > y <strong>Silestone</strong>. Encimeras de cocina, baños y superficies
-        de alta resistencia con garantía de hasta 25 años.
+        Especialistas en <strong>Artemarmol</strong>, <strong>Altea</strong>, <strong
+          >Dekton</strong
+        >, <strong>Neolith</strong> y <strong>Silestone</strong>. Encimeras de
+        cocina, baños y superficies de alta resistencia con garantía de hasta 25
+        años.
       </p>
       <div class="flex flex-wrap justify-center gap-4 mb-8">
         <a
-          href="#altea"
+          href="#artemarmol"
           class="bg-marmoles-gold text-marmoles-black px-8 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all"
         >
-          Ver Altea ⭐
+          Artemarmol
+        </a>
+        <a
+          href="#altea"
+          class="bg-white text-marmoles-black px-8 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all"
+        >
+          Altea
         </a>
         <a
           href="#dekton"
           class="bg-white text-marmoles-black px-8 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all"
         >
-          Ver Dekton
+          Dekton
         </a>
         <a
           href="#neolith"
           class="bg-white text-marmoles-black px-8 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all"
         >
-          Ver Neolith
+          Neolith
         </a>
       </div>
       <p class="text-sm text-gray-300">
