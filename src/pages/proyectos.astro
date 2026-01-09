@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import SEOSchemaData from "../components/SEOSchemaData.tsx";
-import { fetchAllDesignImages } from "../lib/utils/s3Utils";
+import MasonryGallery from "../components/MasonryGallery"; // New Client Component
 
 const title =
   "Galería de Proyectos - Mármoles Deluxe | Inspiración en Gran Formato";
@@ -13,10 +13,7 @@ const keywords =
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const pageUrl = canonicalURL.toString();
-const metaImage = new URL("/images/proyectos-og.jpg", Astro.site).toString(); // Ensure this image exists or use a fallback
-
-// Fetch all images tagged as 'design' from S3
-const galleryImages = await fetchAllDesignImages();
+const metaImage = new URL("/images/proyectos-og.jpg", Astro.site).toString();
 ---
 
 <Layout title={title} description={description}>
@@ -60,76 +57,7 @@ const galleryImages = await fetchAllDesignImages();
       </p>
     </section>
 
-    <!-- Masonry Gallery -->
-    <section class="container mx-auto px-4">
-      {
-        galleryImages.length > 0 ? (
-          <div class="masonry-grid">
-            {galleryImages.map((img) => (
-              <div class="masonry-item mb-4 break-inside-avoid">
-                <div class="group relative overflow-hidden rounded-xl bg-white shadow-md hover:shadow-xl transition-all duration-300">
-                  <img
-                    src={img.url}
-                    alt={`Diseño con ${img.name} - ${img.category}`}
-                    class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                  />
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                    <span class="text-marmoles-gold text-xs font-bold uppercase tracking-wider mb-1">
-                      {img.category}
-                    </span>
-                    <h3 class="text-white font-semibold text-lg leading-tight">
-                      {img.name}
-                    </h3>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div class="flex flex-col items-center justify-center py-20 text-center">
-            <div class="text-6xl mb-4">🖼️</div>
-            <h3 class="text-2xl font-bold text-gray-400">
-              Cargando inspiración...
-            </h3>
-            <p class="text-gray-500 mt-2">
-              Estamos recuperando las mejores imágenes para ti.
-            </p>
-          </div>
-        )
-      }
-    </section>
+    <!-- Client-Side Masonry Gallery with Progressive Loading -->
+    <MasonryGallery client:load />
   </main>
 </Layout>
-
-<style>
-  /* CSS Columns Masonry Layout - The "Pinterest" Style without JS */
-  .masonry-grid {
-    column-count: 1;
-    column-gap: 1.5rem;
-  }
-
-  @media (min-width: 640px) {
-    .masonry-grid {
-      column-count: 2;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .masonry-grid {
-      column-count: 3;
-    }
-  }
-
-  @media (min-width: 1280px) {
-    .masonry-grid {
-      column-count: 4;
-    }
-  }
-
-  /* Prevent elements from breaking across columns */
-  .masonry-item {
-    break-inside: avoid;
-    -webkit-column-break-inside: avoid;
-  }
-</style>
