@@ -337,17 +337,50 @@ const image = "/images/piedra-sinterizada-og.jpg";
 
   // --- Abrir modal automáticamente por parámetro 'material' ---
   if (typeof window !== "undefined") {
-    window.addEventListener("DOMContentLoaded", () => {
+    const triggerMaterialModal = () => {
       const params = new URLSearchParams(window.location.search);
       const material = params.get("material");
+
       if (material) {
-        setTimeout(() => {
+        // Normalizar el material parameter a slug format
+        const normalizedMaterial = material
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/(^-|-$)/g, "");
+
+        // Intentar abrir el modal múltiples veces para asegurar que React esté listo
+        let attempts = 0;
+        const maxAttempts = 5;
+
+        const tryOpenModal = () => {
+          attempts++;
           const event = new CustomEvent("modal-state-change", {
-            detail: { id: material },
+            detail: { id: normalizedMaterial },
           });
           document.dispatchEvent(event);
-        }, 500);
+
+          // Verificar si algún modal se abrió (comprobando si hay un modal visible)
+          setTimeout(() => {
+            const modalVisible =
+              document.querySelector("[data-modal-backdrop]") ||
+              document.body.style.overflow === "hidden";
+            if (!modalVisible && attempts < maxAttempts) {
+              // Reintentar después de un tiempo más largo
+              setTimeout(tryOpenModal, 500);
+            }
+          }, 100);
+        };
+
+        // Esperar un poco más para que React hidrate los componentes
+        setTimeout(tryOpenModal, 800);
       }
-    });
+    };
+
+    // Usar DOMContentLoaded y también un listener de load como respaldo
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", triggerMaterialModal);
+    } else {
+      triggerMaterialModal();
+    }
   }
 </script>

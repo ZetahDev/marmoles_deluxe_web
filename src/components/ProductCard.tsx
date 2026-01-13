@@ -101,7 +101,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
   useEffect(() => {
     const handleModalStateChange = (e: CustomEvent) => {
       const { id } = e.detail;
-      setIsModalOpen(id === slug);
+      // Support both exact match and partial match for URL sharing
+      // Partial match: if the material parameter is contained in the slug
+      // This allows URLs like ?material=travertino to match "travertino-gold"
+      const isExactMatch = id === slug;
+      const isPartialMatch = id && slug && slug.includes(id);
+      setIsModalOpen(isExactMatch || isPartialMatch);
     };
 
     const handleModalClose = () => {
