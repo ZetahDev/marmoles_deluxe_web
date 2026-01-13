@@ -98,15 +98,34 @@ const ProductCard: React.FC<ProductCardProps> = ({
     window.open(whatsappURL, "_blank");
   }, [category, name]);
 
+  // Get materialToOpen from Zustand store
+  const materialToOpen = useMaterialModalStore((state) => state.materialToOpen);
+  const clearMaterialToOpen = useMaterialModalStore(
+    (state) => state.clearMaterialToOpen
+  );
+
+  // Check if this ProductCard should open its modal based on URL parameter
+  useEffect(() => {
+    if (materialToOpen) {
+      // Check if slug matches (exact or partial match)
+      const isExactMatch = materialToOpen === slug;
+      const isPartialMatch = slug && slug.includes(materialToOpen);
+
+      if (isExactMatch || isPartialMatch) {
+        setIsModalOpen(true);
+        // Clear the materialToOpen after opening to prevent re-opening
+        clearMaterialToOpen();
+      }
+    }
+  }, [materialToOpen, slug, clearMaterialToOpen]);
+
+  // Keep the event listener for click-based modal opening
   useEffect(() => {
     const handleModalStateChange = (e: CustomEvent) => {
       const { id } = e.detail;
-      // Support both exact match and partial match for URL sharing
-      // Partial match: if the material parameter is contained in the slug
-      // This allows URLs like ?material=travertino to match "travertino-gold"
-      const isExactMatch = id === slug;
-      const isPartialMatch = id && slug && slug.includes(id);
-      setIsModalOpen(isExactMatch || isPartialMatch);
+      if (id === slug) {
+        setIsModalOpen(true);
+      }
     };
 
     const handleModalClose = () => {

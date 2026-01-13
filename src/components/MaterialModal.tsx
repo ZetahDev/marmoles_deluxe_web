@@ -41,22 +41,53 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
       document.body.style.overflow = "";
       resetImageIndex();
       clearCotizacion(); // Limpiar cotización al cerrar modal
+      // Dispatch modal-close event for other components to listen
+      const closeEvent = new CustomEvent("modal-close");
+      document.dispatchEvent(closeEvent);
     }
     return () => {
       document.body.style.overflow = "";
     };
   }, [isOpen, resetImageIndex, clearCotizacion]);
 
-  // Close on click outside
+  // Close on click outside - but NOT on touch/swipe events
   useEffect(() => {
     if (!isOpen) return;
-    const handleClick = (e: MouseEvent) => {
+
+    let touchMoved = false;
+
+    const handleTouchStart = () => {
+      touchMoved = false;
+    };
+
+    const handleTouchMove = () => {
+      touchMoved = true;
+    };
+
+    const handleClick = (e: MouseEvent | TouchEvent) => {
+      // Ignore if this was a touch swipe
+      if (touchMoved) {
+        touchMoved = false;
+        return;
+      }
+
+      // Check if click was outside modal
       if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
         onClose();
       }
     };
+
     document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
+    document.addEventListener("touchstart", handleTouchStart);
+    document.addEventListener("touchmove", handleTouchMove);
+    document.addEventListener("touchend", handleClick as EventListener);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+      document.removeEventListener("touchstart", handleTouchStart);
+      document.removeEventListener("touchmove", handleTouchMove);
+      document.removeEventListener("touchend", handleClick as EventListener);
+    };
   }, [isOpen, onClose]);
 
   // Close on Escape
@@ -69,19 +100,29 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
     return () => document.removeEventListener("keydown", handleEsc);
   }, [isOpen, onClose]);
 
-  // URL logic (split as recommended)
+  // URL logic - include category for better sharing
+  // Track if modal has been opened to avoid cleaning URL on initial render
+  const hasBeenOpenedRef = useRef(false);
+
   useEffect(() => {
     if (isOpen) {
+      hasBeenOpenedRef.current = true;
       const slug = title
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/(^-|-$)/g, "");
-      const newUrl = `${window.location.pathname}?material=${slug}`;
+      const categorySlug = category
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)/g, "");
+      const newUrl = `${window.location.pathname}?material=${slug}&categoria=${categorySlug}`;
       window.history.pushState({}, "", newUrl);
     }
-  }, [isOpen, title]);
+  }, [isOpen, title, category]);
+
   useEffect(() => {
-    if (!isOpen) {
+    // Only clean URL if modal was opened before (not on initial mount)
+    if (!isOpen && hasBeenOpenedRef.current) {
       window.history.pushState({}, "", window.location.pathname);
     }
   }, [isOpen]);

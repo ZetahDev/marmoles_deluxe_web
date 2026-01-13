@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
 
 interface Stone {
@@ -26,14 +26,88 @@ export default function CategorySection({
   itemsPerPage = 12, // Default to 12 items per page
 }: CategorySectionProps) {
   const [currentPage, setCurrentPage] = useState(1);
+  const [materialFilter, setMaterialFilter] = useState<string | null>(null);
+  const [isThisCategory, setIsThisCategory] = useState(false);
 
-  // Calculate total pages
-  const totalPages = Math.ceil(category.stones.length / itemsPerPage);
+  // Handle URL-based search filter
+  useEffect(() => {
+    if (typeof window === "undefined") return;
 
-  // Get current items
+    const params = new URLSearchParams(window.location.search);
+    const materialParam = params.get("material");
+    const categoriaParam = params.get("categoria");
+
+    if (materialParam && categoriaParam) {
+      // Check if this category matches the URL parameter
+      const categorySlug = category.title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)/g, "");
+
+      if (categorySlug === categoriaParam) {
+        // This is our target category - set filter
+        const normalizedMaterial = materialParam
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/(^-|-$)/g, "");
+
+        setMaterialFilter(normalizedMaterial);
+        setIsThisCategory(true);
+      }
+    }
+  }, [category.title]);
+
+  // Filter stones based on material parameter
+  const filteredStones = materialFilter
+    ? category.stones.filter((stone) => {
+        const stoneSlug = stone.name
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/(^-|-$)/g, "");
+        return (
+          stoneSlug === materialFilter || stoneSlug.includes(materialFilter)
+        );
+      })
+    : category.stones;
+
+  // Open modal automatically when filter is set
+  useEffect(() => {
+    if (isThisCategory && materialFilter && filteredStones.length > 0) {
+      // Small delay to ensure DOM is ready
+      const timeoutId = setTimeout(() => {
+        const event = new CustomEvent("modal-state-change", {
+          detail: { id: materialFilter },
+        });
+        document.dispatchEvent(event);
+      }, 500);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [isThisCategory, materialFilter, filteredStones.length]);
+
+  // Listen for modal close to clear filter and restore URL
+  useEffect(() => {
+    const handleModalClose = () => {
+      if (materialFilter) {
+        setMaterialFilter(null);
+        setIsThisCategory(false);
+        // Clean URL
+        if (typeof window !== "undefined") {
+          window.history.pushState({}, "", window.location.pathname);
+        }
+      }
+    };
+
+    document.addEventListener("modal-close", handleModalClose);
+    return () => document.removeEventListener("modal-close", handleModalClose);
+  }, [materialFilter]);
+
+  // Calculate total pages (using filtered stones)
+  const totalPages = Math.ceil(filteredStones.length / itemsPerPage);
+
+  // Get items to display
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = category.stones.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = filteredStones.slice(indexOfFirstItem, indexOfLastItem);
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
