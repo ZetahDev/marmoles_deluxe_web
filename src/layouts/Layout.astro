@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { WhatsAppButton } from "../components/WhatsAppButton";
+import { ScrollToTopButton } from "../components/ScrollToTopButton";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import { ClientRouter } from "astro:transitions";
@@ -87,6 +88,7 @@ const {
     </main>
     <Footer />
     <WhatsAppButton client:idle />
+    <ScrollToTopButton client:idle />
     <SpeedInsights />
 
     <script>
