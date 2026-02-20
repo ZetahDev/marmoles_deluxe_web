@@ -6,9 +6,9 @@ export const WhatsAppButton = () => {
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const phoneNumber = "573132592793";
   const message =
-    "¡Hola! Vengo de su página web y me interesa el descuento del 15% 🛒";
+    "¡Hola! Vengo de su página web y me gustaría hacer una consulta 🏢";
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
-    message
+    message,
   )}`;
 
   // Mostrar el botón después de 2 segundos para no bloquear INP
@@ -34,7 +34,7 @@ export const WhatsAppButton = () => {
       onMouseLeave={() => setTooltipVisible(false)}
       onClick={(e) => {
         // Trackear clic en WhatsApp
-        trackWhatsAppClick("floating_button", "15% descuento web");
+        trackWhatsAppClick("floating_button", "consulta general");
 
         // Utilizar requestIdleCallback para navegar solo cuando el thread esté libre
         e.preventDefault();

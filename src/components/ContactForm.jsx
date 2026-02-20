@@ -91,7 +91,7 @@ const ContactForm = () => {
 
       // Crear un objeto con los campos que espera la plantilla de EmailJS
       const templateParams = {
-        title: "Nueva solicitud de visita técnica - 15% descuento web",
+        title: "Nueva solicitud de visita técnica",
         name: formData.name,
         email: formData.email,
         message: combinedMessage,
@@ -108,7 +108,6 @@ const ContactForm = () => {
       // SIEMPRE enviar por WhatsApp como respaldo
       const whatsappMessage = `
 🔔 *Nueva Solicitud de Visita Técnica*
-💰 *Promoción: 15% de descuento por compra web*
 
 👤 *Nombre:* ${formData.name}
 📞 *Teléfono:* ${formData.phone}
@@ -150,10 +149,6 @@ ${formData.message}
       <h2 className="text-2xl font-bold text-marmoles-black mb-2">
         Solicita tu Visita Técnica
       </h2>
-      <p className="text-marmoles-gold font-semibold mb-4">
-        🎉 ¡Obtén 15% de descuento en tu compra por solicitar a través de la
-        web!
-      </p>
 
       {/* Mensaje de éxito */}
       {success && (
