@@ -1,0 +1,1177 @@
+{
+  "generatedAt": "2026-04-10T16:50:55.482Z",
+  "cloudName": "dudv2dh4w",
+  "source": {
+    "s3Bucket": "marmolesdeluxe",
+    "s3Region": "us-east-2",
+    "categories": [
+      "MARMOL",
+      "QUARSTONE",
+      "GRANITOS+NATURALES",
+      "PIEDRA+SINTERIZADA/ALTEA",
+      "PIEDRA+SINTERIZADA/DEKTON",
+      "PIEDRA+SINTERIZADA/NEOLITH",
+      "PIEDRA+SINTERIZADA/SILESTONE",
+      "PIEDRA+SINTERIZADA/ARTEMARMOL"
+    ]
+  },
+  "categories": {
+    "MARMOL": [
+      {
+        "name": "Blanco Carrara",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/marmol/blanco_carrara",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/marmol/blanco_carrara_desing"
+      },
+      {
+        "name": "Crema Marfil",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/marmol/crema_marfil",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/marmol/crema_marfil_desing"
+      },
+      {
+        "name": "Marron Emperador",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/marmol/marron_emperador",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/marmol/marron_emperador_desing"
+      }
+    ],
+    "QUARSTONE": [
+      {
+        "name": "Blanco Estelar",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/quarstone/blanco_estelar",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/quarstone/blanco_estelar_desing"
+      },
+      {
+        "name": "Blanco Extra",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/quarstone/blanco_extra",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/quarstone/blanco_extra_desing"
+      },
+      {
+        "name": "Blanco Polar",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/quarstone/blanco_polar",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/quarstone/blanco_polar_desing"
+      },
+      {
+        "name": "Gris Estelar",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/quarstone/gris_estelar",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/quarstone/gris_estelar_desing"
+      },
+      {
+        "name": "Negro Estelar",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/quarstone/negro_estelar",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/quarstone/negro_estelar_desing"
+      },
+      {
+        "name": "Quarstone Beige",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/quarstone/quarstone_beige",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/quarstone/quarstone_beige_desing"
+      },
+      {
+        "name": "Quarstone Gris Clasico",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/quarstone/quarstone_gris_clasico",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/quarstone/quarstone_gris_clasico_desing"
+      },
+      {
+        "name": "Rojo Estelar",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/quarstone/rojo_estelar",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/quarstone/rojo_estelar_desing"
+      }
+    ],
+    "GRANITOS+NATURALES": [
+      {
+        "name": "Amariilo Ornamental",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/amariilo_ornamental",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/amariilo_ornamental-_desing"
+      },
+      {
+        "name": "Artic Cream",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/artic_cream",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/artic_cream_designs"
+      },
+      {
+        "name": "Bengal Black",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/bengal_black",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/bengal_black_designs"
+      },
+      {
+        "name": "Bianco Azurro",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/bianco_azurro",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/bianco_azurro_designs"
+      },
+      {
+        "name": "Bianco Miramare",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/bianco_miramare",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/bianco_miramare_designs"
+      },
+      {
+        "name": "Black River",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/black_river",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/black_river_designs"
+      },
+      {
+        "name": "Blue Fantasy",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/blue_fantasy",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/blue_fantasy_designs"
+      },
+      {
+        "name": "Blue Sky",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/blue_sky",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/blue_sky_designs"
+      },
+      {
+        "name": "Delicatus",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/delicatus",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/delicatus_designs"
+      },
+      {
+        "name": "Golden Withe",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/golden_withe",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/golden_withe_designs"
+      },
+      {
+        "name": "Negro San Gabriel",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/negro_san_gabriel",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/negro_san_gabriel_desing"
+      },
+      {
+        "name": "Roma Exotico",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/roma_exotico",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/roma_exotico_desing"
+      },
+      {
+        "name": "Royal Gold",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/royal_gold",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/royal_gold_designs"
+      },
+      {
+        "name": "Silver Gray",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/silver_gray",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/silver_gray_desing"
+      },
+      {
+        "name": "Verde Ubatuba",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/verde_ubatuba",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/verde_ubatuba_designs"
+      },
+      {
+        "name": "White Delicatus",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/white_delicatus",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/white_delicatus_designs"
+      }
+    ],
+    "PIEDRA+SINTERIZADA/ALTEA": [
+      {
+        "name": "Amasia Texturizado",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/amasia_texturizado",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/amasia_texturizado_designs"
+      },
+      {
+        "name": "Antracita Dark",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/antracita_dark",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/antracita_dark_designs"
+      },
+      {
+        "name": "Calacatta Gold",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/calacatta_gold",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/calacatta_gold_designs"
+      },
+      {
+        "name": "Calacatta Royale",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/calacatta_royale",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/calacatta_royale_designs"
+      },
+      {
+        "name": "Cement Ash",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/cement_ash",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/cement_ash_designs"
+      },
+      {
+        "name": "Laurent Gold",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/laurent_gold",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/laurent_gold_designs"
+      },
+      {
+        "name": "Limestone Cream",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/limestone_cream",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/limestone_cream_designs"
+      },
+      {
+        "name": "Phantom Grey",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/phantom_grey",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/phantom_grey_designs"
+      },
+      {
+        "name": "Pure Black",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/pure_black",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/pure_black_designs"
+      },
+      {
+        "name": "Pure White",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/pure_white",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/pure_white_designs"
+      },
+      {
+        "name": "Snow River",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/snow_river",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/snow_river_designs"
+      },
+      {
+        "name": "Statuario",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/statuario",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/statuario_designs"
+      },
+      {
+        "name": "Taj Mahal",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/taj_mahal",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/taj_mahal_designs"
+      },
+      {
+        "name": "Travertino Crema",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/travertino_crema",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/travertino_crema_designs"
+      }
+    ],
+    "PIEDRA+SINTERIZADA/DEKTON": [
+      {
+        "name": "Aeris",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/aeris",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/aeris_designs"
+      },
+      {
+        "name": "Aura",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/aura",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/aura_designs"
+      },
+      {
+        "name": "Awake",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/awake",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/awake_designs"
+      },
+      {
+        "name": "Bergen",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/bergen",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/bergen_designs"
+      },
+      {
+        "name": "Ceppo",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/ceppo",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/ceppo_designs"
+      },
+      {
+        "name": "Danae",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/danae",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/danae_designs"
+      },
+      {
+        "name": "Domoos",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/domoos",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/domoos_designs"
+      },
+      {
+        "name": "Entzo",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/entzo",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/entzo_designs"
+      },
+      {
+        "name": "Eter",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/eter",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/eter_designs"
+      },
+      {
+        "name": "Halo",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/halo",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/halo_designs"
+      },
+      {
+        "name": "Kelya",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/kelya",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/kelya_designs"
+      },
+      {
+        "name": "Keon",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/keon",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/keon_designs"
+      },
+      {
+        "name": "Khalo",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/khalo",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/khalo_designs"
+      },
+      {
+        "name": "Kira",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/kira",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/kira_designs"
+      },
+      {
+        "name": "Laurent",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/laurent",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/laurent_designs"
+      },
+      {
+        "name": "Liquid Sky",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/liquid_sky",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/liquid_sky_designs"
+      },
+      {
+        "name": "Marina",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/marina",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/marina_designs"
+      },
+      {
+        "name": "Marmorio",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/marmorio",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/marmorio_designs"
+      },
+      {
+        "name": "Nacre",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/nacre",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/nacre_designs"
+      },
+      {
+        "name": "Natura",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/natura",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/natura_designs"
+      },
+      {
+        "name": "Soke",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/soke",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/soke_designs"
+      },
+      {
+        "name": "Somnia",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/somnia",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/somnia_designs"
+      },
+      {
+        "name": "Taga",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/taga",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/taga_designs"
+      },
+      {
+        "name": "Trance",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/trance",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/trance_designs"
+      }
+    ],
+    "PIEDRA+SINTERIZADA/NEOLITH": [
+      {
+        "name": "Artisan Silk",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/neolith/artisan_silk",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/neolith/artisan_silk_designs"
+      },
+      {
+        "name": "Black Obsession Silk",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/neolith/black_obsession_silk",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/neolith/black_obsession_silk_designs"
+      },
+      {
+        "name": "Ignea RiverWashed",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/neolith/ignea_riverwashed",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/neolith/ignea_riverwashed_designs"
+      },
+      {
+        "name": "Rapolano Silk",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/neolith/rapolano_silk",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/neolith/rapolano_silk_designs"
+      },
+      {
+        "name": "WhiteSands Silk",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/neolith/whitesands_silk",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/neolith/whitesands_silk_designs"
+      }
+    ],
+    "PIEDRA+SINTERIZADA/SILESTONE": [
+      {
+        "name": "Brass Relish",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/silestone/brass_relish",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/silestone/brass_relish_designs"
+      },
+      {
+        "name": "Cala Blue",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/silestone/cala_blue",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/silestone/cala_blue_designs"
+      },
+      {
+        "name": "Cinder Craze",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/silestone/cinder_craze",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/silestone/cinder_craze_designs"
+      },
+      {
+        "name": "Concrete Pulse",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/silestone/concrete_pulse",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/silestone/concrete_pulse_designs"
+      },
+      {
+        "name": "Gris Expo",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/silestone/gris_expo",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/silestone/gris_expo_designs"
+      },
+      {
+        "name": "Lime Delight",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/silestone/lime_delight",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/silestone/lime_delight_designs"
+      },
+      {
+        "name": "Miami White",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/silestone/miami_white",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/silestone/miami_white_designs"
+      },
+      {
+        "name": "Noka",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/silestone/noka",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/silestone/noka_designs"
+      },
+      {
+        "name": "Rougui",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/silestone/rougui",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/silestone/rougui_designs"
+      }
+    ],
+    "PIEDRA+SINTERIZADA/ARTEMARMOL": [
+      {
+        "name": "Amazonite",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/amazonite",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/amazonite_designs"
+      },
+      {
+        "name": "Apune Statuario",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/apune-statuario",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/apune-statuario_designs"
+      },
+      {
+        "name": "Apune Statuario Porcelan",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/apune-statuario-porcelan",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/apune-statuario-porcelan_designs"
+      },
+      {
+        "name": "Arbescato Oscuro",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/arbescato-oscuro",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/arbescato-oscuro_designs"
+      },
+      {
+        "name": "Australian Grey",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/australian-grey",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/australian-grey_designs"
+      },
+      {
+        "name": "Beldia Blanco",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/beldia-blanco",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/beldia-blanco_designs"
+      },
+      {
+        "name": "Bianco Statuario Venato",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/bianco-statuario-venato",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/bianco-statuario-venato_designs"
+      },
+      {
+        "name": "Blanco Rumero",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/blanco-rumero",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/blanco-rumero_designs"
+      },
+      {
+        "name": "Calacata Borghini",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/calacata-borghini",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/calacata-borghini_designs"
+      },
+      {
+        "name": "Calacata Gold",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/calacata-gold",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/calacata-gold_designs"
+      },
+      {
+        "name": "Calacata Venato",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/calacata-venato",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/calacata-venato_desings"
+      },
+      {
+        "name": "Calacatta Borghini",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/calacatta-borghini",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/calacatta-borghini_designs"
+      },
+      {
+        "name": "Calacutta Bianco Oro",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/calacutta-bianco-oro",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/calacutta-bianco-oro_designs"
+      },
+      {
+        "name": "Calce Terracota",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/calce-terracota",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/calce-terracota_designs"
+      },
+      {
+        "name": "Cristalita",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/cristalita",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/cristalita_designs"
+      },
+      {
+        "name": "Fokos Roccia",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/fokos-roccia",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/fokos-roccia_designs"
+      },
+      {
+        "name": "Fokos Sale",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/fokos-sale",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/fokos-sale_designs"
+      },
+      {
+        "name": "Golden Breeze",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/golden-breeze",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/golden-breeze_designs"
+      },
+      {
+        "name": "Grunge Copper",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/grunge-copper",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/grunge-copper_designs"
+      },
+      {
+        "name": "Invisible White",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/invisible-white",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/invisible-white_designs"
+      },
+      {
+        "name": "Massimo Arabescato",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/massimo-arabescato",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/massimo-arabescato_designs"
+      },
+      {
+        "name": "Negro Marquina",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/negro-marquina",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/negro-marquina_designs"
+      },
+      {
+        "name": "Oceano Onyx",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/oceano-onyx",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/oceano-onyx_designs"
+      },
+      {
+        "name": "Paboni Black",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/paboni-black",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/paboni-black_designs"
+      },
+      {
+        "name": "Patagonia",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/patagonia",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/patagonia_designs"
+      },
+      {
+        "name": "Pietra Di Savoia Grigia",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/pietra-di-savoia-grigia",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/pietra-di-savoia-grigia_designs"
+      },
+      {
+        "name": "Pietra Di Savoia Perla",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/pietra-di-savoia-perla",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/pietra-di-savoia-perla_designs"
+      },
+      {
+        "name": "Pietra Grey",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/pietra-grey",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/pietra-grey_designs"
+      },
+      {
+        "name": "Statuario Grey",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/statuario-grey",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/statuario-grey_designs"
+      },
+      {
+        "name": "Statuario Oro",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/statuario-oro",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/statuario-oro_designs"
+      },
+      {
+        "name": "Travertino",
+        "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/travertino",
+        "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/travertino_designs"
+      }
+    ]
+  },
+  "designGallery": [
+    {
+      "name": "Aeris",
+      "category": "DEKTON",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/aeris_designs"
+    },
+    {
+      "name": "Amariilo Ornamental",
+      "category": "GRANITOS+NATURALES",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/amariilo_ornamental-_desing"
+    },
+    {
+      "name": "Amasia Texturizado",
+      "category": "ALTEA",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/amasia_texturizado_designs"
+    },
+    {
+      "name": "Amazonite",
+      "category": "ARTEMARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/amazonite_designs"
+    },
+    {
+      "name": "Antracita Dark",
+      "category": "ALTEA",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/antracita_dark_designs"
+    },
+    {
+      "name": "Apune Statuario",
+      "category": "ARTEMARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/apune-statuario_designs"
+    },
+    {
+      "name": "Apune Statuario Porcelan",
+      "category": "ARTEMARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/apune-statuario-porcelan_designs"
+    },
+    {
+      "name": "Arbescato Oscuro",
+      "category": "ARTEMARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/arbescato-oscuro_designs"
+    },
+    {
+      "name": "Artic Cream",
+      "category": "GRANITOS+NATURALES",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/artic_cream_designs"
+    },
+    {
+      "name": "Artisan Silk",
+      "category": "NEOLITH",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/neolith/artisan_silk_designs"
+    },
+    {
+      "name": "Aura",
+      "category": "DEKTON",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/aura_designs"
+    },
+    {
+      "name": "Australian Grey",
+      "category": "ARTEMARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/australian-grey_designs"
+    },
+    {
+      "name": "Awake",
+      "category": "DEKTON",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/awake_designs"
+    },
+    {
+      "name": "Beldia Blanco",
+      "category": "ARTEMARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/beldia-blanco_designs"
+    },
+    {
+      "name": "Bengal Black",
+      "category": "GRANITOS+NATURALES",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/bengal_black_designs"
+    },
+    {
+      "name": "Bergen",
+      "category": "DEKTON",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/bergen_designs"
+    },
+    {
+      "name": "Bianco Azurro",
+      "category": "GRANITOS+NATURALES",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/bianco_azurro_designs"
+    },
+    {
+      "name": "Bianco Miramare",
+      "category": "GRANITOS+NATURALES",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/bianco_miramare_designs"
+    },
+    {
+      "name": "Bianco Statuario Venato",
+      "category": "ARTEMARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/bianco-statuario-venato_designs"
+    },
+    {
+      "name": "Black Obsession Silk",
+      "category": "NEOLITH",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/neolith/black_obsession_silk_designs"
+    },
+    {
+      "name": "Black River",
+      "category": "GRANITOS+NATURALES",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/black_river_designs"
+    },
+    {
+      "name": "Blanco Carrara",
+      "category": "MARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/marmol/blanco_carrara_desing"
+    },
+    {
+      "name": "Blanco Estelar",
+      "category": "QUARSTONE",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/quarstone/blanco_estelar_desing"
+    },
+    {
+      "name": "Blanco Extra",
+      "category": "QUARSTONE",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/quarstone/blanco_extra_desing"
+    },
+    {
+      "name": "Blanco Polar",
+      "category": "QUARSTONE",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/quarstone/blanco_polar_desing"
+    },
+    {
+      "name": "Blanco Rumero",
+      "category": "ARTEMARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/blanco-rumero_designs"
+    },
+    {
+      "name": "Blue Fantasy",
+      "category": "GRANITOS+NATURALES",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/blue_fantasy_designs"
+    },
+    {
+      "name": "Blue Sky",
+      "category": "GRANITOS+NATURALES",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/blue_sky_designs"
+    },
+    {
+      "name": "Brass Relish",
+      "category": "SILESTONE",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/silestone/brass_relish_designs"
+    },
+    {
+      "name": "Cala Blue",
+      "category": "SILESTONE",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/silestone/cala_blue_designs"
+    },
+    {
+      "name": "Calacata Borghini",
+      "category": "ARTEMARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/calacata-borghini_designs"
+    },
+    {
+      "name": "Calacata Gold",
+      "category": "ARTEMARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/calacata-gold_designs"
+    },
+    {
+      "name": "Calacata Venato",
+      "category": "ARTEMARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/calacata-venato_desings"
+    },
+    {
+      "name": "Calacatta Borghini",
+      "category": "ARTEMARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/calacatta-borghini_designs"
+    },
+    {
+      "name": "Calacatta Gold",
+      "category": "ALTEA",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/calacatta_gold_designs"
+    },
+    {
+      "name": "Calacatta Royale",
+      "category": "ALTEA",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/calacatta_royale_designs"
+    },
+    {
+      "name": "Calacutta Bianco Oro",
+      "category": "ARTEMARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/calacutta-bianco-oro_designs"
+    },
+    {
+      "name": "Calce Terracota",
+      "category": "ARTEMARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/calce-terracota_designs"
+    },
+    {
+      "name": "Cement Ash",
+      "category": "ALTEA",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/cement_ash_designs"
+    },
+    {
+      "name": "Ceppo",
+      "category": "DEKTON",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/ceppo_designs"
+    },
+    {
+      "name": "Cinder Craze",
+      "category": "SILESTONE",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/silestone/cinder_craze_designs"
+    },
+    {
+      "name": "Concrete Pulse",
+      "category": "SILESTONE",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/silestone/concrete_pulse_designs"
+    },
+    {
+      "name": "Crema Marfil",
+      "category": "MARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/marmol/crema_marfil_desing"
+    },
+    {
+      "name": "Cristalita",
+      "category": "ARTEMARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/cristalita_designs"
+    },
+    {
+      "name": "Danae",
+      "category": "DEKTON",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/danae_designs"
+    },
+    {
+      "name": "Delicatus",
+      "category": "GRANITOS+NATURALES",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/delicatus_designs"
+    },
+    {
+      "name": "Domoos",
+      "category": "DEKTON",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/domoos_designs"
+    },
+    {
+      "name": "Entzo",
+      "category": "DEKTON",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/entzo_designs"
+    },
+    {
+      "name": "Eter",
+      "category": "DEKTON",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/eter_designs"
+    },
+    {
+      "name": "Fokos Roccia",
+      "category": "ARTEMARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/fokos-roccia_designs"
+    },
+    {
+      "name": "Fokos Sale",
+      "category": "ARTEMARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/fokos-sale_designs"
+    },
+    {
+      "name": "Golden Breeze",
+      "category": "ARTEMARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/golden-breeze_designs"
+    },
+    {
+      "name": "Golden Withe",
+      "category": "GRANITOS+NATURALES",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/golden_withe_designs"
+    },
+    {
+      "name": "Gris Estelar",
+      "category": "QUARSTONE",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/quarstone/gris_estelar_desing"
+    },
+    {
+      "name": "Gris Expo",
+      "category": "SILESTONE",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/silestone/gris_expo_designs"
+    },
+    {
+      "name": "Grunge Copper",
+      "category": "ARTEMARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/grunge-copper_designs"
+    },
+    {
+      "name": "Halo",
+      "category": "DEKTON",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/halo_designs"
+    },
+    {
+      "name": "Ignea RiverWashed",
+      "category": "NEOLITH",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/neolith/ignea_riverwashed_designs"
+    },
+    {
+      "name": "Invisible White",
+      "category": "ARTEMARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/invisible-white_designs"
+    },
+    {
+      "name": "Kelya",
+      "category": "DEKTON",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/kelya_designs"
+    },
+    {
+      "name": "Keon",
+      "category": "DEKTON",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/keon_designs"
+    },
+    {
+      "name": "Khalo",
+      "category": "DEKTON",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/khalo_designs"
+    },
+    {
+      "name": "Kira",
+      "category": "DEKTON",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/kira_designs"
+    },
+    {
+      "name": "Laurent",
+      "category": "DEKTON",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/laurent_designs"
+    },
+    {
+      "name": "Laurent Gold",
+      "category": "ALTEA",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/laurent_gold_designs"
+    },
+    {
+      "name": "Lime Delight",
+      "category": "SILESTONE",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/silestone/lime_delight_designs"
+    },
+    {
+      "name": "Limestone Cream",
+      "category": "ALTEA",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/limestone_cream_designs"
+    },
+    {
+      "name": "Liquid Sky",
+      "category": "DEKTON",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/liquid_sky_designs"
+    },
+    {
+      "name": "Marina",
+      "category": "DEKTON",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/marina_designs"
+    },
+    {
+      "name": "Marmorio",
+      "category": "DEKTON",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/marmorio_designs"
+    },
+    {
+      "name": "Marron Emperador",
+      "category": "MARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/marmol/marron_emperador_desing"
+    },
+    {
+      "name": "Massimo Arabescato",
+      "category": "ARTEMARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/massimo-arabescato_designs"
+    },
+    {
+      "name": "Miami White",
+      "category": "SILESTONE",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/silestone/miami_white_designs"
+    },
+    {
+      "name": "Nacre",
+      "category": "DEKTON",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/nacre_designs"
+    },
+    {
+      "name": "Natura",
+      "category": "DEKTON",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/natura_designs"
+    },
+    {
+      "name": "Negro Estelar",
+      "category": "QUARSTONE",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/quarstone/negro_estelar_desing"
+    },
+    {
+      "name": "Negro Marquina",
+      "category": "ARTEMARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/negro-marquina_designs"
+    },
+    {
+      "name": "Negro San Gabriel",
+      "category": "GRANITOS+NATURALES",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/negro_san_gabriel_desing"
+    },
+    {
+      "name": "Noka",
+      "category": "SILESTONE",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/silestone/noka_designs"
+    },
+    {
+      "name": "Oceano Onyx",
+      "category": "ARTEMARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/oceano-onyx_designs"
+    },
+    {
+      "name": "Paboni Black",
+      "category": "ARTEMARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/paboni-black_designs"
+    },
+    {
+      "name": "Patagonia",
+      "category": "ARTEMARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/patagonia_designs"
+    },
+    {
+      "name": "Phantom Grey",
+      "category": "ALTEA",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/phantom_grey_designs"
+    },
+    {
+      "name": "Pietra Di Savoia Grigia",
+      "category": "ARTEMARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/pietra-di-savoia-grigia_designs"
+    },
+    {
+      "name": "Pietra Di Savoia Perla",
+      "category": "ARTEMARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/pietra-di-savoia-perla_designs"
+    },
+    {
+      "name": "Pietra Grey",
+      "category": "ARTEMARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/pietra-grey_designs"
+    },
+    {
+      "name": "Pure Black",
+      "category": "ALTEA",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/pure_black_designs"
+    },
+    {
+      "name": "Pure White",
+      "category": "ALTEA",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/pure_white_designs"
+    },
+    {
+      "name": "Quarstone Beige",
+      "category": "QUARSTONE",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/quarstone/quarstone_beige_desing"
+    },
+    {
+      "name": "Quarstone Gris Clasico",
+      "category": "QUARSTONE",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/quarstone/quarstone_gris_clasico_desing"
+    },
+    {
+      "name": "Rapolano Silk",
+      "category": "NEOLITH",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/neolith/rapolano_silk_designs"
+    },
+    {
+      "name": "Rojo Estelar",
+      "category": "QUARSTONE",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/quarstone/rojo_estelar_desing"
+    },
+    {
+      "name": "Roma Exotico",
+      "category": "GRANITOS+NATURALES",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/roma_exotico_desing"
+    },
+    {
+      "name": "Rougui",
+      "category": "SILESTONE",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/silestone/rougui_designs"
+    },
+    {
+      "name": "Royal Gold",
+      "category": "GRANITOS+NATURALES",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/royal_gold_designs"
+    },
+    {
+      "name": "Silver Gray",
+      "category": "GRANITOS+NATURALES",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/silver_gray_desing"
+    },
+    {
+      "name": "Snow River",
+      "category": "ALTEA",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/snow_river_designs"
+    },
+    {
+      "name": "Soke",
+      "category": "DEKTON",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/soke_designs"
+    },
+    {
+      "name": "Somnia",
+      "category": "DEKTON",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/somnia_designs"
+    },
+    {
+      "name": "Statuario",
+      "category": "ALTEA",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/statuario_designs"
+    },
+    {
+      "name": "Statuario Grey",
+      "category": "ARTEMARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/statuario-grey_designs"
+    },
+    {
+      "name": "Statuario Oro",
+      "category": "ARTEMARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/statuario-oro_designs"
+    },
+    {
+      "name": "Taga",
+      "category": "DEKTON",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/taga_designs"
+    },
+    {
+      "name": "Taj Mahal",
+      "category": "ALTEA",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/taj_mahal_designs"
+    },
+    {
+      "name": "Trance",
+      "category": "DEKTON",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/trance_designs"
+    },
+    {
+      "name": "Travertino",
+      "category": "ARTEMARMOL",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/travertino_designs"
+    },
+    {
+      "name": "Travertino Crema",
+      "category": "ALTEA",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/travertino_crema_designs"
+    },
+    {
+      "name": "Verde Ubatuba",
+      "category": "GRANITOS+NATURALES",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/verde_ubatuba_designs"
+    },
+    {
+      "name": "White Delicatus",
+      "category": "GRANITOS+NATURALES",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/granitos-naturales/white_delicatus_designs"
+    },
+    {
+      "name": "WhiteSands Silk",
+      "category": "NEOLITH",
+      "url": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/neolith/whitesands_silk_designs"
+    }
+  ],
+  "assets": {
+    "branding": {
+      "logoMain": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/assets/images/logo",
+      "brandLogos": {
+        "Altea": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/assets/logos/altea",
+        "catemar": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/assets/logos/catemar",
+        "dekton": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/assets/logos/dekton",
+        "neolith": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/assets/logos/neolith",
+        "Sensa": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/assets/logos/sensa",
+        "silestone": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/assets/logos/silestone"
+      }
+    },
+    "home": {
+      "hero": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/assets/home/hero",
+      "detail": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/assets/home/detail",
+      "projectBlackDiamond": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/assets/home/projectblackdiamond",
+      "projectRoyalWhite": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/assets/home/projectroyalwhite",
+      "projectIslaInfinity": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/assets/home/projectislainfinity",
+      "projectLobbyMajestic": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/assets/home/projectlobbymajestic",
+      "projects": [
+        "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/assets/home/projectblackdiamond",
+        "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/assets/home/projectroyalwhite",
+        "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/assets/home/projectislainfinity",
+        "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/assets/home/projectlobbymajestic"
+      ]
+    },
+    "promo": {
+      "blancoPolar": [
+        "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/quarstone/blanco_polar",
+        "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/quarstone/blanco_polar_desing"
+      ]
+    },
+    "seo": {
+      "default": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/assets/home/hero",
+      "contact": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/assets/home/detail",
+      "projects": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/assets/home/projectlobbymajestic",
+      "piedraSinterizada": "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/assets/home/hero"
+    }
+  }
+}
