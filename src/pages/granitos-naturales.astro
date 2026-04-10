@@ -3,10 +3,12 @@ import Layout from "../layouts/Layout.astro";
 import ProductCard from "../components/ProductCard.tsx";
 import SEOSchemaData from "../components/SEOSchemaData.tsx";
 import { listStonesFromS3, type Stone } from "../lib/utils/s3Utils";
+import { cloudinaryAssets } from "../lib/images/cloudinaryAssets";
+import { buildSeoImageUrl } from "../lib/images/cloudinary";
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const pageUrl = canonicalURL.toString();
-const metaImage = new URL("/images/contactanos-og.jpg", Astro.site).toString();
+const metaImage = buildSeoImageUrl(cloudinaryAssets.seo.contact);
 const title = "Granitos Naturales Cali - Mármoles Deluxe | Encimeras Durables";
 const description =
   "Explora nuestra colección de granitos naturales de alta calidad para encimeras, pisos y superficies. Material elegante y duradero para tu hogar u oficina.";

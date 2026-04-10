@@ -1,5 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useMaterialModalStore } from "../store/materialModalStore";
+import {
+  buildCloudinaryImageSet,
+  CLOUDINARY_PRESETS,
+} from "../lib/images/cloudinary";
 
 interface MaterialModalProps {
   title: string;
@@ -24,6 +28,10 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
 }) => {
   const allImages = images.length > 0 ? images : [image];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const mainResponsiveImage = buildCloudinaryImageSet(
+    allImages[currentImageIndex],
+    CLOUDINARY_PRESETS.modal
+  );
   const resetImageIndex = useMaterialModalStore(
     (state) => state.resetImageIndex
   );
@@ -226,10 +234,14 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
               style={{ maxWidth: "100%" }}
             >
               <img
-                src={allImages[currentImageIndex]}
+                src={mainResponsiveImage.src}
+                srcSet={mainResponsiveImage.srcSet}
+                sizes={mainResponsiveImage.sizes}
                 alt={`${title} - vista ${currentImageIndex + 1}`}
                 className="w-full h-full object-contain sm:object-cover object-center"
                 style={{ maxWidth: "100%", height: "100%", display: "block" }}
+                loading="lazy"
+                decoding="async"
               />
               {allImages.length > 1 && (
                 <>
@@ -300,9 +312,13 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
                     onClick={() => setCurrentImageIndex(index)}
                   >
                     <img
-                      src={img}
+                      src={
+                        buildCloudinaryImageSet(img, CLOUDINARY_PRESETS.card).src
+                      }
                       alt={`${title} - miniatura ${index + 1}`}
                       className="h-full w-full object-cover"
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                 ))}

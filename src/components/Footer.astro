@@ -1,31 +1,44 @@
 ---
 import MarcasBanner from "./MarcasBanner.astro";
+import { cloudinaryAssets } from "../lib/images/cloudinaryAssets";
+import {
+  buildCloudinaryImageSet,
+  CLOUDINARY_PRESETS,
+} from "../lib/images/cloudinary";
+
 const currentYear = new Date().getFullYear();
+const logoImage = buildCloudinaryImageSet(
+  cloudinaryAssets.branding.logoMain,
+  CLOUDINARY_PRESETS.logo
+);
 ---
 
 <footer class="bg-marmoles-black text-white py-4 mt-auto">
   <div class="container mx-auto px-4 sm:px-6 max-w-6xl">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <!-- Logo y descripciÃ³n -->
+      <!-- Logo y descripción -->
       <div class="flex flex-col items-center md:items-start">
         <img
-          src={"images/logo.webp"}
-          alt="MÃ¡rmoles Deluxe Logo"
+          src={logoImage.src}
+          srcset={logoImage.srcSet}
+          sizes={logoImage.sizes}
+          alt="Mármoles Deluxe Logo"
           class="h-16 w-auto mb-4"
           width="215"
           height="112"
           loading="lazy"
+          decoding="async"
         />
         <p class="text-sm text-gray-300 mt-2 text-center md:text-left">
-          MÃ¡s de 16 aÃ±os de experiencia en el suministro e instalaciÃ³n de
+          Más de 16 años de experiencia en el suministro e instalación de
           superficies en piedras naturales y sinterizadas.
         </p>
       </div>
 
-      <!-- Enlaces rÃ¡pidos -->
+      <!-- Enlaces rápidos -->
       <div class="text-center">
         <h3 class="text-lg font-semibold mb-4 text-marmoles-gold">
-          Enlaces RÃ¡pidos
+          Enlaces Rápidos
         </h3>
         <ul class="space-y-2">
           <li>
@@ -53,7 +66,7 @@ const currentYear = new Date().getFullYear();
             <a
               href="/contactanos"
               class="text-gray-300 hover:text-marmoles-gold transition-colors"
-              >ContÃ¡ctanos</a
+              >Contáctanos</a
             >
           </li>
         </ul>
@@ -62,11 +75,9 @@ const currentYear = new Date().getFullYear();
       <!-- Contacto y redes sociales -->
       <div class="text-center md:text-right">
         <h3 class="text-lg font-semibold mb-4 text-marmoles-gold">
-          ContÃ¡ctanos
+          Contáctanos
         </h3>
-        <p class="text-gray-300 mb-2">
-          Cra 5norte 40-43 barrio el popular, Cali
-        </p>
+        <p class="text-gray-300 mb-2">Cl. 43a Nte. #5N 69, COMUNA 4, Cali</p>
         <p class="text-gray-300 mb-4">+57 3132592793</p>
 
         <div class="flex justify-center md:justify-end space-x-4 mt-4">
@@ -116,12 +127,12 @@ const currentYear = new Date().getFullYear();
       </div>
     </div>
 
-    <!-- Marcas Banner con desplazamiento automÃ¡tico -->
+    <!-- Marcas Banner con desplazamiento automático -->
     <MarcasBanner />
 
     <div class="border-t border-gray-800 mt-8 pt-8 text-center">
       <p class="text-sm text-gray-400">
-        &copy; {currentYear} MÃ¡rmoles Deluxe. Todos los derechos reservados.
+        &copy; {currentYear} Mármoles Deluxe. Todos los derechos reservados.
         <a
           href="https://co.linkedin.com/in/zetahdev/en"
           target="_blank"
@@ -137,12 +148,12 @@ const currentYear = new Date().getFullYear();
 
 <style>
   footer {
-    padding-bottom: 80px; /* Espacio para el botÃ³n de WhatsApp */
+    padding-bottom: 80px; /* Espacio para el botón de WhatsApp */
   }
 
   @media (min-width: 768px) {
     footer {
-      padding-bottom: 60px; /* Ajuste para pantallas mÃ¡s grandes */
+      padding-bottom: 60px; /* Ajuste para pantallas más grandes */
     }
   }
 </style>

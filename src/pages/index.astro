@@ -4,6 +4,12 @@ import { CarouselWrapper } from "../components/CarouselWrapper";
 import { TestimonialCarousel } from "../components/TestimonialCarousel";
 import ContactForm from "../components/ContactForm";
 import SEOSchemaData from "../components/SEOSchemaData.tsx";
+import { cloudinaryAssets } from "../lib/images/cloudinaryAssets";
+import {
+  buildCloudinaryImageSet,
+  buildSeoImageUrl,
+  CLOUDINARY_PRESETS,
+} from "../lib/images/cloudinary";
 
 // --- Metadatos SEO & Configuración ---
 const title =
@@ -16,7 +22,15 @@ const keywords =
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const pageUrl = canonicalURL.toString();
-const metaImage = new URL("/images/contactanos-og.jpg", Astro.site).toString();
+const metaImage = buildSeoImageUrl(cloudinaryAssets.seo.default);
+const heroImage = buildCloudinaryImageSet(
+  cloudinaryAssets.home.hero,
+  CLOUDINARY_PRESETS.hero
+);
+const detailImage = buildCloudinaryImageSet(
+  cloudinaryAssets.home.detail,
+  CLOUDINARY_PRESETS.card
+);
 
 // --- Datos "Alex Hormozi Style" ---
 
@@ -56,25 +70,25 @@ const projects = [
     title: "Cocina Black Diamond",
     description: "Granito San Gabriel con acabado leather. Elegancia pura.",
     image:
-      "https://images.unsplash.com/photo-1556911220-bff31c812dba?q=60&w=600&auto=format&fit=crop",
+      cloudinaryAssets.home.projectBlackDiamond,
   },
   {
     title: "Baño Royal White",
     description: "Mármol Calacatta importado. El spa en tu propia casa.",
     image:
-      "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=60&w=600&auto=format&fit=crop",
+      cloudinaryAssets.home.projectRoyalWhite,
   },
   {
     title: "Isla Infinity",
     description: "Piedra sinterizada Neolith. Indestructible y hermosa.",
     image:
-      "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=60&w=600&auto=format&fit=crop",
+      cloudinaryAssets.home.projectIslaInfinity,
   },
   {
     title: "Lobby Majestic",
     description: "Mármol Crema Marfil. La primera impresión cuenta.",
     image:
-      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=60&w=600&auto=format&fit=crop",
+      cloudinaryAssets.home.projectLobbyMajestic,
   },
 ];
 
@@ -105,7 +119,7 @@ const testimonies = [
     <link
       rel="preload"
       as="image"
-      href="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2000&auto=format&fit=crop"
+      href={heroImage.src}
       fetchpriority="high"
     />
     <style>
@@ -176,12 +190,15 @@ const testimonies = [
     <!-- Background Image with Overlay -->
     <div class="absolute inset-0 z-0">
       <img
-        src="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2000&auto=format&fit=crop"
+        src={heroImage.src}
+        srcset={heroImage.srcSet}
+        sizes={heroImage.sizes}
         alt="Cocina de lujo con mármol negro"
         class="w-full h-full object-cover opacity-60"
         width="1920"
         height="1080"
         fetchpriority="high"
+        decoding="async"
       />
       <div
         class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"
@@ -337,10 +354,13 @@ const testimonies = [
       <div class="flex flex-col md:flex-row items-center gap-12">
         <div class="md:w-1/2 animate-on-scroll">
           <img
-            src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1000&auto=format&fit=crop"
+            src={detailImage.src}
+            srcset={detailImage.srcSet}
+            sizes={detailImage.sizes}
             alt="Detalle de mármol de alta calidad"
             class="rounded-2xl shadow-2xl rotate-2 hover:rotate-0 transition-all duration-500"
             loading="lazy"
+            decoding="async"
           />
         </div>
         <div class="md:w-1/2 animate-on-scroll">
@@ -529,3 +549,5 @@ const testimonies = [
     });
   });
 </script>
+
+

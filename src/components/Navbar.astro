@@ -1,5 +1,10 @@
 ---
 import MobileMenu from "./MobileMenu";
+import { cloudinaryAssets } from "../lib/images/cloudinaryAssets";
+import {
+  buildCloudinaryImageSet,
+  CLOUDINARY_PRESETS,
+} from "../lib/images/cloudinary";
 
 const navItems = [
   {
@@ -16,7 +21,7 @@ const navItems = [
     items: [
       { href: "/piedra-sinterizada", label: "Piedra Sinterizada" },
       { href: "/quartzstone", label: "Quartzstone" },
-      { href: "/marmoles", label: "MÃ¡rmoles" },
+      { href: "/marmoles", label: "Mármoles" },
       { href: "/granitos-naturales", label: "Granito" },
     ],
   },
@@ -25,13 +30,17 @@ const navItems = [
   { href: "/otros-servicios", label: "Otros Servicios" },
   { href: "/b2b", label: "B2B" },
   { href: "/proyectos", label: "Proyectos" },
-  { href: "/politicas-garantia", label: "GarantÃ­as" },
-  { href: "/contactanos", label: "ContÃ¡ctanos" },
+  { href: "/politicas-garantia", label: "Garantías" },
+  { href: "/contactanos", label: "Contáctanos" },
 ];
 
 const currentPath = Astro.url.pathname;
+const logoImage = buildCloudinaryImageSet(
+  cloudinaryAssets.branding.logoMain,
+  CLOUDINARY_PRESETS.logo
+);
 
-// Helper para verificar si la ruta actual estÃ¡ bajo Materiales
+// Helper para verificar si la ruta actual está bajo Materiales
 const isCurrentPathUnderMateriales = () => {
   const materialesItems =
     navItems.find((item) => item.label === "Materiales")?.items || [];
@@ -44,12 +53,12 @@ const isCurrentPathUnderMateriales = () => {
 >
   <nav class="container mx-auto px-4">
     <div class="flex items-center justify-center h-16">
-      <!-- MenÃº mÃ³vil con zustand (componente de React) -->
+      <!-- Menú móvil con zustand (componente de React) -->
       <div class="md:hidden absolute left-4">
         <MobileMenu navItems={navItems} currentPath={currentPath} client:load />
       </div>
 
-      <!-- MenÃº para escritorio -->
+      <!-- Menú para escritorio -->
       <div class="hidden md:flex items-center justify-center space-x-8">
         {
           navItems.map((item) => {
@@ -57,9 +66,15 @@ const isCurrentPathUnderMateriales = () => {
               return (
                 <a href={item.href} class="mx-4">
                   <img
-                    src="/images/logo.webp"
-                    alt="MÃ¡rmoles Deluxe Logo"
+                    src={logoImage.src}
+                    srcset={logoImage.srcSet}
+                    sizes={logoImage.sizes}
+                    alt="Mármoles Deluxe Logo"
                     class="h-12 w-auto logo-gold"
+                    width="180"
+                    height="48"
+                    decoding="async"
+                    fetchpriority="high"
                   />
                 </a>
               );

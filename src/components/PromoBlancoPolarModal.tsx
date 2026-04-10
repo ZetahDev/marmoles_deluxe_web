@@ -2,8 +2,8 @@ import React, { useRef, useState, useEffect } from "react";
 import { X, ChevronLeft, ChevronRight, Check } from "lucide-react";
 
 const carouselImgs = [
-  "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Blanco_Polar.webp",
-  "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/FOTOS/QUARSTONE/Blanco_Polar_desing.webp",
+  "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/quarstone/blanco_polar",
+  "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/quarstone/blanco_polar_desing",
 ];
 
 export default function PromoBlancoPolarModal() {

@@ -11,6 +11,10 @@ import {
 } from "../components/ui/carousel";
 import MaterialModal from "./MaterialModal";
 import { useMaterialModalStore } from "../store/materialModalStore";
+import {
+  buildCloudinaryImageSet,
+  CLOUDINARY_PRESETS,
+} from "../lib/images/cloudinary";
 
 interface ProductCardProps {
   name: string;
@@ -202,25 +206,37 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 {images.map((image, index) => (
                   <CarouselItem key={index} className="h-full w-full">
                     <div className="w-full h-full flex items-center justify-center overflow-hidden bg-gray-100">
-                      <img
-                        src={image}
-                        alt={`${name} ${index === 0 ? "" : "- diseÃ±o"}`}
-                        className="w-full h-full object-contain md:object-cover object-center rounded-lg"
-                        style={{
-                          contentVisibility: "auto",
-                          maxWidth: "100%",
-                          display: "block",
-                          height: "100%",
-                        }}
-                        loading="lazy"
-                        decoding="async"
-                        fetchPriority={index === 0 ? "high" : "low"}
-                        onLoad={(e) => {
-                          if (index === 0) {
-                            e.currentTarget.style.contentVisibility = "visible";
-                          }
-                        }}
-                      />
+                      {(() => {
+                        const responsiveImage = buildCloudinaryImageSet(
+                          image,
+                          CLOUDINARY_PRESETS.card
+                        );
+
+                        return (
+                          <img
+                            src={responsiveImage.src}
+                            srcSet={responsiveImage.srcSet}
+                            sizes={responsiveImage.sizes}
+                            alt={`${name} ${index === 0 ? "" : "- diseño"}`}
+                            className="w-full h-full object-contain md:object-cover object-center rounded-lg"
+                            style={{
+                              contentVisibility: "auto",
+                              maxWidth: "100%",
+                              display: "block",
+                              height: "100%",
+                            }}
+                            loading="lazy"
+                            decoding="async"
+                            fetchPriority={index === 0 ? "high" : "low"}
+                            onLoad={(e) => {
+                              if (index === 0) {
+                                e.currentTarget.style.contentVisibility =
+                                  "visible";
+                              }
+                            }}
+                          />
+                        );
+                      })()}
                     </div>
                   </CarouselItem>
                 ))}
@@ -355,3 +371,4 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
 // Exportar como componente memoizado para evitar re-renders innecesarios
 export default React.memo(ProductCard);
+

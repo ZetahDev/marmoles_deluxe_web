@@ -1,31 +1,21 @@
 ---
-// Array con los datos de los logos - ahora usando URLs de S3
-const s3BaseUrl = "https://marmolesdeluxe.s3.us-east-2.amazonaws.com/logos/";
+import { buildCloudinaryImageSet, CLOUDINARY_PRESETS } from "../lib/images/cloudinary";
+import { getBrandLogo } from "../lib/images/cloudinaryAssets";
+
 const logos = [
-  { name: "Altea", file: "Altea.webp" },
-  { name: "Catemar", file: "catemar.webp" },
-  { name: "Dekton", file: "dekton.webp" },
-  { name: "Neolith", file: "neolith.webp" },
-  { name: "Sensa", file: "Sensa.webp" },
-  { name: "Silestone", file: "silestone.webp" },
-];
+  { name: "Altea", url: getBrandLogo("Altea") },
+  { name: "Catemar", url: getBrandLogo("catemar") },
+  { name: "Dekton", url: getBrandLogo("dekton") },
+  { name: "Neolith", url: getBrandLogo("neolith") },
+  { name: "Sensa", url: getBrandLogo("Sensa") },
+  { name: "Silestone", url: getBrandLogo("silestone") },
+].map((logo) => ({
+  ...logo,
+  image: buildCloudinaryImageSet(logo.url, CLOUDINARY_PRESETS.logo),
+}));
 
 // Duplicamos el array para crear un desplazamiento continuo
 const allLogos = [...logos, ...logos];
-
-// Funci贸n para obtener la URL correcta (local para desarrollo, S3 para producci贸n)
-function getLogoUrl(fileName: string) {
-  // Usar siempre archivos locales por ahora
-  return `/logos/${fileName}`;
-
-  // C贸digo comentado para referencia futura:
-  // // Si estamos en el entorno de producci贸n, usa URLs de S3
-  // if (import.meta.env.PROD) {
-  //   return `${s3BaseUrl}${fileName}`;
-  // }
-  // // En desarrollo, usa archivos locales
-  // return `/logos/${fileName}`;
-}
 ---
 
 <section class="bg-marmoles-black py-2 overflow-hidden">
@@ -35,12 +25,15 @@ function getLogoUrl(fileName: string) {
         allLogos.map((logo) => (
           <div class="logo-item">
             <img
-              src={getLogoUrl(logo.file)}
+              src={logo.image.src}
+              srcset={logo.image.srcSet}
+              sizes={logo.image.sizes}
               alt={`Logo de ${logo.name}`}
               class="h-10 w-auto object-contain filter brightness-0 invert opacity-80 hover:opacity-100 transition-opacity duration-300"
               width="120"
               height="40"
               loading="lazy"
+              decoding="async"
             />
           </div>
         ))
@@ -79,7 +72,7 @@ function getLogoUrl(fileName: string) {
     }
   }
 
-  /* Pausa la animaci贸n al hacer hover */
+  /* Pausa la animaci髇 al hacer hover */
   .logos-container:hover .logos-slide {
     animation-play-state: paused;
   }

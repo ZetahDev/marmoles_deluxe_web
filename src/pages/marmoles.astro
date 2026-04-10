@@ -3,6 +3,8 @@ import Layout from "../layouts/Layout.astro";
 import ProductCard from "../components/ProductCard.tsx";
 import SEOSchemaData from "../components/SEOSchemaData.tsx";
 import { listStonesFromS3, type Stone } from "../lib/utils/s3Utils";
+import { cloudinaryAssets } from "../lib/images/cloudinaryAssets";
+import { buildSeoImageUrl } from "../lib/images/cloudinary";
 
 const title = "Mármoles Naturales Cali - Mármoles Deluxe | Encimeras y Pisos";
 const description =
@@ -22,7 +24,7 @@ const schemaStones = marmoles.map((stone: Stone) => ({
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const pageUrl = canonicalURL.toString();
-const metaImage = new URL("/images/contactanos-og.jpg", Astro.site).toString();
+const metaImage = buildSeoImageUrl(cloudinaryAssets.seo.contact);
 ---
 
 <Layout title={title} description={description}>

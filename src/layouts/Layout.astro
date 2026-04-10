@@ -6,6 +6,11 @@ import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import { ClientRouter } from "astro:transitions";
 import SpeedInsights from "@vercel/speed-insights/astro";
+import { getBrandLogo } from "../lib/images/cloudinaryAssets";
+import {
+  buildCloudinaryImageSet,
+  CLOUDINARY_PRESETS,
+} from "../lib/images/cloudinary";
 
 interface Props {
   title: string;
@@ -16,6 +21,12 @@ const {
   title,
   description = "Mármoles Deluxe - Instalación, Transporte y Garantía de Mármoles",
 } = Astro.props;
+
+const preloadBrandLogos = [
+  buildCloudinaryImageSet(getBrandLogo("Altea"), CLOUDINARY_PRESETS.logo).src,
+  buildCloudinaryImageSet(getBrandLogo("silestone"), CLOUDINARY_PRESETS.logo)
+    .src,
+];
 ---
 
 <!doctype html>
@@ -196,16 +207,13 @@ const {
     }
   </style>
 
-  <!-- Precargar imágenes críticas después de la carga inicial -->
-  <script>
+  <!-- Precargar im�genes cr�ticas despu�s de la carga inicial -->
+  <script define:vars={{ preloadBrandLogos }}>
     document.addEventListener("DOMContentLoaded", function () {
       if ("requestIdleCallback" in window) {
         requestIdleCallback(() => {
-          // Precargar logos cuando el navegador esté inactivo
-          const imagesToPreload = [
-            "/logos/Altea.webp",
-            "/logos/silestone.webp",
-          ];
+          // Precargar logos cuando el navegador est� inactivo
+          const imagesToPreload = preloadBrandLogos;
           imagesToPreload.forEach((src) => {
             const img = new Image();
             img.src = src;
@@ -215,3 +223,4 @@ const {
     });
   </script>
 </html>
+

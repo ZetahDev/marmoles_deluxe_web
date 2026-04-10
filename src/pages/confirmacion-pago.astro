@@ -1,18 +1,27 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import PaymentConfirmation from "../components/PaymentConfirmation";
+import { cloudinaryAssets } from "../lib/images/cloudinaryAssets";
+import {
+  buildCloudinaryImageSet,
+  CLOUDINARY_PRESETS,
+} from "../lib/images/cloudinary";
 
-// Obtener par谩metros de la URL
+// Obtener par醡etros de la URL
 const id = Astro.url.searchParams.get("id");
 const reference = Astro.url.searchParams.get("reference");
 const status = Astro.url.searchParams.get("status");
 
 // Log para debugging
-console.log("馃攳 Par谩metros de confirmaci贸n:", { id, reference, status });
+console.log("?? Par醡etros de confirmaci髇:", { id, reference, status });
 
 // Metadata para SEO
-const title = "Confirmaci贸n de Pago - M谩rmoles Deluxe";
-const description = "Confirmaci贸n de tu transacci贸n de pago";
+const title = "Confirmaci髇 de Pago - M醨moles Deluxe";
+const description = "Confirmaci髇 de tu transacci髇 de pago";
+const logoImage = buildCloudinaryImageSet(
+  cloudinaryAssets.branding.logoMain,
+  CLOUDINARY_PRESETS.logo
+);
 ---
 
 <Layout title={title} description={description}>
@@ -24,15 +33,20 @@ const description = "Confirmaci贸n de tu transacci贸n de pago";
       <div class="text-center mb-8">
         <a href="/" class="inline-block mb-4">
           <img
-            src="/logos/logo.webp"
-            alt="M谩rmoles Deluxe"
+            src={logoImage.src}
+            srcset={logoImage.srcSet}
+            sizes={logoImage.sizes}
+            alt="M醨moles Deluxe"
             class="h-16 mx-auto"
+            width="240"
+            height="64"
+            decoding="async"
             onerror="this.style.display='none'"
           />
         </a>
       </div>
 
-      <!-- Componente de Confirmaci贸n -->
+      <!-- Componente de Confirmaci髇 -->
       <PaymentConfirmation
         client:load
         transactionId={id}
@@ -40,15 +54,15 @@ const description = "Confirmaci贸n de tu transacci贸n de pago";
         status={status}
       />
 
-      <!-- Informaci贸n Adicional -->
+      <!-- Informaci髇 Adicional -->
       <div class="max-w-3xl mx-auto mt-12 text-center">
         <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
           <h3 class="font-semibold text-gray-900 mb-2">
-            馃敀 Pago Seguro con Wompi
+            ?? Pago Seguro con Wompi
           </h3>
           <p class="text-sm text-gray-600">
             Todos los pagos son procesados de forma segura por Wompi, cumpliendo
-            con los est谩ndares PCI DSS para la protecci贸n de datos financieros.
+            con los est醤dares PCI DSS para la protecci髇 de datos financieros.
           </p>
         </div>
       </div>
@@ -58,7 +72,7 @@ const description = "Confirmaci贸n de tu transacci贸n de pago";
 
 <style>
   @media print {
-    /* Estilos para impresi贸n del comprobante */
+    /* Estilos para impresi髇 del comprobante */
     nav,
     footer,
     button {

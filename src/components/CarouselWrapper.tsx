@@ -8,6 +8,10 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "./ui/carousel";
+import {
+  buildCloudinaryImageSet,
+  CLOUDINARY_PRESETS,
+} from "../lib/images/cloudinary";
 
 interface CarouselWrapperProps {
   items: Array<{
@@ -26,14 +30,25 @@ export const CarouselWrapper: React.FC<CarouselWrapperProps> = ({ items }) => {
             <CarouselItem key={item.title} className="basis-full">
               <div className="p-4">
                 <div className="bg-marmoles-black text-marmoles-white rounded-lg overflow-hidden">
+                  {(() => {
+                    const image = buildCloudinaryImageSet(
+                      item.image,
+                      CLOUDINARY_PRESETS.card
+                    );
+                    return (
                   <img
-                    src={item.image}
+                    src={image.src}
+                    srcSet={image.srcSet}
+                    sizes={image.sizes}
                     alt={item.title}
                     className="w-full h-80 object-cover"
                     width="600"
                     height="400"
                     loading="lazy"
+                    decoding="async"
                   />
+                    );
+                  })()}
                   <div className="p-6">
                     <h3 className="text-2xl font-semibold mb-3">
                       {item.title}

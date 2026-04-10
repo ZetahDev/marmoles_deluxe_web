@@ -2,6 +2,8 @@
 import Layout from "../layouts/Layout.astro";
 import SEOSchemaData from "../components/SEOSchemaData.tsx";
 import ContactFormB2B from "../components/ContactFormB2B";
+import { cloudinaryAssets } from "../lib/images/cloudinaryAssets";
+import { buildSeoImageUrl } from "../lib/images/cloudinary";
 
 const title =
   "Servicios B2B - Mármoles Deluxe | Soluciones para Arquitectos y Constructoras";
@@ -13,7 +15,7 @@ const keywords =
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const pageUrl = canonicalURL.toString();
-const metaImage = new URL("/images/contactanos-og.jpg", Astro.site).toString();
+const metaImage = buildSeoImageUrl(cloudinaryAssets.seo.contact);
 
 const benefits = [
   {
