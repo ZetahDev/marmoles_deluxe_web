@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useReducer, useRef, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import {
   trackFormStart,
@@ -14,20 +14,53 @@ const PUBLIC_KEY = "YsOXeIbRezMr8efGI"; // TODO: Actualizar con tu Public Key
 // Número de WhatsApp para respaldo
 const WHATSAPP_NUMBER = "+573132592793";
 
+const initialState = {
+  formData: { name: "", phone: "", message: "" },
+  errors: {},
+  loading: false,
+  success: false,
+  error: false,
+  formStarted: false,
+  formSubmitted: false,
+};
+
+function formReducer(state, action) {
+  switch (action.type) {
+    case "SET_FIELD":
+      return {
+        ...state,
+        formData: { ...state.formData, [action.field]: action.value },
+        errors: { ...state.errors, [action.field]: "" },
+      };
+    case "SET_ERRORS":
+      return { ...state, errors: action.errors };
+    case "START_SUBMIT":
+      return { ...state, loading: true, success: false, error: false };
+    case "SUBMIT_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        formSubmitted: true,
+        formData: initialState.formData,
+      };
+    case "SUBMIT_ERROR":
+      return { ...state, loading: false, error: true };
+    case "CLEAR_SUCCESS":
+      return { ...state, success: false };
+    case "CLEAR_ERROR_ALERT":
+      return { ...state, error: false };
+    case "FORM_STARTED":
+      return { ...state, formStarted: true };
+    default:
+      return state;
+  }
+}
+
 const ContactForm = () => {
   const formRef = useRef();
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    message: "",
-  });
-  const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState({});
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState(false);
-  const [formStarted, setFormStarted] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [state, dispatch] = useReducer(formReducer, initialState);
+  const { formData, errors, loading, success, error, formStarted, formSubmitted } = state;
 
   // Trackear abandono de formulario al desmontar
   useEffect(() => {
@@ -35,7 +68,7 @@ const ContactForm = () => {
       if (formStarted && !formSubmitted) {
         const totalFields = 4;
         const completedFields = Object.values(formData).filter(
-          (v) => v.trim() !== ""
+          (v) => v.trim() !== "",
         ).length;
         trackFormAbandonment("contact_form", completedFields, totalFields);
       }
@@ -44,11 +77,7 @@ const ContactForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-    // Clear error for this field when user starts typing
-    if (errors[name]) {
-      setErrors({ ...errors, [name]: "" });
-    }
+    dispatch({ type: "SET_FIELD", field: name, value });
   };
 
   const validateForm = () => {
@@ -59,20 +88,14 @@ const ContactForm = () => {
     }
 
     if (!formData.phone.trim()) {
-      newErrors.phone = "El teléfono es requerido";
-    }
-
-    if (!formData.email.trim()) {
-      newErrors.email = "El correo electrónico es requerido";
-    } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
-      newErrors.email = "Correo electrónico inválido";
+      newErrors.phone = "El WhatsApp es requerido";
     }
 
     if (!formData.message.trim()) {
       newErrors.message = "El mensaje es requerido";
     }
 
-    setErrors(newErrors);
+    dispatch({ type: "SET_ERRORS", errors: newErrors });
     return Object.keys(newErrors).length === 0;
   };
 
@@ -81,9 +104,7 @@ const ContactForm = () => {
 
     if (!validateForm()) return;
 
-    setLoading(true);
-    setSuccess(false);
-    setError(false);
+    dispatch({ type: "START_SUBMIT" });
 
     try {
       // Preparar el mensaje
@@ -91,9 +112,8 @@ const ContactForm = () => {
 
       // Crear un objeto con los campos que espera la plantilla de EmailJS
       const templateParams = {
-        title: "Nueva solicitud de visita técnica - 15% descuento web",
+        title: "Nueva solicitud de visita técnica",
         name: formData.name,
-        email: formData.email,
         message: combinedMessage,
       };
 
@@ -108,11 +128,9 @@ const ContactForm = () => {
       // SIEMPRE enviar por WhatsApp como respaldo
       const whatsappMessage = `
 🔔 *Nueva Solicitud de Visita Técnica*
-💰 *Promoción: 15% de descuento por compra web*
 
 👤 *Nombre:* ${formData.name}
-📞 *Teléfono:* ${formData.phone}
-📧 *Email:* ${formData.email}
+📞 *WhatsApp:* ${formData.phone}
 
 📝 *Mensaje:*
 ${formData.message}
@@ -120,28 +138,23 @@ ${formData.message}
 
       // Abrir WhatsApp en nueva ventana
       const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-        whatsappMessage
+        whatsappMessage,
       )}`;
       window.open(whatsappUrl, "_blank");
 
       // Trackear envío exitoso
-      setFormSubmitted(true);
       trackFormSubmit("contact_form", {
         has_phone: !!formData.phone,
-        has_email: !!formData.email,
         message_length: formData.message.length,
       });
 
       // Mostrar mensaje de éxito y resetear formulario
-      setSuccess(true);
-      setFormData({ name: "", phone: "", email: "", message: "" });
-      setTimeout(() => setSuccess(false), 5000);
-    } catch (error) {
-      console.error("❌ Error al procesar el formulario:", error);
-      setError(true);
-      setTimeout(() => setError(false), 5000);
-    } finally {
-      setLoading(false);
+      dispatch({ type: "SUBMIT_SUCCESS" });
+      setTimeout(() => dispatch({ type: "CLEAR_SUCCESS" }), 5000);
+    } catch (submitError) {
+      console.error("❌ Error al procesar el formulario:", submitError);
+      dispatch({ type: "SUBMIT_ERROR" });
+      setTimeout(() => dispatch({ type: "CLEAR_ERROR_ALERT" }), 5000);
     }
   };
 
@@ -150,10 +163,6 @@ ${formData.message}
       <h2 className="text-2xl font-bold text-marmoles-black mb-2">
         Solicita tu Visita Técnica
       </h2>
-      <p className="text-marmoles-gold font-semibold mb-4">
-        🎉 ¡Obtén 15% de descuento en tu compra por solicitar a través de la
-        web!
-      </p>
 
       {/* Mensaje de éxito */}
       {success && (
@@ -189,7 +198,7 @@ ${formData.message}
               onChange={handleChange}
               onFocus={() => {
                 if (!formStarted) {
-                  setFormStarted(true);
+                  dispatch({ type: "FORM_STARTED" });
                   trackFormStart("contact_form");
                 }
               }}
@@ -209,7 +218,7 @@ ${formData.message}
               htmlFor="phone"
               className="block text-sm font-medium text-gray-700 mb-1"
             >
-              Teléfono
+              WhatsApp
             </label>
             <input
               type="tel"
@@ -220,36 +229,12 @@ ${formData.message}
               className={`w-full px-4 py-3 rounded-lg border ${
                 errors.phone ? "border-red-500" : "border-marmoles-gold"
               } focus:outline-none focus:ring-2 focus:ring-marmoles-gold transition-all`}
-              placeholder="Tu teléfono"
+              placeholder="Tu número de WhatsApp"
             />
             {errors.phone && (
               <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
             )}
           </div>
-        </div>
-
-        {/* Campo Email */}
-        <div>
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
-            Correo electrónico
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className={`w-full px-4 py-3 rounded-lg border ${
-              errors.email ? "border-red-500" : "border-marmoles-gold"
-            } focus:outline-none focus:ring-2 focus:ring-marmoles-gold transition-all`}
-            placeholder="Tu correo electrónico"
-          />
-          {errors.email && (
-            <p className="text-red-500 text-sm mt-1">{errors.email}</p>
-          )}
         </div>
 
         {/* Campo Mensaje */}
@@ -286,12 +271,12 @@ ${formData.message}
             loading ? "opacity-70 cursor-not-allowed" : ""
           }`}
         >
-          {loading ? "Enviando..." : "📧 Enviar Solicitud (Email + WhatsApp)"}
+          {loading ? "Enviando..." : "Enviar Solicitud"}
         </button>
 
         <p className="text-center text-sm text-gray-500 mt-4">
-          Tu solicitud se enviará por email y WhatsApp para garantizar que la
-          recibamos
+          Tu solicitud se enviará por WhatsApp para una atención ágil y
+          personalizada
         </p>
       </form>
     </div>
