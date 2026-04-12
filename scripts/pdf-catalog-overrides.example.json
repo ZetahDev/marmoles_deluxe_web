@@ -1,0 +1,19 @@
+{
+  "by_page": {
+    "5": {
+      "name": "Granito Avocatus",
+      "characteristics": [
+        "Origen: Brasil",
+        "Acabado: Cepillado",
+        "Formato: 2 cm de espesor",
+        "Usos: Mesones, Baños, Barras, Escaleras"
+      ]
+    },
+    "7": {
+      "name": "Quartzite Bianco Superiore"
+    },
+    "21": {
+      "skip": true
+    }
+  }
+}

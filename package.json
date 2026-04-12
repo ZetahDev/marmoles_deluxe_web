@@ -11,6 +11,7 @@
     "test-signature": "node scripts/test-integrity-signature.js",
     "generate-s3-index": "node scripts/generate-s3-index.js",
     "cloudinary:sync": "node scripts/cloudinary-sync.js",
+    "pdf:cloudinary": "python scripts/pdf-catalog-cloudinary.py",
     "react-doctor": "npx react-doctor@latest . --yes --offline"
   },
   "dependencies": {
