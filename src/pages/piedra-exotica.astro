@@ -1,0 +1,144 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ProductCard from "../components/ProductCard.tsx";
+import SEOSchemaData from "../components/SEOSchemaData.tsx";
+import exoticCatalog from "../data/piedra-exotica-catalog.json";
+import { cloudinaryAssets } from "../lib/images/cloudinaryAssets";
+import { buildSeoImageUrl } from "../lib/images/cloudinary";
+
+interface ExoticStone {
+  name: string;
+  image: string;
+  design: string;
+  characteristics?: string[];
+}
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const pageUrl = canonicalURL.toString();
+const metaImage = buildSeoImageUrl(cloudinaryAssets.seo.contact);
+const title = "Piedra Exótica Cali - Mármoles Deluxe | Luxury Stone";
+const description =
+  "Colección premium de piedras exóticas importadas: granitos, quartzitas, ónix y ágatas para cocinas, barras y revestimientos de alto impacto visual.";
+
+const keywords =
+  "piedra exotica Cali, luxury stone, quartzite Cali, onix Cali, agata Cali, granito exotico, revestimientos premium, mesones exclusivos";
+
+const exoticas = ((exoticCatalog.items ?? []) as ExoticStone[]).filter(
+  (stone) => stone?.name && stone?.image && stone?.design
+);
+
+const schemaStones = exoticas.map((stone) => ({
+  name: stone.name,
+  image: stone.image,
+}));
+---
+
+<Layout title={title} description={description}>
+  <Fragment slot="head">
+    <meta name="keywords" content={keywords} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Mármoles Deluxe" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:site_name" content="Mármoles Deluxe" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <meta name="geo.region" content="CO-VAC" />
+    <meta name="geo.placename" content="Cali" />
+    <meta name="geo.position" content="3.4516;-76.5320" />
+    <meta name="ICBM" content="3.4516, -76.5320" />
+  </Fragment>
+
+  <SEOSchemaData
+    client:load
+    pageTitle={title}
+    pageDescription={description}
+    pageUrl={pageUrl}
+    pageImage={metaImage}
+    category="Piedra Exótica"
+    stones={schemaStones}
+  />
+
+  <main class="py-20 pt-24">
+    <div class="container mx-auto px-4">
+      <h1 class="text-4xl md:text-5xl font-bold text-center mb-4">
+        Piedra Exótica
+      </h1>
+
+      <div class="max-w-5xl mx-auto mb-12">
+        <div
+          class="bg-gradient-to-r from-gray-50 to-white p-6 rounded-lg shadow-sm border border-gray-100"
+        >
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div class="flex items-start text-sm text-gray-700">
+              <span class="mr-2 flex-shrink-0">💎</span>
+              <span>Materiales importados de colección premium</span>
+            </div>
+            <div class="flex items-start text-sm text-gray-700">
+              <span class="mr-2 flex-shrink-0">🎨</span>
+              <span>Vetas y contrastes únicos de alto impacto visual</span>
+            </div>
+            <div class="flex items-start text-sm text-gray-700">
+              <span class="mr-2 flex-shrink-0">🏛️</span>
+              <span>Ideal para mesones, barras y muros de diseño</span>
+            </div>
+            <div class="flex items-start text-sm text-gray-700">
+              <span class="mr-2 flex-shrink-0">🛡️</span>
+              <span>Alta durabilidad para proyectos residenciales y comerciales</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8 mb-16"
+        id="piedra-exotica-grid"
+      >
+        {
+          exoticas.map((stone) => (
+            <ProductCard
+              client:load
+              name={stone.name}
+              description="Piedra exótica de alta gama"
+              features={stone.characteristics ?? []}
+              images={[stone.image, stone.design]}
+              category="Piedra Exótica"
+              slug={stone.name
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, "-")
+                .replace(/(^-|-$)/g, "")}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  import { initModal } from "../scripts/modal";
+  initModal();
+
+  if (typeof window !== "undefined") {
+    window.addEventListener("DOMContentLoaded", () => {
+      const params = new URLSearchParams(window.location.search);
+      const material = params.get("material");
+      if (material) {
+        setTimeout(() => {
+          const event = new CustomEvent("modal-state-change", {
+            detail: { id: material },
+          });
+          document.dispatchEvent(event);
+        }, 500);
+      }
+    });
+  }
+</script>
