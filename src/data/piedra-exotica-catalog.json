@@ -1,0 +1,769 @@
+{
+  "generatedAt": "2026-04-12T18:45:23.058237+00:00",
+  "sourcePdf": "C:\\Users\\johan\\Downloads\\CATALOGO- PIEDRA EXOTICA_.pdf",
+  "category": "PIEDRA+EXOTICA",
+  "cloudinaryFolder": "marmoles-deluxe/catalog/piedra-exotica",
+  "items": [
+    {
+      "name": "Granito Alpinus",
+      "slug": "granito_alpinus",
+      "characteristics": [
+        "Origen: Brasil",
+        "Acabado: Brillante",
+        "Formato: 2 cm de espesor"
+      ],
+      "origin": "Brasil",
+      "finish": "Brillante",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019522/marmoles-deluxe/catalog/piedra-exotica/granito_alpinus.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019522/marmoles-deluxe/catalog/piedra-exotica/granito_alpinus_designs.webp"
+    },
+    {
+      "name": "Granito Avocatus",
+      "slug": "granito_avocatus",
+      "characteristics": [
+        "Origen: Brasil",
+        "Acabado: Cepillado",
+        "Formato: 2 cm de espesor"
+      ],
+      "origin": "Brasil",
+      "finish": "Cepillado",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019402/marmoles-deluxe/catalog/piedra-exotica/granito_avocatus.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019402/marmoles-deluxe/catalog/piedra-exotica/granito_avocatus_designs.webp"
+    },
+    {
+      "name": "Granito Caravaggio",
+      "slug": "granito_caravaggio",
+      "characteristics": [
+        "Origen: Brasil",
+        "Acabado: Pulido / brillante",
+        "Formato: 2 cm de espesor"
+      ],
+      "origin": "Brasil",
+      "finish": "Pulido / brillante",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019404/marmoles-deluxe/catalog/piedra-exotica/granito_caravaggio.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019404/marmoles-deluxe/catalog/piedra-exotica/granito_caravaggio_designs.webp"
+    },
+    {
+      "name": "Granito Everest",
+      "slug": "granito_everest",
+      "characteristics": [
+        "Origen: Brasil",
+        "Acabado: Brillante",
+        "Formato: 2 cm de espesor"
+      ],
+      "origin": "Brasil",
+      "finish": "Brillante",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019404/marmoles-deluxe/catalog/piedra-exotica/granito_everest.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019405/marmoles-deluxe/catalog/piedra-exotica/granito_everest_designs.webp"
+    },
+    {
+      "name": "Granito Fusion Blue",
+      "slug": "granito_fusion_blue",
+      "characteristics": [
+        "Origen: Brasil",
+        "Acabado: Brillante",
+        "Formato: 2 cm de espesor",
+        "Usos: Mesones, Baños, Escaleras, Comedor, Muro de Impacto, Barras"
+      ],
+      "origin": "Brasil",
+      "finish": "Brillante",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [
+        "Mesones",
+        "Baños",
+        "Escaleras",
+        "Comedor",
+        "Muro de Impacto",
+        "Barras",
+        "Enchapes",
+        "Mesones Cocina"
+      ],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019405/marmoles-deluxe/catalog/piedra-exotica/granito_fusion_blue.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019405/marmoles-deluxe/catalog/piedra-exotica/granito_fusion_blue_designs.webp"
+    },
+    {
+      "name": "Granito Fusion Red",
+      "slug": "granito_fusion_red",
+      "characteristics": [
+        "Origen: Brasil",
+        "Acabado: Brillante",
+        "Formato: 2 cm de espesor",
+        "Usos: Mesones, Baños, Escaleras, Comedor, Muro de Impacto, Barras"
+      ],
+      "origin": "Brasil",
+      "finish": "Brillante",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [
+        "Mesones",
+        "Baños",
+        "Escaleras",
+        "Comedor",
+        "Muro de Impacto",
+        "Barras",
+        "Enchapes",
+        "Mesones Cocina"
+      ],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019405/marmoles-deluxe/catalog/piedra-exotica/granito_fusion_red.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019405/marmoles-deluxe/catalog/piedra-exotica/granito_fusion_red_designs.webp"
+    },
+    {
+      "name": "Granito Jacaranda",
+      "slug": "granito_jacaranda",
+      "characteristics": [
+        "Origen: Brasil",
+        "Acabado: Brillante",
+        "Formato: 2 cm de espesor",
+        "Usos: Mesones, Baños, Escaleras, Comedor, Muro de Impacto, Barras"
+      ],
+      "origin": "Brasil",
+      "finish": "Brillante",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [
+        "Mesones",
+        "Baños",
+        "Escaleras",
+        "Comedor",
+        "Muro de Impacto",
+        "Barras",
+        "Enchapes",
+        "Mesones Cocina"
+      ],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019405/marmoles-deluxe/catalog/piedra-exotica/granito_jacaranda.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019405/marmoles-deluxe/catalog/piedra-exotica/granito_jacaranda_designs.webp"
+    },
+    {
+      "name": "Granito Lennon Gold",
+      "slug": "granito_lennon_gold",
+      "characteristics": [
+        "Origen: Brasil",
+        "Acabado: Brillante",
+        "Formato: 2 cm de espesor"
+      ],
+      "origin": "Brasil",
+      "finish": "Brillante",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019405/marmoles-deluxe/catalog/piedra-exotica/granito_lennon_gold.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019405/marmoles-deluxe/catalog/piedra-exotica/granito_lennon_gold_designs.webp"
+    },
+    {
+      "name": "Granito Revolution",
+      "slug": "granito_revolution",
+      "characteristics": [
+        "Origen: Brasil",
+        "Acabado: Brillante",
+        "Formato: 2 cm de espesor",
+        "Usos: Mesones, Baños, Escaleras, Comedor, Muro de Impacto, Barras"
+      ],
+      "origin": "Brasil",
+      "finish": "Brillante",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [
+        "Mesones",
+        "Baños",
+        "Escaleras",
+        "Comedor",
+        "Muro de Impacto",
+        "Barras",
+        "Enchapes",
+        "Mesones Cocina"
+      ],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019405/marmoles-deluxe/catalog/piedra-exotica/granito_revolution.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019406/marmoles-deluxe/catalog/piedra-exotica/granito_revolution_designs.webp"
+    },
+    {
+      "name": "Granito Sandaluz",
+      "slug": "granito_sandaluz",
+      "characteristics": [
+        "Origen: Brasil",
+        "Acabado: Cepillado",
+        "Formato: 2 cm de espesor"
+      ],
+      "origin": "Brasil",
+      "finish": "Cepillado",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019406/marmoles-deluxe/catalog/piedra-exotica/granito_sandaluz.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019406/marmoles-deluxe/catalog/piedra-exotica/granito_sandaluz_designs.webp"
+    },
+    {
+      "name": "Granito Taj Mahal",
+      "slug": "granito_taj_mahal",
+      "characteristics": [
+        "Origen: India",
+        "Acabado: Brillante",
+        "Formato: 2 cm de espesor",
+        "Usos: Mesones, Baños, Escaleras, Comedor, Muro de Impacto, Barras"
+      ],
+      "origin": "India",
+      "finish": "Brillante",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [
+        "Mesones",
+        "Baños",
+        "Escaleras",
+        "Comedor",
+        "Muro de Impacto",
+        "Barras",
+        "Enchapes",
+        "Mesones Cocina"
+      ],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019408/marmoles-deluxe/catalog/piedra-exotica/granito_taj_mahal.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019408/marmoles-deluxe/catalog/piedra-exotica/granito_taj_mahal_designs.webp"
+    },
+    {
+      "name": "Madera Petrificada",
+      "slug": "madera_petrificada",
+      "characteristics": [
+        "Origen: Madagascar",
+        "Acabado: Brillante",
+        "Formato: 2 cm de espesor"
+      ],
+      "origin": "Madagascar",
+      "finish": "Brillante",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019404/marmoles-deluxe/catalog/piedra-exotica/madera_petrificada.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019404/marmoles-deluxe/catalog/piedra-exotica/madera_petrificada_designs.webp"
+    },
+    {
+      "name": "Mármol Calacatta Viola",
+      "slug": "marmol_calacatta_viola",
+      "characteristics": [
+        "Origen: Turquía",
+        "Acabado: Brillante",
+        "Formato: 2 cm de espesor"
+      ],
+      "origin": "Turquía",
+      "finish": "Brillante",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019522/marmoles-deluxe/catalog/piedra-exotica/marmol_calacatta_viola.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019522/marmoles-deluxe/catalog/piedra-exotica/marmol_calacatta_viola_designs.webp"
+    },
+    {
+      "name": "Mármol Panda White",
+      "slug": "marmol_panda_white",
+      "characteristics": [
+        "Origen: España",
+        "Acabado: Brillado / Anticado",
+        "Formato: 2 cm de espesor",
+        "Usos: Mesones, Baños, Escaleras, Comedor, Barras, Enchapes"
+      ],
+      "origin": "España",
+      "finish": "Brillado / Anticado",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [
+        "Mesones",
+        "Baños",
+        "Escaleras",
+        "Comedor",
+        "Barras",
+        "Enchapes",
+        "Pisos"
+      ],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019407/marmoles-deluxe/catalog/piedra-exotica/marmol_panda_white.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019407/marmoles-deluxe/catalog/piedra-exotica/marmol_panda_white_designs.webp"
+    },
+    {
+      "name": "Quartzite Bianco Superiore",
+      "slug": "quartzite_bianco_superiore",
+      "characteristics": [
+        "Origen: Brasil",
+        "Acabado: Pulido",
+        "Formato: 2 cm de espesor",
+        "Usos: Mesones, Baños, Escaleras, Comedor, Muro de Impacto, Barras"
+      ],
+      "origin": "Brasil",
+      "finish": "Pulido",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [
+        "Mesones",
+        "Baños",
+        "Escaleras",
+        "Comedor",
+        "Muro de Impacto",
+        "Barras",
+        "Enchapes",
+        "Mesones Cocina",
+        "Pisos"
+      ],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019402/marmoles-deluxe/catalog/piedra-exotica/quartzite_bianco_superiore.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019402/marmoles-deluxe/catalog/piedra-exotica/quartzite_bianco_superiore_designs.webp"
+    },
+    {
+      "name": "Quartzite Botanic Crystal",
+      "slug": "quartzite_botanic_crystal",
+      "characteristics": [
+        "Origen: Brasil",
+        "Acabado: Pulido",
+        "Formato: 2 cm de espesor",
+        "Usos: Mesones, Baños, Escaleras, Comedor, Muro de Impacto, Barras"
+      ],
+      "origin": "Brasil",
+      "finish": "Pulido",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [
+        "Mesones",
+        "Baños",
+        "Escaleras",
+        "Comedor",
+        "Muro de Impacto",
+        "Barras",
+        "Enchapes",
+        "Mesones Cocina",
+        "Pisos"
+      ],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019402/marmoles-deluxe/catalog/piedra-exotica/quartzite_botanic_crystal.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019402/marmoles-deluxe/catalog/piedra-exotica/quartzite_botanic_crystal_designs.webp"
+    },
+    {
+      "name": "Quartzite Colibri Blue",
+      "slug": "quartzite_colibri_blue",
+      "characteristics": [
+        "Origen: Brasil",
+        "Acabado: Pulido",
+        "Formato: 2 cm de espesor",
+        "Usos: Mesones, Baños, Escaleras, Comedor, Muro de Impacto, Barras"
+      ],
+      "origin": "Brasil",
+      "finish": "Pulido",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [
+        "Mesones",
+        "Baños",
+        "Escaleras",
+        "Comedor",
+        "Muro de Impacto",
+        "Barras",
+        "Enchapes",
+        "Mesones Cocina",
+        "Pisos"
+      ],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019403/marmoles-deluxe/catalog/piedra-exotica/quartzite_colibri_blue.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019403/marmoles-deluxe/catalog/piedra-exotica/quartzite_colibri_blue_designs.webp"
+    },
+    {
+      "name": "Quartzite Cosmopolitan",
+      "slug": "quartzite_cosmopolitan",
+      "characteristics": [
+        "Origen: Brasil",
+        "Acabado: Brillante",
+        "Formato: 2 cm de espesor",
+        "Usos: Mesones, Baños, Escaleras, Comedor, Muro de Impacto, Barras"
+      ],
+      "origin": "Brasil",
+      "finish": "Brillante",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [
+        "Mesones",
+        "Baños",
+        "Escaleras",
+        "Comedor",
+        "Muro de Impacto",
+        "Barras",
+        "Enchapes",
+        "Mesones Cocina"
+      ],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019406/marmoles-deluxe/catalog/piedra-exotica/quartzite_cosmopolitan.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019406/marmoles-deluxe/catalog/piedra-exotica/quartzite_cosmopolitan_designs.webp"
+    },
+    {
+      "name": "Quartzite DA Vinci",
+      "slug": "quartzite_da_vinci",
+      "characteristics": [
+        "Origen: Brasil",
+        "Acabado: Pulido",
+        "Formato: 2 cm de espesor",
+        "Usos: Mesones, Baños, Escaleras, Comedor, Muro de Impacto, Barras"
+      ],
+      "origin": "Brasil",
+      "finish": "Pulido",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [
+        "Mesones",
+        "Baños",
+        "Escaleras",
+        "Comedor",
+        "Muro de Impacto",
+        "Barras",
+        "Enchapes",
+        "Mesones Cocina",
+        "Pisos"
+      ],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019403/marmoles-deluxe/catalog/piedra-exotica/quartzite_da_vinci.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019403/marmoles-deluxe/catalog/piedra-exotica/quartzite_da_vinci_designs.webp"
+    },
+    {
+      "name": "Quartzite Macaubas Fantasy",
+      "slug": "quartzite_macaubas_fantasy",
+      "characteristics": [
+        "Origen: Brasil",
+        "Acabado: Pulido",
+        "Formato: 2 cm de espesor",
+        "Usos: Mesones, Baños, Escaleras, Comedor, Muro de Impacto, Barras"
+      ],
+      "origin": "Brasil",
+      "finish": "Pulido",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [
+        "Mesones",
+        "Baños",
+        "Escaleras",
+        "Comedor",
+        "Muro de Impacto",
+        "Barras",
+        "Enchapes",
+        "Mesones Cocina",
+        "Pisos"
+      ],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019403/marmoles-deluxe/catalog/piedra-exotica/quartzite_macaubas_fantasy.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019403/marmoles-deluxe/catalog/piedra-exotica/quartzite_macaubas_fantasy_designs.webp"
+    },
+    {
+      "name": "Quartzite Patagonia",
+      "slug": "quartzite_patagonia",
+      "characteristics": [
+        "Origen: Brasil",
+        "Acabado: Brillante",
+        "Formato: 2 cm de espesor",
+        "Usos: Mesones, Baños, Escaleras, Comedor, Muro de Impacto, Barras"
+      ],
+      "origin": "Brasil",
+      "finish": "Brillante",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [
+        "Mesones",
+        "Baños",
+        "Escaleras",
+        "Comedor",
+        "Muro de Impacto",
+        "Barras",
+        "Enchapes",
+        "Mesones Cocina"
+      ],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019406/marmoles-deluxe/catalog/piedra-exotica/quartzite_patagonia.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019407/marmoles-deluxe/catalog/piedra-exotica/quartzite_patagonia_designs.webp"
+    },
+    {
+      "name": "Quartzite Patagonia Green",
+      "slug": "quartzite_patagonia_green",
+      "characteristics": [
+        "Origen: Brasil",
+        "Acabado: Brillante",
+        "Formato: 2 cm de espesor",
+        "Usos: Mesones, Baños, Escaleras, Comedor, Muro de Impacto, Barras"
+      ],
+      "origin": "Brasil",
+      "finish": "Brillante",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [
+        "Mesones",
+        "Baños",
+        "Escaleras",
+        "Comedor",
+        "Muro de Impacto",
+        "Barras",
+        "Enchapes",
+        "Mesones Cocina"
+      ],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019407/marmoles-deluxe/catalog/piedra-exotica/quartzite_patagonia_green.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019406/marmoles-deluxe/catalog/piedra-exotica/quartzite_patagonia_green_designs.webp"
+    },
+    {
+      "name": "Quartzite Platinum",
+      "slug": "quartzite_platinum",
+      "characteristics": [
+        "Origen: Brasil",
+        "Acabado: Pulido",
+        "Formato: 2 cm de espesor",
+        "Usos: Mesones, Baños, Escaleras, Comedor, Muro de Impacto, Barras"
+      ],
+      "origin": "Brasil",
+      "finish": "Pulido",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [
+        "Mesones",
+        "Baños",
+        "Escaleras",
+        "Comedor",
+        "Muro de Impacto",
+        "Barras",
+        "Enchapes",
+        "Mesones Cocina",
+        "Pisos"
+      ],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019403/marmoles-deluxe/catalog/piedra-exotica/quartzite_platinum.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019403/marmoles-deluxe/catalog/piedra-exotica/quartzite_platinum_designs.webp"
+    },
+    {
+      "name": "Quartzite Volupia",
+      "slug": "quartzite_volupia",
+      "characteristics": [
+        "Origen: Brasil",
+        "Acabado: Pulido",
+        "Formato: 2 cm de espesor",
+        "Usos: Mesones, Baños, Escaleras, Comedor, Muro de Impacto, Barras"
+      ],
+      "origin": "Brasil",
+      "finish": "Pulido",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [
+        "Mesones",
+        "Baños",
+        "Escaleras",
+        "Comedor",
+        "Muro de Impacto",
+        "Barras",
+        "Enchapes",
+        "Mesones Cocina",
+        "Pisos"
+      ],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019403/marmoles-deluxe/catalog/piedra-exotica/quartzite_volupia.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019403/marmoles-deluxe/catalog/piedra-exotica/quartzite_volupia_designs.webp"
+    },
+    {
+      "name": "Sodalite",
+      "slug": "sodalite",
+      "characteristics": [
+        "Origen: Brasil",
+        "Acabado: Brillante",
+        "Formato: 2 cm de espesor"
+      ],
+      "origin": "Brasil",
+      "finish": "Brillante",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019407/marmoles-deluxe/catalog/piedra-exotica/sodalite.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019407/marmoles-deluxe/catalog/piedra-exotica/sodalite_designs.webp"
+    },
+    {
+      "name": "Ágata Blue",
+      "slug": "agata_blue",
+      "characteristics": [
+        "Origen: Madagascar",
+        "Acabado: Brillante",
+        "Formato: 2 cm de espesor",
+        "Usos: Comedor, Muro de Impacto, Barras, Enchapes"
+      ],
+      "origin": "Madagascar",
+      "finish": "Brillante",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [
+        "Comedor",
+        "Muro de Impacto",
+        "Barras",
+        "Enchapes"
+      ],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019522/marmoles-deluxe/catalog/piedra-exotica/agata_blue.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019522/marmoles-deluxe/catalog/piedra-exotica/agata_blue_designs.webp"
+    },
+    {
+      "name": "Ágata Golden",
+      "slug": "agata_golden",
+      "characteristics": [
+        "Origen: Madagascar",
+        "Acabado: Brillante",
+        "Formato: 2 cm de espesor",
+        "Usos: Comedor, Muro de Impacto, Barras, Enchapes"
+      ],
+      "origin": "Madagascar",
+      "finish": "Brillante",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [
+        "Comedor",
+        "Muro de Impacto",
+        "Barras",
+        "Enchapes"
+      ],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019404/marmoles-deluxe/catalog/piedra-exotica/agata_golden.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019404/marmoles-deluxe/catalog/piedra-exotica/agata_golden_designs.webp"
+    },
+    {
+      "name": "Ágata Gris",
+      "slug": "agata_gris",
+      "characteristics": [
+        "Origen: Madagascar",
+        "Acabado: Brillante",
+        "Formato: 2 cm de espesor",
+        "Usos: Comedor, Muro de Impacto, Barras, Enchapes"
+      ],
+      "origin": "Madagascar",
+      "finish": "Brillante",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [
+        "Comedor",
+        "Muro de Impacto",
+        "Barras",
+        "Enchapes"
+      ],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019404/marmoles-deluxe/catalog/piedra-exotica/agata_gris.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019404/marmoles-deluxe/catalog/piedra-exotica/agata_gris_designs.webp"
+    },
+    {
+      "name": "Ágata Negra",
+      "slug": "agata_negra",
+      "characteristics": [
+        "Origen: Madagascar",
+        "Acabado: Brillante",
+        "Formato: 2 cm de espesor",
+        "Usos: Comedor, Muro de Impacto, Barras, Enchapes"
+      ],
+      "origin": "Madagascar",
+      "finish": "Brillante",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [
+        "Comedor",
+        "Muro de Impacto",
+        "Barras",
+        "Enchapes"
+      ],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019404/marmoles-deluxe/catalog/piedra-exotica/agata_negra.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019404/marmoles-deluxe/catalog/piedra-exotica/agata_negra_designs.webp"
+    },
+    {
+      "name": "Ónix Bubble",
+      "slug": "onix_bubble",
+      "characteristics": [
+        "Acabado: Brillante",
+        "Formato: 2 cm de espesor"
+      ],
+      "origin": "",
+      "finish": "Brillante",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019408/marmoles-deluxe/catalog/piedra-exotica/onix_bubble.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019408/marmoles-deluxe/catalog/piedra-exotica/onix_bubble_designs.webp"
+    },
+    {
+      "name": "Ónix Giallo",
+      "slug": "onix_giallo",
+      "characteristics": [
+        "Origen: España",
+        "Acabado: Pulido y Cepillado",
+        "Formato: 2 cm de espesor",
+        "Usos: Comedor, Muro de Impacto, Barras, Enchapes"
+      ],
+      "origin": "España",
+      "finish": "Pulido y Cepillado",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [
+        "Comedor",
+        "Muro de Impacto",
+        "Barras",
+        "Enchapes"
+      ],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019407/marmoles-deluxe/catalog/piedra-exotica/onix_giallo.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019407/marmoles-deluxe/catalog/piedra-exotica/onix_giallo_designs.webp"
+    },
+    {
+      "name": "Ónix Madagascar",
+      "slug": "onix_madagascar",
+      "characteristics": [
+        "Acabado: Brillante",
+        "Formato: 2 cm de espesor",
+        "Usos: Comedor, Muro de Impacto, Barras, Enchapes"
+      ],
+      "origin": "",
+      "finish": "Brillante",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [
+        "Comedor",
+        "Muro de Impacto",
+        "Barras",
+        "Enchapes"
+      ],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019408/marmoles-deluxe/catalog/piedra-exotica/onix_madagascar.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019408/marmoles-deluxe/catalog/piedra-exotica/onix_madagascar_designs.webp"
+    },
+    {
+      "name": "Ónix Moscovita Golden",
+      "slug": "onix_moscovita_golden",
+      "characteristics": [
+        "Origen: Italia",
+        "Acabado: Brillante",
+        "Formato: 2 cm de espesor"
+      ],
+      "origin": "Italia",
+      "finish": "Brillante",
+      "formats": [
+        "2 cm de espesor"
+      ],
+      "uses": [],
+      "image": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019407/marmoles-deluxe/catalog/piedra-exotica/onix_moscovita_golden.webp",
+      "design": "https://res.cloudinary.com/dudv2dh4w/image/upload/v1776019407/marmoles-deluxe/catalog/piedra-exotica/onix_moscovita_golden_designs.webp"
+    }
+  ]
+}
