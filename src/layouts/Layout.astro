@@ -1,4 +1,4 @@
----
+ï»¿---
 import "../styles/global.css";
 import { WhatsAppButton } from "../components/WhatsAppButton";
 import { ScrollToTopButton } from "../components/ScrollToTopButton";
@@ -207,12 +207,12 @@ const preloadBrandLogos = [
     }
   </style>
 
-  <!-- Precargar imágenes críticas después de la carga inicial -->
+  <!-- Precargar imÃ¡genes crÃ­ticas despuÃ©s de la carga inicial -->
   <script define:vars={{ preloadBrandLogos }}>
     document.addEventListener("DOMContentLoaded", function () {
       if ("requestIdleCallback" in window) {
         requestIdleCallback(() => {
-          // Precargar logos cuando el navegador esté inactivo
+          // Precargar logos cuando el navegador estÃ© inactivo
           const imagesToPreload = preloadBrandLogos;
           imagesToPreload.forEach((src) => {
             const img = new Image();
@@ -223,4 +223,3 @@ const preloadBrandLogos = [
     });
   </script>
 </html>
-

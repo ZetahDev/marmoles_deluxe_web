@@ -1,4 +1,4 @@
----
+ï»¿---
 import MobileMenu from "./MobileMenu";
 import { cloudinaryAssets } from "../lib/images/cloudinaryAssets";
 import {
@@ -21,9 +21,9 @@ const navItems = [
     items: [
       { href: "/piedra-sinterizada", label: "Piedra Sinterizada" },
       { href: "/quartzstone", label: "Quartzstone" },
-      { href: "/marmoles", label: "Mármoles" },
+      { href: "/marmoles", label: "MÃ¡rmoles" },
       { href: "/granitos-naturales", label: "Granito" },
-      { href: "/piedra-exotica", label: "Piedra Exótica" },
+      { href: "/piedra-exotica", label: "Piedra ExÃ³tica" },
     ],
   },
   //{ href: "/productos", label: "Productos" },
@@ -31,8 +31,8 @@ const navItems = [
   { href: "/otros-servicios", label: "Otros Servicios" },
   { href: "/b2b", label: "B2B" },
   { href: "/proyectos", label: "Proyectos" },
-  { href: "/politicas-garantia", label: "Garantías" },
-  { href: "/contactanos", label: "Contáctanos" },
+  { href: "/politicas-garantia", label: "GarantÃ­as" },
+  { href: "/contactanos", label: "ContÃ¡ctanos" },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -41,7 +41,7 @@ const logoImage = buildCloudinaryImageSet(
   CLOUDINARY_PRESETS.logo
 );
 
-// Helper para verificar si la ruta actual está bajo Materiales
+// Helper para verificar si la ruta actual estÃ¡ bajo Materiales
 const isCurrentPathUnderMateriales = () => {
   const materialesItems =
     navItems.find((item) => item.label === "Materiales")?.items || [];
@@ -54,12 +54,12 @@ const isCurrentPathUnderMateriales = () => {
 >
   <nav class="container mx-auto px-4">
     <div class="flex items-center justify-center h-16">
-      <!-- Menú móvil con zustand (componente de React) -->
+      <!-- MenÃº mÃ³vil con zustand (componente de React) -->
       <div class="md:hidden absolute left-4">
         <MobileMenu navItems={navItems} currentPath={currentPath} client:load />
       </div>
 
-      <!-- Menú para escritorio -->
+      <!-- MenÃº para escritorio -->
       <div class="hidden md:flex items-center justify-center space-x-8">
         {
           navItems.map((item) => {
@@ -70,7 +70,7 @@ const isCurrentPathUnderMateriales = () => {
                     src={logoImage.src}
                     srcset={logoImage.srcSet}
                     sizes={logoImage.sizes}
-                    alt="Mármoles Deluxe Logo"
+                    alt="MÃ¡rmoles Deluxe Logo"
                     class="h-12 w-auto logo-gold"
                     width="180"
                     height="48"
