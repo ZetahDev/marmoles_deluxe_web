@@ -32,7 +32,7 @@ import cloudinary
 import cloudinary.api
 import cloudinary.uploader
 import fitz  # PyMuPDF
-from PIL import Image
+from PIL import Image, ImageStat
 
 
 NAME_SKIP_VALUES = {
@@ -571,6 +571,16 @@ def render_pdf_pages(
     return assets
 
 
+def is_mostly_black(image: Image.Image) -> bool:
+    rgb = image.convert("RGB")
+    stat = ImageStat.Stat(rgb)
+    mean_luma = sum(stat.mean) / 3
+    std_luma = sum(stat.stddev) / 3
+    if mean_luma < 14 and std_luma < 8:
+        return True
+    return False
+
+
 def extract_embedded_images(
     doc: fitz.Document,
     output_dir: Path,
@@ -579,48 +589,74 @@ def extract_embedded_images(
     end_page: int,
     min_width: int,
     min_height: int,
+    zoom: float,
 ) -> List[ImageAsset]:
     assets: List[ImageAsset] = []
     seen_hashes: set[str] = set()
     for page_no in range(start_page, end_page + 1):
         page = doc.load_page(page_no - 1)
+        page_area = max(1.0, float(page.rect.width * page.rect.height))
         images = page.get_images(full=True)
         index = 0
+        seen_rects: set[Tuple[int, int, int, int]] = set()
         for image_info in images:
             xref = image_info[0]
-            extracted = doc.extract_image(xref)
-            image_bytes = extracted.get("image")
-            if not image_bytes:
-                continue
-
-            digest = hashlib.sha1(image_bytes).hexdigest()
-            if digest in seen_hashes:
-                continue
-
             try:
-                pil_image = Image.open(io.BytesIO(image_bytes))
-                pil_image.load()
+                rects = page.get_image_rects(xref)
             except Exception:
                 continue
 
-            if pil_image.width < min_width or pil_image.height < min_height:
-                continue
+            for rect in rects:
+                rel_area = (rect.width * rect.height) / page_area
+                if rel_area < 0.06:
+                    continue
 
-            seen_hashes.add(digest)
-            index += 1
-            converted = pil_image.convert("RGB")
-            dest = output_dir / f"page_{page_no:03d}_img_{index:02d}.webp"
-            converted.save(dest, "WEBP", quality=quality, method=6)
-            assets.append(
-                ImageAsset(
-                    page=page_no,
-                    index=index,
-                    kind="embedded",
-                    path=dest,
-                    width=converted.width,
-                    height=converted.height,
+                rect_key = (
+                    int(rect.x0),
+                    int(rect.y0),
+                    int(rect.x1),
+                    int(rect.y1),
                 )
-            )
+                if rect_key in seen_rects:
+                    continue
+                seen_rects.add(rect_key)
+
+                try:
+                    pix = page.get_pixmap(
+                        matrix=fitz.Matrix(zoom, zoom),
+                        clip=rect,
+                        alpha=False,
+                    )
+                    pil_image = Image.open(io.BytesIO(pix.tobytes("png"))).convert(
+                        "RGB"
+                    )
+                except Exception:
+                    continue
+
+                if pil_image.width < min_width or pil_image.height < min_height:
+                    continue
+
+                if is_mostly_black(pil_image):
+                    continue
+
+                digest = hashlib.sha1(pil_image.tobytes()).hexdigest()
+                if digest in seen_hashes:
+                    continue
+
+                seen_hashes.add(digest)
+                index += 1
+                dest = output_dir / f"page_{page_no:03d}_img_{index:02d}.webp"
+                pil_image.save(dest, "WEBP", quality=quality, method=6)
+                assets.append(
+                    ImageAsset(
+                        page=page_no,
+                        index=index,
+                        kind="embedded",
+                        path=dest,
+                        width=pil_image.width,
+                        height=pil_image.height,
+                    )
+                )
     return assets
 
 
@@ -660,16 +696,16 @@ def assign_material_assets(
         image_asset = pick_asset_for_page(embedded_by_page, material.page, rendered_by_page)
         design_asset: Optional[ImageAsset] = None
 
-        next_page = material.page + 1
-        if next_page not in material_pages:
-            design_asset = pick_asset_for_page(
-                embedded_by_page, next_page, rendered_by_page
-            )
+        same_page_embedded = embedded_by_page.get(material.page, [])
+        if len(same_page_embedded) > 1:
+            design_asset = same_page_embedded[1]
 
         if not design_asset:
-            same_page_embedded = embedded_by_page.get(material.page, [])
-            if len(same_page_embedded) > 1:
-                design_asset = same_page_embedded[1]
+            next_page = material.page + 1
+            if next_page not in material_pages:
+                design_asset = pick_asset_for_page(
+                    embedded_by_page, next_page, rendered_by_page
+                )
 
         if not design_asset:
             design_asset = image_asset
@@ -1080,6 +1116,7 @@ def main() -> None:
                 end_page=end_page,
                 min_width=int(args.min_width),
                 min_height=int(args.min_height),
+                zoom=float(args.zoom),
             )
 
     assign_material_assets(materials, embedded_assets, rendered_assets)
