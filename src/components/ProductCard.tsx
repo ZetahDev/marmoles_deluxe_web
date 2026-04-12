@@ -197,7 +197,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         style={{ maxWidth: "100%" }}
       >
         <div className="flex-1">
-          <div className="relative aspect-video w-full mb-6 overflow-hidden">
+          <div className="relative aspect-[4/3] w-full mb-6 overflow-hidden">
             <Carousel
               className="w-full h-full absolute inset-0"
               ref={carouselRef}
@@ -218,7 +218,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                             srcSet={responsiveImage.srcSet}
                             sizes={responsiveImage.sizes}
                             alt={`${name} ${index === 0 ? "" : "- diseño"}`}
-                            className="w-full h-full object-contain md:object-cover object-center rounded-lg"
+                            className="w-full h-full object-contain object-center rounded-lg"
                             style={{
                               contentVisibility: "auto",
                               maxWidth: "100%",
