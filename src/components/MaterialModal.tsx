@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useMaterialModalStore } from "../store/materialModalStore";
 import {
   buildCloudinaryImageSet,
@@ -41,13 +41,30 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
   isOpen,
   onClose,
 }) => {
-  const allImages = images.length > 0 ? images : [image];
-  const imageEntries = createStableEntries(allImages);
-  const featureEntries = createStableEntries(features);
+  const allImages = useMemo(
+    () => (images.length > 0 ? images : [image]),
+    [images, image]
+  );
+  const imageEntries = useMemo(() => createStableEntries(allImages), [allImages]);
+  const featureEntries = useMemo(() => createStableEntries(features), [features]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const mainResponsiveImage = buildCloudinaryImageSet(
-    allImages[currentImageIndex],
-    CLOUDINARY_PRESETS.modal
+  const modalImageSets = useMemo(
+    () =>
+      allImages.map((imageUrl) =>
+        buildCloudinaryImageSet(imageUrl, CLOUDINARY_PRESETS.modal)
+      ),
+    [allImages]
+  );
+  const thumbnailImageSets = useMemo(
+    () =>
+      allImages.map((imageUrl) =>
+        buildCloudinaryImageSet(imageUrl, CLOUDINARY_PRESETS.card)
+      ),
+    [allImages]
+  );
+  const mainResponsiveImage = useMemo(
+    () => modalImageSets[currentImageIndex] ?? modalImageSets[0],
+    [currentImageIndex, modalImageSets]
   );
   const resetImageIndex = useMaterialModalStore(
     (state) => state.resetImageIndex
@@ -161,7 +178,7 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
   }, [isOpen]);
 
   // Share logic
-  const handleShare = () => {
+  const handleShare = useCallback(() => {
     const url = window.location.href;
     if (navigator.share) {
       navigator.share({
@@ -175,7 +192,23 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
       navigator.clipboard.writeText(url);
       alert("¡Enlace copiado al portapapeles!");
     }
-  };
+  }, [category, title]);
+
+  const handlePrevImage = useCallback(() => {
+    setCurrentImageIndex(
+      (previousIndex) => (previousIndex - 1 + allImages.length) % allImages.length
+    );
+  }, [allImages.length]);
+
+  const handleNextImage = useCallback(() => {
+    setCurrentImageIndex((previousIndex) => (previousIndex + 1) % allImages.length);
+  }, [allImages.length]);
+
+  const handleSelectImage = useCallback((index: number) => {
+    setCurrentImageIndex((previousIndex) =>
+      previousIndex === index ? previousIndex : index
+    );
+  }, []);
 
   return (
     <div
@@ -264,12 +297,7 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
               {allImages.length > 1 && (
                 <>
                   <button
-                    onClick={() =>
-                      setCurrentImageIndex(
-                        (currentImageIndex - 1 + allImages.length) %
-                          allImages.length
-                      )
-                    }
+                    onClick={handlePrevImage}
                     className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white h-9 w-9 sm:h-10 sm:w-10 rounded-full flex items-center justify-center z-10 text-marmoles-gold border-2 border-marmoles-gold/20 hover:border-marmoles-gold transition-all duration-200 shadow-lg hover:scale-110"
                     aria-label="Imagen anterior"
                   >
@@ -287,11 +315,7 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
                     </svg>
                   </button>
                   <button
-                    onClick={() =>
-                      setCurrentImageIndex(
-                        (currentImageIndex + 1) % allImages.length
-                      )
-                    }
+                    onClick={handleNextImage}
                     className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white h-9 w-9 sm:h-10 sm:w-10 rounded-full flex items-center justify-center z-10 text-marmoles-gold border-2 border-marmoles-gold/20 hover:border-marmoles-gold transition-all duration-200 shadow-lg hover:scale-110"
                     aria-label="Imagen siguiente"
                   >
@@ -328,18 +352,13 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
                         ? "ring-2 sm:ring-3 ring-marmoles-gold opacity-100 scale-105"
                         : "hover:opacity-75 opacity-60 hover:scale-105"
                     }`}
-                    onClick={() => setCurrentImageIndex(index)}
+                    onClick={() => handleSelectImage(index)}
                     aria-label={`Seleccionar imagen ${index + 1}`}
                   >
                     <img
-                      src={
-                        buildCloudinaryImageSet(
-                          entry.value,
-                          CLOUDINARY_PRESETS.card
-                        ).src
-                      }
+                      src={thumbnailImageSets[index].src}
                       alt={`${title} - miniatura ${index + 1}`}
-                      className="h-full w-full object-cover"
+                      className="h-full w-full object-contain"
                       loading="lazy"
                       decoding="async"
                     />
