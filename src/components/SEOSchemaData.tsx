@@ -157,9 +157,6 @@ export default function SEOSchemaData(props: SEOSchemaDataProps) {
 
   // JSON-LD format for search engines
   return (
-    <script 
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
-    />
+    <script type="application/ld+json">{JSON.stringify(schemaData)}</script>
   );
 } 

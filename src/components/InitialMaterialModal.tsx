@@ -13,6 +13,8 @@ interface InitialMaterialModalProps {
   categoryFeatures?: string[];
 }
 
+const EMPTY_CATEGORY_FEATURES: string[] = [];
+
 /**
  * Component that renders a MaterialModal that starts open based on server-side data.
  * This bypasses pagination issues by rendering the modal directly at page level.
@@ -20,7 +22,7 @@ interface InitialMaterialModalProps {
 export default function InitialMaterialModal({
   material,
   categoryTitle,
-  categoryFeatures = [],
+  categoryFeatures = EMPTY_CATEGORY_FEATURES,
 }: InitialMaterialModalProps) {
   const [isOpen, setIsOpen] = useState(true); // Start open!
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+﻿import React, { useEffect } from "react";
 import { useNavbarStore } from "../store/navbar";
 
 interface NavItem {
@@ -17,25 +17,22 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ navItems, currentPath }) => {
   const { isMobileMenuOpen, toggleMobileMenu, setMobileMenuOpen } =
     useNavbarStore();
 
-  // Close menu when clicking outside
+  const getItemKey = (item: NavItem) => item.href || item.label;
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
-      console.log("[MobileMenu] Click detected:", target);
       if (
         isMobileMenuOpen &&
         !target.closest("#mobile-menu") &&
         !target.closest("#mobile-menu-button")
       ) {
-        console.log("[MobileMenu] Closing menu - click outside");
         setMobileMenuOpen(false);
       }
     };
 
-    // Close menu when pressing escape
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        console.log("[MobileMenu] Closing menu - ESC pressed");
         setMobileMenuOpen(false);
       }
     };
@@ -44,13 +41,11 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ navItems, currentPath }) => {
     document.addEventListener("keydown", handleEscape);
 
     return () => {
-      console.log("[MobileMenu] Cleaning up event listeners");
       document.removeEventListener("click", handleClickOutside);
       document.removeEventListener("keydown", handleEscape);
     };
   }, [isMobileMenuOpen, setMobileMenuOpen]);
 
-  // Toggle submenu visibility
   const toggleSubmenu = (event: React.MouseEvent) => {
     event.preventDefault();
     const submenu = (event.currentTarget as HTMLElement)
@@ -66,14 +61,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ navItems, currentPath }) => {
         className="md:hidden p-2 text-marmoles-gold hover:text-marmoles-gold transition-colors"
         id="mobile-menu-button"
         aria-label="Menú"
-        onClick={() => {
-          console.log(
-            "[MobileMenu] Button clicked! Current state:",
-            isMobileMenuOpen
-          );
-          toggleMobileMenu();
-          console.log("[MobileMenu] After toggle");
-        }}
+        onClick={toggleMobileMenu}
         aria-expanded={isMobileMenuOpen}
       >
         <svg
@@ -101,11 +89,19 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ navItems, currentPath }) => {
         </svg>
       </button>
 
-      {/* Overlay oscuro de fondo */}
       {isMobileMenuOpen && (
         <div
           className="md:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-40 top-16"
           onClick={() => setMobileMenuOpen(false)}
+          onKeyDown={(event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              setMobileMenuOpen(false);
+            }
+          }}
+          role="button"
+          tabIndex={0}
+          aria-label="Cerrar menú"
         />
       )}
 
@@ -119,13 +115,13 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ navItems, currentPath }) => {
         aria-hidden={!isMobileMenuOpen}
       >
         <div className="px-4 py-3 space-y-3">
-          {navItems.map((item, index) => {
+          {navItems.map((item) => {
             if (item.isLogo) {
               return null;
             }
             if (item.items) {
               return (
-                <div className="space-y-2" key={`mobile-item-${index}`}>
+                <div className="space-y-2" key={`mobile-item-${getItemKey(item)}`}>
                   <button
                     className="text-sm font-medium text-gray-800 hover:text-marmoles-gold w-full text-left flex justify-between items-center transition-colors"
                     onClick={toggleSubmenu}
@@ -146,7 +142,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ navItems, currentPath }) => {
                     </svg>
                   </button>
                   <div className="hidden pl-4 space-y-2">
-                    {item.items.map(({ href, label }, subIndex) => (
+                    {item.items.map(({ href, label }) => (
                       <a
                         href={href}
                         className={`block text-sm font-medium hover:text-marmoles-gold py-2 transition-colors ${
@@ -154,7 +150,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ navItems, currentPath }) => {
                             ? "text-marmoles-gold"
                             : "text-gray-800"
                         }`}
-                        key={`mobile-subitem-${index}-${subIndex}`}
+                        key={`mobile-subitem-${href}`}
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         {label}
@@ -173,7 +169,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ navItems, currentPath }) => {
                     ? "text-marmoles-gold"
                     : "text-gray-800 hover:text-marmoles-gold"
                 }`}
-                key={`mobile-item-${index}`}
+                key={`mobile-item-${getItemKey(item)}`}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.label}

@@ -118,6 +118,15 @@ export default function FileUploader({ onFileUpload, contentType }) {
       onDragOver={handleDragOver}
       onDrop={handleDrop}
       onClick={() => fileInputRef.current?.click()}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          fileInputRef.current?.click();
+        }
+      }}
+      role="button"
+      tabIndex={0}
+      aria-label="Subir imagen"
     >
       <input 
         type="file" 

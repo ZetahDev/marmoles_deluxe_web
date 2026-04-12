@@ -16,17 +16,34 @@ interface MaterialModalProps {
   onClose: () => void;
 }
 
+const EMPTY_IMAGE_LIST: string[] = [];
+const EMPTY_FEATURE_LIST: string[] = [];
+
+function createStableEntries(values: string[]) {
+  const duplicates = new Map<string, number>();
+  return values.map((value) => {
+    const next = (duplicates.get(value) ?? 0) + 1;
+    duplicates.set(value, next);
+    return {
+      value,
+      key: next === 1 ? value : `${value}__${next}`,
+    };
+  });
+}
+
 const MaterialModal: React.FC<MaterialModalProps> = ({
   title,
   description,
   image,
-  images = [],
-  features = [],
+  images = EMPTY_IMAGE_LIST,
+  features = EMPTY_FEATURE_LIST,
   category = "",
   isOpen,
   onClose,
 }) => {
   const allImages = images.length > 0 ? images : [image];
+  const imageEntries = createStableEntries(allImages);
+  const featureEntries = createStableEntries(features);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const mainResponsiveImage = buildCloudinaryImageSet(
     allImages[currentImageIndex],
@@ -63,6 +80,7 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
     if (!isOpen) return;
 
     let touchMoved = false;
+    const touchOptions: AddEventListenerOptions = { passive: true };
 
     const handleTouchStart = () => {
       touchMoved = false;
@@ -86,15 +104,15 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
     };
 
     document.addEventListener("mousedown", handleClick);
-    document.addEventListener("touchstart", handleTouchStart);
-    document.addEventListener("touchmove", handleTouchMove);
-    document.addEventListener("touchend", handleClick as EventListener);
+    document.addEventListener("touchstart", handleTouchStart, touchOptions);
+    document.addEventListener("touchmove", handleTouchMove, touchOptions);
+    document.addEventListener("touchend", handleClick as EventListener, touchOptions);
 
     return () => {
       document.removeEventListener("mousedown", handleClick);
-      document.removeEventListener("touchstart", handleTouchStart);
-      document.removeEventListener("touchmove", handleTouchMove);
-      document.removeEventListener("touchend", handleClick as EventListener);
+      document.removeEventListener("touchstart", handleTouchStart, touchOptions);
+      document.removeEventListener("touchmove", handleTouchMove, touchOptions);
+      document.removeEventListener("touchend", handleClick as EventListener, touchOptions);
     };
   }, [isOpen, onClose]);
 
@@ -301,26 +319,31 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
             </div>
             {allImages.length > 1 && (
               <div className="grid grid-cols-4 gap-2">
-                {allImages.map((img, index) => (
-                  <div
-                    key={index}
+                {imageEntries.map((entry, index) => (
+                  <button
+                    type="button"
+                    key={entry.key}
                     className={`aspect-square overflow-hidden rounded-md sm:rounded-lg cursor-pointer transition-all duration-200 ${
                       currentImageIndex === index
                         ? "ring-2 sm:ring-3 ring-marmoles-gold opacity-100 scale-105"
                         : "hover:opacity-75 opacity-60 hover:scale-105"
                     }`}
                     onClick={() => setCurrentImageIndex(index)}
+                    aria-label={`Seleccionar imagen ${index + 1}`}
                   >
                     <img
                       src={
-                        buildCloudinaryImageSet(img, CLOUDINARY_PRESETS.card).src
+                        buildCloudinaryImageSet(
+                          entry.value,
+                          CLOUDINARY_PRESETS.card
+                        ).src
                       }
                       alt={`${title} - miniatura ${index + 1}`}
                       className="h-full w-full object-cover"
                       loading="lazy"
                       decoding="async"
                     />
-                  </div>
+                  </button>
                 ))}
               </div>
             )}
@@ -430,9 +453,9 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
                     Características
                   </h3>
                   <ul className="space-y-2 sm:space-y-2.5">
-                    {features.map((feature, index) => (
+                    {featureEntries.map((featureEntry) => (
                       <li
-                        key={index}
+                        key={featureEntry.key}
                         className="flex items-start gap-2.5 sm:gap-3 text-gray-700"
                       >
                         <svg
@@ -447,7 +470,7 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
                           />
                         </svg>
                         <span className="text-sm sm:text-base leading-snug flex-1">
-                          {feature}
+                          {featureEntry.value}
                         </span>
                       </li>
                     ))}

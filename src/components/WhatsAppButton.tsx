@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { trackWhatsAppClick } from "../lib/analytics";
 
 export const WhatsAppButton = () => {
@@ -8,10 +8,9 @@ export const WhatsAppButton = () => {
   const message =
     "¡Hola! Vengo de su página web y me gustaría hacer una consulta 🏢";
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
-    message,
+    message
   )}`;
 
-  // Mostrar el botón después de 2 segundos para no bloquear INP
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true);
@@ -32,19 +31,8 @@ export const WhatsAppButton = () => {
       style={{ position: "fixed", bottom: "1rem", right: "1rem" }}
       onMouseEnter={() => setTooltipVisible(true)}
       onMouseLeave={() => setTooltipVisible(false)}
-      onClick={(e) => {
-        // Trackear clic en WhatsApp
+      onClick={() => {
         trackWhatsAppClick("floating_button", "consulta general");
-
-        // Utilizar requestIdleCallback para navegar solo cuando el thread esté libre
-        e.preventDefault();
-        if ("requestIdleCallback" in window) {
-          window.requestIdleCallback(() => {
-            (window as Window).open(whatsappUrl, "_blank");
-          });
-        } else {
-          (window as Window).open(whatsappUrl, "_blank");
-        }
       }}
     >
       <svg

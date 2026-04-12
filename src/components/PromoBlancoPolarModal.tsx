@@ -1,9 +1,16 @@
-import React, { useRef, useState, useEffect } from "react";
+﻿import React, { useRef, useState, useEffect } from "react";
 import { X, ChevronLeft, ChevronRight, Check } from "lucide-react";
 
 const carouselImgs = [
   "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/quarstone/blanco_polar",
   "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/quarstone/blanco_polar_desing",
+];
+
+const promoBenefits = [
+  "Superficie altamente higiénica y fácil de limpiar.",
+  "Resistencia superior al impacto y rayado.",
+  "Color uniforme y acabado brillante duradero.",
+  "Garantía de calidad respaldo directo.",
 ];
 
 export default function PromoBlancoPolarModal() {
@@ -49,10 +56,8 @@ export default function PromoBlancoPolarModal() {
 
   return (
     <>
-      {/* Banner Sección - Designed to stop the scroll */}
       <section className="relative py-10 bg-gradient-to-r from-marmoles-white to-gray-50 border-y border-marmoles-gold/20 scroll-mt-20">
         <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
-          {/* Thumbnail / Trigger */}
           <button
             type="button"
             onClick={() => setOpen(true)}
@@ -77,7 +82,6 @@ export default function PromoBlancoPolarModal() {
             </div>
           </button>
 
-          {/* Copy and CTA */}
           <div className="flex-1 text-center md:text-left max-w-2xl">
             <div className="inline-block px-3 py-1 rounded-full bg-red-100 text-red-700 text-xs font-bold mb-3 border border-red-200 uppercase tracking-wide">
               🔥 Stock Limitado - Entrega Inmediata
@@ -123,16 +127,17 @@ export default function PromoBlancoPolarModal() {
         </div>
       </section>
 
-      {/* MODAL */}
       {open && (
         <dialog
           ref={modalRef}
           open
           onClick={handleBackdropClick}
+          onKeyDown={(event) => {
+            if (event.key === "Escape") setOpen(false);
+          }}
           className="fixed inset-0 z-50 flex items-center justify-center w-full h-full bg-black/80 backdrop-blur-sm m-0 p-4 border-none"
         >
           <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden animate-in fade-in zoom-in-95 duration-200 relative">
-            {/* Close Button */}
             <button
               ref={firstModalElementRef}
               onClick={() => setOpen(false)}
@@ -142,7 +147,6 @@ export default function PromoBlancoPolarModal() {
               <X size={24} />
             </button>
 
-            {/* Carousel */}
             <div className="relative h-64 bg-gray-100 flex items-center justify-center">
               <img
                 src={carouselImgs[carouselIndex]}
@@ -150,7 +154,6 @@ export default function PromoBlancoPolarModal() {
                 className="w-full h-full object-cover"
               />
 
-              {/* Carousel Controls */}
               <button
                 onClick={handlePrev}
                 className="absolute left-4 p-2 bg-white/80 rounded-full shadow hover:bg-white transition-colors"
@@ -166,11 +169,10 @@ export default function PromoBlancoPolarModal() {
                 <ChevronRight size={24} />
               </button>
 
-              {/* Dots */}
               <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
-                {carouselImgs.map((_, idx) => (
+                {carouselImgs.map((img, idx) => (
                   <div
-                    key={idx}
+                    key={img}
                     className={`w-2 h-2 rounded-full transition-all ${
                       idx === carouselIndex
                         ? "bg-marmoles-gold w-4"
@@ -181,7 +183,6 @@ export default function PromoBlancoPolarModal() {
               </div>
             </div>
 
-            {/* Content */}
             <div className="p-8">
               <div className="flex justify-between items-start mb-4">
                 <div>
@@ -215,14 +216,9 @@ export default function PromoBlancoPolarModal() {
                   fortuna.
                 </p>
                 <ul className="space-y-2">
-                  {[
-                    "Superficie altamente higiénica y fácil de limpiar.",
-                    "Resistencia superior al impacto y rayado.",
-                    "Color uniforme y acabado brillante duradero.",
-                    "Garantía de calidad respaldo directo.",
-                  ].map((item, i) => (
+                  {promoBenefits.map((item) => (
                     <li
-                      key={i}
+                      key={item}
                       className="flex items-start gap-2 text-sm text-gray-700"
                     >
                       <Check

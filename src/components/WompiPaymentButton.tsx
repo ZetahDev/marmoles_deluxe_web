@@ -329,10 +329,11 @@ export default function WompiPaymentButton({
         {/* Formulario de datos del cliente */}
         <div className="space-y-3">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="wompi-customer-name" className="block text-sm font-medium text-gray-700 mb-1">
               Nombre Completo *
             </label>
             <input
+              id="wompi-customer-name"
               type="text"
               value={customerData.name}
               onChange={(e) =>
@@ -345,10 +346,11 @@ export default function WompiPaymentButton({
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="wompi-customer-email" className="block text-sm font-medium text-gray-700 mb-1">
               Email *
             </label>
             <input
+              id="wompi-customer-email"
               type="email"
               value={customerData.email}
               onChange={(e) =>
@@ -361,10 +363,11 @@ export default function WompiPaymentButton({
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="wompi-customer-phone" className="block text-sm font-medium text-gray-700 mb-1">
               Teléfono *
             </label>
             <input
+              id="wompi-customer-phone"
               type="tel"
               value={customerData.phone}
               onChange={(e) => {

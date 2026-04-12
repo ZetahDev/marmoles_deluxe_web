@@ -129,9 +129,9 @@ export default function CategorySection({
         <div className="max-w-5xl mx-auto mb-8">
           <div className="bg-gradient-to-r from-gray-50 to-white p-6 rounded-lg shadow-sm border border-gray-100">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              {category.features.map((feature, idx) => (
+              {category.features.map((feature) => (
                 <div
-                  key={idx}
+                  key={`${category.title}-${feature}`}
                   className="flex items-start text-sm text-gray-700"
                 >
                   <span className="mr-2 flex-shrink-0">
