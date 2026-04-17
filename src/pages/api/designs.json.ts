@@ -1,9 +1,11 @@
 import type { APIRoute } from "astro";
 import { fetchAllDesignImages } from "../../lib/utils/s3Utils";
+import { fetchDesignImagesFromAdminApi } from "../../lib/api/adminCatalog";
 
 export const GET: APIRoute = async () => {
   try {
-    const images = await fetchAllDesignImages();
+    const remoteImages = await fetchDesignImagesFromAdminApi();
+    const images = remoteImages ?? (await fetchAllDesignImages());
     return new Response(JSON.stringify(images), {
       status: 200,
       headers: {
