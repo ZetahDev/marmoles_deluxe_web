@@ -1,4 +1,4 @@
-import cloudinaryIndex from "../../data/cloudinary-index.json";
+ï»¿import { fetchDesignImagesFromAdminApi } from "../api/adminCatalog";
 
 export interface Stone {
   name: string;
@@ -12,61 +12,76 @@ interface DesignImage {
   name: string;
 }
 
-type CategoryMap = Record<string, Stone[]>;
-
-const categories = (cloudinaryIndex.categories ?? {}) as CategoryMap;
-const designGallery = (cloudinaryIndex.designGallery ?? []) as DesignImage[];
-
-function normalizeCategory(category: string): string {
-  return category
-    .trim()
-    .replace(/\s+/g, "")
-    .replace(/_/g, "")
-    .replace(/-/g, "")
-    .toUpperCase();
-}
-
-function resolveCategory(category: string): string | null {
-  const directMatch = categories[category];
-  if (directMatch) {
-    return category;
-  }
-
-  const target = normalizeCategory(category);
-  const matchedKey = Object.keys(categories).find((key) => {
-    const normalizedKey = normalizeCategory(key).replace(/\//g, "");
-    return normalizedKey === target || normalizedKey.includes(target);
-  });
-
-  return matchedKey ?? null;
-}
-
 /**
- * Retorna todas las imágenes de diseños para la galería.
- * Sin fallback a S3: solo usa el índice Cloudinary versionado en el repo.
+ * Normaliza nombres para comparaciÃ³n robusta (ej: "GRANITOS+NATURALES" -> "granitosnaturales")
  */
+function normalize(str: string): string {
+  if (!str) return "";
+  return str.trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "") // Quitar acentos
+    .replace(/[^a-z0-9]+/g, "");   // Solo letras y nÃºmeros
+}
+
+async function fetchCatalogFromApi() {
+  const baseUrl = import.meta.env.PUBLIC_ADMIN_API_BASE_URL;
+  if (!baseUrl) return null;
+  try {
+    const response = await fetch(`${baseUrl}/api/public/catalog`);
+    if (!response.ok) return null;
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching catalog:", error);
+    return null;
+  }
+}
+
 export async function fetchAllDesignImages(): Promise<DesignImage[]> {
-  if (designGallery.length === 0) {
-    console.warn("?? cloudinary-index sin registros para designGallery");
-    return [];
-  }
-
-  // Mantiene el comportamiento previo de barajar para efecto masonry.
-  return [...designGallery].sort(() => Math.random() - 0.5);
+  const urls = await fetchDesignImagesFromAdminApi();
+  if (!urls) return [];
+  return urls.map(url => ({
+    url,
+    category: "General",
+    name: "DiseÃ±o Marmoles Deluxe"
+  })).sort(() => Math.random() - 0.5);
 }
 
-/**
- * Mantiene la firma histórica para evitar cambios en páginas actuales.
- * Internamente obtiene datos desde Cloudinary indexado localmente.
- */
-export async function listStonesFromS3(category: string): Promise<Stone[]> {
-  const resolvedCategory = resolveCategory(category);
-
-  if (!resolvedCategory) {
-    console.warn(`?? Categoría no encontrada en cloudinary-index: ${category}`);
+export async function listStonesFromS3(categoryName: string): Promise<Stone[]> {
+  const catalog = await fetchCatalogFromApi();
+  if (!catalog || !catalog.data) {
+    console.warn("?? CatÃ¡logo vacÃ­o o API no disponible");
+    return [];
+  }
+  
+  const { categories, products, media } = catalog.data;
+  const targetNorm = normalize(categoryName);
+  
+  // Buscar categorÃ­a por coincidencia parcial normalizada
+  const category = categories.find((c: any) => normalize(c.name).includes(targetNorm) || targetNorm.includes(normalize(c.name)));
+  if (!category) {
+    console.warn(`?? CategorÃ­a no encontrada: ${categoryName} (Normalizada: ${targetNorm})`);
     return [];
   }
 
-  const stones = categories[resolvedCategory] ?? [];
-  return stones.map((stone) => ({ ...stone }));
+  const categoryProducts = products.filter((p: any) => p.category_id === category.id);
+  const cloudName = import.meta.env.CLOUDINARY_CLOUD_NAME;
+  
+  return categoryProducts.map((p: any) => {
+    const productMedia = media.filter((m: any) => m.product_id === p.id);
+    const mainMedia = productMedia.find((m: any) => m.is_primary) || productMedia[0];
+    const designMedia = productMedia.find((m: any) => 
+      m.public_id?.toLowerCase().includes("design") || 
+      m.public_id?.toLowerCase().includes("desing")
+    ) || productMedia[1] || mainMedia;
+
+    const buildUrl = (publicId: string) => 
+      publicId ? `https://res.cloudinary.com/${cloudName}/image/upload/${publicId}` : "";
+
+    return {
+      name: p.name,
+      image: buildUrl(mainMedia?.public_id),
+      design: buildUrl(designMedia?.public_id)
+    };
+  });
 }

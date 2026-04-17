@@ -28,7 +28,7 @@ export async function fetchDesignImagesFromAdminApi() {
 
     const urls = media.map((item) => {
       if (item.provider === "cloudinary" && item.public_id) {
-        return `https://res.cloudinary.com/${import.meta.env.CLOUDINARY_CLOUD_NAME || "dudv2dh4w"}/image/upload/${item.public_id}`;
+        return `https://res.cloudinary.com/${import.meta.env.CLOUDINARY_CLOUD_NAME}/image/upload/${item.public_id}`;
       }
       return item.public_id;
     });
