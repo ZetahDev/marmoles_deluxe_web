@@ -14,7 +14,7 @@ const keywords =
   "mármoles naturales Cali, mármol blanco, mármol negro, encimeras mármol Cali, pisos mármol, mármol cocina, mármol baño, mármol italiano, instalación mármol Valle del Cauca";
 
 // Fetch marble data at build time
-const marmoles = await listStonesFromS3("MARMOL");
+const marmoles = await listStonesFromS3("MARMOL/ARTEMARMOL");
 
 // Configurar datos para schema.org
 const schemaStones = marmoles.map((stone: Stone) => ({

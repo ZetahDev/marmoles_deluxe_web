@@ -27,6 +27,10 @@ const CATALOG_CATEGORIES = [
   "PIEDRA+SINTERIZADA/ARTEMARMOL",
 ];
 
+const CATEGORY_OUTPUT_ALIAS = {
+  MARMOL: "MARMOL/ARTEMARMOL",
+};
+
 const HOME_REMOTE_ASSETS = [
   {
     key: "hero",
@@ -435,7 +439,8 @@ async function buildCatalog(cloudName) {
       cloudName
     );
 
-    categories[category] = stones;
+    const outputCategory = CATEGORY_OUTPUT_ALIAS[category] ?? category;
+    categories[outputCategory] = stones;
     designGallery.push(...designs);
 
     for (const key of s3Keys) {
@@ -587,7 +592,7 @@ async function main() {
     source: {
       s3Bucket: S3_BUCKET,
       s3Region: S3_REGION,
-      categories: CATALOG_CATEGORIES,
+      categories: CATALOG_CATEGORIES.map((c) => CATEGORY_OUTPUT_ALIAS[c] ?? c),
     },
     categories,
     designGallery,
