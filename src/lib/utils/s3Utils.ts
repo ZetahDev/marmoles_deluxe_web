@@ -26,6 +26,32 @@ function normalize(str: string): string {
     .replace(/[^a-z0-9]+/g, "");
 }
 
+function buildCategoryAliases(categoryName: string): string[] {
+  const aliases = new Set<string>();
+  const raw = categoryName?.trim() ?? "";
+  const full = normalize(raw);
+  if (full) aliases.add(full);
+
+  const slashParts = raw
+    .split("/")
+    .map((part) => part.trim())
+    .filter(Boolean);
+
+  if (slashParts.length > 1) {
+    const lastSegment = normalize(slashParts[slashParts.length - 1] ?? "");
+    if (lastSegment) aliases.add(lastSegment);
+  }
+
+  return Array.from(aliases);
+}
+
+function matchesCategoryName(candidateName: string, targetCategory: string): boolean {
+  const candidate = normalize(candidateName);
+  if (!candidate) return false;
+  const aliases = buildCategoryAliases(targetCategory);
+  return aliases.includes(candidate);
+}
+
 async function fetchCatalogFromApi() {
   const baseUrl = import.meta.env.PUBLIC_ADMIN_API_BASE_URL;
   if (!baseUrl) return null;
@@ -41,12 +67,9 @@ async function fetchCatalogFromApi() {
 
 function listStonesFromCloudinaryIndex(categoryName: string): Stone[] {
   const categories = (cloudinaryIndex as any)?.categories ?? {};
-  const targetNorm = normalize(categoryName);
-
-  const matchedCategoryKey = Object.keys(categories).find((key) => {
-    const keyNorm = normalize(key);
-    return keyNorm.includes(targetNorm) || targetNorm.includes(keyNorm);
-  });
+  const matchedCategoryKey = Object.keys(categories).find((key) =>
+    matchesCategoryName(key, categoryName)
+  );
 
   if (!matchedCategoryKey) return [];
 
@@ -78,12 +101,8 @@ export async function listStonesFromS3(categoryName: string): Promise<Stone[]> {
   }
 
   const { categories, products, media } = catalog.data;
-  const targetNorm = normalize(categoryName);
-
-  const category = categories.find(
-    (c: any) =>
-      normalize(c.name).includes(targetNorm) ||
-      targetNorm.includes(normalize(c.name))
+  const category = categories.find((c: any) =>
+    matchesCategoryName(c.name, categoryName)
   );
 
   if (!category) {
@@ -108,10 +127,11 @@ export async function listStonesFromS3(categoryName: string): Promise<Stone[]> {
       productMedia[1] ||
       mainMedia;
 
-    const buildUrl = (publicId: string) =>
-      publicId
-        ? `https://res.cloudinary.com/${cloudName}/image/upload/${publicId}`
-        : "";
+    const buildUrl = (publicId: string) => {
+      if (!publicId) return "";
+      if (/^https?:\/\//i.test(publicId)) return publicId;
+      return `https://res.cloudinary.com/${cloudName}/image/upload/${publicId}`;
+    };
 
     return {
       name: p.name,
