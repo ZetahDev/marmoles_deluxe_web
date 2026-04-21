@@ -52,6 +52,14 @@ function matchesCategoryName(candidateName: string, targetCategory: string): boo
   return aliases.includes(candidate);
 }
 
+function normalizeCloudinaryPublicId(publicId: string): string {
+  const clean = (publicId ?? "").trim().replace(/^\/+/, "");
+  if (!clean) return "";
+  if (/^https?:\/\//i.test(clean)) return clean;
+  if (clean.startsWith("marmoles-deluxe/")) return clean;
+  return `marmoles-deluxe/${clean}`;
+}
+
 async function fetchCatalogFromApi() {
   const baseUrl = import.meta.env.PUBLIC_ADMIN_API_BASE_URL;
   if (!baseUrl) return null;
@@ -129,8 +137,9 @@ export async function listStonesFromS3(categoryName: string): Promise<Stone[]> {
 
     const buildUrl = (publicId: string) => {
       if (!publicId) return "";
-      if (/^https?:\/\//i.test(publicId)) return publicId;
-      return `https://res.cloudinary.com/${cloudName}/image/upload/${publicId}`;
+      const normalized = normalizeCloudinaryPublicId(publicId);
+      if (/^https?:\/\//i.test(normalized)) return normalized;
+      return `https://res.cloudinary.com/${cloudName}/image/upload/${normalized}`;
     };
 
     return {
