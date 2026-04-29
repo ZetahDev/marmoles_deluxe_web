@@ -50,6 +50,22 @@ interface AnalyticsEvent {
   value?: number;
 }
 
+interface WhatsAppOpenOptions {
+  openInNewTab?: boolean;
+  timeoutMs?: number;
+}
+
+const WHATSAPP_CONVERSION_SEND_TO =
+  import.meta.env.PUBLIC_GOOGLE_ADS_WHATSAPP_SEND_TO;
+const WHATSAPP_CONVERSION_VALUE = Number(
+  import.meta.env.PUBLIC_GOOGLE_ADS_WHATSAPP_VALUE ?? "1"
+);
+const WHATSAPP_CONVERSION_CURRENCY =
+  import.meta.env.PUBLIC_GOOGLE_ADS_WHATSAPP_CURRENCY ?? "COP";
+const WHATSAPP_CONVERSION_TIMEOUT_MS = Number(
+  import.meta.env.PUBLIC_GOOGLE_ADS_WHATSAPP_TIMEOUT_MS ?? "900"
+);
+
 /**
  * Detecta la fuente de tráfico basada en UTM params
  */
@@ -217,6 +233,34 @@ export function trackEvent(eventData: AnalyticsEvent) {
   }
 }
 
+function createOneTimeCallback(callback: () => void) {
+  let hasRun = false;
+  return () => {
+    if (hasRun) return;
+    hasRun = true;
+    callback();
+  };
+}
+
+function tryTrackWhatsAppAdsConversion(done: () => void): boolean {
+  if (
+    typeof window === "undefined" ||
+    !window.gtag ||
+    !WHATSAPP_CONVERSION_SEND_TO
+  ) {
+    return false;
+  }
+
+  window.gtag("event", "conversion", {
+    send_to: WHATSAPP_CONVERSION_SEND_TO,
+    value: WHATSAPP_CONVERSION_VALUE,
+    currency: WHATSAPP_CONVERSION_CURRENCY,
+    event_callback: done,
+  });
+
+  return true;
+}
+
 /**
  * Trackea clics en productos
  */
@@ -248,6 +292,91 @@ export function trackWhatsAppClick(context: string, productName?: string) {
       page_url: window.location.href,
     },
   });
+}
+
+export function openWhatsAppTracked(
+  whatsappUrl: string,
+  context: string,
+  productName?: string,
+  options: WhatsAppOpenOptions = {}
+) {
+  if (typeof window === "undefined") return;
+
+  trackWhatsAppClick(context, productName);
+
+  const navigate = createOneTimeCallback(() => {
+    if (options.openInNewTab === false) {
+      window.location.href = whatsappUrl;
+      return;
+    }
+    window.open(whatsappUrl, "_blank");
+  });
+
+  const timeoutMs =
+    options.timeoutMs && options.timeoutMs > 0
+      ? options.timeoutMs
+      : WHATSAPP_CONVERSION_TIMEOUT_MS;
+
+  const adsConversionTracked = tryTrackWhatsAppAdsConversion(navigate);
+  if (adsConversionTracked) {
+    window.setTimeout(navigate, timeoutMs);
+    return;
+  }
+
+  navigate();
+}
+
+function normalizeWhatsAppPathname(pathname: string): string {
+  if (!pathname) return "";
+  return pathname.replace(/^\/+/, "");
+}
+
+function extractWhatsAppContext(anchor: HTMLAnchorElement): string {
+  const explicitContext = anchor.getAttribute("data-whatsapp-context");
+  if (explicitContext) return explicitContext;
+
+  const source = anchor.getAttribute("data-whatsapp-source");
+  if (source) return source;
+
+  const href = anchor.getAttribute("href") ?? "";
+  if (href.includes("wa.me/")) {
+    const path = href.split("wa.me/")[1] ?? "";
+    return `wa_link_${normalizeWhatsAppPathname(path).split("?")[0]}`;
+  }
+
+  return "wa_link";
+}
+
+function setupWhatsAppLinkTracking() {
+  if (typeof document === "undefined") return;
+
+  const handler = (event: MouseEvent) => {
+    if (event.defaultPrevented) return;
+
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+
+    const anchor = target.closest(
+      "a[href*='wa.me/'],a[href*='api.whatsapp.com/'],a[href*='whatsapp.com/send']"
+    ) as HTMLAnchorElement | null;
+
+    if (!anchor) return;
+
+    const href = anchor.href;
+    if (!href) return;
+
+    const context = extractWhatsAppContext(anchor);
+    const productName =
+      anchor.getAttribute("data-whatsapp-product") ?? undefined;
+
+    event.preventDefault();
+    openWhatsAppTracked(href, context, productName, {
+      openInNewTab: anchor.target === "_self" ? false : true,
+    });
+  };
+
+  document.addEventListener("click", handler);
+  return () => document.removeEventListener("click", handler);
 }
 
 /**
@@ -413,6 +542,7 @@ export function initializeAnalytics() {
     setupScrollTracking(),
     setupTimeTracking(),
     setupExitIntentTracking(),
+    setupWhatsAppLinkTracking(),
   ];
 
   // Cleanup al desmontar

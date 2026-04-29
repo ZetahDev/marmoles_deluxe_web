@@ -4,6 +4,7 @@ import {
   buildCloudinaryImageSet,
   CLOUDINARY_PRESETS,
 } from "../lib/images/cloudinary";
+import { openWhatsAppTracked } from "../lib/analytics";
 
 interface MaterialModalProps {
   title: string;
@@ -520,9 +521,10 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
                   }
 
                   const encodedMessage = encodeURIComponent(message);
-                  window.open(
+                  openWhatsAppTracked(
                     `https://wa.me/+573132592793?text=${encodedMessage}`,
-                    "_blank"
+                    "material_modal_cta",
+                    `${category ? `${category} - ` : ""}${title}`
                   );
                 }}
                 className={`w-full py-3 sm:py-3.5 rounded-lg sm:rounded-xl transition-all duration-300 focus:ring-2 focus:outline-none text-sm sm:text-base font-semibold shadow-lg flex items-center justify-center gap-2 ${

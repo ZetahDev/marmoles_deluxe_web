@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useCallback, useEffect, useRef } from "react";
-import { trackProductClick, trackWhatsAppClick } from "../lib/analytics";
+import { openWhatsAppTracked, trackProductClick } from "../lib/analytics";
 import {
   Carousel,
   CarouselContent,
@@ -67,11 +67,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
     }
 
     // Trackear clic en WhatsApp con cotización
-    trackWhatsAppClick(
-      "product_quote",
-      `${category ? `${category} - ` : ""}${name}`
-    );
-
     const message =
       `Hola, me interesa una cotización para:\n\n` +
       `📐 Material: ${category ? `${category} - ` : ""}${name}\n` +
@@ -83,23 +78,18 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
     const encodedMessage = encodeURIComponent(message);
     const whatsappURL = `https://wa.me/+573132592793?text=${encodedMessage}`;
-    window.open(whatsappURL, "_blank");
+    openWhatsAppTracked(whatsappURL, "product_quote", `${category ? `${category} - ` : ""}${name}`);
   }, [category, name, metros, precioCalculado, unidad]);
 
   // Optimización: Deferred execution - sólo ejecutar cuando el usuario interactúa
   const handleWhatsAppClick = useCallback(() => {
     // Trackear clic en WhatsApp
-    trackWhatsAppClick(
-      "product_info",
-      `${category ? `${category} - ` : ""}${name}`
-    );
-
     const message = `Hola, estoy interesado en obtener más información sobre la piedra sinterizada: ${
       category ? `${category} - ` : ""
     }${name}.`;
     const encodedMessage = encodeURIComponent(message);
     const whatsappURL = `https://wa.me/+573132592793?text=${encodedMessage}`;
-    window.open(whatsappURL, "_blank");
+    openWhatsAppTracked(whatsappURL, "product_info", `${category ? `${category} - ` : ""}${name}`);
   }, [category, name]);
 
   // Get materialToOpen from Zustand store

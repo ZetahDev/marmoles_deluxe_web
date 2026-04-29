@@ -4,6 +4,7 @@ import {
   trackFormStart,
   trackFormSubmit,
   trackFormAbandonment,
+  openWhatsAppTracked,
 } from "../lib/analytics";
 
 // EmailJS configuration - ACTUALIZA ESTOS VALORES CON TUS CREDENCIALES
@@ -140,7 +141,7 @@ ${formData.message}
       const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
         whatsappMessage,
       )}`;
-      window.open(whatsappUrl, "_blank");
+      openWhatsAppTracked(whatsappUrl, "contact_form_submit");
 
       // Trackear envío exitoso
       trackFormSubmit("contact_form", {

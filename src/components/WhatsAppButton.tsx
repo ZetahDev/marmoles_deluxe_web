@@ -1,12 +1,12 @@
-﻿import React, { useState, useEffect } from "react";
-import { trackWhatsAppClick } from "../lib/analytics";
+import React, { useState, useEffect } from "react";
+import { openWhatsAppTracked } from "../lib/analytics";
 
 export const WhatsAppButton = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const phoneNumber = "573132592793";
   const message =
-    "¡Hola! Vengo de su página web y me gustaría hacer una consulta 🏢";
+    "Hola! Vengo de su pagina web y me gustaria hacer una consulta.";
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
     message
   )}`;
@@ -31,8 +31,13 @@ export const WhatsAppButton = () => {
       style={{ position: "fixed", bottom: "1rem", right: "1rem" }}
       onMouseEnter={() => setTooltipVisible(true)}
       onMouseLeave={() => setTooltipVisible(false)}
-      onClick={() => {
-        trackWhatsAppClick("floating_button", "consulta general");
+      onClick={(event) => {
+        event.preventDefault();
+        openWhatsAppTracked(
+          whatsappUrl,
+          "floating_button",
+          "consulta general"
+        );
       }}
     >
       <svg
@@ -48,7 +53,7 @@ export const WhatsAppButton = () => {
       </svg>
       {tooltipVisible && (
         <span className="absolute right-full mr-3 bg-white text-gray-900 px-2 py-1 rounded text-sm whitespace-nowrap shadow-md">
-          ¡Contáctanos por WhatsApp!
+          Contactanos por WhatsApp
         </span>
       )}
     </a>

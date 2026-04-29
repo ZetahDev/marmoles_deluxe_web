@@ -2,6 +2,10 @@
 
 interface ImportMetaEnv {
   readonly PUBLIC_API_URL: string;
+  readonly PUBLIC_GOOGLE_ADS_WHATSAPP_SEND_TO?: string;
+  readonly PUBLIC_GOOGLE_ADS_WHATSAPP_VALUE?: string;
+  readonly PUBLIC_GOOGLE_ADS_WHATSAPP_CURRENCY?: string;
+  readonly PUBLIC_GOOGLE_ADS_WHATSAPP_TIMEOUT_MS?: string;
   readonly PUBLIC_AWS_ACCESS_KEY_ID?: string;
   readonly PUBLIC_AWS_SECRET_ACCESS_KEY?: string;
   readonly PUBLIC_AWS_REGION?: string;

@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import { trackFormStart, trackFormSubmit } from "../lib/analytics";
+import { openWhatsAppTracked, trackFormStart, trackFormSubmit } from "../lib/analytics";
 
 const WHATSAPP_NUMBER = "+573132592793";
 
@@ -217,7 +217,7 @@ Solicitud enviada desde www.marmolesdeluxe.com/proyectos
       )}`;
 
       // Abrir WhatsApp
-      window.open(whatsappUrl, "_blank");
+      openWhatsAppTracked(whatsappUrl, "b2b_contact_form_submit");
 
       // Trackear envío
       trackFormSubmit("b2b_contact_form", {
