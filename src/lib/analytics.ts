@@ -52,19 +52,7 @@ interface AnalyticsEvent {
 
 interface WhatsAppOpenOptions {
   openInNewTab?: boolean;
-  timeoutMs?: number;
 }
-
-const WHATSAPP_CONVERSION_SEND_TO =
-  import.meta.env.PUBLIC_GOOGLE_ADS_WHATSAPP_SEND_TO;
-const WHATSAPP_CONVERSION_VALUE = Number(
-  import.meta.env.PUBLIC_GOOGLE_ADS_WHATSAPP_VALUE ?? "1"
-);
-const WHATSAPP_CONVERSION_CURRENCY =
-  import.meta.env.PUBLIC_GOOGLE_ADS_WHATSAPP_CURRENCY ?? "COP";
-const WHATSAPP_CONVERSION_TIMEOUT_MS = Number(
-  import.meta.env.PUBLIC_GOOGLE_ADS_WHATSAPP_TIMEOUT_MS ?? "900"
-);
 
 /**
  * Detecta la fuente de tráfico basada en UTM params
@@ -233,34 +221,6 @@ export function trackEvent(eventData: AnalyticsEvent) {
   }
 }
 
-function createOneTimeCallback(callback: () => void) {
-  let hasRun = false;
-  return () => {
-    if (hasRun) return;
-    hasRun = true;
-    callback();
-  };
-}
-
-function tryTrackWhatsAppAdsConversion(done: () => void): boolean {
-  if (
-    typeof window === "undefined" ||
-    !window.gtag ||
-    !WHATSAPP_CONVERSION_SEND_TO
-  ) {
-    return false;
-  }
-
-  window.gtag("event", "conversion", {
-    send_to: WHATSAPP_CONVERSION_SEND_TO,
-    value: WHATSAPP_CONVERSION_VALUE,
-    currency: WHATSAPP_CONVERSION_CURRENCY,
-    event_callback: done,
-  });
-
-  return true;
-}
-
 /**
  * Trackea clics en productos
  */
@@ -304,26 +264,11 @@ export function openWhatsAppTracked(
 
   trackWhatsAppClick(context, productName);
 
-  const navigate = createOneTimeCallback(() => {
-    if (options.openInNewTab === false) {
-      window.location.href = whatsappUrl;
-      return;
-    }
-    window.open(whatsappUrl, "_blank");
-  });
-
-  const timeoutMs =
-    options.timeoutMs && options.timeoutMs > 0
-      ? options.timeoutMs
-      : WHATSAPP_CONVERSION_TIMEOUT_MS;
-
-  const adsConversionTracked = tryTrackWhatsAppAdsConversion(navigate);
-  if (adsConversionTracked) {
-    window.setTimeout(navigate, timeoutMs);
+  if (options.openInNewTab === false) {
+    window.location.href = whatsappUrl;
     return;
   }
-
-  navigate();
+  window.open(whatsappUrl, "_blank");
 }
 
 function normalizeWhatsAppPathname(pathname: string): string {
