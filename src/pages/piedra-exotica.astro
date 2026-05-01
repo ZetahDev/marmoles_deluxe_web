@@ -1,4 +1,4 @@
-﻿---
+---
 import Layout from "../layouts/Layout.astro";
 import ProductCard from "../components/ProductCard.tsx";
 import SEOSchemaData from "../components/SEOSchemaData.tsx";
@@ -16,9 +16,9 @@ interface ExoticStone {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const pageUrl = canonicalURL.toString();
 const metaImage = buildSeoImageUrl(cloudinaryAssets.seo.contact);
-const title = "Piedra ExÃ³tica Cali - MÃ¡rmoles Deluxe | Luxury Stone";
+const title = "Piedra Exótica Cali - Mármoles Deluxe | Luxury Stone";
 const description =
-  "ColecciÃ³n premium de piedras exÃ³ticas importadas: granitos, quartzitas, Ã³nix y Ã¡gatas para cocinas, barras y revestimientos de alto impacto visual.";
+  "Colección premium de piedras exóticas importadas: granitos, quartzitas, ónix y ágatas para cocinas, barras y revestimientos de alto impacto visual.";
 
 const keywords =
   "piedra exotica Cali, luxury stone, quartzite Cali, onix Cali, agata Cali, granito exotico, revestimientos premium, mesones exclusivos";
@@ -38,14 +38,14 @@ const schemaStones = exoticas.map((stone) => ({
     <meta name="keywords" content={keywords} />
     <link rel="canonical" href={canonicalURL} />
     <meta name="robots" content="index, follow" />
-    <meta name="author" content="MÃ¡rmoles Deluxe" />
+    <meta name="author" content="Mármoles Deluxe" />
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:locale" content="es_CO" />
-    <meta property="og:site_name" content="MÃ¡rmoles Deluxe" />
+    <meta property="og:site_name" content="Mármoles Deluxe" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
@@ -62,14 +62,14 @@ const schemaStones = exoticas.map((stone) => ({
     pageDescription={description}
     pageUrl={pageUrl}
     pageImage={metaImage}
-    category="Piedra ExÃ³tica"
+    category="Piedra Exótica"
     stones={schemaStones}
   />
 
   <main class="py-20 pt-24">
     <div class="container mx-auto px-4">
       <h1 class="text-4xl md:text-5xl font-bold text-center mb-4">
-        Piedra ExÃ³tica
+        Piedra Exótica
       </h1>
 
       <div class="max-w-5xl mx-auto mb-12">
@@ -78,19 +78,19 @@ const schemaStones = exoticas.map((stone) => ({
         >
           <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div class="flex items-start text-sm text-gray-700">
-              <span class="mr-2 flex-shrink-0">ðŸ’Ž</span>
-              <span>Materiales importados de colecciÃ³n premium</span>
+              <span class="mr-2 flex-shrink-0">✔</span>
+              <span>Materiales importados de colección premium</span>
             </div>
             <div class="flex items-start text-sm text-gray-700">
-              <span class="mr-2 flex-shrink-0">ðŸŽ¨</span>
-              <span>Vetas y contrastes Ãºnicos de alto impacto visual</span>
+              <span class="mr-2 flex-shrink-0">✔</span>
+              <span>Vetas y contrastes únicos de alto impacto visual</span>
             </div>
             <div class="flex items-start text-sm text-gray-700">
-              <span class="mr-2 flex-shrink-0">ðŸ›ï¸</span>
-              <span>Ideal para mesones, barras y muros de diseÃ±o</span>
+              <span class="mr-2 flex-shrink-0">✔</span>
+              <span>Ideal para mesones, barras y muros de diseño</span>
             </div>
             <div class="flex items-start text-sm text-gray-700">
-              <span class="mr-2 flex-shrink-0">ðŸ›¡ï¸</span>
+              <span class="mr-2 flex-shrink-0">✔</span>
               <span>Alta durabilidad para proyectos residenciales y comerciales</span>
             </div>
           </div>
@@ -106,10 +106,10 @@ const schemaStones = exoticas.map((stone) => ({
             <ProductCard
               client:idle
               name={stone.name}
-              description="Piedra exÃ³tica de alta gama"
+              description="Piedra exótica de alta gama"
               features={stone.characteristics ?? []}
               images={[stone.image, stone.design]}
-              category="Piedra ExÃ³tica"
+              category="Piedra Exótica"
               slug={stone.name
                 .toLowerCase()
                 .replace(/[^a-z0-9]+/g, "-")

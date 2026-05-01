@@ -1,4 +1,4 @@
-﻿---
+---
 import Layout from "../layouts/Layout.astro";
 import ProductCard from "../components/ProductCard.tsx";
 import SEOSchemaData from "../components/SEOSchemaData.tsx";
@@ -9,12 +9,12 @@ import { buildSeoImageUrl } from "../lib/images/cloudinary";
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const pageUrl = canonicalURL.toString();
 const metaImage = buildSeoImageUrl(cloudinaryAssets.seo.contact);
-const title = "Quartzstone Cali - MÃ¡rmoles Deluxe | Cuarzo de IngenierÃ­a";
+const title = "Quartzstone Cali - Mármoles Deluxe | Cuarzo de Ingeniería";
 const description =
-  "Explora nuestra selecciÃ³n de cuarzo de ingenierÃ­a, un material no poroso, resistente a manchas y de bajo mantenimiento. Ideal para cocinas y baÃ±os de alta durabilidad.";
+  "Explora nuestra selección de cuarzo de ingeniería, un material no poroso, resistente a manchas y de bajo mantenimiento. Ideal para cocinas y baños de alta durabilidad.";
 
 const keywords =
-  "quartzstone Cali, cuarzo ingenierÃ­a, cuarzo cocina, encimeras cuarzo Cali, quartzstone blanco, cuarzo gris, resistente manchas, bajo mantenimiento, instalaciÃ³n cuarzo Valle del Cauca";
+  "quartzstone Cali, cuarzo ingeniería, cuarzo cocina, encimeras cuarzo Cali, quartzstone blanco, cuarzo gris, resistente manchas, bajo mantenimiento, instalación cuarzo Valle del Cauca";
 
 // Fetch quartzstone data at build time
 const quarstone = await listStonesFromS3("QUARSTONE");
@@ -32,7 +32,7 @@ const schemaStones = quarstone.map((stone: Stone) => ({
     <meta name="keywords" content={keywords} />
     <link rel="canonical" href={canonicalURL} />
     <meta name="robots" content="index, follow" />
-    <meta name="author" content="MÃ¡rmoles Deluxe" />
+    <meta name="author" content="Mármoles Deluxe" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -40,7 +40,7 @@ const schemaStones = quarstone.map((stone: Stone) => ({
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:locale" content="es_CO" />
-    <meta property="og:site_name" content="MÃ¡rmoles Deluxe" />
+    <meta property="og:site_name" content="Mármoles Deluxe" />
 
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -70,27 +70,27 @@ const schemaStones = quarstone.map((stone: Stone) => ({
         Quartzstone
       </h1>
 
-      <!-- Features como subtÃ­tulo -->
+      <!-- Features como subtítulo -->
       <div class="max-w-5xl mx-auto mb-12">
         <div
           class="bg-gradient-to-r from-gray-50 to-white p-6 rounded-lg shadow-sm border border-gray-100"
         >
           <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div class="flex items-start text-sm text-gray-700">
-              <span class="mr-2 flex-shrink-0">ðŸ’Ž</span>
-              <span>Resistente a rayones y abrasiÃ³n</span>
+              <span class="mr-2 flex-shrink-0">✔</span>
+              <span>Resistente a rayones y abrasión</span>
             </div>
             <div class="flex items-start text-sm text-gray-700">
-              <span class="mr-2 flex-shrink-0">ðŸ›¡ï¸</span>
+              <span class="mr-2 flex-shrink-0">✔</span>
               <span>Superficie no porosa</span>
             </div>
             <div class="flex items-start text-sm text-gray-700">
-              <span class="mr-2 flex-shrink-0">ðŸ§½</span>
-              <span>FÃ¡cil mantenimiento y limpieza</span>
+              <span class="mr-2 flex-shrink-0">✔</span>
+              <span>Fácil mantenimiento y limpieza</span>
             </div>
             <div class="flex items-start text-sm text-gray-700">
-              <span class="mr-2 flex-shrink-0">ðŸŽ¨</span>
-              <span>Amplia gama de colores y diseÃ±os</span>
+              <span class="mr-2 flex-shrink-0">✔</span>
+              <span>Amplia gama de colores y diseños</span>
             </div>
           </div>
         </div>
@@ -124,7 +124,7 @@ const schemaStones = quarstone.map((stone: Stone) => ({
   import { initModal } from "../scripts/modal";
   initModal();
 
-  // --- Abrir modal automÃ¡ticamente por parÃ¡metro 'material' ---
+  // --- Abrir modal automáticamente por parámetro 'material' ---
   if (typeof window !== "undefined") {
     window.addEventListener("DOMContentLoaded", () => {
       const params = new URLSearchParams(window.location.search);
