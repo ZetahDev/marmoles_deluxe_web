@@ -10,6 +10,8 @@ type PublicCatalogResponse = {
       public_id: string;
       provider?: string;
       transforms?: Record<string, unknown>;
+      url?: string;
+      thumbnail_url?: string;
     }>;
   };
 };
@@ -27,6 +29,7 @@ export async function fetchDesignImagesFromAdminApi() {
     if (media.length === 0) return null;
 
     const urls = media.map((item) => {
+      if (item.url) return item.url;
       if (item.provider === "cloudinary" && item.public_id) {
         return `https://res.cloudinary.com/${import.meta.env.CLOUDINARY_CLOUD_NAME}/image/upload/${item.public_id}`;
       }
@@ -38,4 +41,3 @@ export async function fetchDesignImagesFromAdminApi() {
     return null;
   }
 }
-

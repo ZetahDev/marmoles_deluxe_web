@@ -170,8 +170,8 @@ export async function listStonesFromS3(categoryName: string): Promise<Stone[]> {
 
     return {
       name: p.name,
-      image: buildUrl(mainMedia?.public_id),
-      design: buildUrl(designMedia?.public_id),
+      image: mainMedia?.url ?? buildUrl(mainMedia?.public_id),
+      design: designMedia?.url ?? buildUrl(designMedia?.public_id),
     };
   });
 
