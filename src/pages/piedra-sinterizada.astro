@@ -1,6 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import ProductCard from "../components/ProductCard.tsx";
 import CategoryFilter from "../components/CategoryFilter.tsx";
 import CategoryWrapper from "../components/CategoryWrapper.tsx";
 import SEOSchemaData from "../components/SEOSchemaData.tsx";
@@ -232,7 +231,6 @@ const image = buildSeoImageUrl(cloudinaryAssets.seo.piedraSinterizada);
 
   <!-- Add Schema.org structured data for SEO -->
   <SEOSchemaData
-    client:idle
     pageTitle={title}
     pageDescription={description}
     pageUrl={Astro.url.href}
@@ -241,7 +239,7 @@ const image = buildSeoImageUrl(cloudinaryAssets.seo.piedraSinterizada);
     stones={schemaStones}
   />
 
-  <CategoryFilter client:idle />
+  <CategoryFilter client:visible />
 
   <!-- Hero Section optimizado para SEO -->
   <section
@@ -325,7 +323,7 @@ const image = buildSeoImageUrl(cloudinaryAssets.seo.piedraSinterizada);
       </div>
 
       <CategoryWrapper
-        client:load
+        client:visible
         categories={stoneCategories}
         useAnchorLinks={useAnchorLinks}
       />

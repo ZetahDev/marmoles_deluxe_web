@@ -4,7 +4,6 @@ import { WhatsAppButton } from "../components/WhatsAppButton";
 import { ScrollToTopButton } from "../components/ScrollToTopButton";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
-import { ClientRouter } from "astro:transitions";
 import SpeedInsights from "@vercel/speed-insights/astro";
 import { getBrandLogo } from "../lib/images/cloudinaryAssets";
 import {
@@ -79,8 +78,6 @@ const preloadBrandLogos = [
         style="display:none;visibility:hidden"></iframe></noscript
     >
     <!-- End Google Tag Manager (noscript) -->
-
-    <ClientRouter />
 
     <!-- Facebook Pixel (noscript) -->
     <noscript>
