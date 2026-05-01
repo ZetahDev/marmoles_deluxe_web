@@ -1,5 +1,4 @@
 ﻿---
-import MobileMenu from "./MobileMenu";
 import { cloudinaryAssets } from "../lib/images/cloudinaryAssets";
 import {
   buildCloudinaryImageSet,
@@ -54,9 +53,132 @@ const isCurrentPathUnderMateriales = () => {
 >
   <nav class="container mx-auto px-4">
     <div class="flex items-center justify-center h-16">
-      <!-- Menú móvil con zustand (componente de React) -->
+      <!-- Menú móvil nativo (sin hidratación React) -->
       <div class="md:hidden absolute left-4">
-        <MobileMenu navItems={navItems} currentPath={currentPath} client:idle />
+        <input id="mobile-nav-toggle" type="checkbox" class="peer sr-only" />
+        <label
+          for="mobile-nav-toggle"
+          class="inline-flex items-center justify-center p-2 text-marmoles-gold hover:text-marmoles-gold transition-colors cursor-pointer"
+          aria-label="Menú"
+        >
+          <svg
+            class="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </label>
+
+        <label
+          for="mobile-nav-toggle"
+          class="fixed inset-0 top-16 z-40 bg-black/60 hidden peer-checked:block"
+          aria-label="Cerrar menú"
+        ></label>
+
+        <div class="fixed top-16 left-0 z-50 w-full max-h-0 overflow-hidden bg-white/80 border-b border-white/20 shadow-2xl transition-all duration-300 peer-checked:max-h-screen">
+          <div class="px-4 py-3 space-y-3">
+            {
+              navItems.map((item) => {
+                if (item.isLogo) return null;
+                if (item.label === "Inicio") {
+                  return (
+                    <a
+                      href={item.href}
+                      class:list={[
+                        "block text-sm font-medium py-2 transition-colors",
+                        {
+                          "text-marmoles-gold":
+                            currentPath === item.href ||
+                            currentPath.endsWith(item.href),
+                          "text-gray-800 hover:text-marmoles-gold": !(
+                            currentPath === item.href ||
+                            currentPath.endsWith(item.href)
+                          ),
+                        },
+                      ]}
+                    >
+                      {item.label}
+                    </a>
+                  );
+                }
+
+                if (item.items) {
+                  return (
+                    <details class="group" open={isCurrentPathUnderMateriales()}>
+                      <summary class="list-none text-sm font-medium text-gray-800 hover:text-marmoles-gold w-full py-2 flex justify-between items-center cursor-pointer">
+                        <span>{item.label}</span>
+                        <span class="transition-transform group-open:rotate-180">
+                          <svg
+                            class="h-4 w-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </svg>
+                        </span>
+                      </summary>
+                      <div class="pl-4 space-y-2 pb-1">
+                        {item.items.map((subItem) => (
+                          <a
+                            href={subItem.href}
+                            class:list={[
+                              "block text-sm font-medium py-2 transition-colors",
+                              {
+                                "text-marmoles-gold":
+                                  currentPath === subItem.href ||
+                                  currentPath.endsWith(subItem.href),
+                                "text-gray-800 hover:text-marmoles-gold": !(
+                                  currentPath === subItem.href ||
+                                  currentPath.endsWith(subItem.href)
+                                ),
+                              },
+                            ]}
+                          >
+                            {subItem.label}
+                          </a>
+                        ))}
+                      </div>
+                    </details>
+                  );
+                }
+
+                return (
+                  <a
+                    href={item.href}
+                    class:list={[
+                      "block text-sm font-medium py-2 transition-colors",
+                      {
+                        "text-marmoles-gold":
+                          currentPath === item.href ||
+                          currentPath.endsWith(item.href),
+                        "text-gray-800 hover:text-marmoles-gold": !(
+                          currentPath === item.href ||
+                          currentPath.endsWith(item.href)
+                        ),
+                      },
+                    ]}
+                  >
+                    {item.label}
+                  </a>
+                );
+              })
+            }
+          </div>
+        </div>
       </div>
 
       <!-- Menú para escritorio -->
