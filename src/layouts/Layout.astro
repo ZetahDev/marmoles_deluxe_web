@@ -14,11 +14,15 @@ import {
 interface Props {
   title: string;
   description?: string;
+  showFloatingUi?: boolean;
+  enableSpeedInsights?: boolean;
 }
 
 const {
   title,
   description = "Mármoles Deluxe - Instalación, Transporte y Garantía de Mármoles",
+  showFloatingUi = true,
+  enableSpeedInsights = true,
 } = Astro.props;
 
 const preloadBrandLogos = [
@@ -95,41 +99,9 @@ const preloadBrandLogos = [
       <slot />
     </main>
     <Footer />
-    <WhatsAppButton client:idle />
-    <ScrollToTopButton client:idle />
-    <SpeedInsights />
-
-    <script>
-      // Interceptar navegación
-      document.addEventListener("astro:before-navigation", (event) => {
-        // Verificar si hay eventos pendientes antes de la navegación
-        const pendingChanges =
-          document.body.classList.contains("uploading") ||
-          document.body.classList.contains("saving");
-
-        if (pendingChanges) {
-          const confirmed = confirm(
-            "Hay cambios pendientes. ¿Deseas abandonar la página?"
-          );
-          if (!confirmed) {
-            event.preventDefault();
-          }
-        }
-      });
-
-      // Escuchar eventos de autenticación
-      window.addEventListener("auth-change", (event) => {
-        const { isAuthenticated } = (event as CustomEvent).detail;
-        // Manejar cambios de autenticación sin forzar recarga
-        const currentPath = window.location.pathname;
-        const isAdminRoute = currentPath.startsWith("/admin");
-
-        if (!isAuthenticated && isAdminRoute && currentPath !== "/admin") {
-          history.pushState({}, "", "/admin");
-          window.dispatchEvent(new PopStateEvent("popstate"));
-        }
-      });
-    </script>
+    {showFloatingUi && <WhatsAppButton client:idle />}
+    {showFloatingUi && <ScrollToTopButton client:idle />}
+    {enableSpeedInsights && <SpeedInsights />}
 
     <!-- Meta Pixel Code -->
     <script is:inline>

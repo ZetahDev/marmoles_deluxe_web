@@ -201,7 +201,12 @@ if (useAnchorLinks && effectiveCategory) {
 const image = buildSeoImageUrl(cloudinaryAssets.seo.piedraSinterizada);
 ---
 
-<Layout title={title} description={description}>
+<Layout
+  title={title}
+  description={description}
+  showFloatingUi={false}
+  enableSpeedInsights={false}
+>
   <Fragment slot="head">
     <!-- SEO Meta Tags -->
     <meta name="keywords" content={keywords} />
