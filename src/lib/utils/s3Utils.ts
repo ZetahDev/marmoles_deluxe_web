@@ -61,15 +61,41 @@ function normalizeCloudinaryPublicId(publicId: string): string {
 }
 
 async function fetchCatalogFromApi() {
-  const baseUrl = import.meta.env.PUBLIC_ADMIN_API_BASE_URL;
-  if (!baseUrl) return null;
+  const baseUrl =
+    import.meta.env.PUBLIC_ADMIN_API_BASE_URL ||
+    import.meta.env.ADMIN_API_BASE_URL ||
+    process.env.PUBLIC_ADMIN_API_BASE_URL ||
+    process.env.ADMIN_API_BASE_URL;
+
+  if (!baseUrl) {
+    console.warn(
+      "PUBLIC_ADMIN_API_BASE_URL/ADMIN_API_BASE_URL no configurada. Usando cloudinary-index.json"
+    );
+    return null;
+  }
+
+  const normalizedBaseUrl = baseUrl.replace(/\/+$/, "");
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 8000);
+
   try {
-    const response = await fetch(`${baseUrl}/api/public/catalog`);
-    if (!response.ok) return null;
+    const response = await fetch(`${normalizedBaseUrl}/api/public/catalog`, {
+      signal: controller.signal,
+      headers: { Accept: "application/json" },
+      cache: "no-store",
+    });
+    if (!response.ok) {
+      console.warn(
+        `Catalogo API respondio ${response.status}. Usando cloudinary-index.json`
+      );
+      return null;
+    }
     return await response.json();
   } catch (error) {
-    console.error("Error fetching catalog:", error);
+    console.error("Error consultando catalogo API. Usando cloudinary-index.json:", error);
     return null;
+  } finally {
+    clearTimeout(timeoutId);
   }
 }
 
