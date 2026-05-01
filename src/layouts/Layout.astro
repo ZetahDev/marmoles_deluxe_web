@@ -103,59 +103,91 @@ const preloadBrandLogos = [
     {showFloatingUi && <ScrollToTopButton client:idle />}
     {enableSpeedInsights && <SpeedInsights />}
 
-    <!-- Meta Pixel Code -->
-    <script is:inline>
-      !(function (f, b, e, v, n, t, s) {
-        if (f.fbq) return;
-        n = f.fbq = function () {
-          n.callMethod
-            ? n.callMethod.apply(n, arguments)
-            : n.queue.push(arguments);
-        };
-        if (!f._fbq) f._fbq = n;
-        n.push = n;
-        n.loaded = !0;
-        n.version = "2.0";
-        n.queue = [];
-        t = b.createElement(e);
-        t.async = !0;
-        t.src = v;
-        s = b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t, s);
-      })(
-        window,
-        document,
-        "script",
-        "https://connect.facebook.net/en_US/fbevents.js"
-      );
-      fbq("init", "1756574061191176");
-      fbq("track", "PageView");
-    </script>
-
-    <!-- Google Analytics -->
-    <script
-      is:inline
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-NXQ0SL5DBV"></script>
+    <!-- Analytics y scripts de terceros fuera de la ruta crítica -->
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        window.dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-NXQ0SL5DBV");
-    </script>
+      window.gtag =
+        window.gtag ||
+        function () {
+          window.dataLayer.push(arguments);
+        };
 
-    <!-- Analytics del Embudo de Ventas -->
-    <script>
-      import { initializeAnalytics } from "../lib/analytics";
+      const loadExternalScript = (src) =>
+        new Promise((resolve, reject) => {
+          const script = document.createElement("script");
+          script.src = src;
+          script.async = true;
+          script.onload = resolve;
+          script.onerror = reject;
+          document.head.appendChild(script);
+        });
 
-      // Esperar a que el DOM y los scripts de analytics carguen
-      window.addEventListener("load", function () {
-        // Dar tiempo para que GTM, GA y FB Pixel se inicialicen
-        setTimeout(() => {
-          initializeAnalytics();
-        }, 1000);
+      const loadGoogleAnalytics = () =>
+        loadExternalScript("https://www.googletagmanager.com/gtag/js?id=G-NXQ0SL5DBV")
+          .then(() => {
+            window.gtag("js", new Date());
+            window.gtag("config", "G-NXQ0SL5DBV");
+          })
+          .catch(() => {});
+
+      const loadMetaPixel = () => {
+        if (window.fbq) return;
+        !(function (f, b, e, v, n, t, s) {
+          if (f.fbq) return;
+          n = f.fbq = function () {
+            n.callMethod
+              ? n.callMethod.apply(n, arguments)
+              : n.queue.push(arguments);
+          };
+          if (!f._fbq) f._fbq = n;
+          n.push = n;
+          n.loaded = !0;
+          n.version = "2.0";
+          n.queue = [];
+          t = b.createElement(e);
+          t.async = !0;
+          t.src = v;
+          s = b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t, s);
+        })(
+          window,
+          document,
+          "script",
+          "https://connect.facebook.net/en_US/fbevents.js"
+        );
+        window.fbq("init", "1756574061191176");
+        window.fbq("track", "PageView");
+      };
+
+      const initializeFunnelAnalytics = () => {
+        import("../lib/analytics")
+          .then((module) => module.initializeAnalytics?.())
+          .catch(() => {});
+      };
+
+      let thirdPartyLoaded = false;
+      const loadNonCriticalTracking = () => {
+        if (thirdPartyLoaded) return;
+        thirdPartyLoaded = true;
+        loadGoogleAnalytics();
+        loadMetaPixel();
+        initializeFunnelAnalytics();
+      };
+
+      const scheduleTrackingLoad = () => {
+        if ("requestIdleCallback" in window) {
+          requestIdleCallback(loadNonCriticalTracking, { timeout: 3500 });
+        } else {
+          setTimeout(loadNonCriticalTracking, 2500);
+        }
+      };
+
+      window.addEventListener("load", scheduleTrackingLoad, { once: true });
+      ["pointerdown", "keydown", "touchstart"].forEach((eventName) => {
+        window.addEventListener(eventName, loadNonCriticalTracking, {
+          once: true,
+          passive: true,
+        });
       });
     </script>
   </body>
