@@ -217,7 +217,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                             }}
                             loading="lazy"
                             decoding="async"
-                            fetchPriority={index === 0 ? "high" : "low"}
+                            fetchPriority="low"
                             onLoad={(e) => {
                               if (index === 0) {
                                 e.currentTarget.style.contentVisibility =
@@ -342,19 +342,21 @@ const ProductCard: React.FC<ProductCardProps> = ({
         </div>
       </article>
 
-      <MaterialModal
-        title={name}
-        description={description}
-        image={images[0]}
-        images={images}
-        features={features}
-        category={category}
-        isOpen={isModalOpen}
-        onClose={() => {
-          const event = new CustomEvent("modal-close");
-          document.dispatchEvent(event);
-        }}
-      />
+      {isModalOpen && (
+        <MaterialModal
+          title={name}
+          description={description}
+          image={images[0]}
+          images={images}
+          features={features}
+          category={category}
+          isOpen={isModalOpen}
+          onClose={() => {
+            const event = new CustomEvent("modal-close");
+            document.dispatchEvent(event);
+          }}
+        />
+      )}
     </>
   );
 };

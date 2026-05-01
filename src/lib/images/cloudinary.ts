@@ -20,9 +20,15 @@ export const CLOUDINARY_PRESETS: Record<string, CloudinaryPreset> = {
     sizes: "(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw",
     transforms: ["f_auto", "q_auto", "dpr_auto", "c_limit"],
   },
+  thumbnail: {
+    defaultWidth: 192,
+    widths: [96, 128, 160, 192, 256, 320],
+    sizes: "(max-width: 640px) 22vw, 120px",
+    transforms: ["f_auto", "q_auto", "dpr_auto", "c_limit"],
+  },
   modal: {
-    defaultWidth: 1280,
-    widths: [480, 768, 1024, 1280, 1600],
+    defaultWidth: 1024,
+    widths: [480, 640, 768, 960, 1024, 1280],
     sizes: "(max-width: 1024px) 100vw, 60vw",
     transforms: ["f_auto", "q_auto", "dpr_auto", "c_fit"],
   },
@@ -120,4 +126,3 @@ export function buildCloudinaryImageSet(
 export function buildSeoImageUrl(url: string): string {
   return buildCloudinaryImageSet(url, CLOUDINARY_PRESETS.seo).src;
 }
-

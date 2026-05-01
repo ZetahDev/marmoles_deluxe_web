@@ -59,7 +59,7 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
   const thumbnailImageSets = useMemo(
     () =>
       allImages.map((imageUrl) =>
-        buildCloudinaryImageSet(imageUrl, CLOUDINARY_PRESETS.card)
+        buildCloudinaryImageSet(imageUrl, CLOUDINARY_PRESETS.thumbnail)
       ),
     [allImages]
   );
@@ -358,10 +358,13 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
                   >
                     <img
                       src={thumbnailImageSets[index].src}
+                      srcSet={thumbnailImageSets[index].srcSet}
+                      sizes={thumbnailImageSets[index].sizes}
                       alt={`${title} - miniatura ${index + 1}`}
                       className="h-full w-full object-contain"
                       loading="lazy"
                       decoding="async"
+                      fetchPriority="low"
                     />
                   </button>
                 ))}
