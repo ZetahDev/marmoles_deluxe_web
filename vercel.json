@@ -1,7 +1,4 @@
 {
-  "buildCommand": "node ./node_modules/.bin/astro build",
-  "outputDirectory": "dist",
-  "devCommand": "npm run dev",
-  "installCommand": "npm install",
+  "buildCommand": "astro build",
   "framework": "astro"
 } 
