@@ -1,4 +1,4 @@
-﻿---
+---
 import "../styles/global.css";
 import { WhatsAppButton } from "../components/WhatsAppButton";
 import { ScrollToTopButton } from "../components/ScrollToTopButton";
@@ -104,15 +104,10 @@ const preloadBrandLogos = [
     {enableSpeedInsights && <SpeedInsights />}
 
     <!-- Analytics y scripts de terceros fuera de la ruta crítica -->
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      window.gtag =
-        window.gtag ||
-        function () {
-          window.dataLayer.push(arguments);
-        };
+    <script>
+      import { initializeAnalytics } from "../lib/analytics";
 
-      const loadExternalScript = (src) =>
+      const loadGoogleAnalytics = (src: string) =>
         new Promise((resolve, reject) => {
           const script = document.createElement("script");
           script.src = src;
@@ -122,16 +117,21 @@ const preloadBrandLogos = [
           document.head.appendChild(script);
         });
 
-      const loadGoogleAnalytics = () =>
-        loadExternalScript("https://www.googletagmanager.com/gtag/js?id=G-NXQ0SL5DBV")
+      const initGA = () => {
+        loadGoogleAnalytics("https://www.googletagmanager.com/gtag/js?id=G-NXQ0SL5DBV")
           .then(() => {
+            // @ts-ignore
             window.gtag("js", new Date());
+            // @ts-ignore
             window.gtag("config", "G-NXQ0SL5DBV");
           })
           .catch(() => {});
+      };
 
       const loadMetaPixel = () => {
+        // @ts-ignore
         if (window.fbq) return;
+        // @ts-ignore
         !(function (f, b, e, v, n, t, s) {
           if (f.fbq) return;
           n = f.fbq = function () {
@@ -155,23 +155,19 @@ const preloadBrandLogos = [
           "script",
           "https://connect.facebook.net/en_US/fbevents.js"
         );
+        // @ts-ignore
         window.fbq("init", "1756574061191176");
+        // @ts-ignore
         window.fbq("track", "PageView");
-      };
-
-      const initializeFunnelAnalytics = () => {
-        import("../lib/analytics")
-          .then((module) => module.initializeAnalytics?.())
-          .catch(() => {});
       };
 
       let thirdPartyLoaded = false;
       const loadNonCriticalTracking = () => {
         if (thirdPartyLoaded) return;
         thirdPartyLoaded = true;
-        loadGoogleAnalytics();
+        initGA();
         loadMetaPixel();
-        initializeFunnelAnalytics();
+        initializeAnalytics?.();
       };
 
       const scheduleTrackingLoad = () => {

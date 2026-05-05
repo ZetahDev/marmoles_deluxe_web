@@ -3,20 +3,11 @@ import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
 import vercel from '@astrojs/vercel';
 
+
 // https://astro.build/config
 export default defineConfig({
   output: 'server',
   adapter: vercel(),
   integrations: [tailwind(), react()],
   site: 'https://marmolesdeluxe.com',
-  vite: {
-    build: {
-      assetsDir: 'assets',
-      rollupOptions: {
-        output: {
-          assetFileNames: 'assets/[name].[hash][extname]'
-        }
-      }
-    }
-  }
 });
