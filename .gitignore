@@ -27,3 +27,6 @@ pnpm-debug.log*
 
 # tmp
 tmp/
+
+# playwright
+.playwright-mcp/
