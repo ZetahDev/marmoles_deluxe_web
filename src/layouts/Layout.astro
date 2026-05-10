@@ -167,8 +167,9 @@ const preloadBrandLogos = [
         thirdPartyLoaded = true;
         initGA();
         loadMetaPixel();
-        initializeAnalytics?.();
       };
+
+      initializeAnalytics?.();
 
       const scheduleTrackingLoad = () => {
         if ("requestIdleCallback" in window) {

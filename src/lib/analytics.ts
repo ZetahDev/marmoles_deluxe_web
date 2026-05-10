@@ -54,15 +54,46 @@ interface WhatsAppOpenOptions {
   openInNewTab?: boolean;
 }
 
+type UTMParams = {
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  utm_term?: string;
+  utm_content?: string;
+  gclid?: string;
+  fbclid?: string;
+};
+
+const UTM_STORAGE_KEY = "utm_params";
+const ANALYTICS_INIT_FLAG = "__mdAnalyticsInitialized";
+
+function getStoredUTMParams(): UTMParams {
+  if (typeof window === "undefined") return {};
+
+  try {
+    const stored = sessionStorage.getItem(UTM_STORAGE_KEY);
+    if (!stored) return {};
+
+    const parsed = JSON.parse(stored);
+    return typeof parsed === "object" && parsed ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+function hasAttributionData(params: UTMParams) {
+  return Object.values(params).some((value) => value !== undefined);
+}
+
 /**
  * Detecta la fuente de tráfico basada en UTM params
  */
 export function getTrafficSource(): TrafficSource {
   if (typeof window === "undefined") return TrafficSource.DIRECT;
 
-  const urlParams = new URLSearchParams(window.location.search);
-  const utmSource = urlParams.get("utm_source")?.toLowerCase();
-  const utmMedium = urlParams.get("utm_medium")?.toLowerCase();
+  const utmParams = getUTMParams();
+  const utmSource = utmParams.utm_source?.toLowerCase();
+  const utmMedium = utmParams.utm_medium?.toLowerCase();
   const referrer = document.referrer.toLowerCase();
 
   // Google Ads
@@ -103,14 +134,15 @@ export function getUTMParams() {
   if (typeof window === "undefined") return {};
 
   const urlParams = new URLSearchParams(window.location.search);
+  const storedParams = getStoredUTMParams();
   return {
-    utm_source: urlParams.get("utm_source") || undefined,
-    utm_medium: urlParams.get("utm_medium") || undefined,
-    utm_campaign: urlParams.get("utm_campaign") || undefined,
-    utm_term: urlParams.get("utm_term") || undefined,
-    utm_content: urlParams.get("utm_content") || undefined,
-    gclid: urlParams.get("gclid") || undefined, // Google Click ID
-    fbclid: urlParams.get("fbclid") || undefined, // Facebook Click ID
+    utm_source: urlParams.get("utm_source") || storedParams.utm_source,
+    utm_medium: urlParams.get("utm_medium") || storedParams.utm_medium,
+    utm_campaign: urlParams.get("utm_campaign") || storedParams.utm_campaign,
+    utm_term: urlParams.get("utm_term") || storedParams.utm_term,
+    utm_content: urlParams.get("utm_content") || storedParams.utm_content,
+    gclid: urlParams.get("gclid") || storedParams.gclid, // Google Click ID
+    fbclid: urlParams.get("fbclid") || storedParams.fbclid, // Facebook Click ID
   };
 }
 
@@ -466,11 +498,16 @@ export function setupExitIntentTracking() {
  */
 export function initializeAnalytics() {
   if (typeof window === "undefined") return;
+  if ((window as typeof window & { [ANALYTICS_INIT_FLAG]?: boolean })[ANALYTICS_INIT_FLAG]) {
+    return;
+  }
+
+  (window as typeof window & { [ANALYTICS_INIT_FLAG]?: boolean })[ANALYTICS_INIT_FLAG] = true;
 
   // Guarda UTM params en sessionStorage para persistencia
   const utmParams = getUTMParams();
-  if (Object.values(utmParams).some((v) => v !== undefined)) {
-    sessionStorage.setItem("utm_params", JSON.stringify(utmParams));
+  if (hasAttributionData(utmParams)) {
+    sessionStorage.setItem(UTM_STORAGE_KEY, JSON.stringify(utmParams));
   }
 
   // Trackea vista de página con fuente de tráfico
