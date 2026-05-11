@@ -10,7 +10,7 @@ import { caseStudies } from "../data/caseStudies";
 const title =
   "Casos de Estudio - Mármoles Deluxe | Proyectos, materiales y tiempos reales";
 const description =
-  "Explora casos de estudio de Mármoles Deluxe con materiales, aplicaciones, tiempos de ejecución, alcance, retos y resultados. Página preparada para reemplazar placeholders por fotos reales de cada proyecto.";
+  "Explora casos de estudio de Mármoles Deluxe con materiales, aplicaciones, tiempos de ejecución, alcance, retos y resultados en proyectos residenciales y comerciales en Cali.";
 const keywords =
   "casos de estudio marmoles Cali, proyectos piedra sinterizada Cali, proyectos neolith Cali, proyectos altea Cali, proyectos granito Cali, instalación 5 días, portafolio marmoles deluxe";
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -19,24 +19,24 @@ const metaImage = buildSeoImageUrl(cloudinaryAssets.seo.projects);
 
 const faqItems = [
   {
-    question: "¿Qué información debe incluir un caso de estudio útil para SEO y GEO?",
+    question: "¿Cuánto tarda normalmente un proyecto de cubiertas o superficies premium?",
     answer:
-      "Debe incluir material exacto, aplicación, ciudad, tiempos reales, alcance de trabajo, reto del proyecto, solución adoptada, resultado y evidencia visual propia. La meta es demostrar experiencia real, no solo publicar una galería bonita.",
+      "En proyectos residenciales bien definidos, el proceso completo puede resolverse en una ventana cercana a 5 días entre medición, fabricación, instalación y entrega final. El tiempo exacto depende del material, el formato, los recortes especiales y la logística de acceso.",
   },
   {
-    question: "¿Estas imágenes se pueden reemplazar por fotos reales después?",
+    question: "¿Qué material conviene para una cocina de uso diario?",
     answer:
-      "Sí. La página quedó preparada con placeholders visuales temporales para que el equipo reemplace cada archivo por fotografías reales del proyecto sin necesidad de rehacer la estructura editorial ni el SEO.",
+      "Para cocinas de uso frecuente suelen destacarse las superficies sinterizadas y algunos cuarzos por su mantenimiento simple, estabilidad visual y buen desempeño frente a manchas y uso continuo. La elección final depende del estilo del proyecto y de cómo se utiliza el espacio.",
   },
   {
-    question: "¿Por qué una página de casos de estudio ayuda más que una galería sola?",
+    question: "¿La piedra sinterizada sirve también para barras, baños o proyectos comerciales?",
     answer:
-      "Porque permite explicar contexto, materiales, plazos, decisiones técnicas y resultados. Eso entrega a Google y a los modelos más señales de experiencia aplicada que una colección de imágenes sin narrativa.",
+      "Sí. La piedra sinterizada funciona muy bien en barras, baños, revestimientos y superficies comerciales cuando se especifica correctamente el formato, el espesor y el sistema de instalación según el uso esperado.",
   },
   {
-    question: "¿Cómo deben presentarse los 5 días de ejecución?",
+    question: "¿Qué revisa Mármoles Deluxe antes de recomendar un material?",
     answer:
-      "No como una frase aislada. Conviene explicar si esos 5 días incluyen medición, fabricación, instalación, remates y entrega, para que el dato tenga credibilidad y ayude al usuario a entender el proceso.",
+      "Se revisan medidas, tipo de uso, exposición al calor o la humedad, continuidad visual, tránsito esperado, logística de acceso y acabado deseado. La recomendación no se hace solo por catálogo, sino por compatibilidad real con el proyecto.",
   },
 ];
 
@@ -106,22 +106,22 @@ const caseStudiesSchema = {
       <div class="container mx-auto px-4 sm:px-6 max-w-6xl relative z-10">
         <div class="max-w-4xl">
           <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6">
-            Casos de estudio con estructura lista para GEO y evidencia de proyecto
+            Casos de estudio de superficies premium en Cali
           </h1>
           <p class="text-lg md:text-2xl text-gray-300 max-w-3xl mb-8">
-            Esta página convierte el portafolio en una superficie editorial útil
-            para Google, AI Overviews y usuarios con intención alta:
-            materiales, aplicación, tiempos, alcance, reto, solución y resultado.
+            Descubre cómo resolvemos cocinas, barras y proyectos comerciales con
+            mármoles, granitos y piedra sinterizada. Cada caso resume el reto,
+            el material seleccionado, el tiempo de ejecución y el resultado final.
           </p>
           <div class="flex flex-wrap gap-3 text-sm">
             <span class="rounded-full border border-marmoles-gold/40 bg-marmoles-gold/10 px-4 py-2 text-marmoles-gold">
-              Preparado para reemplazar imágenes IA por fotos reales
+              Proyectos residenciales y comerciales
             </span>
             <span class="rounded-full border border-white/20 bg-white/5 px-4 py-2 text-gray-200">
-              Autoría visible
+              Instalación planificada en 5 días
             </span>
             <span class="rounded-full border border-white/20 bg-white/5 px-4 py-2 text-gray-200">
-              Tiempos y alcance explicados
+              Materiales y alcances explicados
             </span>
           </div>
         </div>
@@ -129,12 +129,12 @@ const caseStudiesSchema = {
     </section>
 
     <GeoTrustSection
-      title="Qué hace que esta página sí sirva para autoridad temática"
-      answer="Aquí no solo mostramos inspiración visual. Cada proyecto incluye contexto, material, plazos, alcance, reto, solución y resultado. Esa capa editorial convierte una galería tradicional en evidencia de experiencia aplicada, que es mucho más útil para SEO local y GEO."
+      title="Cómo trabajamos proyectos residenciales y comerciales con criterio técnico"
+      answer="Cada caso de estudio resume una intervención realista: qué necesitaba el espacio, qué material respondía mejor al uso, cómo se organizó la fabricación y qué resultado se buscó en términos de durabilidad, limpieza visual y experiencia de uso."
       bullets={[
-        "Cada caso está listo para documentar materiales, ciudad, tiempos y alcance real.",
-        "La autoría queda visible para reforzar experiencia humana detrás del contenido.",
-        "Las imágenes temporales se pueden sustituir sin romper la estructura SEO ya implementada.",
+        "Selección de material según uso, mantenimiento y lectura estética del ambiente.",
+        "Cronograma resumido para entender cómo se ejecuta una obra corta y bien planificada.",
+        "Casos pensados para inspirar decisiones reales en cocina, barra, baño y comercio.",
       ]}
     />
 
@@ -196,9 +196,7 @@ const caseStudiesSchema = {
                     <span class="rounded-full bg-gray-100 px-4 py-2 text-gray-700">
                       {study.location}
                     </span>
-                    <span class="rounded-full bg-gray-100 px-4 py-2 text-gray-700">
-                      Actualizado {study.updatedAt}
-                    </span>
+                    <span class="rounded-full bg-gray-100 px-4 py-2 text-gray-700">Actualizado {study.updatedAt}</span>
                   </div>
                   <h2 class="text-3xl md:text-4xl font-bold text-marmoles-black mb-4">
                     {study.title}
@@ -274,7 +272,7 @@ const caseStudiesSchema = {
 
                   <div class="rounded-3xl bg-marmoles-black text-white p-6 mb-6">
                     <p class="text-xs uppercase tracking-[0.2em] text-marmoles-gold mb-3">
-                      Autoría visible
+                      Responsable del caso
                     </p>
                     <h3 class="text-xl font-bold mb-2">{study.authorName}</h3>
                     <p class="text-gray-300">{study.authorRole}</p>
@@ -292,17 +290,6 @@ const caseStudiesSchema = {
                     </footer>
                   </blockquote>
 
-                  <div class="rounded-3xl border border-dashed border-marmoles-gold/40 bg-marmoles-gold/5 p-5 mt-6">
-                    <p class="text-sm font-semibold text-marmoles-black mb-2">
-                      Nota editorial actual
-                    </p>
-                    <p class="text-sm text-gray-700">
-                      Estas imágenes son placeholders creados para dejar la
-                      estructura lista. Reemplázalas por fotos propias del
-                      proyecto para reforzar experiencia real, confianza y
-                      desempeño en GEO.
-                    </p>
-                  </div>
                 </aside>
               </div>
             </article>
@@ -312,8 +299,8 @@ const caseStudiesSchema = {
     </section>
 
     <GeoFaqSection
-      title="Preguntas frecuentes sobre esta nueva capa de casos de estudio"
-      intro="Estas respuestas dejan claro qué información debe vivir aquí y por qué esta página tiene más valor SEO que una simple galería de inspiración."
+      title="Preguntas frecuentes sobre materiales, tiempos y ejecución"
+      intro="Estas respuestas resumen dudas comunes cuando un cliente quiere comparar materiales, entender tiempos de obra y evaluar qué solución se adapta mejor a su proyecto."
       faqs={faqItems}
     />
   </main>

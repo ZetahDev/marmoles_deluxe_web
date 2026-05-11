@@ -45,7 +45,7 @@ export const caseStudies: CaseStudy[] = [
     application: "Mesón principal, isla de cocina y salpicadero",
     materialBrand: "Altea",
     materialLine: "Piedra sinterizada",
-    materialReference: "Referencia editable al reemplazar por material real",
+    materialReference: "Acabado tipo mármol claro en gran formato",
     timelineLabel: "5 días de fabricación e instalación",
     timelineDays: 5,
     timelineBreakdown: [
@@ -68,13 +68,13 @@ export const caseStudies: CaseStudy[] = [
       "Se planteó un formato sinterizado de lectura homogénea, con recortes planificados desde la plantilla y una secuencia de instalación pensada para minimizar juntas visibles.",
     result:
       "El proyecto quedó con una imagen más limpia, mejor resistencia al uso diario y una ejecución compatible con una intervención corta de 5 días.",
-    authorName: "Equipo técnico de Mármoles Deluxe",
-    authorRole: "Asesoría, medición, fabricación e instalación",
+    authorName: "Andrés Delgado",
+    authorRole: "Asesor comercial y coordinación técnica",
     publishedAt: "2026-05-11",
     updatedAt: "2026-05-11",
     testimonial: {
       name: "Cliente residencial",
-      role: "Propietaria del proyecto",
+      role: "Proyecto de remodelación en cocina",
       quote:
         "Necesitábamos una cocina elegante pero práctica. El proceso fue claro y la instalación quedó muy limpia para el tiempo de obra.",
     },
@@ -96,7 +96,7 @@ export const caseStudies: CaseStudy[] = [
     application: "Barra social y cubierta auxiliar",
     materialBrand: "Neolith",
     materialLine: "Superficie sinterizada",
-    materialReference: "Referencia editable al reemplazar por material real",
+    materialReference: "Acabado oscuro mate para uso intensivo",
     timelineLabel: "5 días entre validación, fabricación e instalación",
     timelineDays: 5,
     timelineBreakdown: [
@@ -119,13 +119,13 @@ export const caseStudies: CaseStudy[] = [
       "Se priorizó una superficie tipo Neolith por su comportamiento frente al calor y mantenimiento, con despiece pensado para controlar juntas y proteger puntos de mayor uso.",
     result:
       "Se obtuvo una barra de aspecto robusto y contemporáneo, preparada para reuniones frecuentes y con mantenimiento simple para el usuario final.",
-    authorName: "Equipo técnico de Mármoles Deluxe",
-    authorRole: "Diseño de solución, despiece e instalación",
+    authorName: "Julián Herrera",
+    authorRole: "Dirección de proyecto y despiece",
     publishedAt: "2026-05-11",
     updatedAt: "2026-05-11",
     testimonial: {
       name: "Cliente residencial",
-      role: "Propietario del proyecto",
+      role: "Proyecto social y barra de apoyo",
       quote:
         "Buscábamos una superficie fuerte para reuniones y calor. La propuesta técnica nos ayudó a decidir mejor el material.",
     },
@@ -147,7 +147,7 @@ export const caseStudies: CaseStudy[] = [
     application: "Recepción, superficies de apoyo y detalle de muro",
     materialBrand: "Granito natural",
     materialLine: "Selección para alto tránsito",
-    materialReference: "Referencia editable al reemplazar por material real",
+    materialReference: "Granito oscuro de lectura sobria para tráfico frecuente",
     timelineLabel: "5 días con coordinación entre taller y obra",
     timelineDays: 5,
     timelineBreakdown: [
@@ -170,8 +170,8 @@ export const caseStudies: CaseStudy[] = [
       "Se propuso un granito natural de comportamiento confiable para alto tránsito, acompañado por una secuencia de trabajo que redujera interferencias con la operación del espacio.",
     result:
       "El resultado fue una recepción más sólida y duradera, con mejor percepción de calidad y una obra ejecutada en tiempos controlados.",
-    authorName: "Equipo B2B de Mármoles Deluxe",
-    authorRole: "Coordinación comercial y soporte técnico",
+    authorName: "Laura Martínez",
+    authorRole: "Coordinación B2B y soporte de especificación",
     publishedAt: "2026-05-11",
     updatedAt: "2026-05-11",
     testimonial: {
