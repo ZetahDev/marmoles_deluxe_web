@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <rect width="1200" height="800" fill="#d9d4cb" />
+  <rect x="120" y="150" width="960" height="500" rx="32" fill="#f3efe7" />
+  <rect x="220" y="460" width="760" height="110" rx="18" fill="#bcb2a3" />
+  <rect x="220" y="250" width="320" height="150" rx="18" fill="#cfc7bb" />
+  <text x="160" y="100" fill="#3a3126" font-size="42" font-family="Inter, Arial, sans-serif" font-weight="700">Antes / placeholder IA</text>
+  <text x="160" y="710" fill="#3a3126" font-size="26" font-family="Inter, Arial, sans-serif">Sustituir por foto real del estado inicial</text>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000">
+  <defs>
+    <linearGradient id="nBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f1720" />
+      <stop offset="55%" stop-color="#2d3541" />
+      <stop offset="100%" stop-color="#b9c6d4" />
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#nBg)" />
+  <rect x="140" y="180" width="1320" height="640" rx="40" fill="#ffffff" opacity=".08" />
+  <rect x="240" y="570" width="1120" height="140" rx="24" fill="#cad1d8" />
+  <rect x="920" y="300" width="260" height="220" rx="28" fill="#f3f5f7" />
+  <text x="240" y="260" fill="#eef2f6" font-size="54" font-family="Inter, Arial, sans-serif" font-weight="700">Caso de estudio</text>
+  <text x="240" y="730" fill="#10161f" font-size="44" font-family="Inter, Arial, sans-serif" font-weight="700">Imagen AI Placeholder</text>
+</svg>

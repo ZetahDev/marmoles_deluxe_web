@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <rect width="1200" height="800" fill="#151515" />
+  <rect x="110" y="130" width="980" height="540" rx="28" fill="#f6f1e9" />
+  <rect x="170" y="500" width="860" height="110" rx="18" fill="#e1d8cb" />
+  <path d="M730 240c120 0 210 50 250 150" stroke="#cfbfab" stroke-width="10" fill="none" />
+  <text x="150" y="100" fill="#f7f1e5" font-size="40" font-family="Inter, Arial, sans-serif" font-weight="700">Resultado / placeholder IA</text>
+  <text x="150" y="735" fill="#f7f1e5" font-size="24" font-family="Inter, Arial, sans-serif">Reemplazar por foto real del resultado final</text>
+</svg>

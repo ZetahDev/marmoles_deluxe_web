@@ -1,0 +1,320 @@
+---
+import Layout from "../layouts/Layout.astro";
+import GeoBusinessSchema from "../components/GeoBusinessSchema.astro";
+import GeoFaqSection from "../components/GeoFaqSection.astro";
+import GeoTrustSection from "../components/GeoTrustSection.astro";
+import { cloudinaryAssets } from "../lib/images/cloudinaryAssets";
+import { buildSeoImageUrl } from "../lib/images/cloudinary";
+import { caseStudies } from "../data/caseStudies";
+
+const title =
+  "Casos de Estudio - Mármoles Deluxe | Proyectos, materiales y tiempos reales";
+const description =
+  "Explora casos de estudio de Mármoles Deluxe con materiales, aplicaciones, tiempos de ejecución, alcance, retos y resultados. Página preparada para reemplazar placeholders por fotos reales de cada proyecto.";
+const keywords =
+  "casos de estudio marmoles Cali, proyectos piedra sinterizada Cali, proyectos neolith Cali, proyectos altea Cali, proyectos granito Cali, instalación 5 días, portafolio marmoles deluxe";
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const pageUrl = canonicalURL.toString();
+const metaImage = buildSeoImageUrl(cloudinaryAssets.seo.projects);
+
+const faqItems = [
+  {
+    question: "¿Qué información debe incluir un caso de estudio útil para SEO y GEO?",
+    answer:
+      "Debe incluir material exacto, aplicación, ciudad, tiempos reales, alcance de trabajo, reto del proyecto, solución adoptada, resultado y evidencia visual propia. La meta es demostrar experiencia real, no solo publicar una galería bonita.",
+  },
+  {
+    question: "¿Estas imágenes se pueden reemplazar por fotos reales después?",
+    answer:
+      "Sí. La página quedó preparada con placeholders visuales temporales para que el equipo reemplace cada archivo por fotografías reales del proyecto sin necesidad de rehacer la estructura editorial ni el SEO.",
+  },
+  {
+    question: "¿Por qué una página de casos de estudio ayuda más que una galería sola?",
+    answer:
+      "Porque permite explicar contexto, materiales, plazos, decisiones técnicas y resultados. Eso entrega a Google y a los modelos más señales de experiencia aplicada que una colección de imágenes sin narrativa.",
+  },
+  {
+    question: "¿Cómo deben presentarse los 5 días de ejecución?",
+    answer:
+      "No como una frase aislada. Conviene explicar si esos 5 días incluyen medición, fabricación, instalación, remates y entrega, para que el dato tenga credibilidad y ayude al usuario a entender el proceso.",
+  },
+];
+
+const caseStudiesSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: title,
+  description,
+  url: pageUrl,
+  hasPart: caseStudies.map((study, index) => ({
+    "@type": "Article",
+    headline: study.title,
+    description: study.summary,
+    position: index + 1,
+    datePublished: study.publishedAt,
+    dateModified: study.updatedAt,
+    image: study.images.cover,
+    author: {
+      "@type": "Organization",
+      name: study.authorName,
+    },
+    about: [
+      study.materialBrand,
+      study.application,
+      study.location,
+      study.propertyType,
+    ],
+  })),
+};
+---
+
+<Layout title={title} description={description}>
+  <Fragment slot="head">
+    <meta name="keywords" content={keywords} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Mármoles Deluxe" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={metaImage} />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:site_name" content="Mármoles Deluxe" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={metaImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(caseStudiesSchema)} />
+  </Fragment>
+
+  <GeoBusinessSchema
+    pageTitle={title}
+    pageDescription={description}
+    pageUrl={pageUrl}
+    pageImage={metaImage}
+    pageType="CollectionPage"
+    faqs={faqItems}
+  />
+
+  <main class="pt-24 pb-20 bg-gray-50">
+    <section class="relative overflow-hidden bg-marmoles-black text-white py-20">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(212,175,55,0.28),transparent_36%),radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.06),transparent_32%)]"></div>
+      <div class="container mx-auto px-4 sm:px-6 max-w-6xl relative z-10">
+        <div class="max-w-4xl">
+          <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6">
+            Casos de estudio con estructura lista para GEO y evidencia de proyecto
+          </h1>
+          <p class="text-lg md:text-2xl text-gray-300 max-w-3xl mb-8">
+            Esta página convierte el portafolio en una superficie editorial útil
+            para Google, AI Overviews y usuarios con intención alta:
+            materiales, aplicación, tiempos, alcance, reto, solución y resultado.
+          </p>
+          <div class="flex flex-wrap gap-3 text-sm">
+            <span class="rounded-full border border-marmoles-gold/40 bg-marmoles-gold/10 px-4 py-2 text-marmoles-gold">
+              Preparado para reemplazar imágenes IA por fotos reales
+            </span>
+            <span class="rounded-full border border-white/20 bg-white/5 px-4 py-2 text-gray-200">
+              Autoría visible
+            </span>
+            <span class="rounded-full border border-white/20 bg-white/5 px-4 py-2 text-gray-200">
+              Tiempos y alcance explicados
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <GeoTrustSection
+      title="Qué hace que esta página sí sirva para autoridad temática"
+      answer="Aquí no solo mostramos inspiración visual. Cada proyecto incluye contexto, material, plazos, alcance, reto, solución y resultado. Esa capa editorial convierte una galería tradicional en evidencia de experiencia aplicada, que es mucho más útil para SEO local y GEO."
+      bullets={[
+        "Cada caso está listo para documentar materiales, ciudad, tiempos y alcance real.",
+        "La autoría queda visible para reforzar experiencia humana detrás del contenido.",
+        "Las imágenes temporales se pueden sustituir sin romper la estructura SEO ya implementada.",
+      ]}
+    />
+
+    <section class="py-16">
+      <div class="container mx-auto px-4 sm:px-6 max-w-6xl">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {
+            caseStudies.map((study) => (
+              <article class="rounded-3xl overflow-hidden bg-white shadow-xl border border-gray-100">
+                <img
+                  src={study.images.cover}
+                  alt={`Placeholder visual del caso ${study.title}`}
+                  class="h-64 w-full object-cover"
+                  loading="lazy"
+                />
+                <div class="p-6">
+                  <div class="flex flex-wrap gap-2 mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-gray-500">
+                    <span>{study.materialBrand}</span>
+                    <span>{study.location}</span>
+                  </div>
+                  <h2 class="text-2xl font-bold text-marmoles-black mb-3">
+                    <a href={`#${study.slug}`} class="hover:text-marmoles-gold transition-colors">
+                      {study.title}
+                    </a>
+                  </h2>
+                  <p class="text-gray-600 leading-relaxed mb-5">{study.summary}</p>
+                  <dl class="grid grid-cols-2 gap-3 text-sm">
+                    <div class="rounded-2xl bg-gray-50 p-3">
+                      <dt class="text-gray-500">Aplicación</dt>
+                      <dd class="font-semibold text-marmoles-black">{study.application}</dd>
+                    </div>
+                    <div class="rounded-2xl bg-gray-50 p-3">
+                      <dt class="text-gray-500">Tiempo</dt>
+                      <dd class="font-semibold text-marmoles-black">{study.timelineDays} días</dd>
+                    </div>
+                  </dl>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-8">
+      <div class="container mx-auto px-4 sm:px-6 max-w-6xl space-y-16">
+        {
+          caseStudies.map((study) => (
+            <article
+              id={study.slug}
+              class="rounded-[2rem] border border-gray-200 bg-white shadow-xl overflow-hidden"
+            >
+              <div class="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr]">
+                <div class="p-8 md:p-10 border-b lg:border-b-0 lg:border-r border-gray-100">
+                  <div class="flex flex-wrap gap-3 mb-5 text-sm">
+                    <span class="rounded-full bg-marmoles-gold/10 px-4 py-2 font-semibold text-marmoles-gold">
+                      {study.materialBrand}
+                    </span>
+                    <span class="rounded-full bg-gray-100 px-4 py-2 text-gray-700">
+                      {study.location}
+                    </span>
+                    <span class="rounded-full bg-gray-100 px-4 py-2 text-gray-700">
+                      Actualizado {study.updatedAt}
+                    </span>
+                  </div>
+                  <h2 class="text-3xl md:text-4xl font-bold text-marmoles-black mb-4">
+                    {study.title}
+                  </h2>
+                  <p class="text-lg leading-relaxed text-gray-700 mb-8">
+                    {study.summary}
+                  </p>
+
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                    <div class="rounded-2xl bg-gray-50 p-5">
+                      <h3 class="font-semibold text-marmoles-black mb-2">Material</h3>
+                      <p class="text-gray-700">
+                        {study.materialBrand} · {study.materialLine}
+                        <br />
+                        <span class="text-sm text-gray-500">{study.materialReference}</span>
+                      </p>
+                    </div>
+                    <div class="rounded-2xl bg-gray-50 p-5">
+                      <h3 class="font-semibold text-marmoles-black mb-2">Aplicación</h3>
+                      <p class="text-gray-700">{study.application}</p>
+                    </div>
+                    <div class="rounded-2xl bg-gray-50 p-5">
+                      <h3 class="font-semibold text-marmoles-black mb-2">Tipo de proyecto</h3>
+                      <p class="text-gray-700">{study.propertyType}</p>
+                    </div>
+                    <div class="rounded-2xl bg-gray-50 p-5">
+                      <h3 class="font-semibold text-marmoles-black mb-2">Tiempo real</h3>
+                      <p class="text-gray-700">{study.timelineLabel}</p>
+                    </div>
+                  </div>
+
+                  <div class="space-y-8">
+                    <section>
+                      <h3 class="text-2xl font-bold text-marmoles-black mb-3">Reto del proyecto</h3>
+                      <p class="text-gray-700 leading-relaxed">{study.challenge}</p>
+                    </section>
+                    <section>
+                      <h3 class="text-2xl font-bold text-marmoles-black mb-3">Solución propuesta</h3>
+                      <p class="text-gray-700 leading-relaxed">{study.solution}</p>
+                    </section>
+                    <section>
+                      <h3 class="text-2xl font-bold text-marmoles-black mb-3">Resultado</h3>
+                      <p class="text-gray-700 leading-relaxed">{study.result}</p>
+                    </section>
+                    <section>
+                      <h3 class="text-2xl font-bold text-marmoles-black mb-3">Alcance del trabajo</h3>
+                      <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 text-gray-700">
+                        {study.scope.map((item) => <li class="rounded-2xl bg-gray-50 p-4">{item}</li>)}
+                      </ul>
+                    </section>
+                    <section>
+                      <h3 class="text-2xl font-bold text-marmoles-black mb-3">Cronograma explicado</h3>
+                      <ol class="space-y-3 text-gray-700">
+                        {study.timelineBreakdown.map((item) => <li class="rounded-2xl bg-gray-50 p-4">{item}</li>)}
+                      </ol>
+                    </section>
+                  </div>
+                </div>
+
+                <aside class="p-8 md:p-10 bg-gray-50">
+                  <div class="rounded-3xl overflow-hidden bg-white shadow-lg mb-6">
+                    <img
+                      src={study.images.final}
+                      alt={`Placeholder final del caso ${study.title}`}
+                      class="w-full h-72 object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div class="grid grid-cols-2 gap-4 mb-8">
+                    <img src={study.images.before} alt={`Placeholder antes del caso ${study.title}`} class="w-full h-40 object-cover rounded-2xl shadow-md" loading="lazy" />
+                    <img src={study.images.process} alt={`Placeholder proceso del caso ${study.title}`} class="w-full h-40 object-cover rounded-2xl shadow-md" loading="lazy" />
+                  </div>
+
+                  <div class="rounded-3xl bg-marmoles-black text-white p-6 mb-6">
+                    <p class="text-xs uppercase tracking-[0.2em] text-marmoles-gold mb-3">
+                      Autoría visible
+                    </p>
+                    <h3 class="text-xl font-bold mb-2">{study.authorName}</h3>
+                    <p class="text-gray-300">{study.authorRole}</p>
+                    <p class="text-sm text-gray-400 mt-4">
+                      Publicado {study.publishedAt} · Actualizado {study.updatedAt}
+                    </p>
+                  </div>
+
+                  <blockquote class="rounded-3xl bg-white p-6 shadow-md border border-gray-200">
+                    <p class="text-lg text-gray-700 leading-relaxed mb-4">“{study.testimonial.quote}”</p>
+                    <footer class="text-sm text-gray-500">
+                      <strong class="text-marmoles-black">{study.testimonial.name}</strong>
+                      <br />
+                      {study.testimonial.role}
+                    </footer>
+                  </blockquote>
+
+                  <div class="rounded-3xl border border-dashed border-marmoles-gold/40 bg-marmoles-gold/5 p-5 mt-6">
+                    <p class="text-sm font-semibold text-marmoles-black mb-2">
+                      Nota editorial actual
+                    </p>
+                    <p class="text-sm text-gray-700">
+                      Estas imágenes son placeholders creados para dejar la
+                      estructura lista. Reemplázalas por fotos propias del
+                      proyecto para reforzar experiencia real, confianza y
+                      desempeño en GEO.
+                    </p>
+                  </div>
+                </aside>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <GeoFaqSection
+      title="Preguntas frecuentes sobre esta nueva capa de casos de estudio"
+      intro="Estas respuestas dejan claro qué información debe vivir aquí y por qué esta página tiene más valor SEO que una simple galería de inspiración."
+      faqs={faqItems}
+    />
+  </main>
+</Layout>
