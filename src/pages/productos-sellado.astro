@@ -1,5 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { cloudinaryAssets } from "../lib/images/cloudinaryAssets";
+import { buildSeoImageUrl } from "../lib/images/cloudinary";
 
 const title = "Productos de Sellado Certificados - Mármoles Deluxe Cali";
 const description =
@@ -9,6 +11,7 @@ const keywords =
   "selladores mármol Cali, silicona neutra piedra, Mapei Mapesil, Sika sellador, productos sellado granito, adhesivos piedra natural, selladores profesionales Cali, mantenimiento mármol, protección granito";
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const metaImage = buildSeoImageUrl(cloudinaryAssets.seo.contact);
 
 const productos = [
   {
@@ -127,6 +130,12 @@ const productos = [
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:image" content={metaImage} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={metaImage} />
   </Fragment>
 
   <div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">

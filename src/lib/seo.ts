@@ -1,0 +1,16 @@
+export const publicSiteRoutes = [
+  "/",
+  "/b2b",
+  "/casos-de-estudio",
+  "/contactanos",
+  "/granitos-naturales",
+  "/marmoles",
+  "/nosotros",
+  "/otros-servicios",
+  "/piedra-exotica",
+  "/piedra-sinterizada",
+  "/politicas-garantia",
+  "/productos-sellado",
+  "/proyectos",
+  "/quartzstone",
+] as const;

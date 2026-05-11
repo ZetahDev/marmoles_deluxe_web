@@ -52,6 +52,7 @@ const preloadBrandLogos = [
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -68,6 +69,7 @@ const preloadBrandLogos = [
       name="facebook-domain-verification"
       content="v2kxgywlwg2k962jr77ep47ryjagd5"
     />
+    <slot name="head" />
   </head>
 
   <body

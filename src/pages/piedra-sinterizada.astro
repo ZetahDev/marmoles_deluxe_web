@@ -3,6 +3,9 @@ import Layout from "../layouts/Layout.astro";
 import CategoryFilter from "../components/CategoryFilter.tsx";
 import CategoryWrapper from "../components/CategoryWrapper.tsx";
 import SEOSchemaData from "../components/SEOSchemaData.tsx";
+import GeoBusinessSchema from "../components/GeoBusinessSchema.astro";
+import GeoFaqSection from "../components/GeoFaqSection.astro";
+import GeoTrustSection from "../components/GeoTrustSection.astro";
 import { listStonesFromS3, type Stone } from "../lib/utils/s3Utils";
 import { cloudinaryAssets } from "../lib/images/cloudinaryAssets";
 import { buildSeoImageUrl } from "../lib/images/cloudinary";
@@ -137,11 +140,9 @@ const stoneCategories = await Promise.all(
 const { url } = Astro;
 const params = url.searchParams;
 const categoryParam = params.get("categoria")?.toLowerCase();
-// También revisar el hash para el SEO si estamos usando anclas
-const hash = url.hash ? url.hash.substring(1) : null;
-const effectiveCategory = useAnchorLinks
-  ? hash || categoryParam
-  : categoryParam;
+// Los fragmentos (#) no forman parte de la URL indexable y no deben
+// alterar metadata ni canonical.
+const effectiveCategory = categoryParam;
 
 // Default metadata - Optimizado para SEO con enfoque en Altea
 let title = "Piedra Sinterizada Altea, Dekton y Neolith Cali | Mármoles Deluxe";
@@ -189,16 +190,30 @@ if (effectiveCategory) {
 
 // Canonical URL (important for SEO)
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-if (useAnchorLinks && effectiveCategory) {
-  // Si usamos anclas, el canonical debe incluir el hash
-  canonicalURL.hash = `#${effectiveCategory}`;
-} else if (categoryParam) {
+if (!useAnchorLinks && categoryParam) {
   // Si usamos parámetros, incluirlos en el canonical
   canonicalURL.searchParams.set("categoria", categoryParam);
 }
 
 // Default image for SEO
 const image = buildSeoImageUrl(cloudinaryAssets.seo.piedraSinterizada);
+const sinterizadaFaqs = [
+  {
+    question: "¿Qué ventajas tiene la piedra sinterizada frente a otras superficies?",
+    answer:
+      "La piedra sinterizada destaca por su resistencia al calor, baja absorción, estabilidad del color y buen desempeño en cocinas, baños y algunas aplicaciones exteriores. La marca y el espesor adecuados dependen del uso final del proyecto.",
+  },
+  {
+    question: "¿Qué marcas de piedra sinterizada ofrece Mármoles Deluxe en Cali?",
+    answer:
+      "Trabajamos líneas como Artemarmol, Altea, Dekton, Neolith y Silestone, cada una con formatos, diseños, garantías y atributos técnicos distintos según la aplicación.",
+  },
+  {
+    question: "¿La piedra sinterizada sirve para cocinas y fachadas?",
+    answer:
+      "Sí, pero no todas las referencias se recomiendan igual para cada uso. La selección correcta depende de exposición solar, tránsito, formato, soporte y exigencia mecánica del proyecto.",
+  },
+];
 ---
 
 <Layout
@@ -218,6 +233,7 @@ const image = buildSeoImageUrl(cloudinaryAssets.seo.piedraSinterizada);
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
     <meta property="og:locale" content="es_CO" />
     <meta property="og:site_name" content="Mármoles Deluxe" />
 
@@ -225,6 +241,7 @@ const image = buildSeoImageUrl(cloudinaryAssets.seo.piedraSinterizada);
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
 
     <!-- Geo Tags -->
     <meta name="geo.region" content="CO-VAC" />
@@ -241,6 +258,14 @@ const image = buildSeoImageUrl(cloudinaryAssets.seo.piedraSinterizada);
     pageImage={image}
     category={schemaCategory}
     stones={schemaStones}
+  />
+  <GeoBusinessSchema
+    pageTitle={title}
+    pageDescription={description}
+    pageUrl={canonicalURL.toString()}
+    pageImage={image}
+    pageType="CollectionPage"
+    faqs={sinterizadaFaqs}
   />
 
   <CategoryFilter client:idle />
@@ -331,6 +356,24 @@ const image = buildSeoImageUrl(cloudinaryAssets.seo.piedraSinterizada);
         categories={stoneCategories}
         useAnchorLinks={useAnchorLinks}
       />
+
+      <div class="mt-16 space-y-16">
+        <GeoTrustSection
+          title="Cómo evaluamos piedra sinterizada para proyectos reales"
+          answer="La elección de una superficie sinterizada no se reduce al color. En la práctica importan el uso, el formato, el espesor, la exposición al calor, la logística de instalación y el comportamiento esperado a largo plazo. Esa experiencia aplicada es la que intentamos reflejar en esta página."
+          bullets={[
+            "Comparación de varias marcas con descripciones y beneficios diferenciados.",
+            "Señales técnicas visibles: calor, rayones, impermeabilidad, UV y garantía.",
+            "Orientación local para proyectos en Cali con instalación y asesoría comercial.",
+          ]}
+        />
+
+        <GeoFaqSection
+          title="Preguntas frecuentes sobre piedra sinterizada en Cali"
+          intro="Estas respuestas están redactadas para resolver dudas de compra y para reforzar la autoridad temática de la página sobre superficies sinterizadas."
+          faqs={sinterizadaFaqs}
+        />
+      </div>
     </div>
   </main>
 </Layout>

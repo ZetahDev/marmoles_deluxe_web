@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface SEOSchemaDataProps {
   pageTitle: string;
@@ -10,7 +10,13 @@ interface SEOSchemaDataProps {
     name: string;
     image: string;
   }>;
-  pageType?: 'WebPage' | 'CollectionPage' | 'AboutPage' | 'ContactPage' | 'HomePage' | 'ServicePage';
+  pageType?:
+    | "WebPage"
+    | "CollectionPage"
+    | "AboutPage"
+    | "ContactPage"
+    | "HomePage"
+    | "ServicePage";
   organization?: {
     name: string;
     logo?: string;
@@ -33,65 +39,68 @@ type SchemaData = Record<string, any>;
 const createBaseSchema = (props: SEOSchemaDataProps): SchemaData => ({
   "@context": "https://schema.org",
   "@type": props.pageType,
-  "name": props.pageTitle,
-  "description": props.pageDescription,
-  "url": props.pageUrl,
-  "image": props.pageImage
+  name: props.pageTitle,
+  description: props.pageDescription,
+  url: props.pageUrl,
+  image: props.pageImage,
+  inLanguage: "es-CO",
 });
 
 // Create collection page schema
 const createCollectionSchema = (props: SEOSchemaDataProps): SchemaData => {
-  const { pageTitle, pageDescription, pageUrl, pageImage, category, stones = [] } = props;
-  
+  const {
+    pageTitle,
+    pageDescription,
+    pageUrl,
+    pageImage,
+    category,
+    stones = [],
+  } = props;
+
   return {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": pageTitle,
-    "description": pageDescription,
-    "url": pageUrl,
-    "image": pageImage,
-    "mainEntity": {
+    name: pageTitle,
+    description: pageDescription,
+    url: pageUrl,
+    image: pageImage,
+    mainEntity: {
       "@type": "ItemList",
-      "itemListElement": stones.map((stone, index) => ({
+      itemListElement: stones.map((stone, index) => ({
         "@type": "ListItem",
-        "position": index + 1,
-        "item": {
+        position: index + 1,
+        item: {
           "@type": "Product",
-          "name": stone.name,
-          "image": stone.image,
-          "description": `${category} - ${stone.name}`,
-          "category": category,
-          "brand": {
+          name: stone.name,
+          image: stone.image,
+          description: `${category} - ${stone.name}`,
+          category,
+          url: pageUrl,
+          brand: {
             "@type": "Brand",
-            "name": category
+            name: category,
           },
-          "offers": {
-            "@type": "Offer",
-            "availability": "https://schema.org/InStock",
-            "priceCurrency": "COP",
-            "price": "0",
-            "priceValidUntil": new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0],
-            "url": `${pageUrl}?material=${stone.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`
-          }
-        }
-      }))
-    }
+        },
+      })),
+    },
   };
 };
 
 // Create organization schema parts
-const createOrganizationData = (organization: NonNullable<SEOSchemaDataProps['organization']>): SchemaData => ({
+const createOrganizationData = (
+  organization: NonNullable<SEOSchemaDataProps["organization"]>
+): SchemaData => ({
   "@type": "Organization",
-  "name": organization.name,
-  ...(organization.logo && { "logo": organization.logo }),
-  ...(organization.sameAs && { "sameAs": organization.sameAs }),
-  ...(organization.telephone && { "telephone": organization.telephone }),
+  name: organization.name,
+  ...(organization.logo && { logo: organization.logo }),
+  ...(organization.sameAs && { sameAs: organization.sameAs }),
+  ...(organization.telephone && { telephone: organization.telephone }),
   ...(organization.address && {
-    "address": {
+    address: {
       "@type": "PostalAddress",
-      ...organization.address
-    }
-  })
+      ...organization.address,
+    },
+  }),
 });
 
 /**
@@ -104,10 +113,10 @@ export default function SEOSchemaData(props: SEOSchemaDataProps) {
     pageDescription,
     pageUrl,
     pageImage,
-    pageType = 'WebPage',
+    pageType = "WebPage",
     category,
     stones = [], 
-    organization
+    organization,
   } = props;
   
   // Get base schema
@@ -120,38 +129,42 @@ export default function SEOSchemaData(props: SEOSchemaDataProps) {
   });
   
   // Apply specific schema based on page type and available data
-  if (category && stones.length > 0 && (pageType === 'CollectionPage' || pageType === 'WebPage')) {
+  if (
+    category &&
+    stones.length > 0 &&
+    (pageType === "CollectionPage" || pageType === "WebPage")
+  ) {
     schemaData = createCollectionSchema({
       pageTitle,
       pageDescription,
       pageUrl,
       pageImage,
       category,
-      stones
+      stones,
     });
-  } else if (pageType === 'ContactPage' && organization) {
+  } else if (pageType === "ContactPage" && organization) {
     schemaData = {
       ...schemaData,
       "@type": "ContactPage",
-      "about": createOrganizationData(organization)
+      about: createOrganizationData(organization),
     };
-  } else if (pageType === 'AboutPage' && organization) {
+  } else if (pageType === "AboutPage" && organization) {
     schemaData = {
       ...schemaData,
       "@type": "AboutPage",
-      "about": createOrganizationData(organization)
+      about: createOrganizationData(organization),
     };
-  } else if (pageType === 'ServicePage') {
+  } else if (pageType === "ServicePage") {
     schemaData = {
       ...schemaData,
       "@type": "WebPage",
-      "specialty": category || "Servicios de mármoles y piedras"
+      specialty: category || "Servicios de mármoles y piedras",
     };
-  } else if (pageType === 'HomePage' && organization) {
+  } else if (pageType === "HomePage" && organization) {
     schemaData = {
       ...schemaData,
       "@type": "WebPage",
-      "publisher": createOrganizationData(organization)
+      publisher: createOrganizationData(organization),
     };
   }
 

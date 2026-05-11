@@ -1,5 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { cloudinaryAssets } from "../lib/images/cloudinaryAssets";
+import { buildSeoImageUrl } from "../lib/images/cloudinary";
 
 const title = "Políticas de Garantía y Servicios - Mármoles Deluxe Cali";
 const description =
@@ -9,6 +11,7 @@ const keywords =
   "garantías mármol Cali, garantía granito, cuarzo quartzstone garantía, piedra sinterizada garantía, NTC 4489, ISO 9001, políticas calidad mármoles, servicio postventa Cali, garantía instalación piedra, mantenimiento mármol granito";
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const metaImage = buildSeoImageUrl(cloudinaryAssets.seo.contact);
 
 const schemaData = {
   "@context": "https://schema.org",
@@ -37,7 +40,7 @@ const schemaData = {
         addressCountry: "CO",
       },
       telephone: "+57-313-2592793",
-      email: "marmolesdeluxe@gmail.com",
+      email: "info@marmolesdeluxe.com",
     },
     areaServed: {
       "@type": "City",
@@ -101,8 +104,14 @@ const schemaData = {
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:image" content={metaImage} />
     <meta property="og:locale" content="es_CO" />
     <meta property="og:site_name" content="Mármoles Deluxe" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={metaImage} />
 
     <!-- Geo Tags -->
     <meta name="geo.region" content="CO-VAC" />
@@ -802,7 +811,7 @@ const schemaData = {
             </h3>
             <ol class="ml-6 space-y-2 list-decimal">
               <li>
-                Contactar a Mármoles Deluxe vía email (marmolesdeluxe@gmail.com)
+                Contactar a Mármoles Deluxe vía email (info@marmolesdeluxe.com)
                 o WhatsApp (+57 313 2592793) con:
                 <ul class="ml-6 mt-2 space-y-1">
                   <li>- Número de factura y fecha de instalación</li>
@@ -1185,7 +1194,7 @@ const schemaData = {
             <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
               <div class="text-3xl mb-3">📧</div>
               <h3 class="font-bold mb-2">Email</h3>
-              <p class="text-sm text-white/80">marmolesdeluxe@gmail.com</p>
+              <p class="text-sm text-white/80">info@marmolesdeluxe.com</p>
               <p class="text-xs text-white/60 mt-2">Respuesta en 24-48 horas</p>
             </div>
 
@@ -1200,7 +1209,7 @@ const schemaData = {
               <div class="text-3xl mb-3">📍</div>
               <h3 class="font-bold mb-2">Visítanos</h3>
               <p class="text-sm text-white/80">
-                Cl. 43a Nte. #5N 69, COMUNA 4, Cali
+                Cra 5norte 40-43 barrio el popular, Cali
               </p>
               <p class="text-xs text-white/60 mt-2">Sáb 9AM-2PM</p>
             </div>
