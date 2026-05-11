@@ -1,0 +1,37 @@
+{
+  "diff": false,
+  "failOn": "none",
+  "ignore": {
+    "rules": [
+      "react-doctor/design-no-default-tailwind-palette",
+      "react-doctor/design-no-redundant-size-axes",
+      "react-doctor/design-no-space-on-flex-children",
+      "react-doctor/design-no-three-period-ellipsis",
+      "react-doctor/design-no-bold-heading",
+      "react-doctor/no-generic-handler-names",
+      "react-doctor/no-react19-deprecated-apis",
+      "react-doctor/rerender-state-only-in-handlers",
+      "react-doctor/no-cascading-set-state",
+      "react-doctor/no-giant-component",
+      "react-doctor/js-hoist-intl",
+      "react-doctor/rerender-functional-setstate",
+      "react-doctor/prefer-use-effect-event",
+      "react-doctor/no-effect-event-handler",
+      "react-doctor/no-prevent-default",
+      "react-doctor/rerender-memo-with-default-value",
+      "react-doctor/no-fetch-in-effect",
+      "react-doctor/js-tosorted-immutable",
+      "react-doctor/no-array-index-as-key",
+      "react-doctor/no-derived-useState",
+      "knip/files",
+      "knip/exports",
+      "knip/types"
+    ],
+    "files": [
+      "scripts/**",
+      "src/components/admin/**",
+      "src/layouts/AdminLayout.astro",
+      "src/components/ui/**"
+    ]
+  }
+}
