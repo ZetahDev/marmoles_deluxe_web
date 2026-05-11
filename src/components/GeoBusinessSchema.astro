@@ -1,0 +1,120 @@
+---
+import { businessInfo, type GeoFaqItem } from "../lib/business";
+
+interface Props {
+  pageTitle: string;
+  pageDescription: string;
+  pageUrl: string;
+  pageImage: string;
+  pageType?: string;
+  faqs?: GeoFaqItem[];
+}
+
+const {
+  pageTitle,
+  pageDescription,
+  pageUrl,
+  pageImage,
+  pageType = "WebPage",
+  faqs = [],
+} = Astro.props;
+
+const websiteId = `${businessInfo.url}/#website`;
+const organizationId = `${businessInfo.url}/#organization`;
+const localBusinessId = `${businessInfo.url}/#localbusiness`;
+const pageId = `${pageUrl}#webpage`;
+
+const graph: Record<string, unknown>[] = [
+  {
+    "@type": "WebSite",
+    "@id": websiteId,
+    url: businessInfo.url,
+    name: businessInfo.name,
+    inLanguage: "es-CO",
+  },
+  {
+    "@type": "Organization",
+    "@id": organizationId,
+    name: businessInfo.legalName,
+    url: businessInfo.url,
+    email: businessInfo.email,
+    telephone: businessInfo.telephone,
+    sameAs: businessInfo.sameAs,
+  },
+  {
+    "@type": "LocalBusiness",
+    "@id": localBusinessId,
+    name: businessInfo.name,
+    description: businessInfo.description,
+    url: businessInfo.url,
+    image: pageImage,
+    email: businessInfo.email,
+    telephone: businessInfo.telephone,
+    priceRange: "$$",
+    address: {
+      "@type": "PostalAddress",
+      ...businessInfo.address,
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: businessInfo.geo.latitude,
+      longitude: businessInfo.geo.longitude,
+    },
+    openingHoursSpecification: {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: businessInfo.openingHours.days,
+      opens: businessInfo.openingHours.opens,
+      closes: businessInfo.openingHours.closes,
+    },
+    areaServed: businessInfo.serviceArea.map((name) => ({
+      "@type": "AdministrativeArea",
+      name,
+    })),
+    sameAs: businessInfo.sameAs,
+    parentOrganization: {
+      "@id": organizationId,
+    },
+  },
+  {
+    "@type": pageType,
+    "@id": pageId,
+    url: pageUrl,
+    name: pageTitle,
+    description: pageDescription,
+    inLanguage: "es-CO",
+    isPartOf: {
+      "@id": websiteId,
+    },
+    about: {
+      "@id": localBusinessId,
+    },
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: pageImage,
+    },
+  },
+];
+
+if (faqs.length > 0) {
+  graph.push({
+    "@type": "FAQPage",
+    "@id": `${pageUrl}#faq`,
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  });
+}
+---
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": graph,
+  })}
+/>

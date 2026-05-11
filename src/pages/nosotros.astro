@@ -1,6 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import SEOSchemaData from "../components/SEOSchemaData.tsx";
+import GeoBusinessSchema from "../components/GeoBusinessSchema.astro";
+import GeoFaqSection from "../components/GeoFaqSection.astro";
+import GeoTrustSection from "../components/GeoTrustSection.astro";
 import { cloudinaryAssets } from "../lib/images/cloudinaryAssets";
 import { buildSeoImageUrl } from "../lib/images/cloudinary";
 
@@ -15,6 +18,23 @@ const keywords =
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const pageUrl = canonicalURL.toString();
 const metaImage = buildSeoImageUrl(cloudinaryAssets.seo.contact);
+const aboutFaqs = [
+  {
+    question: "¿Qué experiencia tiene Mármoles Deluxe en Cali?",
+    answer:
+      "La empresa comunica más de 16 años de experiencia en suministro e instalación de superficies para hogares y proyectos comerciales en Cali y el Valle del Cauca, con enfoque en materiales naturales y sinterizados.",
+  },
+  {
+    question: "¿Qué diferencia a Mármoles Deluxe de un simple intermediario?",
+    answer:
+      "La propuesta del sitio combina selección de materiales, asesoría técnica, instalación, postventa y contenido específico por categoría. Eso refleja una operación especializada, no solo un catálogo de terceros.",
+  },
+  {
+    question: "¿Dónde opera Mármoles Deluxe?",
+    answer:
+      "La sede y el foco principal están en Cali, con atención para proyectos en el Valle del Cauca según el alcance técnico y comercial requerido.",
+  },
+];
 ---
 
 <Layout title={title} description={description}>
@@ -30,6 +50,7 @@ const metaImage = buildSeoImageUrl(cloudinaryAssets.seo.contact);
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:image" content={metaImage} />
     <meta property="og:locale" content="es_CO" />
     <meta property="og:site_name" content="Mármoles Deluxe" />
 
@@ -37,6 +58,7 @@ const metaImage = buildSeoImageUrl(cloudinaryAssets.seo.contact);
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={metaImage} />
 
     <!-- Geo Tags -->
     <meta name="geo.region" content="CO-VAC" />
@@ -47,11 +69,18 @@ const metaImage = buildSeoImageUrl(cloudinaryAssets.seo.contact);
 
   <!-- Agregar datos estructurados schema.org para SEO -->
   <SEOSchemaData
-    client:load
     pageTitle={title}
     pageDescription={description}
     pageUrl={pageUrl}
     pageImage={metaImage}
+  />
+  <GeoBusinessSchema
+    pageTitle={title}
+    pageDescription={description}
+    pageUrl={pageUrl}
+    pageImage={metaImage}
+    pageType="AboutPage"
+    faqs={aboutFaqs}
   />
 
   <main class="py-20 pt-24">
@@ -276,6 +305,22 @@ const metaImage = buildSeoImageUrl(cloudinaryAssets.seo.contact);
           </a>
         </div>
       </section>
+
+      <GeoTrustSection
+        title="Qué señales refuerzan la autoridad de la marca"
+        answer="La sección 'Nosotros' es clave para GEO porque ayuda a identificar la entidad detrás del contenido. Aquí se explican años de experiencia, cobertura local, valores de servicio y foco de especialización, que son señales mucho más útiles que una simple frase comercial."
+        bullets={[
+          "Historia y experiencia declaradas de forma visible en una página dedicada.",
+          "Especialización concreta en mármoles, granitos y piedra sinterizada.",
+          "Conexión directa con la operación local en Cali y Valle del Cauca.",
+        ]}
+      />
+
+      <GeoFaqSection
+        title="Preguntas frecuentes sobre la empresa"
+        intro="Estas respuestas ayudan a que buscadores y usuarios entiendan mejor quién está detrás del contenido y qué tipo de experiencia respalda la marca."
+        faqs={aboutFaqs}
+      />
     </div>
   </main>
 </Layout>
@@ -289,45 +334,3 @@ const metaImage = buildSeoImageUrl(cloudinaryAssets.seo.contact);
     }
   }
 </style>
-
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Mármoles Deluxe",
-    "description": "Empresa familiar con 16 años de experiencia en suministro e instalación de superficies en piedras naturales y sinterizadas en Cali.",
-    "image": metaImage,
-    "url": "https://marmolesdeluxe.com",
-    "telephone": "+573123456789",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Dirección en Cali",
-      "addressLocality": "Cali",
-      "addressRegion": "Valle del Cauca",
-      "postalCode": "760001",
-      "addressCountry": "CO"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": "3.4516",
-      "longitude": "-76.5320"
-    },
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-      ],
-      "opens": "08:00",
-      "closes": "18:00"
-    },
-    "sameAs": [
-      "https://www.facebook.com/marmolesdeluxe",
-      "https://www.instagram.com/marmolesdeluxe"
-    ]
-  }
-</script>

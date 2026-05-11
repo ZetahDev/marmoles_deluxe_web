@@ -1,6 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import SEOSchemaData from "../components/SEOSchemaData.tsx";
+import GeoBusinessSchema from "../components/GeoBusinessSchema.astro";
+import GeoFaqSection from "../components/GeoFaqSection.astro";
+import GeoTrustSection from "../components/GeoTrustSection.astro";
 import ContactFormB2B from "../components/ContactFormB2B";
 import { cloudinaryAssets } from "../lib/images/cloudinaryAssets";
 import { buildSeoImageUrl } from "../lib/images/cloudinary";
@@ -170,6 +173,24 @@ const process = [
       "Coordinación con instaladores certificados. Supervisión técnica disponible.",
   },
 ];
+
+const b2bFaqs = [
+  {
+    question: "¿Qué tipo de clientes atiende la unidad B2B de Mármoles Deluxe?",
+    answer:
+      "Atendemos arquitectos, constructoras, diseñadores, firmas de interiorismo y responsables de compras de proyectos comerciales o residenciales de gran formato en Cali y Valle del Cauca.",
+  },
+  {
+    question: "¿Pueden apoyar con fichas técnicas y selección de materiales?",
+    answer:
+      "Sí. El enfoque B2B incluye acompañamiento técnico para comparar formatos, aplicaciones, resistencia, cronograma de suministro y ajuste al presupuesto del proyecto.",
+  },
+  {
+    question: "¿Manejan muestras y visitas de validación?",
+    answer:
+      "Sí. Podemos coordinar muestras físicas, revisión de planos y visitas a obra para reducir errores antes de compra, fabricación e instalación.",
+  },
+];
 ---
 
 <Layout title={title} description={description}>
@@ -185,6 +206,10 @@ const process = [
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={metaImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={metaImage} />
 
     <!-- Geo Tags -->
     <meta name="geo.region" content="CO-VAC" />
@@ -192,11 +217,18 @@ const process = [
   </Fragment>
 
   <SEOSchemaData
-    client:load
     pageTitle={title}
     pageDescription={description}
     pageUrl={pageUrl}
     pageImage={metaImage}
+  />
+  <GeoBusinessSchema
+    pageTitle={title}
+    pageDescription={description}
+    pageUrl={pageUrl}
+    pageImage={metaImage}
+    pageType="ServicePage"
+    faqs={b2bFaqs}
   />
 
   <main class="pt-24 pb-16">
@@ -432,6 +464,16 @@ const process = [
       </div>
     </section>
 
+    <GeoTrustSection
+      title="Por qué esta página B2B es útil para GEO y búsquedas de alta intención"
+      answer="La combinación de oferta clara, formatos, proceso comercial, estadísticas y formulario especializado hace que esta página responda con precisión preguntas transaccionales de arquitectos y constructoras. No es una landing genérica: describe alcance, soporte y logística."
+      bullets={[
+        "Proceso de atención B2B explicado paso a paso, desde planos hasta soporte.",
+        "Detalle de materiales, formatos y aplicaciones relevantes para decisiones técnicas.",
+        "Formulario dedicado para proyectos con criterios distintos al cliente residencial.",
+      ]}
+    />
+
     <!-- Contact Form Section -->
     <section
       id="contacto-b2b"
@@ -506,6 +548,12 @@ const process = [
         </div>
       </div>
     </section>
+
+    <GeoFaqSection
+      title="Preguntas frecuentes para arquitectos y constructoras"
+      intro="Estas respuestas cubren dudas comunes en compras técnicas, abastecimiento y validación de materiales para proyectos de gran formato."
+      faqs={b2bFaqs}
+    />
   </main>
 </Layout>
 

@@ -4,12 +4,16 @@ import { CarouselWrapper } from "../components/CarouselWrapper";
 import { TestimonialCarousel } from "../components/TestimonialCarousel";
 import ContactForm from "../components/ContactForm";
 import SEOSchemaData from "../components/SEOSchemaData.tsx";
+import GeoBusinessSchema from "../components/GeoBusinessSchema.astro";
+import GeoFaqSection from "../components/GeoFaqSection.astro";
+import GeoTrustSection from "../components/GeoTrustSection.astro";
 import { cloudinaryAssets } from "../lib/images/cloudinaryAssets";
 import {
   buildCloudinaryImageSet,
   buildSeoImageUrl,
   CLOUDINARY_PRESETS,
 } from "../lib/images/cloudinary";
+import { caseStudies } from "../data/caseStudies";
 
 // --- Metadatos SEO & Configuración ---
 const title =
@@ -111,6 +115,29 @@ const testimonies = [
     text: "La mejor inversión que he hecho en mi apartamento. El valor de mi propiedad subió instantáneamente.",
   },
 ];
+
+const homeFaqs = [
+  {
+    question: "¿Qué tipo de proyectos realiza Mármoles Deluxe en Cali?",
+    answer:
+      "Atendemos cocinas, baños, barras, islas, pisos, revestimientos y proyectos comerciales con mármoles, granitos, cuarzos y piedra sinterizada. Trabajamos tanto proyectos residenciales como corporativos en Cali y el Valle del Cauca.",
+  },
+  {
+    question: "¿Cómo validan la calidad de los materiales?",
+    answer:
+      "Seleccionamos materiales de primera calidad, revisamos acabados, vetas y formato antes de instalación y acompañamos la elección con asesoría técnica. Cuando aplica, también respaldamos la instalación con políticas de garantía y postventa.",
+  },
+  {
+    question: "¿Cuánto tarda una instalación típica?",
+    answer:
+      "El tiempo depende del material, las medidas y la complejidad del proyecto, pero nuestra propuesta comercial está enfocada en reducir tiempos muertos y ejecutar instalaciones con planeación, medición y cronograma claros.",
+  },
+  {
+    question: "¿Puedo agendar una visita técnica antes de comprar?",
+    answer:
+      "Sí. Evaluamos el espacio, tomamos medidas y te orientamos sobre materiales, espesores, acabados y mantenimiento para que la decisión no dependa solo del catálogo.",
+  },
+];
 ---
 
 <Layout title={title} description={description}>
@@ -173,14 +200,22 @@ const testimonies = [
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={metaImage} />
+    <meta name="twitter:image" content={metaImage} />
   </Fragment>
 
   <SEOSchemaData
-    client:load
     pageTitle={title}
     pageDescription={description}
     pageUrl={pageUrl}
     pageImage={metaImage}
+  />
+  <GeoBusinessSchema
+    pageTitle={title}
+    pageDescription={description}
+    pageUrl={pageUrl}
+    pageImage={metaImage}
+    pageType="HomePage"
+    faqs={homeFaqs}
   />
 
   <!-- HERO SECTION: THE HOOK -->
@@ -348,6 +383,57 @@ const testimonies = [
     </div>
   </section>
 
+  <section class="py-24 bg-white text-marmoles-black">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+        <div class="max-w-3xl">
+          <h2 class="text-4xl md:text-5xl font-bold mb-4">
+            Casos de estudio con material, reto y tiempo real
+          </h2>
+          <p class="text-xl text-gray-600">
+            No solo mostramos inspiración. Documentamos el contexto del
+            proyecto, el material elegido, el alcance y cómo se resolvió la
+            intervención en una ventana real de 5 días.
+          </p>
+        </div>
+        <a
+          href="/casos-de-estudio"
+          class="inline-flex items-center justify-center rounded-full bg-marmoles-black px-6 py-3 font-semibold text-white hover:bg-marmoles-gold hover:text-marmoles-black transition-colors"
+        >
+          Ver casos de estudio
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {
+          caseStudies.map((study) => (
+            <article class="rounded-3xl overflow-hidden border border-gray-100 shadow-lg bg-gray-50">
+              <img
+                src={study.images.cover}
+                alt={`Placeholder del caso ${study.title}`}
+                class="w-full h-60 object-cover"
+                loading="lazy"
+              />
+              <div class="p-6">
+                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-marmoles-gold mb-3">
+                  {study.materialBrand} · {study.location}
+                </p>
+                <h3 class="text-2xl font-bold mb-3">{study.title}</h3>
+                <p class="text-gray-600 mb-5">{study.summary}</p>
+                <div class="flex items-center justify-between text-sm text-gray-500">
+                  <span>{study.timelineDays} días</span>
+                  <a href={`/casos-de-estudio#${study.slug}`} class="font-semibold text-marmoles-black hover:text-marmoles-gold transition-colors">
+                    Leer caso
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
   <!-- ADVANTAGES / GUARANTEE -->
   <section class="py-20 bg-gradient-to-b from-marmoles-white to-gray-100">
     <div class="container mx-auto px-4">
@@ -438,6 +524,16 @@ const testimonies = [
     </div>
   </section>
 
+  <GeoTrustSection
+    title="Por qué esta información tiene señales reales de experiencia"
+    answer="Mármoles Deluxe no se presenta solo como un catálogo. La propuesta comercial, las políticas de garantía, la ubicación física en Cali, las marcas trabajadas y la evidencia visual del portafolio permiten a Google y a los usuarios entender que existe una operación real detrás del contenido."
+    bullets={[
+      "Más de 16 años de experiencia comunicados de forma consistente en el sitio.",
+      "Portafolio visual y testimonios que apoyan la experiencia declarada.",
+      "Cobertura local clara en Cali y Valle del Cauca con dirección, mapa y contacto visibles.",
+    ]}
+  />
+
   <!-- CONTACT / CTA SECTION -->
   <section id="contacto" class="py-24 bg-marmoles-black text-white relative">
     <div class="absolute inset-0 overflow-hidden">
@@ -501,6 +597,12 @@ const testimonies = [
     </div>
   </section>
 
+  <GeoFaqSection
+    title="Preguntas frecuentes sobre mármoles y superficies premium en Cali"
+    intro="Estas respuestas resumen las dudas que más se repiten en proyectos residenciales y comerciales antes de elegir material, instalación y soporte."
+    faqs={homeFaqs}
+  />
+
   <!-- MAP & LOCATION -->
   <section class="py-0 relative h-96">
     <iframe
@@ -549,5 +651,3 @@ const testimonies = [
     });
   });
 </script>
-
-
