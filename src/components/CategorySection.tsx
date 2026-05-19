@@ -28,6 +28,7 @@ export default function CategorySection({
   const [currentPage, setCurrentPage] = useState(1);
   const [materialFilter, setMaterialFilter] = useState<string | null>(null);
   const [isThisCategory, setIsThisCategory] = useState(false);
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   // Handle URL-based search filter
   useEffect(() => {
@@ -57,6 +58,32 @@ export default function CategorySection({
     }
   }, [category.title]);
 
+
+  // Listen for search events from MaterialSearch component
+  useEffect(() => {
+    const handleSearch = (event: CustomEvent) => {
+      const term = event.detail?.searchTerm || "";
+      setSearchTerm(term);
+      setCurrentPage(1); // Reset to first page on search
+    };
+
+    document.addEventListener("material-search", handleSearch as EventListener);
+    return () => {
+      document.removeEventListener("material-search", handleSearch as EventListener);
+    };
+  }, []);
+
+  // Also check URL for search parameter on mount
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const params = new URLSearchParams(window.location.search);
+    const searchParam = params.get("search");
+    
+    if (searchParam) {
+      setSearchTerm(searchParam);
+    }
+  }, []);
   // Filter stones based on material parameter
   const filteredStones = materialFilter
     ? category.stones.filter((stone) => {

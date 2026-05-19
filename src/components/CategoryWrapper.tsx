@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useStoneCategoryStore } from "../store/stoneCategoryStore";
 import ProductCard from "./ProductCard";
 import CategorySection from "./CategorySection";
+import MaterialSearch from "./MaterialSearch";
 
 interface Stone {
   name: string;
@@ -82,6 +83,7 @@ export default function CategoryWrapper({
   return (
     <>
       {/* Mostrar botón de limpieza de filtro si hay una categoría activa */}
+      <MaterialSearch />
       {activeCategory && (
         <div className="flex justify-center mb-8">
           <button
