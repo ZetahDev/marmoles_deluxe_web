@@ -21,6 +21,16 @@ interface CategorySectionProps {
   itemsPerPage?: number;
 }
 
+function normalizeSearchValue(value: string): string {
+  return (value ?? "")
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
 export default function CategorySection({
   category,
   itemsPerPage = 12, // Default to 12 items per page
@@ -84,18 +94,27 @@ export default function CategorySection({
       setSearchTerm(searchParam);
     }
   }, []);
-  // Filter stones based on material parameter
-  const filteredStones = materialFilter
-    ? category.stones.filter((stone) => {
-        const stoneSlug = stone.name
-          .toLowerCase()
-          .replace(/[^a-z0-9]+/g, "-")
-          .replace(/(^-|-$)/g, "");
-        return (
-          stoneSlug === materialFilter || stoneSlug.includes(materialFilter)
-        );
-      })
-    : category.stones;
+
+  const normalizedSearchTerm = normalizeSearchValue(searchTerm);
+
+  // Filter stones based on material parameter and free-text search
+  const filteredStones = category.stones.filter((stone) => {
+    const stoneSlug = stone.name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "");
+    const normalizedStoneName = normalizeSearchValue(stone.name);
+
+    const matchesMaterialFilter = materialFilter
+      ? stoneSlug === materialFilter || stoneSlug.includes(materialFilter)
+      : true;
+
+    const matchesSearch = normalizedSearchTerm
+      ? normalizedStoneName.includes(normalizedSearchTerm)
+      : true;
+
+    return matchesMaterialFilter && matchesSearch;
+  });
 
   // Open modal automatically when filter is set
   useEffect(() => {
@@ -190,6 +209,12 @@ export default function CategorySection({
           />
         ))}
       </div>
+
+      {filteredStones.length === 0 && (
+        <div className="mx-auto mb-8 max-w-2xl rounded-lg border border-gray-200 bg-gray-50 px-6 py-8 text-center text-gray-600">
+          No encontramos materiales en {category.title} para "{searchTerm}".
+        </div>
+      )}
 
       {/* Pagination Controls */}
       {totalPages > 1 && (

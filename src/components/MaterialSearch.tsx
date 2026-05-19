@@ -16,18 +16,27 @@ export default function MaterialSearch({
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [isActive, setIsActive] = useState<boolean>(false);
 
+  const formatSlugToReadableText = (value: string) =>
+    value
+      .replace(/-/g, " ")
+      .replace(/\b\w/g, (char) => char.toUpperCase());
+
   // Leer el término de búsqueda desde la URL al cargar
   useEffect(() => {
     if (typeof window === "undefined") return;
 
     const params = new URLSearchParams(window.location.search);
+    const searchParam = params.get("search");
     const materialParam = params.get("material");
-    
+
+    if (searchParam) {
+      setSearchTerm(formatSlugToReadableText(searchParam));
+      setIsActive(true);
+      return;
+    }
+
     if (materialParam) {
-      // Convertir el slug de vuelta a un término de búsqueda legible
-      const readableTerm = materialParam
-        .replace(/-/g, " ")
-        .replace(/\b\w/g, (char) => char.toUpperCase());
+      const readableTerm = formatSlugToReadableText(materialParam);
       setSearchTerm(readableTerm);
       setIsActive(true);
     }
