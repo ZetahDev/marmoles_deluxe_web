@@ -161,9 +161,12 @@ ${formData.message}
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-6 md:p-8">
-      <h2 className="text-2xl font-bold text-marmoles-black mb-2">
-        Solicita tu Visita Técnica
+      <h2 className="text-2xl font-bold text-marmoles-black mb-1">
+        Agenda tu Visita Técnica <span className="text-green-600 font-extrabold">GRATIS</span>
       </h2>
+      <p className="text-sm text-gray-500 mb-6">
+        Tomamos medidas en tu obra, llevamos muestras reales del material y te asesoramos sin costo en Cali (Ahorra $50.000 COP)
+      </p>
 
       {/* Mensaje de éxito */}
       {success && (
@@ -266,13 +269,13 @@ ${formData.message}
         <button
           type="submit"
           disabled={loading}
-          className={`w-full bg-marmoles-gold text-white font-semibold py-3 px-6 rounded-lg
-          transition-all duration-300 hover:bg-opacity-90 focus:outline-none focus:ring-2 
-          focus:ring-offset-2 focus:ring-marmoles-gold ${
+          className={`w-full bg-marmoles-gold text-white font-bold py-4 px-6 rounded-lg shadow-md
+          transition-all duration-300 hover:bg-opacity-95 hover:shadow-lg focus:outline-none focus:ring-2 
+          focus:ring-offset-2 focus:ring-marmoles-gold text-base md:text-lg flex items-center justify-center gap-2 ${
             loading ? "opacity-70 cursor-not-allowed" : ""
           }`}
         >
-          {loading ? "Enviando..." : "Enviar Solicitud"}
+          {loading ? "Procesando..." : "👉 AGENDAR MI VISITA SIN COSTO"}
         </button>
 
         <p className="text-center text-sm text-gray-500 mt-4">
