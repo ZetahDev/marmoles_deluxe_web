@@ -115,6 +115,14 @@ function listStonesFromCloudinaryIndex(categoryName: string): Stone[] {
   }));
 }
 
+function findStoneFromCloudinaryIndex(categoryName: string, stoneName: string): Stone | null {
+  const categoryStones = listStonesFromCloudinaryIndex(categoryName);
+  const normalizedTargetName = normalize(stoneName);
+  return (
+    categoryStones.find((stone) => normalize(stone.name) === normalizedTargetName) ?? null
+  );
+}
+
 export async function fetchAllDesignImages(): Promise<DesignImage[]> {
   const urls = await fetchDesignImagesFromAdminApi();
   if (!urls) return [];
@@ -152,7 +160,6 @@ export async function listStonesFromS3(categoryName: string): Promise<Stone[]> {
   const mapped = categoryProducts.flatMap((p: any) => {
     const productMedia = media.filter((m: any) => m.product_id === p.id);
     const mainMedia = productMedia.find((m: any) => m.is_primary) || productMedia[0];
-    if (!mainMedia?.url && !mainMedia?.public_id) return [];
 
     const designMedia =
       productMedia.find(
@@ -170,10 +177,19 @@ export async function listStonesFromS3(categoryName: string): Promise<Stone[]> {
       return `https://res.cloudinary.com/${cloudName}/image/upload/${normalized}`;
     };
 
+    const localStone = findStoneFromCloudinaryIndex(categoryName, p.name);
+    const apiImage = mainMedia?.url ?? buildUrl(mainMedia?.public_id);
+    const apiDesign = designMedia?.url ?? buildUrl(designMedia?.public_id);
+    const finalImage = apiImage || localStone?.image || "";
+    const finalDesign = apiDesign || localStone?.design || "";
+
+    // The UI requires the material image + design image pair.
+    if (!finalImage || !finalDesign) return [];
+
     return [{
       name: p.name,
-      image: mainMedia?.url ?? buildUrl(mainMedia?.public_id),
-      design: designMedia?.url ?? buildUrl(designMedia?.public_id),
+      image: finalImage,
+      design: finalDesign,
     }];
   });
 
