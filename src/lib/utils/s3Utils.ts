@@ -60,6 +60,14 @@ function normalizeCloudinaryPublicId(publicId: string): string {
   return `marmoles-deluxe/${clean}`;
 }
 
+function isCloudinaryDeliveryUrl(value: string): boolean {
+  return /^https?:\/\/res\.cloudinary\.com\//i.test(value);
+}
+
+function toCloudinaryFetchUrl(cloudName: string, sourceUrl: string): string {
+  return `https://res.cloudinary.com/${cloudName}/image/fetch/f_auto,q_auto/${encodeURIComponent(sourceUrl)}`;
+}
+
 async function fetchCatalogFromApi() {
   const baseUrl =
     import.meta.env.PUBLIC_ADMIN_API_BASE_URL ||
@@ -173,15 +181,30 @@ export async function listStonesFromS3(categoryName: string): Promise<Stone[]> {
     const buildUrl = (publicId: string) => {
       if (!publicId) return "";
       const normalized = normalizeCloudinaryPublicId(publicId);
-      if (/^https?:\/\//i.test(normalized)) return normalized;
+      if (/^https?:\/\//i.test(normalized)) {
+        return isCloudinaryDeliveryUrl(normalized)
+          ? normalized
+          : toCloudinaryFetchUrl(cloudName, normalized);
+      }
       return `https://res.cloudinary.com/${cloudName}/image/upload/${normalized}`;
     };
 
     const localStone = findStoneFromCloudinaryIndex(categoryName, p.name);
-    const apiImage = mainMedia?.url ?? buildUrl(mainMedia?.public_id);
-    const apiDesign = designMedia?.url ?? buildUrl(designMedia?.public_id);
-    const finalImage = apiImage || localStone?.image || "";
-    const finalDesign = apiDesign || localStone?.design || "";
+    const apiImage = buildUrl(mainMedia?.url || mainMedia?.public_id || "");
+    const apiDesign = buildUrl(designMedia?.url || designMedia?.public_id || "");
+
+    // Prefer local Cloudinary pair when API arrives with external URLs (ex: legacy CDN links).
+    const canUseLocalPair =
+      Boolean(localStone?.image && localStone?.design) &&
+      ((!isCloudinaryDeliveryUrl(apiImage) && Boolean(apiImage)) ||
+        (!isCloudinaryDeliveryUrl(apiDesign) && Boolean(apiDesign)));
+
+    const finalImage = canUseLocalPair
+      ? localStone!.image
+      : apiImage || localStone?.image || "";
+    const finalDesign = canUseLocalPair
+      ? localStone!.design
+      : apiDesign || localStone?.design || "";
 
     // The UI requires the material image + design image pair.
     if (!finalImage || !finalDesign) return [];
