@@ -149,9 +149,11 @@ export async function listStonesFromS3(categoryName: string): Promise<Stone[]> {
   const categoryProducts = products.filter((p: any) => p.category_id === category.id);
   const cloudName = import.meta.env.CLOUDINARY_CLOUD_NAME || "dudv2dh4w";
 
-  const mapped = categoryProducts.map((p: any) => {
+  const mapped = categoryProducts.flatMap((p: any) => {
     const productMedia = media.filter((m: any) => m.product_id === p.id);
     const mainMedia = productMedia.find((m: any) => m.is_primary) || productMedia[0];
+    if (!mainMedia?.url && !mainMedia?.public_id) return [];
+
     const designMedia =
       productMedia.find(
         (m: any) =>
@@ -168,11 +170,11 @@ export async function listStonesFromS3(categoryName: string): Promise<Stone[]> {
       return `https://res.cloudinary.com/${cloudName}/image/upload/${normalized}`;
     };
 
-    return {
+    return [{
       name: p.name,
       image: mainMedia?.url ?? buildUrl(mainMedia?.public_id),
       design: designMedia?.url ?? buildUrl(designMedia?.public_id),
-    };
+    }];
   });
 
   if (mapped.length === 0) {

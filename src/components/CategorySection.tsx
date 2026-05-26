@@ -31,6 +31,13 @@ function normalizeSearchValue(value: string): string {
     .trim();
 }
 
+function slugify(value: string): string {
+  return (value ?? "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
 export default function CategorySection({
   category,
   itemsPerPage = 12, // Default to 12 items per page
@@ -39,6 +46,7 @@ export default function CategorySection({
   const [materialFilter, setMaterialFilter] = useState<string | null>(null);
   const [isThisCategory, setIsThisCategory] = useState(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const categorySlug = slugify(category.title);
 
   // Handle URL-based search filter
   useEffect(() => {
@@ -50,23 +58,15 @@ export default function CategorySection({
 
     if (materialParam && categoriaParam) {
       // Check if this category matches the URL parameter
-      const categorySlug = category.title
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/(^-|-$)/g, "");
-
       if (categorySlug === categoriaParam) {
         // This is our target category - set filter
-        const normalizedMaterial = materialParam
-          .toLowerCase()
-          .replace(/[^a-z0-9]+/g, "-")
-          .replace(/(^-|-$)/g, "");
+        const normalizedMaterial = slugify(materialParam);
 
         setMaterialFilter(normalizedMaterial);
         setIsThisCategory(true);
       }
     }
-  }, [category.title]);
+  }, [categorySlug]);
 
 
   // Listen for search events from MaterialSearch component
@@ -99,10 +99,7 @@ export default function CategorySection({
 
   // Filter stones based on material parameter and free-text search
   const filteredStones = category.stones.filter((stone) => {
-    const stoneSlug = stone.name
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/(^-|-$)/g, "");
+    const stoneSlug = slugify(stone.name);
     const normalizedStoneName = normalizeSearchValue(stone.name);
 
     const matchesMaterialFilter = materialFilter
@@ -122,13 +119,13 @@ export default function CategorySection({
       // Small delay to ensure DOM is ready
       const timeoutId = setTimeout(() => {
         const event = new CustomEvent("modal-state-change", {
-          detail: { id: materialFilter },
+          detail: { id: `${categorySlug}-${materialFilter}` },
         });
         document.dispatchEvent(event);
       }, 500);
       return () => clearTimeout(timeoutId);
     }
-  }, [isThisCategory, materialFilter, filteredStones.length]);
+  }, [categorySlug, isThisCategory, materialFilter, filteredStones.length]);
 
   // Listen for modal close to clear filter and restore URL
   useEffect(() => {
@@ -200,10 +197,7 @@ export default function CategorySection({
             description="Piedra sinterizada de alta calidad"
             images={[stone.image, stone.design]}
             category={category.title}
-            slug={stone.name
-              .toLowerCase()
-              .replace(/[^a-z0-9]+/g, "-")
-              .replace(/(^-|-$)/g, "")}
+            slug={`${categorySlug}-${slugify(stone.name)}`}
             precioPublico={category.precioPublico}
             unidad={category.unidad}
           />

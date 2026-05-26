@@ -90,10 +90,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   useEffect(() => {
     if (!materialToOpen) return;
 
-    const isExactMatch = materialToOpen === slug;
-    const isPartialMatch = slug && slug.includes(materialToOpen);
-
-    if (isExactMatch || isPartialMatch) {
+    if (materialToOpen === slug) {
       setIsModalOpen(true);
       clearMaterialToOpen();
     }
