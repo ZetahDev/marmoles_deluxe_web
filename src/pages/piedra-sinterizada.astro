@@ -10,6 +10,7 @@ import { listProviderGroupsFromCatalog } from "../lib/utils/s3Utils";
 import { slugify } from "../lib/utils";
 import { cloudinaryAssets } from "../lib/images/cloudinaryAssets";
 import { buildSeoImageUrl } from "../lib/images/cloudinary";
+import cloudinaryIndex from "../data/cloudinary-index.json";
 
 // Define stone type features
 interface StoneTypeFeatures {
@@ -109,12 +110,25 @@ const features: StoneTypeFeatures = {
 const providerOrder = [
   "Terracina",
   "Artemarmol",
-  "Arte Mármol",
   "Altea",
   "Dekton",
-  "Neolith",
   "Silestone",
+  "Neolith",
 ];
+
+const providerAllowlist = new Set(providerOrder.map((provider) => provider.toLowerCase()));
+
+function toCanonicalProviderName(raw: string) {
+  const normalized = raw.trim().toLowerCase();
+  if (normalized === "arte mármol" || normalized === "arte marmol") return "Artemarmol";
+  if (normalized === "artemarmol") return "Artemarmol";
+  if (normalized === "altea") return "Altea";
+  if (normalized === "dekton") return "Dekton";
+  if (normalized === "silestone") return "Silestone";
+  if (normalized === "neolith") return "Neolith";
+  if (normalized === "terracina") return "Terracina";
+  return raw.trim();
+}
 
 // Precios por marca (solo Altea tiene calculadora habilitada)
 const preciosPorMarca: Record<
@@ -134,11 +148,49 @@ const preciosPorMarca: Record<
 };
 
 const providerGroups = await listProviderGroupsFromCatalog("Piedra sinterizada");
+const fallbackCategories = (cloudinaryIndex as any)?.categories ?? {};
+const fallbackGroups = Object.entries(fallbackCategories)
+  .filter(([key]) => key.startsWith("PIEDRA+SINTERIZADA/"))
+  .map(([key, stones]) => {
+    const providerFromKey = toCanonicalProviderName((key.split("/").pop() ?? "").trim());
+    return {
+      provider: providerFromKey,
+      slug: slugify(providerFromKey),
+      stones: (stones as any[]).map((stone) => ({
+        name: stone.name ?? "",
+        image: stone.image ?? "",
+        design: stone.design ?? stone.image ?? "",
+      })),
+    };
+  })
+  .filter((group) => providerAllowlist.has(group.provider.toLowerCase()) && group.stones.length > 0);
+
+const providerByCanonicalName = new Map<string, (typeof providerGroups)[number]>();
+for (const group of providerGroups) {
+  const canonical = toCanonicalProviderName(group.provider);
+  if (!providerAllowlist.has(canonical.toLowerCase())) continue;
+  const previous = providerByCanonicalName.get(canonical);
+  if (!previous || group.stones.length > previous.stones.length) {
+    providerByCanonicalName.set(canonical, {
+      ...group,
+      provider: canonical,
+      slug: slugify(canonical),
+    });
+  }
+}
+for (const group of fallbackGroups) {
+  if (!providerByCanonicalName.has(group.provider)) {
+    providerByCanonicalName.set(group.provider, group);
+  }
+}
+const mergedProviderGroups = providerOrder
+  .map((provider) => providerByCanonicalName.get(provider))
+  .filter(Boolean) as typeof providerGroups;
 const providerRank = new Map(
   providerOrder.map((provider, index) => [slugify(provider), index])
 );
 
-const stoneCategories = providerGroups
+const stoneCategories = mergedProviderGroups
   .map((group) => {
     const precios = preciosPorMarca[group.provider];
 
@@ -161,7 +213,7 @@ const providerNames = stoneCategories.map((category) => category.title);
 const providerListText = providerNames.join(", ");
 
 console.log("[piedra-sinterizada] server_render:data", {
-  providerGroups: providerGroups.map((group) => ({
+  providerGroups: mergedProviderGroups.map((group) => ({
     provider: group.provider,
     slug: group.slug,
     stones: group.stones.length,

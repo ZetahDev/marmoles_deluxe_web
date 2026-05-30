@@ -40,6 +40,33 @@ function normalize(value) {
     .replace(/[^a-z0-9]+/g, "");
 }
 
+function titleCaseWords(value) {
+  return (value || "")
+    .toLowerCase()
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
+}
+
+function cleanStoneName(name, provider) {
+  const trimmed = String(name || "").trim();
+  if (!trimmed) return "";
+  let cleaned = trimmed
+    .replace(/\b\d{1,2}(?:[.,]\d{1,2})?\s*CM\b/gi, "")
+    .replace(/\b(DE\s*)?\d{1,2}\s*MM\b/gi, "")
+    .replace(/\b\d{1,2}\s*MM\b/gi, "")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+
+  const providerPattern = new RegExp(`\\b${String(provider || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "ig");
+  cleaned = cleaned.replace(providerPattern, "").replace(/\s{2,}/g, " ").trim();
+  cleaned = cleaned.replace(/\s+de\s*$/i, "").replace(/[-/,:]+$/g, "").trim();
+  if (!cleaned) cleaned = trimmed;
+  if (cleaned === cleaned.toUpperCase()) cleaned = titleCaseWords(cleaned);
+  return cleaned;
+}
+
 function normalizeCloudinaryPublicId(publicId) {
   const clean = (publicId ?? "").trim().replace(/^\/+/, "");
   if (!clean) return "";
@@ -96,7 +123,7 @@ function mapStoneFromProduct(product, mediaByProductId, cloudName) {
   if (!image) return null;
 
   return {
-    name: product.name,
+    name: cleanStoneName(product.name, "Terracina"),
     image,
     design: design || image,
   };
