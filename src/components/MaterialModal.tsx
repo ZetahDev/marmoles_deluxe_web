@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useMaterialModalStore } from "../store/materialModalStore";
+import { slugify } from "../lib/utils";
 import {
   buildCloudinaryImageSet,
   CLOUDINARY_PRESETS,
@@ -151,14 +152,8 @@ const MaterialModal: React.FC<MaterialModalProps> = ({
   useEffect(() => {
     if (isOpen) {
       hasBeenOpenedRef.current = true;
-      const slug = title
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/(^-|-$)/g, "");
-      const categorySlug = category
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/(^-|-$)/g, "");
+      const slug = title ? slugify(title) : "";
+      const categorySlug = category ? slugify(category) : "";
       const newUrl = `${window.location.pathname}?material=${slug}&categoria=${categorySlug}`;
       window.history.pushState({}, "", newUrl);
     }

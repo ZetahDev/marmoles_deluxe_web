@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useStoneCategoryStore } from '../store/stoneCategoryStore';
+import { slugify } from '../lib/utils';
 
 /**
  * Component that handles URL parameter extraction and applies:
@@ -10,7 +11,11 @@ import { useStoneCategoryStore } from '../store/stoneCategoryStore';
  * - Parámetros de URL: ?categoria=neolith
  * - Anclas/hash: #neolith
  */
-export default function CategoryFilter() {
+interface CategoryFilterProps {
+  categories: string[];
+}
+
+export default function CategoryFilter({ categories }: CategoryFilterProps) {
   const { setActiveCategory } = useStoneCategoryStore();
 
   useEffect(() => {
@@ -19,16 +24,9 @@ export default function CategoryFilter() {
 
     // Función para activar una categoría
     const activateCategory = (categoryParam: string) => {
-      // Normalizar el parámetro a minúsculas
-      const category = categoryParam.toLowerCase();
-      
-      // Mapear a la categoría con formato correcto
-      let formattedCategory: string | null = null;
-      
-      if (category === 'neolith') formattedCategory = 'Neolith';
-      else if (category === 'altea') formattedCategory = 'Altea';
-      else if (category === 'dekton') formattedCategory = 'Dekton';
-      else if (category === 'silestone') formattedCategory = 'Silestone';
+      const category = slugify(categoryParam);
+      const formattedCategory =
+        categories.find((item) => slugify(item) === category) ?? null;
       
       // Si es una categoría válida, aplicar filtro y scroll
       if (formattedCategory) {
@@ -37,7 +35,7 @@ export default function CategoryFilter() {
         
         // Hacer scroll suave a la sección (incluso si está filtrado)
         setTimeout(() => {
-          const element = document.getElementById(category);
+          const element = document.getElementById(slugify(formattedCategory));
           if (element) {
             element.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
@@ -80,7 +78,7 @@ export default function CategoryFilter() {
     return () => {
       window.removeEventListener('hashchange', handleHashChange);
     };
-  }, [setActiveCategory]);
+  }, [categories, setActiveCategory]);
 
   // Este componente no renderiza nada visible
   return null;

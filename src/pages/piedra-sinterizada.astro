@@ -6,7 +6,8 @@ import SEOSchemaData from "../components/SEOSchemaData.tsx";
 import GeoBusinessSchema from "../components/GeoBusinessSchema.astro";
 import GeoFaqSection from "../components/GeoFaqSection.astro";
 import GeoTrustSection from "../components/GeoTrustSection.astro";
-import { listStonesFromS3, type Stone } from "../lib/utils/s3Utils";
+import { listProviderGroupsFromCatalog } from "../lib/utils/s3Utils";
+import { slugify } from "../lib/utils";
 import { cloudinaryAssets } from "../lib/images/cloudinaryAssets";
 import { buildSeoImageUrl } from "../lib/images/cloudinary";
 
@@ -30,6 +31,8 @@ const categoryDescriptions = {
     "Silestone cuarzo Cali | Superficies de cuarzo para cocinas y baños con tecnología antibacteriana. 25 años de garantía, variedad de colores y diseños. Distribuidor oficial Valle del Cauca | Instalación certificada | Financiación disponible.",
   Artemarmol:
     "Artemarmol piedra sinterizada Cali | Diseños exclusivos y sofisticados con tecnología de última generación. Alta resistencia y formatos grandes para superficies continuas. Distribuidor oficial.",
+  Terracina:
+    "Terracina piedra sinterizada Cali | Superficies premium de gran formato para cocinas, baños y aplicaciones de alto nivel. Asesoría e instalación profesional en Cali y Valle del Cauca.",
 };
 
 const features: StoneTypeFeatures = {
@@ -93,16 +96,24 @@ const features: StoneTypeFeatures = {
     "⭐ Calidad premium garantizada",
     "♻️ Sostenible y eco-amigable",
   ],
+  Terracina: [
+    "✨ Diseños de lectura premium y contemporánea",
+    "🔥 Alta resistencia al calor para superficies exigentes",
+    "💎 Superficie compacta de buena respuesta al uso diario",
+    "💧 Baja absorción y limpieza práctica",
+    "🏠 Aplicable a cocinas, baños y proyectos arquitectónicos",
+    "📐 Gran formato para composiciones más continuas",
+  ],
 };
 
-// Define stone categories - ORDEN PRIORITARIO: Artemarmol > Altea > Dekton > Neolith > Silestone
-// Define stone categories - ORDEN PRIORITARIO: Artemarmol > Altea > Dekton > Neolith > Silestone
-const stoneTypes = [
-  { title: "Artemarmol", folder: "PIEDRA+SINTERIZADA/ARTEMARMOL" },
-  { title: "Altea", folder: "PIEDRA+SINTERIZADA/ALTEA" },
-  { title: "Dekton", folder: "PIEDRA+SINTERIZADA/DEKTON" },
-  { title: "Neolith", folder: "PIEDRA+SINTERIZADA/NEOLITH" },
-  { title: "Silestone", folder: "PIEDRA+SINTERIZADA/SILESTONE" },
+const providerOrder = [
+  "Terracina",
+  "Artemarmol",
+  "Arte Mármol",
+  "Altea",
+  "Dekton",
+  "Neolith",
+  "Silestone",
 ];
 
 // Precios por marca (solo Altea tiene calculadora habilitada)
@@ -118,23 +129,50 @@ const preciosPorMarca: Record<
   Neolith: null, // Sin calculadora
   Silestone: null, // Sin calculadora
   Artemarmol: null, // Sin calculadora
+  "Arte Mármol": null,
+  Terracina: null,
 };
 
-// Fetch stone data for each category at build time
-const stoneCategories = await Promise.all(
-  stoneTypes.map(async (type) => {
-    const stones = await listStonesFromS3(type.folder);
-    const precios = preciosPorMarca[type.title];
+const providerGroups = await listProviderGroupsFromCatalog("Piedra sinterizada");
+const providerRank = new Map(
+  providerOrder.map((provider, index) => [slugify(provider), index])
+);
+
+const stoneCategories = providerGroups
+  .map((group) => {
+    const precios = preciosPorMarca[group.provider];
 
     return {
-      title: type.title,
-      stones: stones,
-      features: features[type.title], // Features a nivel de categoría
+      title: group.provider,
+      stones: group.stones,
+      features: features[group.provider],
       precioPublico: precios?.precioPublico || undefined,
       unidad: precios?.unidad || undefined,
     };
   })
-);
+  .sort((left, right) => {
+    const leftRank = providerRank.get(slugify(left.title)) ?? Number.MAX_SAFE_INTEGER;
+    const rightRank = providerRank.get(slugify(right.title)) ?? Number.MAX_SAFE_INTEGER;
+    if (leftRank !== rightRank) return leftRank - rightRank;
+    return left.title.localeCompare(right.title, "es");
+  });
+
+const providerNames = stoneCategories.map((category) => category.title);
+const providerListText = providerNames.join(", ");
+
+console.log("[piedra-sinterizada] server_render:data", {
+  providerGroups: providerGroups.map((group) => ({
+    provider: group.provider,
+    slug: group.slug,
+    stones: group.stones.length,
+  })),
+  stoneCategories: stoneCategories.map((category) => ({
+    title: category.title,
+    stones: category.stones.length,
+    hasFeatures: Boolean(category.features?.length),
+  })),
+  providerNames,
+});
 
 // Get the category from URL for server-side rendering of metadata
 const { url } = Astro;
@@ -147,9 +185,9 @@ const effectiveCategory = categoryParam;
 // Default metadata - Optimizado para SEO con enfoque en Altea
 let title = "Piedra Sinterizada Altea, Dekton y Neolith Cali | Mármoles Deluxe";
 let description =
-  "Distribuidor oficial de piedra sinterizada en Cali: Altea, Dekton, Neolith y Silestone. Encimeras de cocina y baños con garantía. Instalación profesional en Valle del Cauca. ¡Cotización gratis!";
+  `Distribuidor de piedra sinterizada en Cali: ${providerListText}. Encimeras de cocina, baños y superficies premium con instalación profesional en Valle del Cauca. ¡Cotización gratis!`;
 let keywords =
-  "piedra sinterizada cali, altea cali, dekton cali, neolith cali, silestone cali, encimeras cocina cali, encimeras baño cali, superficies cocina, resistente calor, ultracompacto";
+  `piedra sinterizada cali, ${providerNames.map((provider) => `${provider.toLowerCase()} cali`).join(", ")}, encimeras cocina cali, encimeras baño cali, superficies cocina, resistente calor, ultracompacto`;
 
 // Prepare data for schema.org
 let schemaCategory: string | undefined;
@@ -158,21 +196,14 @@ let schemaStones: Array<{ name: string; image: string }> = [];
 // Update metadata if a valid category is specified
 if (effectiveCategory) {
   const formattedCategory =
-    effectiveCategory === "neolith"
-      ? "Neolith"
-      : effectiveCategory === "altea"
-        ? "Altea"
-        : effectiveCategory === "dekton"
-          ? "Dekton"
-          : effectiveCategory === "silestone"
-            ? "Silestone"
-            : effectiveCategory === "artemarmol"
-              ? "Artemarmol"
-              : null;
+    stoneCategories.find((category) => slugify(category.title) === effectiveCategory)
+      ?.title ?? null;
 
   if (formattedCategory) {
     title = `${formattedCategory} - Piedra Sinterizada | Mármoles Deluxe`;
-    description = categoryDescriptions[formattedCategory];
+    description =
+      categoryDescriptions[formattedCategory] ??
+      `Piedra sinterizada ${formattedCategory} en Cali | Superficies premium para cocinas, baños y proyectos arquitectónicos con asesoría e instalación profesional.`;
 
     // Set schema.org data for this category
     schemaCategory = formattedCategory;
@@ -206,7 +237,7 @@ const sinterizadaFaqs = [
   {
     question: "¿Qué marcas de piedra sinterizada ofrece Mármoles Deluxe en Cali?",
     answer:
-      "Trabajamos líneas como Artemarmol, Altea, Dekton, Neolith y Silestone, cada una con formatos, diseños, garantías y atributos técnicos distintos según la aplicación.",
+      `Trabajamos líneas como ${providerListText}, cada una con formatos, diseños, garantías y atributos técnicos distintos según la aplicación.`,
   },
   {
     question: "¿La piedra sinterizada sirve para cocinas y fachadas?",
@@ -268,7 +299,7 @@ const sinterizadaFaqs = [
     faqs={sinterizadaFaqs}
   />
 
-  <CategoryFilter client:idle />
+  <CategoryFilter client:idle categories={providerNames} />
 
   <!-- Hero Section optimizado para SEO -->
   <section
@@ -282,37 +313,25 @@ const sinterizadaFaqs = [
         Distribuidor Oficial en Cali y Valle del Cauca
       </p>
       <p class="text-lg mb-8 max-w-3xl mx-auto">
-        Especialistas en <strong>Artemarmol</strong>, <strong>Altea</strong>, <strong
-          >Dekton</strong
-        >, <strong>Neolith</strong> y <strong>Silestone</strong>. Encimeras de
-        cocina, baños y superficies de alta resistencia con garantía de hasta 25
-        años.
+        Especialistas en piedra sinterizada para cocinas, baños y superficies de
+        alta resistencia. Trabajamos líneas como <strong>{providerListText}</strong>
+        con asesoría comercial e instalación profesional en Cali.
       </p>
       <div class="flex flex-wrap justify-center gap-4 mb-8">
-        <a
-          href="#artemarmol"
-          class="bg-marmoles-gold text-marmoles-black px-8 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all"
-        >
-          Artemarmol
-        </a>
-        <a
-          href="#altea"
-          class="bg-white text-marmoles-black px-8 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all"
-        >
-          Altea
-        </a>
-        <a
-          href="#dekton"
-          class="bg-white text-marmoles-black px-8 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all"
-        >
-          Dekton
-        </a>
-        <a
-          href="#neolith"
-          class="bg-white text-marmoles-black px-8 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all"
-        >
-          Neolith
-        </a>
+        {
+          providerNames.map((provider, index) => (
+            <a
+              href={`#${slugify(provider)}`}
+              class={`px-8 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all ${
+                index === 0
+                  ? "bg-marmoles-gold text-marmoles-black"
+                  : "bg-white text-marmoles-black"
+              }`}
+            >
+              {provider}
+            </a>
+          ))
+        }
       </div>
       <p class="text-sm text-gray-300">
         ✓ Instalación Profesional | ✓ Garantía Extendida | ✓ Cotización Gratuita
@@ -356,6 +375,18 @@ const sinterizadaFaqs = [
         categories={stoneCategories}
         useAnchorLinks={useAnchorLinks}
       />
+
+      <script
+        is:inline
+        define:vars={{
+          categoryDebug: stoneCategories.map((category) => ({
+            title: category.title,
+            stones: category.stones.length,
+          })),
+        }}
+      >
+        console.log("[piedra-sinterizada] client_bootstrap:categories", categoryDebug);
+      </script>
 
       <div class="mt-16 space-y-16">
         <GeoTrustSection

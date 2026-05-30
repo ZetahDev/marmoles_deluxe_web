@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useStoneCategoryStore } from "../store/stoneCategoryStore";
-import ProductCard from "./ProductCard";
 import CategorySection from "./CategorySection";
 import MaterialSearch from "./MaterialSearch";
+import { slugify } from "../lib/utils";
 
 interface Stone {
   name: string;
@@ -34,12 +34,22 @@ export default function CategoryWrapper({
 }: CategoryWrapperProps) {
   const { activeCategory, resetCategory } = useStoneCategoryStore();
 
+  useEffect(() => {
+    console.log("[CategoryWrapper] render_input", {
+      categories: categories.map((category) => ({
+        title: category.title,
+        stones: category.stones.length,
+        hasFeatures: Boolean(category.features?.length),
+      })),
+    });
+  }, [categories]);
+
   // Efecto para actualizar la URL cuando cambia la categoría activa
   useEffect(() => {
     if (typeof window === "undefined") return;
 
     if (activeCategory) {
-      const category = activeCategory.toLowerCase();
+      const category = slugify(activeCategory);
 
       if (useAnchorLinks) {
         // Si usamos anclas, actualizar el hash sin recargar la página

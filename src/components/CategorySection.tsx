@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
+import { normalizeText, slugify } from "../lib/utils";
 
 interface Stone {
   name: string;
@@ -22,20 +23,7 @@ interface CategorySectionProps {
 }
 
 function normalizeSearchValue(value: string): string {
-  return (value ?? "")
-    .trim()
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]+/g, " ")
-    .trim();
-}
-
-function slugify(value: string): string {
-  return (value ?? "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
+  return normalizeText(value).replace(/[^a-z0-9]+/g, " ").trim();
 }
 
 export default function CategorySection({
@@ -156,7 +144,7 @@ export default function CategorySection({
     setCurrentPage(pageNumber);
     // Optional: Scroll to top of section on page change
     const sectionElement = document.getElementById(
-      category.title.toLowerCase()
+      categorySlug
     );
     if (sectionElement) {
       sectionElement.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -164,7 +152,7 @@ export default function CategorySection({
   };
 
   return (
-    <div id={category.title.toLowerCase()} className="scroll-mt-24 mb-16">
+    <div id={categorySlug} className="scroll-mt-24 mb-16">
       <h2 className="text-3xl font-bold text-center mb-4">{category.title}</h2>
 
       {/* Features as subtitle */}
