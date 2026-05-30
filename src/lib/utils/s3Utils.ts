@@ -437,11 +437,15 @@ export async function listProviderGroupsFromCatalog(
   const categoryProducts = catalog.products.filter(
     (product) => product.category_id === category.id
   );
+  const terracinaProducts = categoryProducts.filter(
+    (product) => resolveProductProvider(product).toLowerCase() === "terracina"
+  );
 
   console.log("[catalog] listProviderGroupsFromCatalog:category_products", {
     categoryId: category.id,
     categoryName: category.name,
     totalProductsInCategory: categoryProducts.length,
+    terracinaProductsInCategory: terracinaProducts.length,
     providersSeen: Array.from(
       new Set(categoryProducts.map((product) => resolveProductProvider(product)))
     ),
@@ -453,17 +457,34 @@ export async function listProviderGroupsFromCatalog(
   });
 
   const groups = new Map<string, ProviderStoneGroup>();
+  const terracinaDiscarded: Array<{
+    productId: string;
+    productName: string;
+    mediaCount: number;
+    reason: string;
+  }> = [];
 
   for (const product of categoryProducts) {
     const provider = resolveProductProvider(product);
     const groupKey = slugify(provider);
     const stone = mapProductToStone(product, catalog.media, category.name);
     if (!stone) {
+      const mediaCount = catalog.media.filter((item) => item.product_id === product.id).length;
+      const reason = mediaCount === 0 ? "no_media_records" : "media_not_renderable";
+      if (provider.toLowerCase() === "terracina") {
+        terracinaDiscarded.push({
+          productId: product.id,
+          productName: product.name,
+          mediaCount,
+          reason,
+        });
+      }
       console.warn("[catalog] listProviderGroupsFromCatalog:product_without_renderable_media", {
         productId: product.id,
         productName: product.name,
         provider,
-        mediaCount: catalog.media.filter((item) => item.product_id === product.id).length,
+        mediaCount,
+        reason,
       });
       continue;
     }
@@ -480,8 +501,17 @@ export async function listProviderGroupsFromCatalog(
   }
 
   const result = Array.from(groups.values()).filter((group) => group.stones.length > 0);
+  const terracinaGroup = result.find(
+    (group) => group.provider.toLowerCase() === "terracina"
+  );
   console.log("[catalog] listProviderGroupsFromCatalog:result", {
     categoryName,
+    terracinaSummary: {
+      foundGroup: Boolean(terracinaGroup),
+      stones: terracinaGroup?.stones.length ?? 0,
+      discarded: terracinaDiscarded.length,
+      discardedSample: terracinaDiscarded.slice(0, 10),
+    },
     groups: result.map((group) => ({
       provider: group.provider,
       slug: group.slug,

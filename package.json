@@ -11,6 +11,8 @@
     "test-signature": "node scripts/test-integrity-signature.js",
     "generate-s3-index": "node scripts/generate-s3-index.js",
     "cloudinary:sync": "node scripts/cloudinary-sync.js",
+    "cloudinary:inject:terracina": "node scripts/inject-terracina-fallback.js",
+    "cloudinary:inject:terracina:apply": "node scripts/inject-terracina-fallback.js --apply",
     "pdf:cloudinary": "python scripts/pdf-catalog-cloudinary.py",
     "react-doctor": "npx react-doctor@latest . --yes --offline"
   },
