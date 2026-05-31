@@ -9,123 +9,218 @@ const ga4Id = import.meta.env.PUBLIC_GA4_ID || "";
 
 const canonicalUrl = "https://estudio.marmolesdeluxe.com/";
 const whatsappNumber = "573186110790";
+const brandLogo = cloudinaryAssets.branding.logoMain;
+const whatsappIconPath =
+  "M16 3.2A12.6 12.6 0 0 0 5.1 22.1L3.6 28.8l6.8-1.6A12.6 12.6 0 1 0 16 3.2Zm0 2.4a10.2 10.2 0 1 1-5 19.1l-.4-.2-3.7.9.8-3.7-.3-.4A10.2 10.2 0 0 1 16 5.6Zm-4.3 5.2c-.3 0-.8.1-1.2.6-.4.4-1.5 1.5-1.5 3.6s1.6 4.2 1.8 4.5c.2.3 3.1 4.9 7.7 6.5 3.8 1.3 4.6.7 5.4.7.8-.1 2.7-1.1 3.1-2.2.4-1.1.4-2 .3-2.2-.1-.2-.4-.3-.9-.6l-2.9-1.4c-.4-.2-.8-.2-1.1.3-.3.5-1.2 1.4-1.5 1.7-.3.3-.6.3-1 .1-.5-.2-2-.7-3.7-2.3-1.4-1.2-2.3-2.8-2.6-3.2-.3-.5 0-.7.2-1l.8-.9c.3-.3.4-.5.6-.9.2-.3.1-.6 0-.9l-1.3-3c-.3-.7-.7-.7-1-.7h-1.2Z";
+const campaignParams =
+  "utm_source=google_ads&utm_medium=cpc&utm_campaign=studio_marmoles_deluxe&utm_content=hero_whatsapp_cta";
 const whatsappMessage =
-  "Deseo cotizar una asesoría técnica para un proyecto de superficies premium con mármol, piedra sinterizada o mesones de mármol.";
-const whatsappTracking =
-  "utm_source=google_ads&utm_medium=cpc&utm_campaign=estudio_marmoles_deluxe&utm_content=whatsapp_cta";
-const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}&${whatsappTracking}`;
+  "Deseo agendar un diagnóstico técnico para un proyecto premium de cocina, mesón de mármol o piedra sinterizada en Cali.";
+const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}&${campaignParams}`;
 
 const title =
-  "Estudio Mármoles Deluxe en Cali | Mesones de Mármol y Piedra Sinterizada";
+  "Studio Mármoles Deluxe Cali | Cocinas Premium, Mármol y Piedra Sinterizada";
 const description =
-  "Estudio especializado en superficies premium para cocinas de alta gama, trabajo en mármol, mesones de mármol y piedra sinterizada en Cali. Proyectos B2B para arquitectos y constructoras.";
+  "Agenda un diagnóstico técnico con Studio Mármoles Deluxe en Cali. Diseñamos, modulamos e instalamos mesones de mármol, piedra sinterizada y superficies premium para hogares, arquitectos y constructoras.";
 const keywords =
-  "piedra sinterizada Cali, mármol Cali, trabajo en mármol, mesones de mármol, superficies premium, cocinas de alta gama, proyectos B2B, arquitectos Cali, constructoras Cali, Mármoles Deluxe";
+  "studio mármoles deluxe, cocinas premium Cali, mesones de mármol Cali, piedra sinterizada Cali, trabajo en mármol Cali, superficies premium, arquitectos Cali, constructoras Cali, mármol para cocinas";
 
 const heroImage = cloudinaryAssets.home.hero;
 const processImages = [
   cloudinaryAssets.home.projectRoyalWhite,
   cloudinaryAssets.home.projectBlackDiamond,
-  cloudinaryAssets.home.hero,
+  cloudinaryAssets.home.projectIslaInfinity,
 ];
-const caseImages = [
+const caseVisuals = [
   cloudinaryAssets.home.projectRoyalWhite,
   cloudinaryAssets.home.projectBlackDiamond,
-  cloudinaryAssets.home.hero,
+  cloudinaryAssets.home.projectLobbyMajestic,
 ];
 const b2bImage = cloudinaryAssets.home.projectBlackDiamond;
+
+const studioOffer = [
+  {
+    title: "Diagnóstico técnico inicial",
+    text: "Revisamos uso, medidas, mueble base, estilo y complejidad antes de hablar de precio.",
+  },
+  {
+    title: "Selección de material",
+    text: "Te guiamos entre mármol, cuarzo, granito y piedra sinterizada según estética, mantenimiento y presupuesto.",
+  },
+  {
+    title: "Modulación y cortes",
+    text: "Definimos juntas, vetas, cantos, salpicadero y perforaciones para evitar improvisaciones en obra.",
+  },
+  {
+    title: "Cotización accionable",
+    text: "Recibes una ruta clara de alcance, tiempos y próximos pasos para ejecutar sin sorpresas.",
+  },
+];
+
+const proofStats = [
+  { value: "16+", label: "años en superficies" },
+  { value: "5 días", label: "ejecución típica controlada" },
+  { value: "Cali", label: "cobertura local y B2B" },
+];
 
 const processSteps = [
   {
     number: "01",
-    title: "Diagnóstico",
-    text: "Analizamos el proyecto, el espacio y el material para definir la solución constructiva ideal.",
+    title: "Levantamiento",
+    text: "Medimos, validamos soportes, ubicación de equipos, lavaplatos, grifería, cantos y accesos de instalación.",
   },
   {
     number: "02",
-    title: "Modulación",
-    text: "Diseñamos cada pieza con modulación exacta para minimizar juntas y optimizar vetas.",
+    title: "Especificación",
+    text: "Seleccionamos material, acabado y despiece para que la superficie se vea diseñada, no simplemente instalada.",
   },
   {
     number: "03",
-    title: "Instalación controlada",
-    text: "Montaje por especialistas, con equipos de precisión y protocolos que aseguran acabados impecables.",
+    title: "Fabricación",
+    text: "Cortes, pulidos, perforaciones y control de calidad se preparan antes de llevar piezas a obra.",
+  },
+  {
+    number: "04",
+    title: "Instalación",
+    text: "Equipo especializado instala, remata, limpia y entrega recomendaciones de uso y mantenimiento.",
   },
 ];
 
-const cases = caseStudies.slice(0, 3).map((study, index) => ({
-  image: caseImages[index],
-  alt: `Caso real de ${study.application.toLowerCase()} en ${study.location}`,
-  material:
-    index === 0
-      ? "Mármol Calacatta Oro"
-      : index === 1
-        ? "Cuarzo Taj Mahal Leather"
-        : "Piedra sinterizada gran formato",
-  challenge:
-    index === 0
-      ? "Isla monolítica con vetas continuas y cero juntas visibles."
-      : index === 1
-        ? "Uniformidad de tono y gran formato en áreas húmedas."
-        : "Instalación exterior con cortes precisos y nivelación exacta.",
-  time:
-    index === 0 ? "18 días" : index === 1 ? "14 días" : "21 días",
-  result:
-    index === 0
-      ? "Superficie escultórica y continuidad de veta en todas las caras."
-      : index === 1
-        ? "Acabado mate sedoso y máxima resistencia al uso diario."
-        : "Superficie continua, antideslizante y de alto rendimiento.",
+const studioCases = caseStudies.slice(0, 3).map((study, index) => ({
+  ...study,
+  studioImage: caseVisuals[index],
 }));
 
 const b2bItems = [
+  "Asesoría técnica desde etapa de diseño",
+  "Muestras y moodboards personalizados",
+  "Despieces, cortes y documentación técnica",
+  "Logística, fabricación e instalación profesional",
+];
+
+const trustItems = [
+  "Atención local en Cali y Valle del Cauca.",
+  "Portafolio, casos de estudio y evidencia visual del proceso.",
+  "Materiales de marcas reconocidas y selección según uso real.",
+  "Acompañamiento para hogares, arquitectos, diseñadores y constructoras.",
+];
+
+const studioFaqs = [
   {
-    title: "Asesoría técnica desde diseño",
-    icon: "M16 4l11 6v12l-11 6-11-6V10l11-6z M16 10v12 M7 11l9 5 9-5",
+    question: "¿El diagnóstico técnico tiene costo?",
+    answer:
+      "La orientación inicial por WhatsApp no tiene costo. Cuando el proyecto requiere visita, medición o levantamiento avanzado, el equipo confirma alcance, disponibilidad y condiciones antes de agendar.",
   },
   {
-    title: "Muestras y moodboards personalizados",
-    icon: "M7 7h18v18H7z M11 11h4v4h-4z M17 11h4v4h-4z M11 17h10v4H11z",
+    question: "¿Trabajan solo cocinas premium?",
+    answer:
+      "No. Studio Mármoles Deluxe atiende cocinas, barras, baños, lobbies, recepciones y proyectos B2B donde la superficie tenga alto impacto visual o exigencia técnica.",
   },
   {
-    title: "Documentación técnica y cortes detallados",
-    icon: "M9 5h12l4 4v18H9z M21 5v5h5 M13 14h9 M13 19h9 M13 24h6",
+    question: "¿Qué materiales especifican?",
+    answer:
+      "Trabajamos mármol, granito, cuarzo y piedra sinterizada. La recomendación depende del uso, exposición al calor, mantenimiento esperado, formato, estilo y presupuesto.",
   },
   {
-    title: "Logística e instalación profesional",
-    icon: "M5 12h16v9H5z M21 15h5l3 3v3h-8z M9 24a2 2 0 1 0 0-4 2 2 0 0 0 0 4z M24 24a2 2 0 1 0 0-4 2 2 0 0 0 0 4z",
+    question: "¿Atienden arquitectos y constructoras?",
+    answer:
+      "Sí. La unidad B2B apoya especificación, muestras, moodboards, despieces, logística e instalación para proyectos residenciales, comerciales y de alto formato.",
   },
 ];
 
-const schema = {
+const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": ["LocalBusiness", "ProfessionalService"],
-  name: "Estudio Mármoles Deluxe",
-  url: canonicalUrl,
-  image: heroImage,
-  telephone: "+57 318 611 0790",
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Cali",
-    addressRegion: "Valle del Cauca",
-    addressCountry: "CO",
-  },
-  areaServed: ["Cali", "Valle del Cauca", "Colombia"],
-  description,
-  makesOffer: [
+  "@graph": [
     {
-      "@type": "Offer",
-      itemOffered: {
-        "@type": "Service",
-        name: "Trabajo en mármol y mesones de mármol para cocinas de alta gama",
+      "@type": ["LocalBusiness", "ProfessionalService"],
+      "@id": `${canonicalUrl}#business`,
+      name: "Studio Mármoles Deluxe",
+      alternateName: "Estudio Mármoles Deluxe",
+      url: canonicalUrl,
+      image: heroImage,
+      telephone: "+57 318 611 0790",
+      priceRange: "$$$",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Cra 5 Norte 40-43, barrio El Popular",
+        addressLocality: "Cali",
+        addressRegion: "Valle del Cauca",
+        addressCountry: "CO",
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 3.4516,
+        longitude: -76.532,
+      },
+      areaServed: ["Cali", "Valle del Cauca", "Colombia"],
+      sameAs: [
+        "https://www.instagram.com/marmolesdeluxe/",
+        "https://www.facebook.com/Marmolesdeluxe",
+      ],
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+57 318 611 0790",
+        contactType: "sales",
+        areaServed: "CO",
+        availableLanguage: ["es"],
+      },
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Servicios Studio Mármoles Deluxe",
+        itemListElement: [
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Diagnóstico técnico para cocinas premium",
+              areaServed: "Cali",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Mesones de mármol y superficies premium",
+              areaServed: "Cali",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Especificación de piedra sinterizada para proyectos B2B",
+              areaServed: "Valle del Cauca",
+            },
+          },
+        ],
       },
     },
     {
-      "@type": "Offer",
-      itemOffered: {
-        "@type": "Service",
-        name: "Especificación e instalación de piedra sinterizada para proyectos B2B",
+      "@type": "WebPage",
+      "@id": `${canonicalUrl}#webpage`,
+      url: canonicalUrl,
+      name: title,
+      description,
+      inLanguage: "es-CO",
+      primaryImageOfPage: heroImage,
+      about: { "@id": `${canonicalUrl}#business` },
+      potentialAction: {
+        "@type": "ContactAction",
+        target: whatsappUrl,
+        name: "Agendar diagnóstico técnico por WhatsApp",
       },
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${canonicalUrl}#faq`,
+      mainEntity: studioFaqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer,
+        },
+      })),
     },
   ],
 };
@@ -146,7 +241,7 @@ const schema = {
     <meta name="ICBM" content="3.4516, -76.5320" />
     <link rel="canonical" href={canonicalUrl} />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Estudio Mármoles Deluxe" />
+    <meta property="og:site_name" content="Studio Mármoles Deluxe" />
     <meta property="og:locale" content="es_CO" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
@@ -174,14 +269,14 @@ const schema = {
     {
       ga4Id && (
         <>
-          <script async src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`}></script>
+          <script async src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`} />
           <script is:inline>
             {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${ga4Id}',{anonymize_ip:true});`}
           </script>
         </>
       )
     }
-    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
   </head>
 
   <body>
@@ -198,16 +293,25 @@ const schema = {
       )
     }
 
-    <header class="studio-header" aria-label="Navegación de Estudio Mármoles Deluxe">
+    <header class="studio-header" aria-label="Navegación de Studio Mármoles Deluxe">
       <a class="brand" href="#inicio" aria-label="Ir al inicio">
-        <span class="brand-mark">EMD</span>
-        <span class="brand-copy">Estudio Mármoles <strong>Deluxe</strong></span>
+        <img
+          src={brandLogo}
+          alt="Mármoles Deluxe"
+          class="brand-logo"
+          width="180"
+          height="48"
+          decoding="async"
+          fetchpriority="high"
+        />
+        <span class="brand-copy">Studio <strong>Superficies Premium</strong></span>
       </a>
-      <nav aria-label="Acciones internas">
+      <nav aria-label="Navegación interna">
+        <a href="#diagnostico">Diagnóstico</a>
         <a href="#casos">Casos</a>
         <a href="#b2b">B2B</a>
-        <a class="nav-menu" href="#contacto" aria-label="Ir a WhatsApp y formulario">
-          <span></span><span></span><span></span>
+        <a class="nav-cta track-cta" href={whatsappUrl} target="_blank" rel="noopener noreferrer" data-cta="nav_whatsapp">
+          WhatsApp
         </a>
       </nav>
     </header>
@@ -218,45 +322,87 @@ const schema = {
           <Image
             src={heroImage}
             alt=""
-            width={1600}
-            height={1800}
+            width={1800}
+            height={1200}
             format="webp"
             sizes="100vw"
             loading="eager"
             decoding="async"
+            fetchpriority="high"
           />
         </div>
-        <div class="hero-panel">
-          <p class="hero-materials">Piedra natural · Cuarzo · Piedra sinterizada</p>
-          <h1 id="hero-title">Superficies de Alta Gama para Cocinas y Proyectos de Alto Valor</h1>
-          <p class="hero-summary">
-            Precisión técnica. Materiales excepcionales. Trabajo en mármol, mesones de mármol y superficies premium para proyectos en Cali.
-          </p>
-          <div class="hero-actions" aria-label="Acciones principales">
-            <a class="whatsapp-button" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-              <span class="whatsapp-symbol" aria-hidden="true">
-                <svg viewBox="0 0 32 32" role="img"><path d="M16 3.2A12.6 12.6 0 0 0 5.1 22.1L3.6 28.8l6.8-1.6A12.6 12.6 0 1 0 16 3.2Zm0 2.4a10.2 10.2 0 1 1-5 19.1l-.4-.2-3.7.9.8-3.7-.3-.4A10.2 10.2 0 0 1 16 5.6Zm-4.3 5.2c-.3 0-.8.1-1.2.6-.4.4-1.5 1.5-1.5 3.6s1.6 4.2 1.8 4.5c.2.3 3.1 4.9 7.7 6.5 3.8 1.3 4.6.7 5.4.7.8-.1 2.7-1.1 3.1-2.2.4-1.1.4-2 .3-2.2-.1-.2-.4-.3-.9-.6l-2.9-1.4c-.4-.2-.8-.2-1.1.3-.3.5-1.2 1.4-1.5 1.7-.3.3-.6.3-1 .1-.5-.2-2-.7-3.7-2.3-1.4-1.2-2.3-2.8-2.6-3.2-.3-.5 0-.7.2-1l.8-.9c.3-.3.4-.5.6-.9.2-.3.1-.6 0-.9l-1.3-3c-.3-.7-.7-.7-1-.7h-1.2Z"/></svg>
-              </span>
-              Cotizar por WhatsApp
-            </a>
-            <a class="case-anchor" href="#casos">Ver casos reales</a>
+        <div class="hero-shell">
+          <div class="hero-copy">
+            <p class="hero-materials">Studio técnico de superficies premium en Cali</p>
+            <h1 id="hero-title">Cocinas y mesones premium, diseñados para verse impecables.</h1>
+            <p class="hero-summary">
+              Diagnóstico, selección de material, modulación, fabricación e instalación para proyectos en mármol, cuarzo y piedra sinterizada.
+            </p>
+            <div class="hero-actions" aria-label="Acciones principales">
+              <a class="whatsapp-button track-cta" href={whatsappUrl} target="_blank" rel="noopener noreferrer" data-cta="hero_whatsapp">
+                <span class="whatsapp-symbol" aria-hidden="true">
+                  <svg viewBox="0 0 32 32" role="img"><path d={whatsappIconPath} /></svg>
+                </span>
+                Agendar diagnóstico
+              </a>
+              <a class="case-anchor" href="#casos">Ver casos reales</a>
+            </div>
           </div>
+
+          <aside class="diagnostic-card" aria-label="Oferta de diagnóstico técnico">
+            <p class="card-label">Para pauta y agenda prioritaria</p>
+            <h2>Diagnóstico técnico inicial</h2>
+            <p>
+              Envíanos fotos, medidas aproximadas y tipo de proyecto. Te respondemos con una ruta clara de material, alcance y siguiente paso.
+            </p>
+            <div class="card-checks">
+              <span>Respuesta ágil</span>
+              <span>Asesoría en Cali</span>
+              <span>Hogares y B2B</span>
+            </div>
+            <a class="card-link track-cta" href="#contacto" data-cta="hero_form_anchor">Completar formulario</a>
+          </aside>
         </div>
-        <aside class="hero-rating" aria-label="Calificación de servicio">
-          <p>Estudio especializado en superficies premium</p>
-          <div aria-label="Cinco de cinco estrellas">
-            <span>★★★★★</span>
-            <strong>5.0</strong>
-          </div>
-        </aside>
+      </section>
+
+      <section class="proof-strip" aria-label="Pruebas de confianza Studio">
+        {
+          proofStats.map((stat) => (
+            <article>
+              <strong>{stat.value}</strong>
+              <span>{stat.label}</span>
+            </article>
+          ))
+        }
+      </section>
+
+      <section class="offer-section" id="diagnostico" aria-labelledby="offer-title">
+        <div class="section-kicker">Antes de cotizar</div>
+        <div class="offer-heading">
+          <h2 id="offer-title">Una superficie premium no se improvisa.</h2>
+          <p>
+            La diferencia entre una instalación común y un resultado de alto valor está en lo que se decide antes de cortar la primera pieza.
+          </p>
+        </div>
+        <div class="offer-grid">
+          {
+            studioOffer.map((item, index) => (
+              <article>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))
+          }
+        </div>
       </section>
 
       <section class="process-section" id="proceso" aria-labelledby="process-title">
         <div class="process-intro">
-          <p class="section-label">Proceso EMD</p>
-          <h2 id="process-title">Cambios técnicos que garantizan resultados perfectos.</h2>
+          <p class="section-label">Proceso Studio</p>
+          <h2 id="process-title">Control técnico para acabados que sí se sienten premium.</h2>
           <p>
-            Metodología propia aplicada en cada proyecto para asegurar precisión, estética y durabilidad en mármol, cuarzo y piedra sinterizada.
+            Unimos diseño, selección de piedra, fabricación y montaje para que el proyecto conserve intención estética y precisión constructiva.
           </p>
         </div>
         <div class="process-flow">
@@ -279,9 +425,9 @@ const schema = {
                 <figure>
                   <Image
                     src={image}
-                    alt={`Proceso técnico EMD para trabajo en mármol y superficies premium ${index + 1}`}
-                    width={460}
-                    height={290}
+                    alt={`Referencia visual de proceso técnico Studio Mármoles Deluxe ${index + 1}`}
+                    width={520}
+                    height={340}
                     format="webp"
                     sizes="(max-width: 760px) 31vw, 24vw"
                     loading="lazy"
@@ -298,44 +444,44 @@ const schema = {
         <div class="section-heading">
           <div>
             <p class="section-label">Casos reales</p>
-            <h2 id="cases-title">Proyectos que hablan por nosotros.</h2>
+            <h2 id="cases-title">Evidencia concreta antes de tomar una decisión.</h2>
           </div>
-          <a class="outline-link" href="#contacto">Ver más casos</a>
+          <a class="outline-link track-cta" href={whatsappUrl} target="_blank" rel="noopener noreferrer" data-cta="cases_whatsapp">Pedir asesoría</a>
         </div>
-        <div class="case-table" aria-label="Casos reales de superficies premium">
+        <div class="case-grid" aria-label="Casos reales de superficies premium">
           {
-            cases.map((item) => (
-              <article class="case-row">
+            studioCases.map((study) => (
+              <article class="case-card">
                 <figure>
                   <Image
-                    src={item.image}
-                    alt={item.alt}
-                    width={620}
-                    height={310}
+                    src={study.studioImage}
+                    alt={`Caso real ${study.title}`}
+                    width={720}
+                    height={520}
                     format="webp"
-                    sizes="(max-width: 760px) 100vw, 34vw"
+                    sizes="(max-width: 760px) 100vw, 31vw"
                     loading="lazy"
                     decoding="async"
                   />
                 </figure>
-                <dl>
-                  <div>
-                    <dt>Material</dt>
-                    <dd>{item.material}</dd>
-                  </div>
-                  <div>
-                    <dt>Reto</dt>
-                    <dd>{item.challenge}</dd>
-                  </div>
-                  <div>
-                    <dt>Tiempo real</dt>
-                    <dd>{item.time}</dd>
-                  </div>
-                  <div>
-                    <dt>Resultado</dt>
-                    <dd>{item.result}</dd>
-                  </div>
-                </dl>
+                <div>
+                  <p>{study.location} · {study.timelineLabel}</p>
+                  <h3>{study.title}</h3>
+                  <dl>
+                    <div>
+                      <dt>Material</dt>
+                      <dd>{study.materialBrand} · {study.materialReference}</dd>
+                    </div>
+                    <div>
+                      <dt>Aplicación</dt>
+                      <dd>{study.application}</dd>
+                    </div>
+                    <div>
+                      <dt>Resultado</dt>
+                      <dd>{study.result}</dd>
+                    </div>
+                  </dl>
+                </div>
               </article>
             ))
           }
@@ -346,9 +492,9 @@ const schema = {
         <figure class="b2b-image">
           <Image
             src={b2bImage}
-            alt="Materiales premium para arquitectos, constructoras y diseñadores"
-            width={900}
-            height={760}
+            alt="Superficies premium para arquitectos, constructoras y diseñadores en Cali"
+            width={980}
+            height={820}
             format="webp"
             sizes="(max-width: 760px) 100vw, 50vw"
             loading="lazy"
@@ -357,86 +503,162 @@ const schema = {
         </figure>
         <div class="b2b-content">
           <p class="section-label">Unidad B2B</p>
-          <h2 id="b2b-title">Aliados estratégicos para proyectos extraordinarios.</h2>
+          <h2 id="b2b-title">Aliados para arquitectos, diseñadores y constructoras.</h2>
           <p>
-            Acompañamos a arquitectos, constructoras y diseñadores en cada etapa del proyecto: selección de piedra sinterizada, trabajo en mármol, modulación, cortes e instalación.
+            Acompañamos proyectos donde la superficie define la percepción del espacio: cocinas de autor, barras, baños, lobbies y recepciones.
           </p>
           <ul aria-label="Servicios B2B">
             {
               b2bItems.map((item) => (
                 <li>
-                  <svg viewBox="0 0 32 32" aria-hidden="true">
-                    <path d={item.icon} />
-                  </svg>
-                  <span>{item.title}</span>
+                  <span aria-hidden="true"></span>
+                  {item}
                 </li>
               ))
             }
           </ul>
-          <a class="b2b-cta" href="#contacto">Conocer Unidad B2B</a>
+          <a class="b2b-cta track-cta" href="#contacto" data-cta="b2b_form_anchor">Hablar con Studio B2B</a>
+        </div>
+      </section>
+
+      <section class="trust-section" aria-labelledby="trust-title">
+        <div>
+          <p class="section-label">Señales reales de confianza</p>
+          <h2 id="trust-title">Una operación local detrás de cada superficie.</h2>
+        </div>
+        <div class="trust-grid">
+          {
+            trustItems.map((item) => (
+              <article>
+                <span aria-hidden="true">✓</span>
+                <p>{item}</p>
+              </article>
+            ))
+          }
         </div>
       </section>
 
       <section class="contact-section" id="contacto" aria-labelledby="contact-title">
         <div class="contact-copy">
-          <p class="section-label">Hablemos de tu proyecto</p>
-          <h2 id="contact-title">Cuéntanos tu idea y te asesoramos hoy.</h2>
+          <p class="section-label">Agenda Studio</p>
+          <h2 id="contact-title">Cuéntanos tu proyecto y te damos una ruta clara.</h2>
           <p>
-            Agenda por WhatsApp una asesoría para cocinas de alta gama, mesones de mármol, piedra sinterizada o proyectos B2B en Cali.
+            Completa el formulario o escribe por WhatsApp. La conversación inicia con fotos, medidas aproximadas y el tipo de superficie que estás considerando.
           </p>
+          <div class="contact-note">
+            <strong>Respuesta en menos de 2 horas hábiles</strong>
+            <span>Atención para Cali, Valle del Cauca y proyectos B2B.</span>
+          </div>
         </div>
         <form class="lead-form" id="premium-lead-form">
           <div class="form-row">
             <label>
               <span>Nombre completo</span>
-              <input name="nombre" type="text" autocomplete="name" required />
+              <input name="nombre" type="text" autocomplete="name" placeholder="Tu nombre" required />
             </label>
             <label>
               <span>WhatsApp</span>
-              <input name="telefono" type="tel" inputmode="tel" autocomplete="tel" required />
+              <input name="telefono" type="tel" inputmode="tel" autocomplete="tel" placeholder="+57..." required />
             </label>
+          </div>
+          <div class="form-row">
             <label>
               <span>Tipo de proyecto</span>
               <select name="tipoProyecto" required>
-                <option value="">Selecciona</option>
-                <option value="Remodelación Premium">Remodelación Premium</option>
-                <option value="Obra Nueva de Diseñador">Obra Nueva de Diseñador</option>
+                <option value="">Selecciona una opción</option>
+                <option value="Cocina premium residencial">Cocina premium residencial</option>
+                <option value="Mesón de mármol o cuarzo">Mesón de mármol o cuarzo</option>
+                <option value="Piedra sinterizada gran formato">Piedra sinterizada gran formato</option>
                 <option value="Proyecto B2B">Proyecto B2B</option>
+              </select>
+            </label>
+            <label>
+              <span>Etapa</span>
+              <select name="etapa" required>
+                <option value="">Selecciona</option>
+                <option value="Idea inicial">Idea inicial</option>
+                <option value="Con medidas aproximadas">Con medidas aproximadas</option>
+                <option value="Con planos o diseño">Con planos o diseño</option>
+                <option value="Listo para cotizar">Listo para cotizar</option>
               </select>
             </label>
           </div>
           <label>
-            <span>Cuéntanos sobre tu proyecto</span>
-            <textarea name="detalle" rows="4" required></textarea>
+            <span>Cuéntanos qué quieres lograr</span>
+            <textarea name="detalle" rows="4" placeholder="Ej: cocina con isla, mesón en mármol claro, proyecto para apartamento en Cali..." required></textarea>
           </label>
           <aside class="response-box" aria-label="Condiciones de atención">
-            <p>Respuesta en menos de 2 horas hábiles</p>
-            <p>Asesoría técnica inicial</p>
-            <p>Cotización detallada y sin compromiso</p>
+            <p>Sin compromiso comercial inicial.</p>
+            <p>Recomendación de material según uso real.</p>
+            <p>Ruta de alcance, tiempos y siguiente paso.</p>
           </aside>
-          <button type="submit" class="whatsapp-button">
+          <button type="submit" class="whatsapp-button" data-cta="form_submit">
             <span class="whatsapp-symbol" aria-hidden="true">
-              <svg viewBox="0 0 32 32" role="img"><path d="M16 3.2A12.6 12.6 0 0 0 5.1 22.1L3.6 28.8l6.8-1.6A12.6 12.6 0 1 0 16 3.2Zm0 2.4a10.2 10.2 0 1 1-5 19.1l-.4-.2-3.7.9.8-3.7-.3-.4A10.2 10.2 0 0 1 16 5.6Zm-4.3 5.2c-.3 0-.8.1-1.2.6-.4.4-1.5 1.5-1.5 3.6s1.6 4.2 1.8 4.5c.2.3 3.1 4.9 7.7 6.5 3.8 1.3 4.6.7 5.4.7.8-.1 2.7-1.1 3.1-2.2.4-1.1.4-2 .3-2.2-.1-.2-.4-.3-.9-.6l-2.9-1.4c-.4-.2-.8-.2-1.1.3-.3.5-1.2 1.4-1.5 1.7-.3.3-.6.3-1 .1-.5-.2-2-.7-3.7-2.3-1.4-1.2-2.3-2.8-2.6-3.2-.3-.5 0-.7.2-1l.8-.9c.3-.3.4-.5.6-.9.2-.3.1-.6 0-.9l-1.3-3c-.3-.7-.7-.7-1-.7h-1.2Z"/></svg>
+              <svg viewBox="0 0 32 32" role="img"><path d={whatsappIconPath} /></svg>
             </span>
-            Cotizar por WhatsApp
+            Enviar y abrir WhatsApp
           </button>
+          <p class="privacy-copy">Usaremos tus datos solo para responder esta solicitud comercial.</p>
         </form>
+      </section>
+
+      <section class="faq-section" id="faq" aria-labelledby="faq-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-label">Preguntas frecuentes</p>
+            <h2 id="faq-title">Lo que conviene aclarar antes de invertir.</h2>
+          </div>
+        </div>
+        <div class="faq-list">
+          {
+            studioFaqs.map((faq) => (
+              <article>
+                <h3>{faq.question}</h3>
+                <p>{faq.answer}</p>
+              </article>
+            ))
+          }
+        </div>
       </section>
     </main>
 
     <footer class="studio-footer">
-      <strong>Estudio Mármoles Deluxe</strong>
-      <span>Superficies de alta gama. Proyectos de alto valor.</span>
+      <strong>Studio Mármoles Deluxe</strong>
+      <span>Cali, Valle del Cauca · Superficies premium para proyectos de alto valor.</span>
     </footer>
 
-    <a class="floating-whatsapp" href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Cotizar por WhatsApp">
-      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3.2A12.6 12.6 0 0 0 5.1 22.1L3.6 28.8l6.8-1.6A12.6 12.6 0 1 0 16 3.2Zm0 2.4a10.2 10.2 0 1 1-5 19.1l-.4-.2-3.7.9.8-3.7-.3-.4A10.2 10.2 0 0 1 16 5.6Zm-4.3 5.2c-.3 0-.8.1-1.2.6-.4.4-1.5 1.5-1.5 3.6s1.6 4.2 1.8 4.5c.2.3 3.1 4.9 7.7 6.5 3.8 1.3 4.6.7 5.4.7.8-.1 2.7-1.1 3.1-2.2.4-1.1.4-2 .3-2.2-.1-.2-.4-.3-.9-.6l-2.9-1.4c-.4-.2-.8-.2-1.1.3-.3.5-1.2 1.4-1.5 1.7-.3.3-.6.3-1 .1-.5-.2-2-.7-3.7-2.3-1.4-1.2-2.3-2.8-2.6-3.2-.3-.5 0-.7.2-1l.8-.9c.3-.3.4-.5.6-.9.2-.3.1-.6 0-.9l-1.3-3c-.3-.7-.7-.7-1-.7h-1.2Z"/></svg>
+    <a class="floating-whatsapp track-cta" href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Agendar diagnóstico por WhatsApp" data-cta="floating_whatsapp">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d={whatsappIconPath} /></svg>
     </a>
 
     <script is:inline define:vars={{ webhookUrl, whatsappNumber }}>
+      const pushLeadEvent = (eventName, payload = {}) => {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: eventName,
+          page: "studio",
+          ...payload,
+        });
+      };
+
+      document.querySelectorAll(".track-cta").forEach((cta) => {
+        cta.addEventListener("click", () => {
+          pushLeadEvent("studio_cta_click", {
+            cta: cta.getAttribute("data-cta") || "unknown",
+          });
+        });
+      });
+
       const form = document.getElementById("premium-lead-form");
 
       if (form) {
+        let formStarted = false;
+        form.addEventListener("input", () => {
+          if (formStarted) return;
+          formStarted = true;
+          pushLeadEvent("studio_form_start");
+        });
+
         form.addEventListener("submit", (event) => {
           event.preventDefault();
 
@@ -444,9 +666,10 @@ const schema = {
           const nombre = String(fd.get("nombre") || "").trim();
           const telefono = String(fd.get("telefono") || "").trim();
           const tipoProyecto = String(fd.get("tipoProyecto") || "").trim();
+          const etapa = String(fd.get("etapa") || "").trim();
           const detalle = String(fd.get("detalle") || "").trim();
 
-          if (!nombre || !telefono || !tipoProyecto || !detalle) {
+          if (!nombre || !telefono || !tipoProyecto || !etapa || !detalle) {
             form.reportValidity();
             return;
           }
@@ -455,11 +678,17 @@ const schema = {
             nombre,
             telefono,
             tipoProyecto,
+            etapa,
             detalle,
             source: "estudio.marmolesdeluxe.com",
             channel: "whatsapp",
             timestamp: new Date().toISOString(),
           };
+
+          pushLeadEvent("studio_form_submit", {
+            tipoProyecto,
+            etapa,
+          });
 
           if (webhookUrl) {
             fetch(webhookUrl, {
@@ -470,8 +699,8 @@ const schema = {
             }).catch(() => {});
           }
 
-          const text = `Deseo cotizar una asesoría técnica para un proyecto de superficies premium. Mi nombre es ${nombre}. WhatsApp: ${telefono}. Tipo de proyecto: ${tipoProyecto}. Detalle: ${detalle}.`;
-          window.location.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}&utm_source=google_ads&utm_medium=cpc&utm_campaign=estudio_marmoles_deluxe&utm_content=form_submit`;
+          const text = `Deseo agendar un diagnóstico técnico con Studio Mármoles Deluxe. Nombre: ${nombre}. WhatsApp: ${telefono}. Proyecto: ${tipoProyecto}. Etapa: ${etapa}. Detalle: ${detalle}.`;
+          window.location.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}&utm_source=google_ads&utm_medium=cpc&utm_campaign=studio_marmoles_deluxe&utm_content=form_submit`;
         });
       }
     </script>
@@ -483,13 +712,15 @@ const schema = {
     color-scheme: light;
     --ink: #111111;
     --graphite: #171717;
-    --paper: #f8f5ef;
-    --paper-warm: #f1ece3;
-    --muted: #655f56;
-    --soft: rgba(17, 17, 17, 0.14);
-    --gold: #b18a44;
-    --gold-light: #d1ad68;
-    --white: #fffaf2;
+    --paper: #ffffff;
+    --paper-soft: #f6f3ed;
+    --paper-warm: #eee7dc;
+    --muted: #625c53;
+    --soft: rgba(17, 17, 17, 0.13);
+    --gold: #d4af37;
+    --gold-deep: #a9822d;
+    --gold-light: #f2d77b;
+    --white: #ffffff;
     --whatsapp: #31aa3e;
     --whatsapp-dark: #23872e;
     --max: 1240px;
@@ -515,7 +746,7 @@ const schema = {
 
   body::selection {
     background: var(--gold);
-    color: #fff;
+    color: #111;
   }
 
   h1,
@@ -531,7 +762,7 @@ const schema = {
   h1,
   h2 {
     font-family: "Cormorant Garamond", Georgia, serif;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0;
   }
 
@@ -549,38 +780,40 @@ const schema = {
     inset: 0 0 auto;
     z-index: 40;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
     gap: 1rem;
     width: 100%;
-    padding: 1.05rem 1.1rem;
+    padding: 1rem 1.1rem;
     color: #fff;
   }
 
   .brand {
     display: inline-flex;
     align-items: center;
-    gap: 0.68rem;
-    max-width: 13rem;
+    gap: 0.72rem;
     text-decoration: none;
   }
 
-  .brand-mark {
-    padding-right: 0.72rem;
-    border-right: 1px solid rgba(255, 255, 255, 0.34);
-    font-family: "Cormorant Garamond", Georgia, serif;
-    font-size: 2.35rem;
-    font-weight: 700;
-    line-height: 0.8;
-    color: #fff;
-    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.42);
+  .brand-logo {
+    width: 7.4rem;
+    height: auto;
+    max-height: 3.1rem;
+    object-fit: contain;
+    filter: brightness(0) saturate(100%) invert(80%) sepia(38%) saturate(636%)
+      hue-rotate(358deg) brightness(90%) contrast(85%)
+      drop-shadow(0 2px 18px rgba(0, 0, 0, 0.42));
   }
 
   .brand-copy {
-    color: rgba(255, 255, 255, 0.84);
-    font-size: 0.67rem;
+    display: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.34);
+    padding-left: 0.72rem;
+    color: rgba(255, 255, 255, 0.86);
+    font-size: 0.7rem;
     font-weight: 800;
-    line-height: 1.26;
+    letter-spacing: 0.1em;
+    line-height: 1.25;
     text-transform: uppercase;
   }
 
@@ -593,39 +826,35 @@ const schema = {
   .studio-header nav {
     display: flex;
     align-items: center;
-    gap: 0.8rem;
+    gap: 0.65rem;
   }
 
-  .studio-header nav > a:not(.nav-menu) {
+  .studio-header nav > a {
     display: none;
-    color: rgba(255, 255, 255, 0.84);
-    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.86);
+    font-size: 0.74rem;
     font-weight: 800;
+    letter-spacing: 0.08em;
     text-decoration: none;
     text-transform: uppercase;
   }
 
-  .nav-menu {
-    display: grid;
-    gap: 0.34rem;
-    width: 2.05rem;
-    padding-top: 0.08rem;
-    text-decoration: none;
-  }
-
-  .nav-menu span {
-    height: 0.18rem;
-    background: #fff;
-    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.32);
+  .studio-header .nav-cta {
+    display: inline-flex;
+    min-height: 2.7rem;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(242, 215, 123, 0.72);
+    padding: 0 0.9rem;
+    color: var(--gold-light);
   }
 
   .hero {
     position: relative;
-    display: grid;
     min-height: 100svh;
     overflow: hidden;
     color: #fff;
-    background: #111;
+    background: #101010;
   }
 
   .hero-image {
@@ -638,8 +867,8 @@ const schema = {
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(90deg, rgba(8, 8, 8, 0.92) 0%, rgba(8, 8, 8, 0.66) 44%, rgba(8, 8, 8, 0.2) 100%),
-      linear-gradient(180deg, rgba(8, 8, 8, 0.12) 0%, rgba(8, 8, 8, 0.08) 43%, rgba(8, 8, 8, 0.82) 100%);
+      linear-gradient(90deg, rgba(8, 8, 8, 0.92) 0%, rgba(8, 8, 8, 0.74) 42%, rgba(8, 8, 8, 0.3) 100%),
+      linear-gradient(180deg, rgba(8, 8, 8, 0.22) 0%, rgba(8, 8, 8, 0.1) 45%, rgba(8, 8, 8, 0.76) 100%);
   }
 
   .hero-image img {
@@ -649,76 +878,87 @@ const schema = {
     object-position: 58% center;
   }
 
-  .hero-panel {
+  .hero-shell {
     position: relative;
     z-index: 2;
-    align-self: end;
+    display: grid;
+    gap: 1.5rem;
     width: min(100%, var(--max));
+    min-height: 100svh;
     margin: 0 auto;
-    padding: 8.9rem 1.35rem 2.5rem;
+    padding: 6.6rem 1.35rem 2rem;
+    align-content: center;
+  }
+
+  .hero-copy {
+    max-width: 42rem;
   }
 
   .hero-materials,
-  .section-label {
+  .section-label,
+  .section-kicker,
+  .card-label {
     color: var(--gold-light);
     font-size: 0.72rem;
-    font-weight: 800;
-    letter-spacing: 0.12em;
+    font-weight: 900;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
   }
 
   .hero h1 {
-    max-width: 10.2ch;
-    margin-top: 0.92rem;
+    max-width: 11.8ch;
+    margin-top: 0.85rem;
     color: #fff;
-    font-size: clamp(3.05rem, 13.5vw, 5.8rem);
-    line-height: 0.88;
+    font-size: clamp(3rem, 12vw, 5.65rem);
+    line-height: 0.9;
     text-wrap: balance;
     text-shadow: 0 8px 34px rgba(0, 0, 0, 0.48);
   }
 
   .hero h1::after,
+  .offer-heading h2::after,
   .process-intro h2::after,
   .section-heading h2::after {
     content: "";
     display: block;
     width: 7rem;
     height: 1px;
-    margin-top: 1.35rem;
+    margin-top: 1.15rem;
     background: var(--gold-light);
   }
 
   .hero-summary {
-    max-width: 27rem;
-    margin-top: 1.35rem;
-    color: rgba(255, 255, 255, 0.84);
-    font-size: 0.98rem;
+    max-width: 34rem;
+    margin-top: 1.22rem;
+    color: rgba(255, 255, 255, 0.86);
+    font-size: 1rem;
     font-weight: 500;
     line-height: 1.62;
   }
 
   .hero-actions {
-    display: grid;
-    gap: 1rem;
-    width: min(100%, 21rem);
-    margin-top: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.95rem;
+    width: min(100%, 23rem);
+    margin-top: 1.5rem;
   }
 
   .whatsapp-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.88rem;
-    min-height: 4.2rem;
-    padding: 0.9rem 1.12rem;
+    gap: 0.82rem;
+    min-height: 3.95rem;
+    padding: 0.88rem 1rem;
     border: 0;
-    border-radius: 0.18rem;
-    background: linear-gradient(180deg, #3abf47 0%, var(--whatsapp) 100%);
+    border-radius: 0.45rem;
+    background: linear-gradient(180deg, #42c94f 0%, var(--whatsapp) 100%);
     color: #fff;
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.26),
-      0 18px 38px rgba(0, 0, 0, 0.36);
-    font: 800 1.04rem/1 "Manrope", system-ui, sans-serif;
+      inset 0 1px 0 rgba(255, 255, 255, 0.28),
+      0 18px 38px rgba(0, 0, 0, 0.35);
+    font: 900 1rem/1 "Manrope", system-ui, sans-serif;
     text-decoration: none;
     cursor: pointer;
     transition:
@@ -731,30 +971,37 @@ const schema = {
   .whatsapp-button:focus-visible {
     transform: translateY(-1px);
     filter: saturate(1.08);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.28),
+      0 22px 44px rgba(0, 0, 0, 0.42);
   }
 
   .whatsapp-symbol {
     display: grid;
-    width: 2.15rem;
-    height: 2.15rem;
+    width: 2rem;
+    height: 2rem;
     place-items: center;
+    flex: 0 0 auto;
+    overflow: hidden;
   }
 
   .whatsapp-symbol svg,
   .floating-whatsapp svg {
-    width: 100%;
-    height: 100%;
+    width: 72%;
+    height: 72%;
     fill: currentColor;
+    overflow: visible;
   }
 
   .case-anchor,
   .outline-link,
-  .b2b-cta {
+  .b2b-cta,
+  .card-link {
     display: inline-flex;
     align-items: center;
     width: max-content;
     color: inherit;
-    font-weight: 800;
+    font-weight: 900;
     line-height: 1;
     text-decoration: none;
   }
@@ -767,7 +1014,8 @@ const schema = {
 
   .case-anchor::after,
   .outline-link::after,
-  .b2b-cta::after {
+  .b2b-cta::after,
+  .card-link::after {
     content: "";
     width: 1.55rem;
     height: 0.74rem;
@@ -776,67 +1024,173 @@ const schema = {
     clip-path: polygon(0 43%, 78% 43%, 62% 0, 100% 50%, 62% 100%, 78% 57%, 0 57%);
   }
 
-  .hero-rating {
-    position: relative;
-    z-index: 2;
-    width: min(100% - 2.7rem, 22rem);
-    margin: 0 1.35rem 2.35rem auto;
-    color: rgba(255, 255, 255, 0.86);
-    font-size: 0.82rem;
-    line-height: 1.28;
-  }
-
-  .hero-rating div {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    margin-top: 0.52rem;
-  }
-
-  .hero-rating span {
-    color: var(--gold-light);
-    font-size: 1.08rem;
-    letter-spacing: 0.05em;
-  }
-
-  .hero-rating strong {
+  .proof-strip {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px;
+    background: rgba(212, 175, 55, 0.35);
     color: #fff;
-    font-weight: 800;
   }
 
+  .proof-strip article {
+    display: grid;
+    gap: 0.25rem;
+    align-content: center;
+    min-height: 7.2rem;
+    background: #0b0b0b;
+    padding: 1.1rem;
+    text-align: center;
+  }
+
+  .proof-strip strong {
+    display: block;
+    color: #fff;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(1.9rem, 7vw, 3.4rem);
+    line-height: 0.95;
+  }
+
+  .proof-strip span {
+    display: block;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.72rem;
+    font-weight: 800;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+
+  .diagnostic-card {
+    display: grid;
+    gap: 1rem;
+    max-width: 28rem;
+    border: 1px solid rgba(242, 215, 123, 0.34);
+    background: rgba(11, 11, 11, 0.72);
+    padding: 1.2rem;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.38);
+    backdrop-filter: blur(16px);
+  }
+
+  .diagnostic-card h2 {
+    color: #fff;
+    font-size: clamp(2rem, 8vw, 3.1rem);
+    line-height: 0.98;
+  }
+
+  .diagnostic-card p:not(.card-label) {
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .card-checks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .card-checks span {
+    border: 1px solid rgba(242, 215, 123, 0.28);
+    padding: 0.5rem 0.65rem;
+    color: rgba(255, 255, 255, 0.86);
+    font-size: 0.72rem;
+    font-weight: 900;
+  }
+
+  .card-link {
+    color: var(--gold-light);
+  }
+
+  .offer-section,
   .process-section,
   .cases-section,
-  .contact-section {
+  .trust-section,
+  .contact-section,
+  .faq-section {
     background:
-      linear-gradient(rgba(248, 245, 239, 0.97), rgba(248, 245, 239, 0.97)),
-      radial-gradient(circle at 82% 12%, rgba(177, 138, 68, 0.14), transparent 32%);
+      linear-gradient(rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.98)),
+      radial-gradient(circle at 84% 10%, rgba(212, 175, 55, 0.14), transparent 34%);
+  }
+
+  .offer-section,
+  .process-section,
+  .trust-section,
+  .contact-section,
+  .faq-section {
+    width: min(100%, var(--max));
+    margin: 0 auto;
+    padding: 4rem 1.35rem;
+  }
+
+  .offer-heading {
+    display: grid;
+    gap: 1rem;
+    margin-top: 0.7rem;
+  }
+
+  .offer-heading h2,
+  .process-intro h2,
+  .section-heading h2,
+  .contact-copy h2,
+  .b2b-content h2,
+  .trust-section h2 {
+    margin-top: 0.82rem;
+    font-size: clamp(2.45rem, 9.5vw, 4.5rem);
+    line-height: 0.96;
+    text-wrap: balance;
+  }
+
+  .offer-heading p,
+  .process-intro > p:not(.section-label),
+  .contact-copy > p {
+    max-width: 37rem;
+    color: var(--muted);
+    font-size: 1.02rem;
+    line-height: 1.68;
+  }
+
+  .offer-grid {
+    display: grid;
+    gap: 0.85rem;
+    margin-top: 2rem;
+  }
+
+  .offer-grid article {
+    display: grid;
+    gap: 0.8rem;
+    border: 1px solid rgba(17, 17, 17, 0.1);
+    background: var(--paper-soft);
+    padding: 1.35rem;
+  }
+
+  .offer-grid article > span {
+    color: var(--gold-deep);
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 2.6rem;
+    font-weight: 700;
+    line-height: 0.9;
+  }
+
+  .offer-grid h3,
+  .case-card h3,
+  .faq-list h3 {
+    font-size: 1rem;
+    font-weight: 900;
+    line-height: 1.18;
+    text-transform: uppercase;
+  }
+
+  .offer-grid p,
+  .case-card dd,
+  .faq-list p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.55;
   }
 
   .process-section {
     display: grid;
     gap: 2.1rem;
-    max-width: var(--max);
-    margin: 0 auto;
-    padding: 3.65rem 1.35rem 3.4rem;
-  }
-
-  .process-intro h2,
-  .section-heading h2,
-  .contact-copy h2,
-  .b2b-content h2 {
-    margin-top: 0.82rem;
-    font-size: clamp(2.55rem, 9.6vw, 4.55rem);
-    line-height: 0.96;
-    text-wrap: balance;
-  }
-
-  .process-intro > p:not(.section-label),
-  .contact-copy > p {
-    max-width: 33rem;
-    margin-top: 1.55rem;
-    color: var(--muted);
-    font-size: 1.02rem;
-    line-height: 1.68;
+    border-top: 1px solid rgba(17, 17, 17, 0.08);
   }
 
   .process-flow {
@@ -846,7 +1200,7 @@ const schema = {
 
   .process-list {
     display: grid;
-    gap: 1.8rem;
+    gap: 1.55rem;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -854,39 +1208,37 @@ const schema = {
 
   .process-list li {
     display: grid;
-    grid-template-columns: 4.3rem minmax(0, 1fr);
+    grid-template-columns: 4.2rem minmax(0, 1fr);
     gap: 0.95rem;
     align-items: start;
   }
 
   .process-list li > span {
-    color: var(--gold);
+    color: var(--gold-deep);
     font-family: "Cormorant Garamond", Georgia, serif;
-    font-size: 4rem;
-    font-weight: 600;
+    font-size: 3.6rem;
+    font-weight: 700;
     line-height: 0.9;
   }
 
   .process-list h3 {
-    font-family: "Manrope", system-ui, sans-serif;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 900;
-    letter-spacing: 0;
     line-height: 1.12;
     text-transform: uppercase;
   }
 
   .process-list p {
-    margin-top: 0.52rem;
+    margin-top: 0.5rem;
     color: var(--muted);
-    font-size: 0.98rem;
+    font-size: 0.95rem;
     line-height: 1.55;
   }
 
   .process-gallery {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.78rem;
+    gap: 0.65rem;
   }
 
   .process-gallery figure {
@@ -902,11 +1254,11 @@ const schema = {
   }
 
   .cases-section {
-    padding: 3.65rem 0 3.4rem;
+    padding: 4rem 0;
   }
 
   .section-heading,
-  .case-table {
+  .case-grid {
     width: min(100% - 2.7rem, var(--max));
     margin-inline: auto;
   }
@@ -917,63 +1269,75 @@ const schema = {
   }
 
   .outline-link {
-    min-height: 3rem;
+    min-height: 3.25rem;
     padding: 0.78rem 1rem;
     border: 1px solid var(--gold);
-    color: var(--gold);
+    color: var(--gold-deep);
     justify-self: start;
   }
 
-  .case-table {
+  .case-grid {
     display: grid;
+    gap: 1rem;
     margin-top: 2rem;
-    border-top: 1px solid var(--soft);
   }
 
-  .case-row {
+  .case-card {
     display: grid;
-    gap: 1.05rem;
-    padding: 1.18rem 0;
-    border-bottom: 1px solid var(--soft);
+    border: 1px solid rgba(17, 17, 17, 0.1);
+    background: #fff;
+    box-shadow: 0 18px 50px rgba(17, 17, 17, 0.07);
   }
 
-  .case-row figure {
-    aspect-ratio: 1.72 / 1;
+  .case-card figure {
+    aspect-ratio: 1.55 / 1;
     overflow: hidden;
     background: var(--paper-warm);
   }
 
-  .case-row img {
+  .case-card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  .case-row dl {
+  .case-card > div {
     display: grid;
-    gap: 1rem;
+    gap: 1.1rem;
+    padding: 1.2rem;
   }
 
-  .case-row dt {
-    color: var(--ink);
-    font-size: 0.7rem;
+  .case-card > div > p {
+    color: var(--gold-deep);
+    font-size: 0.72rem;
     font-weight: 900;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.08em;
+    line-height: 1.35;
     text-transform: uppercase;
   }
 
-  .case-row dd {
-    margin-top: 0.5rem;
-    color: var(--muted);
-    font-size: 0.94rem;
-    line-height: 1.5;
+  .case-card dl {
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  .case-card dt {
+    color: var(--ink);
+    font-size: 0.68rem;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .case-card dd {
+    margin-top: 0.32rem;
   }
 
   .b2b-section {
     display: grid;
     background:
-      linear-gradient(135deg, rgba(17, 17, 17, 0.98), rgba(17, 17, 17, 0.92)),
-      radial-gradient(circle at 86% 22%, rgba(177, 138, 68, 0.16), transparent 35%);
+      linear-gradient(135deg, rgba(7, 7, 7, 0.98), rgba(17, 17, 17, 0.93)),
+      radial-gradient(circle at 86% 22%, rgba(212, 175, 55, 0.16), transparent 35%);
     color: #fff;
   }
 
@@ -988,7 +1352,7 @@ const schema = {
     height: 100%;
     min-height: 21rem;
     object-fit: cover;
-    filter: saturate(0.9) contrast(1.08);
+    filter: saturate(0.92) contrast(1.08);
   }
 
   .b2b-content {
@@ -996,94 +1360,158 @@ const schema = {
   }
 
   .b2b-content h2 {
-    max-width: 11ch;
-    color: var(--white);
+    max-width: 12ch;
+    color: #fff;
   }
 
   .b2b-content > p:not(.section-label) {
     max-width: 34rem;
     margin-top: 1.08rem;
-    color: rgba(255, 255, 255, 0.78);
+    color: rgba(255, 255, 255, 0.8);
     font-size: 1rem;
     line-height: 1.62;
   }
 
   .b2b-content ul {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.4rem 1rem;
-    margin: 1.9rem 0 1.55rem;
+    gap: 0.8rem;
+    margin: 1.8rem 0;
     padding: 0;
     list-style: none;
   }
 
   .b2b-content li {
     display: grid;
-    gap: 0.6rem;
-    color: rgba(255, 255, 255, 0.78);
-    font-size: 0.78rem;
-    line-height: 1.35;
+    grid-template-columns: 1.2rem minmax(0, 1fr);
+    gap: 0.7rem;
+    align-items: start;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.92rem;
+    line-height: 1.45;
   }
 
-  .b2b-content li svg {
-    width: 2rem;
-    height: 2rem;
-    color: var(--gold-light);
-    fill: none;
-    stroke: currentColor;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 1.45;
+  .b2b-content li span {
+    width: 0.72rem;
+    height: 0.72rem;
+    margin-top: 0.32rem;
+    border-radius: 999px;
+    background: var(--gold-light);
+    box-shadow: 0 0 0 0.28rem rgba(242, 215, 123, 0.12);
   }
 
   .b2b-cta {
     padding-bottom: 0.42rem;
-    border-bottom: 1px solid rgba(209, 173, 104, 0.62);
+    border-bottom: 1px solid rgba(242, 215, 123, 0.62);
     color: var(--gold-light);
+  }
+
+  .trust-section {
+    display: grid;
+    gap: 1.8rem;
+  }
+
+  .trust-section h2 {
+    max-width: 12ch;
+  }
+
+  .trust-grid {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .trust-grid article {
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: 0.8rem;
+    border: 1px solid rgba(212, 175, 55, 0.24);
+    background: var(--paper-soft);
+    padding: 1rem;
+  }
+
+  .trust-grid span {
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    place-items: center;
+    border-radius: 999px;
+    background: #111;
+    color: var(--gold-light);
+    font-weight: 900;
+  }
+
+  .trust-grid p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.55;
   }
 
   .contact-section {
     display: grid;
-    gap: 1.6rem;
-    padding: 3rem 1.35rem 2.6rem;
+    gap: 1.7rem;
+    border-top: 1px solid rgba(17, 17, 17, 0.08);
   }
 
   .contact-copy h2 {
     max-width: 12ch;
   }
 
+  .contact-note {
+    display: grid;
+    gap: 0.25rem;
+    margin-top: 1.4rem;
+    border-left: 3px solid var(--gold);
+    padding-left: 1rem;
+  }
+
+  .contact-note strong {
+    font-size: 0.95rem;
+  }
+
+  .contact-note span,
+  .privacy-copy {
+    color: var(--muted);
+    font-size: 0.84rem;
+    line-height: 1.45;
+  }
+
   .lead-form {
     display: grid;
-    gap: 0.78rem;
+    gap: 0.82rem;
+    border: 1px solid rgba(17, 17, 17, 0.1);
+    background: #fff;
+    padding: 1rem;
+    box-shadow: 0 22px 60px rgba(17, 17, 17, 0.08);
   }
 
   .form-row {
     display: grid;
-    gap: 0.72rem;
+    gap: 0.82rem;
   }
 
   .lead-form label {
     display: grid;
-    gap: 0.3rem;
+    gap: 0.35rem;
   }
 
   .lead-form label span {
     color: var(--muted);
     font-size: 0.68rem;
-    font-weight: 800;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
 
   .lead-form input,
   .lead-form select,
   .lead-form textarea {
     width: 100%;
-    min-height: 3rem;
-    border: 1px solid rgba(17, 17, 17, 0.26);
-    border-radius: 0;
-    background: rgba(255, 255, 255, 0.1);
+    min-height: 3.15rem;
+    border: 1px solid rgba(17, 17, 17, 0.2);
+    border-radius: 0.35rem;
+    background: #fff;
     color: var(--ink);
-    font: 600 0.92rem/1.35 "Manrope", system-ui, sans-serif;
-    padding: 0.78rem 0.82rem;
+    font: 700 0.92rem/1.35 "Manrope", system-ui, sans-serif;
+    padding: 0.82rem 0.9rem;
   }
 
   .lead-form textarea {
@@ -1094,8 +1522,9 @@ const schema = {
   .response-box {
     display: grid;
     gap: 0.72rem;
+    border: 1px solid rgba(212, 175, 55, 0.18);
     padding: 1.1rem;
-    background: rgba(177, 138, 68, 0.08);
+    background: rgba(212, 175, 55, 0.08);
   }
 
   .response-box p {
@@ -1114,7 +1543,7 @@ const schema = {
     left: 0;
     width: 0.95rem;
     height: 0.95rem;
-    border: 1px solid var(--gold);
+    border: 1px solid var(--gold-deep);
     border-radius: 999px;
   }
 
@@ -1125,30 +1554,47 @@ const schema = {
     left: 0.27rem;
     width: 0.38rem;
     height: 0.2rem;
-    border-bottom: 1.5px solid var(--gold);
-    border-left: 1.5px solid var(--gold);
+    border-bottom: 1.5px solid var(--gold-deep);
+    border-left: 1.5px solid var(--gold-deep);
     transform: rotate(-45deg);
   }
 
   .lead-form button {
     width: 100%;
-    margin-top: 0.25rem;
+  }
+
+  .faq-section {
+    padding-top: 2.5rem;
+  }
+
+  .faq-list {
+    display: grid;
+    gap: 0.8rem;
+    margin-top: 2rem;
+  }
+
+  .faq-list article {
+    border: 1px solid rgba(17, 17, 17, 0.1);
+    background: var(--paper-soft);
+    padding: 1.2rem;
+  }
+
+  .faq-list p {
+    margin-top: 0.7rem;
   }
 
   .studio-footer {
     display: grid;
     gap: 0.35rem;
     padding: 1.5rem 1.35rem 1.7rem;
-    background:
-      linear-gradient(rgba(10, 10, 10, 0.94), rgba(10, 10, 10, 0.94)),
-      #101010;
+    background: #080808;
     color: #fff;
     text-align: center;
   }
 
   .studio-footer strong {
     font-size: 0.94rem;
-    font-weight: 800;
+    font-weight: 900;
     letter-spacing: 0.16em;
     text-transform: uppercase;
   }
@@ -1164,8 +1610,8 @@ const schema = {
     bottom: 1rem;
     z-index: 70;
     display: grid;
-    width: 4.35rem;
-    height: 4.35rem;
+    width: 4.2rem;
+    height: 4.2rem;
     place-items: center;
     border: 1px solid rgba(255, 255, 255, 0.24);
     border-radius: 999px;
@@ -1185,8 +1631,8 @@ const schema = {
   }
 
   .floating-whatsapp svg {
-    width: 2.6rem;
-    height: 2.6rem;
+    width: 2.55rem;
+    height: 2.55rem;
   }
 
   a:focus-visible,
@@ -1198,141 +1644,128 @@ const schema = {
     outline-offset: 3px;
   }
 
-  @media (min-width: 700px) {
+  @media (min-width: 760px) {
     .studio-header {
-      padding: 1.7rem 2.7rem;
+      padding: 1.55rem 2.7rem;
     }
 
-    .brand {
-      max-width: 20rem;
-    }
-
-    .brand-mark {
-      font-size: 3.35rem;
+    .brand-logo {
+      width: 8.4rem;
     }
 
     .brand-copy {
-      font-size: 0.82rem;
-      letter-spacing: 0.14em;
+      display: block;
+      font-size: 0.78rem;
     }
 
-    .studio-header nav > a:not(.nav-menu) {
+    .studio-header nav > a {
       display: inline-flex;
     }
 
-    .nav-menu {
-      width: 3rem;
-      gap: 0.48rem;
-      margin-left: 0.7rem;
-    }
-
-    .nav-menu span {
-      height: 0.22rem;
-    }
-
-    .hero {
-      min-height: 790px;
-    }
-
-    .hero-image img {
-      object-position: center center;
-    }
-
-    .hero-panel {
-      padding: 11.4rem 2.7rem 3.4rem;
+    .hero-shell {
+      grid-template-columns: minmax(0, 1fr) 24rem;
+      gap: 2.6rem;
+      padding: 8.2rem 2.7rem 3rem;
+      align-items: center;
     }
 
     .hero h1 {
-      max-width: 11ch;
-      font-size: clamp(4.2rem, 6.15vw, 6.55rem);
+      font-size: clamp(4.25rem, 6.5vw, 6.4rem);
     }
 
     .hero-summary {
-      margin-top: 1.65rem;
       font-size: 1.08rem;
     }
 
     .hero-actions {
-      width: 29.5rem;
-      margin-top: 2rem;
+      flex-direction: row;
+      align-items: center;
+      width: auto;
     }
 
     .whatsapp-button {
-      min-height: 5.25rem;
-      font-size: 1.38rem;
+      min-width: 16.5rem;
+      min-height: 4.25rem;
+      font-size: 1.05rem;
     }
 
-    .whatsapp-symbol {
-      width: 2.75rem;
-      height: 2.75rem;
+    .diagnostic-card {
+      align-self: center;
+      padding: 1.45rem;
     }
 
-    .case-anchor {
-      margin-left: 0.6rem;
-      font-size: 1.02rem;
+    .offer-section,
+    .process-section,
+    .trust-section,
+    .contact-section,
+    .faq-section {
+      padding: 5rem 2.7rem;
     }
 
-    .hero-rating {
-      position: absolute;
-      right: max(4rem, calc((100vw - var(--max)) / 2 + 4rem));
-      bottom: 4.3rem;
-      width: 17rem;
-      margin: 0;
-      font-size: 0.94rem;
+    .offer-heading,
+    .trust-section,
+    .contact-section {
+      grid-template-columns: 0.9fr 1.1fr;
+      align-items: start;
+      gap: 4rem;
     }
 
-    .hero-rating span {
-      font-size: 1.32rem;
+    .offer-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .offer-grid article {
+      min-height: 16rem;
+      align-content: start;
     }
 
     .process-section {
-      grid-template-columns: 0.78fr 1.32fr;
-      gap: 4.6rem;
-      padding: 5rem 2.7rem 4.4rem;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 4.4rem;
     }
 
     .process-flow {
-      grid-template-columns: minmax(0, 1fr) 18.5rem;
-      gap: 2.8rem;
+      grid-template-columns: minmax(0, 1fr) 17rem;
+      gap: 2.4rem;
       align-items: start;
     }
 
     .process-list {
       position: relative;
-      gap: 2.55rem;
-      padding-left: 2.15rem;
-      border-left: 1px solid rgba(177, 138, 68, 0.42);
+      gap: 2.1rem;
+      padding-left: 2rem;
+      border-left: 1px solid rgba(212, 175, 55, 0.42);
     }
 
     .process-list li {
       position: relative;
-      grid-template-columns: 4.7rem minmax(0, 1fr);
-      gap: 1.25rem;
+      grid-template-columns: 4.4rem minmax(0, 1fr);
+      gap: 1.1rem;
     }
 
     .process-list li::before {
       content: "";
       position: absolute;
-      top: 0.48rem;
-      left: -2.51rem;
+      top: 0.42rem;
+      left: -2.36rem;
       width: 0.78rem;
       height: 0.78rem;
       border-radius: 999px;
       background: var(--gold);
-      box-shadow: 0 0 0 0.35rem var(--paper);
+      box-shadow: 0 0 0 0.35rem #fff;
     }
 
     .process-gallery {
       grid-template-columns: 1fr;
-      gap: 1.05rem;
+      gap: 0.9rem;
     }
 
     .process-gallery figure {
-      aspect-ratio: 1.86 / 1;
+      aspect-ratio: 1.75 / 1;
     }
 
     .cases-section {
-      padding: 5rem 0 4.2rem;
+      padding: 5rem 0;
     }
 
     .section-heading {
@@ -1341,45 +1774,28 @@ const schema = {
       gap: 3rem;
     }
 
-    .outline-link {
-      justify-self: end;
-      min-height: 3.55rem;
-      padding-inline: 1.35rem;
-      font-size: 1.02rem;
+    .case-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.05rem;
+      margin-top: 2.2rem;
     }
 
-    .case-table {
-      margin-top: 2.3rem;
+    .case-card {
+      grid-template-rows: auto 1fr;
     }
 
-    .case-row {
-      grid-template-columns: 36% minmax(0, 1fr);
-      gap: 2.4rem;
-      align-items: center;
-      padding: 1.35rem 0;
-    }
-
-    .case-row figure {
-      aspect-ratio: 2.3 / 1;
-    }
-
-    .case-row dl {
-      grid-template-columns: 0.9fr 1.08fr 0.74fr 1.05fr;
-      gap: 1.7rem;
-    }
-
-    .case-row dd {
-      font-size: 0.9rem;
+    .case-card > div {
+      padding: 1.35rem;
     }
 
     .b2b-section {
       grid-template-columns: 48% 52%;
-      min-height: 31rem;
+      min-height: 34rem;
     }
 
     .b2b-image,
     .b2b-image img {
-      min-height: 31rem;
+      min-height: 34rem;
     }
 
     .b2b-content {
@@ -1389,92 +1805,90 @@ const schema = {
     }
 
     .b2b-content ul {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1.2rem;
-      margin-top: 2.1rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem 1.4rem;
+      margin: 2rem 0;
     }
 
-    .b2b-content li {
-      justify-items: center;
-      text-align: center;
-      font-size: 0.76rem;
+    .trust-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .contact-section {
-      grid-template-columns: 0.92fr 1.08fr;
-      gap: 4.5rem;
-      max-width: var(--max);
-      margin-inline: auto;
-      padding: 3.9rem 2.7rem 3.3rem;
+    .lead-form {
+      padding: 1.2rem;
     }
 
     .form-row {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.58rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .response-box {
-      justify-self: end;
-      width: min(100%, 24rem);
-    }
-
-    .lead-form button {
-      justify-self: end;
-      width: min(100%, 24rem);
+    .faq-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
   @media (min-width: 1100px) {
-    .hero {
-      min-height: 820px;
-    }
-
-    .hero-panel {
+    .hero-shell,
+    .offer-section,
+    .process-section,
+    .trust-section,
+    .contact-section,
+    .faq-section {
       padding-left: 4.2rem;
       padding-right: 4.2rem;
     }
 
-    .process-section {
-      padding-left: 4.2rem;
-      padding-right: 4.2rem;
-    }
-
-    .contact-section {
-      padding-left: 4.2rem;
-      padding-right: 4.2rem;
+    .hero-shell {
+      grid-template-columns: minmax(0, 1fr) 27rem;
     }
   }
 
-  @media (max-width: 420px) {
-    .hero-panel {
-      padding-top: 7.8rem;
-      padding-bottom: 1.35rem;
+  @media (max-width: 440px) {
+    .studio-header {
+      align-items: flex-start;
+    }
+
+    .studio-header .nav-cta {
+      min-height: 2.45rem;
+      padding-inline: 0.72rem;
+    }
+
+    .brand-copy {
+      max-width: 7rem;
+    }
+
+    .hero-shell {
+      padding-top: 6.05rem;
+      padding-bottom: 1.25rem;
     }
 
     .hero h1 {
-      font-size: clamp(2.78rem, 13.2vw, 3.2rem);
+      font-size: clamp(2.7rem, 12vw, 3.4rem);
     }
 
-    .hero-rating {
-      margin-top: 0;
-      margin-bottom: 1.35rem;
-      width: min(100% - 6rem, 17rem);
+    .proof-strip {
+      grid-template-columns: 1fr;
     }
 
-    .process-list li {
-      grid-template-columns: 3.7rem minmax(0, 1fr);
+    .proof-strip article {
+      grid-template-columns: 4.5rem minmax(0, 1fr);
+      min-height: 4.25rem;
+      align-items: baseline;
+      justify-items: stretch;
+      text-align: left;
     }
 
-    .process-list li > span {
-      font-size: 3.35rem;
+    .proof-strip strong {
+      font-size: 1.45rem;
     }
 
-    .process-gallery {
-      gap: 0.5rem;
+    .proof-strip span {
+      text-align: right;
     }
 
-    .case-row dl {
-      gap: 0.9rem;
+    .floating-whatsapp {
+      width: 3.75rem;
+      height: 3.75rem;
     }
   }
 

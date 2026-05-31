@@ -1,13 +1,19 @@
 const siteUrl = "https://marmolesdeluxe.com";
+const studioHosts = new Set([
+  "studio.marmolesdeluxe.com",
+  "estudio.marmolesdeluxe.com",
+]);
 
-export function GET() {
+export function GET({ request }: { request: Request }) {
+  const url = new URL(request.url);
+  const origin = studioHosts.has(url.hostname) ? url.origin : siteUrl;
   const body = [
     "User-agent: *",
     "Allow: /",
     "Disallow: /api/",
     "Disallow: /confirmacion-pago",
     "",
-    `Sitemap: ${siteUrl}/sitemap.xml`,
+    `Sitemap: ${origin}/sitemap.xml`,
   ].join("\n");
 
   return new Response(body, {

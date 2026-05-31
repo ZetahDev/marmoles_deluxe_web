@@ -1,14 +1,23 @@
 import { publicSiteRoutes } from "../lib/seo";
 
 const siteUrl = "https://marmolesdeluxe.com";
+const studioHosts = new Set([
+  "studio.marmolesdeluxe.com",
+  "estudio.marmolesdeluxe.com",
+]);
 
-export function GET() {
-  const urls = publicSiteRoutes
+export function GET({ request }: { request: Request }) {
+  const url = new URL(request.url);
+  const isStudioHost = studioHosts.has(url.hostname);
+  const origin = isStudioHost ? url.origin : siteUrl;
+  const routes = isStudioHost ? ["/"] : publicSiteRoutes;
+
+  const urls = routes
     .map((route) => {
       const pathname = route === "/" ? "" : route;
       return [
         "<url>",
-        `  <loc>${siteUrl}${pathname}</loc>`,
+        `  <loc>${origin}${pathname}</loc>`,
         "</url>",
       ].join("\n");
     })
