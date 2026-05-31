@@ -1,16 +1,4 @@
 {
   "buildCommand": "astro build",
-  "framework": "astro",
-  "rewrites": [
-    {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "estudio.marmolesdeluxe.com"
-        }
-      ],
-      "destination": "/estudio/"
-    }
-  ]
+  "framework": "astro"
 }
