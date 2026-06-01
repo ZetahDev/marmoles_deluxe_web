@@ -1,6 +1,6 @@
 # Tasks SEO - Estado de Ejecución
 
-Última actualización: 2026-06-01 (tarde)
+Última actualización: 2026-06-01 (noche)
 
 ## 1) Pendientes críticos (impacto directo en tráfico/ventas)
 
@@ -84,6 +84,8 @@
 
 - 🟡 **Tablero operativo semanal**
   - ✅ Existe base: `docs/seo/tablero_kpis_por_url.md`.
+  - ✅ Definido control semanal GA4/GTM para eventos de `/precios`.
+  - ✅ Definido plan de iteración CTR (2-4 semanas) para `/precios`, `/mesones-de-cocina`, `/blanco-polar`.
   - ⬜ Cargar datos reales semanales y mantener histórico.
 
 - ⬜ **Ritual mensual institucionalizado**
@@ -101,5 +103,5 @@
 ## Próximo bloque recomendado (ejecución inmediata)
 
 1. Validar en Vercel la redirección `/encimeras-de-cocina-cali` -> `/mesones-de-cocina` con `301` en entorno productivo.
-2. Validar eventos de microconversión en GA4/Tag Manager (nombres y parámetros en tiempo real).
-3. Iniciar ciclo de optimización CTR con datos reales GSC (2-4 semanas).
+2. Cargar primera semana real de eventos y CTR en `docs/seo/tablero_kpis_por_url.md`.
+3. Ejecutar Semana 1 de pruebas CTR en `/precios` (title + meta) y registrar resultado.
