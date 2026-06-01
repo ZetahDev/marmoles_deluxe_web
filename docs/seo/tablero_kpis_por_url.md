@@ -3,9 +3,7 @@
 ## URLs foco (fase 1)
 
 - `/`
-- `/mesones-de-cocina-cali`
-- `/mesones-de-cocina-jamundi`
-- `/mesones-de-cocina-palmira`
+- `/mesones-de-cocina`
 - `/blanco-polar`
 - `/precios`
 
@@ -14,9 +12,7 @@
 | URL | Query objetivo | Impresiones | Clics | CTR | Posición prom. | Rebote (GA4) | Conversiones (WA/Form) | Último cambio |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `/` | `marmolistas en cali` |  |  |  |  |  |  |  |
-| `/mesones-de-cocina-cali` | `mesones de cocina cali` |  |  |  |  |  |  |  |
-| `/mesones-de-cocina-jamundi` | `mesones de cocina jamundi` |  |  |  |  |  |  |  |
-| `/mesones-de-cocina-palmira` | `mesones de cocina palmira` |  |  |  |  |  |  |  |
+| `/mesones-de-cocina` | `mesones de cocina cali` |  |  |  |  |  |  |  |
 | `/blanco-polar` | `cuarzo blanco polar cali` |  |  |  |  |  |  |  |
 | `/precios` | `marmoles cali precios` |  |  |  |  |  |  |  |
 

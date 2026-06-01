@@ -2,19 +2,20 @@
 
 | URL objetivo del informe | Estado actual en repo | Acción | Owner | Impacto |
 | --- | --- | --- | --- | --- |
-| `/mesones-de-cocina` | No existe como página canónica | `redirigir` a `/mesones-de-cocina-cali` + crear clúster local | SEO + Frontend | Alto |
-| `/mesones-de-cocina-cali` | No existía | `crear` landing canónica transaccional | SEO + Frontend | Alto |
-| `/mesones-de-cocina-jamundi` | No existía | `crear` landing local fase 1 | SEO + Frontend | Alto |
-| `/mesones-de-cocina-palmira` | No existía | `crear` landing local fase 1 | SEO + Frontend | Alto |
-| `/blanco-polar` | No existía (solo `/quartzstone`) | `crear` + `redirigir` legacy | SEO + Frontend | Alto |
-| `/quartzstone` | Existía como ruta principal de cuarzo | `redirigir` 301 a `/blanco-polar` | Frontend | Medio-Alto |
-| `/precios` | No existía | `crear` hub transaccional de precios | SEO + Frontend | Alto |
-| `/piedra-sinterizada` | Existe | `mantener` y enlazar hacia rutas comerciales | SEO + Frontend | Medio |
-| `/` Home | Existe con copy no alineado a queries 11-20 | `mejorar` title/description/H1 | SEO + Frontend | Alto |
-| `sitemap.xml` | Existía sin nuevas rutas objetivo | `actualizar` catálogo canónico | Frontend | Alto |
+| `/mesones-de-cocina` | Publicada como canónica | `mantener` + optimización continua de CTR | SEO + Frontend | Alto |
+| `/blanco-polar` | Publicada como URL comercial específica | `mantener` + expansión long-form | SEO + Frontend | Alto |
+| `/precios` | Publicada como hub transaccional | `mantener` + CRO + comparación técnica | SEO + Frontend | Alto |
+| `/piedra-sinterizada/altea` | Publicada | `mantener` + enlazado interno estratégico | SEO + Frontend | Alto |
+| `/piedra-sinterizada/terracina` | Publicada | `mantener` + enlazado interno estratégico | SEO + Frontend | Alto |
+| `/piedra-sinterizada/dekton` | Publicada | `mantener` + enlazado interno estratégico | SEO + Frontend | Alto |
+| `/piedra-sinterizada/neolith` | Publicada | `mantener` + enlazado interno estratégico | SEO + Frontend | Alto |
+| `/piedra-sinterizada/silestone` | Publicada | `mantener` + enlazado interno estratégico | SEO + Frontend | Alto |
+| `/piedra-sinterizada/artemarmol` | Publicada | `mantener` + enlazado interno estratégico | SEO + Frontend | Alto |
+| `/encimeras-de-cocina-cali` | Legacy | `redirigir` 301 a `/mesones-de-cocina` | Frontend | Medio |
+| `/` Home | Optimizada base | `iterar` por datos GSC (query set 11-20) | SEO + Frontend | Alto |
+| `sitemap.xml` | Catálogo canónico actualizado | `auditar` semanalmente contra rutas públicas | Frontend | Alto |
 
 ## Notas de decisión
 
-- Se prioriza arquitectura canónica y redirecciones antes de expansión masiva de contenidos.
-- Fase 1 local: Cali, Jamundí, Palmira.
-- Fase 2 propuesta: Yumbo y Candelaria.
+- Se mantiene navegación principal actual (`/quartzstone`, `/piedra-sinterizada`) y se usa SEO por subrutas/landings sin ensuciar navbar.
+- Las rutas locales por ciudad quedan para campañas futuras bajo política explícita index/noindex.

@@ -5,9 +5,9 @@ import GeoFaqSection from "../components/GeoFaqSection.astro";
 import { cloudinaryAssets } from "../lib/images/cloudinaryAssets";
 import { buildSeoImageUrl } from "../lib/images/cloudinary";
 
-const title = "Mármoles en Cali Precios | ¿Cuánto cuesta un mesón?";
+const title = "Precios de Mesones de Cocina en Cali | Cuarzo, Granito y Sinterizada";
 const description =
-  "Mármoles en Cali Precios todo incluido: Medición, transporte, cortes e instalación profesional a precio cerrado de fábrica. ¡Calcula tu mesón hoy!";
+  "Consulta precios de mesones de cocina en Cali: cuarzo desde 550.000, granito desde 600.000 y piedra sinterizada desde 960.000 por metro lineal. Cotiza con instalación.";
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const pageUrl = canonicalURL.toString();
 const metaImage = buildSeoImageUrl(cloudinaryAssets.seo.default);
@@ -33,6 +33,27 @@ const pricingRows = [
   { line: "Mesones de cuarzo en Cali", range: "Desde 550.000 COP por metro lineal*" },
   { line: "Mesones de granito en Cali", range: "Desde 600.000 COP por metro lineal*" },
   { line: "Piedra sinterizada premium", range: "Desde 960.000 COP por metro lineal*" },
+];
+
+const comparisonRows = [
+  {
+    material: "Cuarzo",
+    use: "Cocina residencial de uso diario",
+    maintenance: "Bajo, limpieza simple",
+    entryPrice: "Desde 550.000 COP/ml",
+  },
+  {
+    material: "Granito",
+    use: "Cocina de alto uso y acabado natural",
+    maintenance: "Medio, sellado periódico",
+    entryPrice: "Desde 600.000 COP/ml",
+  },
+  {
+    material: "Piedra sinterizada",
+    use: "Proyecto premium con alta exigencia térmica",
+    maintenance: "Bajo-medio, cuidado de bordes",
+    entryPrice: "Desde 960.000 COP/ml",
+  },
 ];
 ---
 
@@ -65,7 +86,7 @@ const pricingRows = [
           Precios de Mármoles en Cali y Mesones de Cuarzo
         </h1>
         <p class="mt-5 text-lg text-gray-700 max-w-4xl">
-          Esta página concentra señales comerciales para consultas de precio de alta intención. Publicamos rangos de referencia y los factores que realmente mueven la cotización final.
+          Si buscas precios de mesones de cocina en Cali, aquí tienes una base comercial clara para comparar cuarzo, granito y piedra sinterizada. Publicamos rangos de referencia por metro lineal, qué incluye cada cotización y qué variables cambian el valor final para que tomes una decisión con contexto técnico real.
         </p>
       </div>
     </section>
@@ -107,12 +128,13 @@ const pricingRows = [
         <div class="mt-6 flex flex-wrap gap-4">
           <a
             href="https://wa.me/573132592793?text=Hola%2C%20quiero%20cotizar%20un%20mes%C3%B3n%20de%20cocina%20en%20Cali."
+            data-cta="whatsapp-precios-main"
             class="inline-flex items-center rounded-md bg-marmoles-gold px-6 py-3 text-sm font-semibold text-marmoles-black transition hover:bg-yellow-300"
           >
             Cotizar por WhatsApp
           </a>
           <a
-            href="/mesones-de-cocina-cali"
+            href="/mesones-de-cocina"
             class="inline-flex items-center rounded-md border border-marmoles-black px-6 py-3 text-sm font-semibold text-marmoles-black transition hover:bg-gray-100"
           >
             Ver servicio en Cali
@@ -121,10 +143,102 @@ const pricingRows = [
       </article>
     </section>
 
+    <section class="container mx-auto px-4 sm:px-6 max-w-6xl mt-10">
+      <div class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+        <div class="border-b border-gray-200 px-6 py-4">
+          <h2 class="text-2xl font-bold text-marmoles-black">Comparativa rápida por material</h2>
+          <p class="text-sm text-gray-600 mt-1">Comparación orientativa para apoyar decisión de compra.</p>
+        </div>
+        <table class="w-full text-left">
+          <thead class="bg-gray-50 text-gray-800">
+            <tr>
+              <th class="px-6 py-3 text-sm font-semibold">Material</th>
+              <th class="px-6 py-3 text-sm font-semibold">Uso recomendado</th>
+              <th class="px-6 py-3 text-sm font-semibold">Mantenimiento</th>
+              <th class="px-6 py-3 text-sm font-semibold">Desde</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              comparisonRows.map((row) => (
+                <tr class="border-t border-gray-200">
+                  <td class="px-6 py-4 font-semibold text-marmoles-black">{row.material}</td>
+                  <td class="px-6 py-4 text-gray-700">{row.use}</td>
+                  <td class="px-6 py-4 text-gray-700">{row.maintenance}</td>
+                  <td class="px-6 py-4 text-gray-700">{row.entryPrice}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+
     <GeoFaqSection
       title="Preguntas frecuentes sobre precios"
       intro="Estas respuestas ayudan a interpretar mejor la cotización y comparar opciones de material con criterio."
       faqs={faqs}
     />
   </main>
+
+  <a
+    href="https://wa.me/573132592793?text=Hola%2C%20quiero%20cotizar%20mi%20mes%C3%B3n%20de%20cocina."
+    data-cta="whatsapp-precios-sticky"
+    class="fixed bottom-5 right-4 z-40 inline-flex items-center rounded-full bg-marmoles-gold px-5 py-3 text-sm font-bold text-marmoles-black shadow-lg transition hover:bg-yellow-300"
+  >
+    Cotizar ahora
+  </a>
 </Layout>
+
+<script>
+  if (typeof window !== "undefined") {
+    const track = (eventName, params = {}) => {
+      if (typeof window.gtag === "function") {
+        window.gtag("event", eventName, params);
+      }
+      if (Array.isArray(window.dataLayer)) {
+        window.dataLayer.push({
+          event: eventName,
+          ...params,
+        });
+      }
+    };
+
+    // Scroll depth
+    let fired50 = false;
+    let fired90 = false;
+    window.addEventListener("scroll", () => {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      if (scrollable <= 0) return;
+      const depth = Math.round((window.scrollY / scrollable) * 100);
+      if (!fired50 && depth >= 50) {
+        fired50 = true;
+        track("precios_scroll_50", { page: "/precios" });
+      }
+      if (!fired90 && depth >= 90) {
+        fired90 = true;
+        track("precios_scroll_90", { page: "/precios" });
+      }
+    }, { passive: true });
+
+    // CTA clicks
+    document.querySelectorAll("[data-cta]").forEach((node) => {
+      node.addEventListener("click", () => {
+        track("precios_cta_click", {
+          page: "/precios",
+          cta: node.getAttribute("data-cta") || "unknown",
+        });
+      });
+    });
+
+    // Exit intent (desktop)
+    let exitIntentSent = false;
+    document.addEventListener("mouseout", (event) => {
+      if (exitIntentSent) return;
+      if (event.relatedTarget === null && event.clientY <= 0) {
+        exitIntentSent = true;
+        track("precios_exit_intent", { page: "/precios" });
+      }
+    });
+  }
+</script>
