@@ -25,7 +25,7 @@ export const WhatsAppButton = () => {
 
   if (typeof window !== "undefined") {
     const path = window.location.pathname.toLowerCase();
-    if (path.includes("quartzstone")) {
+    if (path.includes("quartzstone") || path.includes("blanco-polar")) {
       message = "Hola! Estoy interesado en cotizar Quartzstone Blanco Polar para el mesón de mi cocina. ¿Tienen láminas disponibles?";
       clickContext = "floating_button_quartzstone";
       productLabel = "Quartzstone Blanco Polar";

@@ -37,6 +37,11 @@ const graph: Record<string, unknown>[] = [
     "@id": organizationId,
     name: businessInfo.legalName,
     url: businessInfo.url,
+    founder: {
+      "@type": "Person",
+      name: businessInfo.founder,
+    },
+    foundingDate: businessInfo.foundingDate,
     email: businessInfo.email,
     telephone: businessInfo.telephone,
     sameAs: businessInfo.sameAs,
@@ -50,6 +55,11 @@ const graph: Record<string, unknown>[] = [
     image: pageImage,
     email: businessInfo.email,
     telephone: businessInfo.telephone,
+    founder: {
+      "@type": "Person",
+      name: businessInfo.founder,
+    },
+    foundingDate: businessInfo.foundingDate,
     priceRange: "$$",
     address: {
       "@type": "PostalAddress",

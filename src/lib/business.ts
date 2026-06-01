@@ -5,15 +5,17 @@ export interface GeoFaqItem {
 
 export const businessInfo = {
   name: "Mármoles Deluxe",
-  legalName: "Mármoles Deluxe",
+  legalName: "Mármoles Deluxe SAS",
   url: "https://marmolesdeluxe.com",
   description:
     "Empresa familiar con más de 16 años de experiencia en suministro e instalación de mármoles, granitos y piedra sinterizada en Cali y Valle del Cauca.",
+  founder: "Johan Sebastian Castro",
+  foundingDate: "2010",
   telephone: "+57 313 259 2793",
   telephoneHref: "+573132592793",
   email: "info@marmolesdeluxe.com",
   address: {
-    streetAddress: "Cra 5norte 40-43 barrio el popular",
+    streetAddress: "Cra. 5 Nte. #40-43, Barrio El Popular",
     addressLocality: "Cali",
     addressRegion: "Valle del Cauca",
     postalCode: "760001",
@@ -39,6 +41,7 @@ export const businessInfo = {
   sameAs: [
     "https://www.instagram.com/marmolesdeluxe/",
     "https://www.facebook.com/Marmolesdeluxe",
+    "https://www.linkedin.com/company/marmoles-deluxe/",
   ],
   reviewSummary: [
     "Más de 16 años de experiencia en suministro e instalación.",
