@@ -12,9 +12,8 @@
 
 ## 2) Redirecciones 301 activas
 
-- `/blanco-polar` -> `/quartzstone?material=blanco-polar`
-- `/mesones-de-cocina` -> `/mesones-de-cocina-cali`
-- `/encimeras-de-cocina-cali` -> `/mesones-de-cocina-cali`
+- `/mesones-de-cocina-cali` -> `/mesones-de-cocina`
+- `/encimeras-de-cocina-cali` -> `/mesones-de-cocina`
 
 ## 3) Reglas de calidad técnica
 

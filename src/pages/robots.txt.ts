@@ -6,11 +6,6 @@ export function GET() {
     "Allow: /",
     "Disallow: /api/",
     "Disallow: /confirmacion-pago",
-    "Disallow: /blanco-polar",
-    "Disallow: /precios",
-    "Disallow: /mesones-de-cocina-cali",
-    "Disallow: /mesones-de-cocina-jamundi",
-    "Disallow: /mesones-de-cocina-palmira",
     "",
     `Sitemap: ${siteUrl}/sitemap.xml`,
   ].join("\n");

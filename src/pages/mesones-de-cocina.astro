@@ -1,0 +1,110 @@
+---
+import Layout from "../layouts/Layout.astro";
+import GeoBusinessSchema from "../components/GeoBusinessSchema.astro";
+import GeoFaqSection from "../components/GeoFaqSection.astro";
+import { cloudinaryAssets } from "../lib/images/cloudinaryAssets";
+import { buildSeoImageUrl } from "../lib/images/cloudinary";
+
+const title = "Mesones y Encimeras de Cocina en Cali | Mármoles Deluxe";
+const description =
+  "Mesones de cocina en Cali en cuarzo y granito. Instalación express certificada en 5 días sin costos ocultos. Medición láser gratis. ¡Cotiza ya!";
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const pageUrl = canonicalURL.toString();
+const metaImage = buildSeoImageUrl(cloudinaryAssets.seo.default);
+
+const faqs = [
+  {
+    question: "¿Cuánto tarda la instalación de un mesón de cocina en Cali?",
+    answer:
+      "Normalmente entre 4 y 7 días hábiles según material, complejidad de cortes y condiciones del proyecto.",
+  },
+  {
+    question: "¿Qué incluye la cotización de mesones y encimeras?",
+    answer:
+      "Incluye revisión técnica, fabricación, cortes requeridos y montaje. El alcance final se confirma en visita técnica.",
+  },
+  {
+    question: "¿Puedo comparar cuarzo, granito y sinterizada antes de comprar?",
+    answer:
+      "Sí. Se puede comparar desempeño, mantenimiento, estética y precio para elegir el material correcto según uso real.",
+  },
+];
+---
+
+<Layout title={title} description={description}>
+  <Fragment slot="head">
+    <link rel="canonical" href={canonicalURL} />
+    <meta
+      name="keywords"
+      content="mesones de cocina cali, encimeras de cocina cali, mesones de cuarzo cali, remodelacion de cocinas cali"
+    />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={metaImage} />
+  </Fragment>
+
+  <GeoBusinessSchema
+    pageTitle={title}
+    pageDescription={description}
+    pageUrl={pageUrl}
+    pageImage={metaImage}
+    pageType="Service"
+    faqs={faqs}
+  />
+
+  <main class="pt-24 pb-16 bg-white">
+    <section class="container mx-auto px-4 sm:px-6 max-w-6xl">
+      <div class="rounded-3xl border border-marmoles-gold/20 bg-gradient-to-br from-marmoles-black to-neutral-900 px-8 py-12 text-white shadow-xl">
+        <p class="text-xs uppercase tracking-[0.22em] text-marmoles-gold mb-4">
+          mesones de cocina cali, encimeras de cocina cali
+        </p>
+        <h1 class="text-3xl md:text-5xl font-bold leading-tight max-w-4xl">
+          Mesones de Cocina en Cali y Encimeras de Cuarzo Premium
+        </h1>
+        <p class="mt-6 text-base md:text-lg text-gray-200 max-w-3xl">
+          Si estás buscando mesones de cocina Cali con instalación confiable y acabados de alto nivel, esta es la página correcta. Diseñamos y fabricamos encimeras de cocina Cali en cuarzo, granito y piedra sinterizada para proyectos residenciales y comerciales. Nuestro proceso integra medición técnica, selección de material y montaje profesional para reducir errores y garantizar un resultado durable. También atendemos remodelación de cocinas Cali con recomendaciones claras de mantenimiento y uso según el tipo de superficie.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a
+            href="https://wa.me/573132592793?text=Hola%2C%20quiero%20cotizar%20mesones%20de%20cocina%20en%20Cali."
+            class="inline-flex items-center rounded-md bg-marmoles-gold px-6 py-3 text-sm font-semibold text-marmoles-black transition hover:bg-yellow-300"
+          >
+            Cotizar por WhatsApp
+          </a>
+          <a
+            href="/precios"
+            class="inline-flex items-center rounded-md border border-white/40 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+          >
+            Ver guía de precios
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="container mx-auto px-4 sm:px-6 max-w-6xl mt-10">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <article class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+          <h2 class="text-xl font-semibold text-marmoles-black mb-2">Cuarzo</h2>
+          <p class="text-gray-700">Ideal para limpieza simple y lectura visual uniforme en cocinas de uso diario.</p>
+        </article>
+        <article class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+          <h2 class="text-xl font-semibold text-marmoles-black mb-2">Granito</h2>
+          <p class="text-gray-700">Excelente desempeño estructural para proyectos que requieren alta robustez y veta natural.</p>
+        </article>
+        <article class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+          <h2 class="text-xl font-semibold text-marmoles-black mb-2">Sinterizada</h2>
+          <p class="text-gray-700">Alternativa premium para calor intenso y superficies de alto tráfico residencial/comercial.</p>
+        </article>
+      </div>
+    </section>
+
+    <GeoFaqSection
+      title="Preguntas frecuentes sobre mesones y encimeras en Cali"
+      intro="Resolvemos dudas clave para tomar una decisión técnica y comercial con mejor criterio."
+      faqs={faqs}
+    />
+  </main>
+</Layout>

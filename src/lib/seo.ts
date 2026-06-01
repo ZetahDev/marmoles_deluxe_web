@@ -13,10 +13,12 @@ export interface SeoPageConfig {
 export const publicSiteRoutes = [
   "/",
   "/b2b",
+  "/blanco-polar",
   "/casos-de-estudio",
   "/contactanos",
   "/granitos-naturales",
   "/marmoles",
+  "/mesones-de-cocina",
   "/nosotros",
   "/otros-servicios",
   "/piedra-exotica",
@@ -27,6 +29,7 @@ export const publicSiteRoutes = [
   "/piedra-sinterizada/neolith",
   "/piedra-sinterizada/silestone",
   "/piedra-sinterizada/terracina",
+  "/precios",
   "/politicas-garantia",
   "/productos-sellado",
   "/proyectos",
@@ -35,9 +38,4 @@ export const publicSiteRoutes = [
 // Rutas de soporte SEO/operación interna:
 // existen para pruebas, campañas o transición, pero no deben indexarse ni exponerse en navegación principal.
 export const internalSupportRoutes = [
-  "/blanco-polar",
-  "/precios",
-  "/mesones-de-cocina-cali",
-  "/mesones-de-cocina-jamundi",
-  "/mesones-de-cocina-palmira",
 ] as const;

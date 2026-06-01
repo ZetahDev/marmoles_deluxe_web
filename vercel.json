@@ -3,18 +3,8 @@
   "framework": "astro",
   "redirects": [
     {
-      "source": "/blanco-polar",
-      "destination": "/quartzstone?material=blanco-polar",
-      "permanent": true
-    },
-    {
-      "source": "/mesones-de-cocina",
-      "destination": "/mesones-de-cocina-cali",
-      "permanent": true
-    },
-    {
       "source": "/encimeras-de-cocina-cali",
-      "destination": "/mesones-de-cocina-cali",
+      "destination": "/mesones-de-cocina",
       "permanent": true
     }
   ]

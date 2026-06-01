@@ -6,9 +6,9 @@ import GeoTrustSection from "../components/GeoTrustSection.astro";
 import { cloudinaryAssets } from "../lib/images/cloudinaryAssets";
 import { buildSeoImageUrl } from "../lib/images/cloudinary";
 
-const title = "Cuarzo Blanco Polar en Cali | Mármoles Deluxe";
+const title = "Cuarzo Blanco Polar en Cali | Quartzstone Importado";
 const description =
-  "Cuarzo Blanco Polar en Cali para mesones de cocina y superficies premium. Cotiza suministro e instalación con asesoría técnica.";
+  "¿Buscas cuarzo Blanco Polar en Cali? Distribución de Quartzstone importado directo de fábrica con stock real en bodega. ¡Asegura tu placa hoy!";
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const pageUrl = canonicalURL.toString();
 const metaImage = buildSeoImageUrl(cloudinaryAssets.seo.contact);
@@ -35,7 +35,7 @@ const faqs = [
   <Fragment slot="head">
     <link rel="canonical" href={canonicalURL} />
     <meta name="keywords" content="cuarzo blanco polar cali, quartzstone blanco polar, mesones de cuarzo cali" />
-    <meta name="robots" content="noindex, nofollow" />
+    <meta name="robots" content="index, follow" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
@@ -57,7 +57,7 @@ const faqs = [
       <div class="rounded-3xl bg-white border border-gray-200 shadow-sm p-8 md:p-12">
         <p class="text-xs uppercase tracking-[0.2em] text-marmoles-gold mb-3">cuarzo blanco polar cali</p>
         <h1 class="text-3xl md:text-5xl font-bold text-marmoles-black">
-          Cuarzo Blanco Polar para Mesones de Cocina en Cali
+          Distribución de Cuarzo Blanco Polar en Cali - Quartzstone de Lujo
         </h1>
         <p class="mt-5 text-lg text-gray-700 max-w-4xl">
           El Blanco Polar es una de las referencias más buscadas para cocinas por su equilibrio entre estética, luminosidad y mantenimiento. En esta página centralizamos información comercial útil para cotizar sin fricción: alcance, usos recomendados y próximos pasos de instalación.

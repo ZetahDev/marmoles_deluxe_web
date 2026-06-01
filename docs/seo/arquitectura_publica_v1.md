@@ -11,28 +11,22 @@ Cerrar el desfase entre informes SEO y experiencia pública actual sin romper na
 1. Se mantiene la arquitectura pública visible actual:
    - `/quartzstone`
    - `/piedra-sinterizada`
-   - demás rutas corporativas vigentes.
-2. Las rutas creadas como soporte táctico permanecen internas:
    - `/blanco-polar`
    - `/precios`
-   - `/mesones-de-cocina-cali`
-   - `/mesones-de-cocina-jamundi`
-   - `/mesones-de-cocina-palmira`
-3. Blanco Polar se canaliza al flujo existente:
-   - `301 /blanco-polar -> /quartzstone?material=blanco-polar`
+   - `/mesones-de-cocina`
+   - demás rutas corporativas vigentes.
+2. Se eliminan rutas legacy locales no usadas para evitar deuda técnica.
 
 ## Reglas técnicas aplicadas
 
-- Rutas internas fuera de `sitemap.xml`.
-- Rutas internas con `noindex,nofollow`.
-- Rutas internas en `robots.txt` como `Disallow`.
-- Navegación pública sin exposición de rutas internas.
+- Las rutas canónicas de negocio quedan indexables y en sitemap.
+- Redirecciones legacy quedan solo para aliases activos.
 
 ## Impacto esperado
 
 - Preserva UX y arquitectura existente de catálogo.
-- Evita canibalización y ruido de indexación.
-- Permite probar mejoras SEO tácticas sin comprometer rutas principales.
+- Reduce canibalización por rutas duplicadas.
+- Reduce deuda de archivos legacy.
 
 ## Próximo paso recomendado (P1.2)
 

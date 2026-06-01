@@ -5,9 +5,9 @@ import GeoFaqSection from "../components/GeoFaqSection.astro";
 import { cloudinaryAssets } from "../lib/images/cloudinaryAssets";
 import { buildSeoImageUrl } from "../lib/images/cloudinary";
 
-const title = "Precios de Mesones y Superficies en Cali | Mármoles Deluxe";
+const title = "Mármoles en Cali Precios | ¿Cuánto cuesta un mesón?";
 const description =
-  "Guía de precios para mesones de cocina en Cali: cuarzo, granito y piedra sinterizada. Conoce rangos y factores reales de cotización.";
+  "Mármoles en Cali Precios todo incluido: Medición, transporte, cortes e instalación profesional a precio cerrado de fábrica. ¡Calcula tu mesón hoy!";
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const pageUrl = canonicalURL.toString();
 const metaImage = buildSeoImageUrl(cloudinaryAssets.seo.default);
@@ -40,7 +40,7 @@ const pricingRows = [
   <Fragment slot="head">
     <link rel="canonical" href={canonicalURL} />
     <meta name="keywords" content="marmoles cali precios, cuanto cuesta un meson en cali, mesones de cuarzo precios" />
-    <meta name="robots" content="noindex, nofollow" />
+    <meta name="robots" content="index, follow" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
@@ -62,7 +62,7 @@ const pricingRows = [
       <div class="rounded-3xl border border-gray-200 bg-gradient-to-r from-gray-50 to-white p-8 md:p-12 shadow-sm">
         <p class="text-xs uppercase tracking-[0.2em] text-marmoles-gold mb-3">marmoles cali precios</p>
         <h1 class="text-3xl md:text-5xl font-bold text-marmoles-black">
-          Guía de Precios de Mesones de Cocina en Cali
+          Precios de Mármoles en Cali y Mesones de Cuarzo
         </h1>
         <p class="mt-5 text-lg text-gray-700 max-w-4xl">
           Esta página concentra señales comerciales para consultas de precio de alta intención. Publicamos rangos de referencia y los factores que realmente mueven la cotización final.
