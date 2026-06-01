@@ -1,0 +1,130 @@
+---
+import Layout from "../layouts/Layout.astro";
+import GeoBusinessSchema from "../components/GeoBusinessSchema.astro";
+import GeoFaqSection from "../components/GeoFaqSection.astro";
+import { cloudinaryAssets } from "../lib/images/cloudinaryAssets";
+import { buildSeoImageUrl } from "../lib/images/cloudinary";
+
+const title = "Precios de Mesones y Superficies en Cali | Mármoles Deluxe";
+const description =
+  "Guía de precios para mesones de cocina en Cali: cuarzo, granito y piedra sinterizada. Conoce rangos y factores reales de cotización.";
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const pageUrl = canonicalURL.toString();
+const metaImage = buildSeoImageUrl(cloudinaryAssets.seo.default);
+const faqs = [
+  {
+    question: "¿Cuánto cuesta un mesón de cocina en Cali?",
+    answer:
+      "El valor varía por material, metraje, borde, salpicadero y aperturas. El rango final se define con medición técnica del espacio.",
+  },
+  {
+    question: "¿Qué incluye la cotización?",
+    answer:
+      "Incluye material, fabricación y montaje. Dependiendo del proyecto puede incluir desmontaje de superficie anterior y ajustes puntuales.",
+  },
+  {
+    question: "¿Puedo cotizar varias alternativas a la vez?",
+    answer:
+      "Sí. Se puede comparar cuarzo, granito y piedra sinterizada en la misma propuesta para decidir por costo, mantenimiento y estilo.",
+  },
+];
+
+const pricingRows = [
+  { line: "Mesones de cuarzo en Cali", range: "Desde 550.000 COP por metro lineal*" },
+  { line: "Mesones de granito en Cali", range: "Desde 600.000 COP por metro lineal*" },
+  { line: "Piedra sinterizada premium", range: "Desde 960.000 COP por metro lineal*" },
+];
+---
+
+<Layout title={title} description={description}>
+  <Fragment slot="head">
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="keywords" content="marmoles cali precios, cuanto cuesta un meson en cali, mesones de cuarzo precios" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={metaImage} />
+  </Fragment>
+
+  <GeoBusinessSchema
+    pageTitle={title}
+    pageDescription={description}
+    pageUrl={pageUrl}
+    pageImage={metaImage}
+    pageType="WebPage"
+    faqs={faqs}
+  />
+
+  <main class="pt-24 pb-16 bg-white">
+    <section class="container mx-auto px-4 sm:px-6 max-w-6xl">
+      <div class="rounded-3xl border border-gray-200 bg-gradient-to-r from-gray-50 to-white p-8 md:p-12 shadow-sm">
+        <p class="text-xs uppercase tracking-[0.2em] text-marmoles-gold mb-3">marmoles cali precios</p>
+        <h1 class="text-3xl md:text-5xl font-bold text-marmoles-black">
+          Guía de Precios de Mesones de Cocina en Cali
+        </h1>
+        <p class="mt-5 text-lg text-gray-700 max-w-4xl">
+          Esta página concentra señales comerciales para consultas de precio de alta intención. Publicamos rangos de referencia y los factores que realmente mueven la cotización final.
+        </p>
+      </div>
+    </section>
+
+    <section class="container mx-auto px-4 sm:px-6 max-w-6xl mt-10">
+      <div class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+        <table class="w-full text-left">
+          <thead class="bg-marmoles-black text-white">
+            <tr>
+              <th class="px-6 py-4 text-sm font-semibold">Referencia</th>
+              <th class="px-6 py-4 text-sm font-semibold">Rango estimado</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              pricingRows.map((row) => (
+                <tr class="border-t border-gray-200">
+                  <td class="px-6 py-4 text-gray-800">{row.line}</td>
+                  <td class="px-6 py-4 text-gray-700">{row.range}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-sm text-gray-600">
+        *Rangos orientativos para proyectos residenciales. El valor definitivo depende de medición técnica, diseño y complejidad de instalación.
+      </p>
+    </section>
+
+    <section class="container mx-auto px-4 sm:px-6 max-w-6xl mt-10">
+      <article class="rounded-2xl border border-gray-200 bg-gray-50 p-8">
+        <h2 class="text-2xl md:text-3xl font-bold text-marmoles-black mb-4">
+          Qué variables impactan el precio final
+        </h2>
+        <p class="text-gray-700 leading-relaxed">
+          El costo total no depende solo del material base. También pesan el metraje real, tipo de borde, número de perforaciones, salpicadero, condiciones de obra y logística de instalación. Por eso la cotización más confiable siempre parte de una validación técnica en sitio.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-4">
+          <a
+            href="https://wa.me/573132592793?text=Hola%2C%20quiero%20cotizar%20un%20mes%C3%B3n%20de%20cocina%20en%20Cali."
+            class="inline-flex items-center rounded-md bg-marmoles-gold px-6 py-3 text-sm font-semibold text-marmoles-black transition hover:bg-yellow-300"
+          >
+            Cotizar por WhatsApp
+          </a>
+          <a
+            href="/mesones-de-cocina-cali"
+            class="inline-flex items-center rounded-md border border-marmoles-black px-6 py-3 text-sm font-semibold text-marmoles-black transition hover:bg-gray-100"
+          >
+            Ver servicio en Cali
+          </a>
+        </div>
+      </article>
+    </section>
+
+    <GeoFaqSection
+      title="Preguntas frecuentes sobre precios"
+      intro="Estas respuestas ayudan a interpretar mejor la cotización y comparar opciones de material con criterio."
+      faqs={faqs}
+    />
+  </main>
+</Layout>

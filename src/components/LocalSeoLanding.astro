@@ -1,0 +1,116 @@
+---
+import Layout from "../layouts/Layout.astro";
+import GeoBusinessSchema from "./GeoBusinessSchema.astro";
+import GeoFaqSection from "./GeoFaqSection.astro";
+import GeoTrustSection from "./GeoTrustSection.astro";
+import type { GeoFaqItem } from "../lib/business";
+import { buildSeoImageUrl } from "../lib/images/cloudinary";
+import { cloudinaryAssets } from "../lib/images/cloudinaryAssets";
+import type { SeoPageConfig } from "../lib/seo";
+
+interface Props {
+  seo: SeoPageConfig;
+  h1: string;
+  heroIntro: string;
+  bodyText: string;
+  trustTitle: string;
+  trustAnswer: string;
+  trustBullets: string[];
+  faqs: GeoFaqItem[];
+  ctaHref: string;
+  ctaLabel: string;
+  secondaryHref: string;
+  secondaryLabel: string;
+}
+
+const {
+  seo,
+  h1,
+  heroIntro,
+  bodyText,
+  trustTitle,
+  trustAnswer,
+  trustBullets,
+  faqs,
+  ctaHref,
+  ctaLabel,
+  secondaryHref,
+  secondaryLabel,
+} = Astro.props;
+
+const canonicalURL = new URL(seo.canonical, Astro.site);
+const pageUrl = canonicalURL.toString();
+const metaImage = buildSeoImageUrl(cloudinaryAssets.seo.default);
+---
+
+<Layout title={seo.title} description={seo.description}>
+  <Fragment slot="head">
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="description" content={seo.description} />
+    <meta name="keywords" content={seo.primaryKeyword} />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={seo.title} />
+    <meta property="og:description" content={seo.description} />
+    <meta property="og:image" content={metaImage} />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:site_name" content="Mármoles Deluxe" />
+  </Fragment>
+
+  <GeoBusinessSchema
+    pageTitle={seo.title}
+    pageDescription={seo.description}
+    pageUrl={pageUrl}
+    pageImage={metaImage}
+    pageType={seo.schemaType ?? "Service"}
+    faqs={faqs}
+  />
+
+  <main class="pt-24 pb-16 bg-white">
+    <section class="container mx-auto px-4 sm:px-6 max-w-6xl">
+      <div class="rounded-3xl border border-marmoles-gold/20 bg-gradient-to-br from-marmoles-black to-neutral-900 px-8 py-12 text-white shadow-xl">
+        <p class="text-xs uppercase tracking-[0.22em] text-marmoles-gold mb-4">
+          {seo.primaryKeyword}
+        </p>
+        <h1 class="text-3xl md:text-5xl font-bold leading-tight max-w-4xl">{h1}</h1>
+        <p class="mt-6 text-base md:text-lg text-gray-200 max-w-3xl">{heroIntro}</p>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a
+            href={ctaHref}
+            class="inline-flex items-center rounded-md bg-marmoles-gold px-6 py-3 text-sm font-semibold text-marmoles-black transition hover:bg-yellow-300"
+          >
+            {ctaLabel}
+          </a>
+          <a
+            href={secondaryHref}
+            class="inline-flex items-center rounded-md border border-white/40 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+          >
+            {secondaryLabel}
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="container mx-auto px-4 sm:px-6 max-w-4xl mt-12">
+      <article class="rounded-2xl border border-gray-200 bg-gray-50 p-8 shadow-sm">
+        <h2 class="text-2xl md:text-3xl font-bold text-marmoles-black mb-4">
+          Cobertura, materiales y proceso
+        </h2>
+        <p class="text-gray-700 leading-relaxed whitespace-pre-line">{bodyText}</p>
+      </article>
+    </section>
+
+    <GeoTrustSection
+      title={trustTitle}
+      answer={trustAnswer}
+      bullets={trustBullets}
+    />
+
+    <GeoFaqSection
+      title={`Preguntas frecuentes sobre ${seo.localArea ?? "el servicio"}`}
+      intro="Respuestas claras para tomar decisiones de compra con información útil y aplicable a tu proyecto."
+      faqs={faqs}
+    />
+  </main>
+</Layout>

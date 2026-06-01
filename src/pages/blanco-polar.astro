@@ -1,0 +1,101 @@
+---
+import Layout from "../layouts/Layout.astro";
+import GeoBusinessSchema from "../components/GeoBusinessSchema.astro";
+import GeoFaqSection from "../components/GeoFaqSection.astro";
+import GeoTrustSection from "../components/GeoTrustSection.astro";
+import { cloudinaryAssets } from "../lib/images/cloudinaryAssets";
+import { buildSeoImageUrl } from "../lib/images/cloudinary";
+
+const title = "Cuarzo Blanco Polar en Cali | Mármoles Deluxe";
+const description =
+  "Cuarzo Blanco Polar en Cali para mesones de cocina y superficies premium. Cotiza suministro e instalación con asesoría técnica.";
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const pageUrl = canonicalURL.toString();
+const metaImage = buildSeoImageUrl(cloudinaryAssets.seo.contact);
+const faqs = [
+  {
+    question: "¿Qué ventajas tiene el cuarzo Blanco Polar en cocina?",
+    answer:
+      "Es una superficie de baja porosidad, buena resistencia al uso diario y estética limpia, lo que facilita mantenimiento y continuidad visual.",
+  },
+  {
+    question: "¿Incluyen instalación además del material?",
+    answer:
+      "Sí. Podemos atender suministro e instalación completa, incluyendo medición, fabricación y montaje técnico.",
+  },
+  {
+    question: "¿En cuánto tiempo puede quedar instalado?",
+    answer:
+      "El tiempo depende del metraje y complejidad, pero la mayoría de proyectos residenciales se ejecutan entre 4 y 7 días hábiles.",
+  },
+];
+---
+
+<Layout title={title} description={description}>
+  <Fragment slot="head">
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="keywords" content="cuarzo blanco polar cali, quartzstone blanco polar, mesones de cuarzo cali" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={metaImage} />
+  </Fragment>
+
+  <GeoBusinessSchema
+    pageTitle={title}
+    pageDescription={description}
+    pageUrl={pageUrl}
+    pageImage={metaImage}
+    pageType="Service"
+    faqs={faqs}
+  />
+
+  <main class="pt-24 pb-16">
+    <section class="container mx-auto px-4 sm:px-6 max-w-6xl">
+      <div class="rounded-3xl bg-white border border-gray-200 shadow-sm p-8 md:p-12">
+        <p class="text-xs uppercase tracking-[0.2em] text-marmoles-gold mb-3">cuarzo blanco polar cali</p>
+        <h1 class="text-3xl md:text-5xl font-bold text-marmoles-black">
+          Cuarzo Blanco Polar para Mesones de Cocina en Cali
+        </h1>
+        <p class="mt-5 text-lg text-gray-700 max-w-4xl">
+          El Blanco Polar es una de las referencias más buscadas para cocinas por su equilibrio entre estética, luminosidad y mantenimiento. En esta página centralizamos información comercial útil para cotizar sin fricción: alcance, usos recomendados y próximos pasos de instalación.
+        </p>
+      </div>
+    </section>
+
+    <section class="container mx-auto px-4 sm:px-6 max-w-6xl mt-10">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <article class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+          <h2 class="text-2xl font-semibold text-marmoles-black mb-3">Aplicaciones recomendadas</h2>
+          <p class="text-gray-700 leading-relaxed">
+            Ideal para mesones de cocina, barras auxiliares y superficies de preparación en vivienda. También se usa en baños y muebles con superficies de contacto frecuente.
+          </p>
+        </article>
+        <article class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+          <h2 class="text-2xl font-semibold text-marmoles-black mb-3">Proceso de proyecto</h2>
+          <p class="text-gray-700 leading-relaxed">
+            Iniciamos con visita técnica y toma de medidas, definimos borde y aperturas, fabricamos y coordinamos montaje final con checklist de nivelación y sellos.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <GeoTrustSection
+      title="Cómo reducir riesgo al cotizar Blanco Polar"
+      answer="Una cotización útil debe estar conectada al estado real de tu proyecto. Por eso priorizamos visita técnica, alcance documentado y recomendaciones de uso para mantener el acabado en el tiempo."
+      bullets={[
+        "Definición clara de alcance y acabados desde la primera propuesta.",
+        "Acompañamiento técnico para evitar reprocesos de instalación.",
+        "Guía de mantenimiento inicial para conservar brillo y color.",
+      ]}
+    />
+
+    <GeoFaqSection
+      title="Preguntas frecuentes sobre Blanco Polar"
+      intro="Respuestas clave para comprar con mejor información técnica y comercial."
+      faqs={faqs}
+    />
+  </main>
+</Layout>
