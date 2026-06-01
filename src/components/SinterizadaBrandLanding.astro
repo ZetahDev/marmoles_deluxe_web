@@ -1,0 +1,99 @@
+---
+import Layout from "../layouts/Layout.astro";
+import GeoBusinessSchema from "./GeoBusinessSchema.astro";
+import GeoFaqSection from "./GeoFaqSection.astro";
+import { buildSeoImageUrl } from "../lib/images/cloudinary";
+import { cloudinaryAssets } from "../lib/images/cloudinaryAssets";
+
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  brand: string;
+  slug: string;
+  title: string;
+  description: string;
+  keyword: string;
+  intro: string;
+  highlights: string[];
+  faqs: FaqItem[];
+}
+
+const { brand, slug, title, description, keyword, intro, highlights, faqs } =
+  Astro.props;
+const canonicalURL = new URL(`/piedra-sinterizada/${slug}`, Astro.site);
+const pageUrl = canonicalURL.toString();
+const metaImage = buildSeoImageUrl(cloudinaryAssets.seo.default);
+const filteredHubUrl = `/piedra-sinterizada?categoria=${slug}`;
+const whatsappUrl = `https://wa.me/573132592793?text=${encodeURIComponent(`Hola, quiero cotizar piedra sinterizada ${brand} en Cali.`)}`;
+---
+
+<Layout title={title} description={description}>
+  <Fragment slot="head">
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="robots" content="index, follow" />
+    <meta name="keywords" content={keyword} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={metaImage} />
+  </Fragment>
+
+  <GeoBusinessSchema
+    pageTitle={title}
+    pageDescription={description}
+    pageUrl={pageUrl}
+    pageImage={metaImage}
+    pageType="CollectionPage"
+    faqs={faqs}
+  />
+
+  <main class="pt-24 pb-16 bg-white">
+    <section class="container mx-auto px-4 sm:px-6 max-w-6xl">
+      <div class="rounded-3xl border border-marmoles-gold/20 bg-gradient-to-br from-marmoles-black to-neutral-900 px-8 py-12 text-white shadow-xl">
+        <p class="text-xs uppercase tracking-[0.22em] text-marmoles-gold mb-4">
+          {keyword}
+        </p>
+        <h1 class="text-3xl md:text-5xl font-bold leading-tight max-w-4xl">
+          Mesones de Cocina {brand} en Cali con Piedra Sinterizada Premium
+        </h1>
+        <p class="mt-6 text-base md:text-lg text-gray-200 max-w-3xl">{intro}</p>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a
+            href={filteredHubUrl}
+            class="inline-flex items-center rounded-md bg-marmoles-gold px-6 py-3 text-sm font-semibold text-marmoles-black transition hover:bg-yellow-300"
+          >
+            Ver catálogo {brand}
+          </a>
+          <a
+            href={whatsappUrl}
+            class="inline-flex items-center rounded-md border border-white/40 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+          >
+            Cotizar por WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="container mx-auto px-4 sm:px-6 max-w-6xl mt-10">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {
+          highlights.map((item) => (
+            <article class="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+              <p class="text-gray-700 font-medium">{item}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <GeoFaqSection
+      title={`Preguntas frecuentes sobre ${brand}`}
+      intro={`Información clave para evaluar ${brand} según el uso real de tu cocina o proyecto en Cali.`}
+      faqs={faqs}
+    />
+  </main>
+</Layout>
