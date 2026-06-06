@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import GeoBusinessSchema from "./GeoBusinessSchema.astro";
 import GeoFaqSection from "./GeoFaqSection.astro";
-import { buildSeoImageUrl } from "../lib/images/cloudinary";
+import { buildSeoImageUrl, buildCloudinaryImageSet, CLOUDINARY_PRESETS } from "../lib/images/cloudinary";
 import { cloudinaryAssets } from "../lib/images/cloudinaryAssets";
 
 interface FaqItem {
@@ -25,13 +25,34 @@ const { brand, slug, title, description, keyword, intro, highlights, faqs } =
   Astro.props;
 const canonicalURL = new URL(`/piedra-sinterizada/${slug}`, Astro.site);
 const pageUrl = canonicalURL.toString();
-const metaImage = buildSeoImageUrl(cloudinaryAssets.seo.default);
+
+const brandHeroImages: Record<string, string> = {
+  altea: "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/altea/calacatta_gold_designs",
+  dekton: "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/dekton/aura_designs",
+  neolith: cloudinaryAssets.home.projectIslaInfinity,
+  silestone: "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/silestone/miami_white_designs",
+  artemarmol: "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/piedra-sinterizada/artemarmol/calacata-gold_designs",
+  terracina: "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/env_Purezza_vtimsa",
+};
+
+const normalizedSlug = slug.toLowerCase();
+const heroImageUrl = brandHeroImages[normalizedSlug] || cloudinaryAssets.home.hero;
+const heroImage = buildCloudinaryImageSet(heroImageUrl, CLOUDINARY_PRESETS.hero);
+const metaImage = buildSeoImageUrl(heroImageUrl);
+
 const filteredHubUrl = `/piedra-sinterizada?categoria=${slug}`;
 const whatsappUrl = `https://wa.me/573132592793?text=${encodeURIComponent(`Hola, quiero cotizar piedra sinterizada ${brand} en Cali.`)}`;
 ---
 
 <Layout title={title} description={description}>
   <Fragment slot="head">
+    <!-- Preload Hero Image -->
+    <link
+      rel="preload"
+      as="image"
+      href={heroImage.src}
+      fetchpriority="high"
+    />
     <link rel="canonical" href={canonicalURL} />
     <meta name="robots" content="index, follow" />
     <meta name="keywords" content={keyword} />
@@ -53,13 +74,29 @@ const whatsappUrl = `https://wa.me/573132592793?text=${encodeURIComponent(`Hola,
 
   <main class="pt-24 pb-16 bg-white">
     <section class="container mx-auto px-4 sm:px-6 max-w-6xl">
-      <div class="rounded-3xl border border-marmoles-gold/20 bg-gradient-to-br from-marmoles-black to-neutral-900 px-8 py-12 text-white shadow-xl">
-        <p class="text-xs uppercase tracking-[0.22em] text-marmoles-gold mb-4">
-          {keyword}
-        </p>
-        <h1 class="text-3xl md:text-5xl font-bold leading-tight max-w-4xl">
-          Mesones de Cocina {brand} en Cali con Piedra Sinterizada Premium
-        </h1>
+      <div class="relative overflow-hidden rounded-3xl border border-marmoles-gold/20 bg-marmoles-black px-8 py-12 md:py-16 text-white shadow-xl">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+          <img
+            src={heroImage.src}
+            srcset={heroImage.srcSet}
+            sizes={heroImage.sizes}
+            alt={`Mesón de cocina en piedra sinterizada ${brand} instalado en Cali`}
+            class="w-full h-full object-cover opacity-35"
+            width="1200"
+            height="400"
+            fetchpriority="high"
+          />
+          <div class="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent"></div>
+        </div>
+
+        <div class="relative z-10">
+          <p class="text-xs uppercase tracking-[0.22em] text-marmoles-gold mb-4">
+            {keyword}
+          </p>
+          <h1 class="text-3xl md:text-5xl font-bold leading-tight max-w-4xl">
+            Mesones de Cocina {brand} en Cali con Piedra Sinterizada Premium
+          </h1>
         <p class="mt-6 text-base md:text-lg text-gray-200 max-w-3xl">{intro}</p>
         <div class="mt-8 flex flex-wrap gap-4">
           <a
@@ -74,6 +111,7 @@ const whatsappUrl = `https://wa.me/573132592793?text=${encodeURIComponent(`Hola,
           >
             Cotizar por WhatsApp
           </a>
+          </div>
         </div>
       </div>
     </section>

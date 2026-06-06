@@ -33,6 +33,7 @@ export const publicSiteRoutes = [
   "/politicas-garantia",
   "/productos-sellado",
   "/proyectos",
+  "/quartzstone",
 ] as const;
 
 // Rutas de soporte SEO/operación interna:

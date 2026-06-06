@@ -3,14 +3,16 @@ import Layout from "../layouts/Layout.astro";
 import GeoBusinessSchema from "../components/GeoBusinessSchema.astro";
 import GeoFaqSection from "../components/GeoFaqSection.astro";
 import { cloudinaryAssets } from "../lib/images/cloudinaryAssets";
-import { buildSeoImageUrl } from "../lib/images/cloudinary";
+import { buildSeoImageUrl, buildCloudinaryImageSet, CLOUDINARY_PRESETS } from "../lib/images/cloudinary";
 
 const title = "Mesones y Encimeras de Cocina en Cali | Mármoles Deluxe";
 const description =
   "Mesones de cocina en Cali en cuarzo y granito. Instalación express certificada en 5 días sin costos ocultos. Medición láser gratis. ¡Cotiza ya!";
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const pageUrl = canonicalURL.toString();
-const metaImage = buildSeoImageUrl(cloudinaryAssets.seo.default);
+const heroImageUrl = cloudinaryAssets.home.hero;
+const heroImage = buildCloudinaryImageSet(heroImageUrl, CLOUDINARY_PRESETS.hero);
+const metaImage = buildSeoImageUrl(heroImageUrl);
 
 const faqs = [
   {
@@ -33,6 +35,13 @@ const faqs = [
 
 <Layout title={title} description={description}>
   <Fragment slot="head">
+    <!-- Preload Hero Image -->
+    <link
+      rel="preload"
+      as="image"
+      href={heroImage.src}
+      fetchpriority="high"
+    />
     <link rel="canonical" href={canonicalURL} />
     <meta
       name="keywords"
@@ -57,13 +66,29 @@ const faqs = [
 
   <main class="pt-24 pb-16 bg-white">
     <section class="container mx-auto px-4 sm:px-6 max-w-6xl">
-      <div class="rounded-3xl border border-marmoles-gold/20 bg-gradient-to-br from-marmoles-black to-neutral-900 px-8 py-12 text-white shadow-xl">
-        <p class="text-xs uppercase tracking-[0.22em] text-marmoles-gold mb-4">
-          mesones de cocina cali, encimeras de cocina cali
-        </p>
-        <h1 class="text-3xl md:text-5xl font-bold leading-tight max-w-4xl">
-          Mesones de Cocina en Cali y Encimeras de Cuarzo Premium
-        </h1>
+      <div class="relative overflow-hidden rounded-3xl border border-marmoles-gold/20 bg-marmoles-black px-8 py-12 md:py-16 text-white shadow-xl">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+          <img
+            src={heroImage.src}
+            srcset={heroImage.srcSet}
+            sizes={heroImage.sizes}
+            alt="Instalación de mesón de cocina de lujo en Cali por Mármoles Deluxe"
+            class="w-full h-full object-cover opacity-35"
+            width="1200"
+            height="400"
+            fetchpriority="high"
+          />
+          <div class="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent"></div>
+        </div>
+
+        <div class="relative z-10">
+          <p class="text-xs uppercase tracking-[0.22em] text-marmoles-gold mb-4">
+            mesones de cocina cali, encimeras de cocina cali
+          </p>
+          <h1 class="text-3xl md:text-5xl font-bold leading-tight max-w-4xl">
+            Mesones de Cocina en Cali y Encimeras de Cuarzo Premium
+          </h1>
         <p class="mt-6 text-base md:text-lg text-gray-200 max-w-3xl">
           Si estás buscando mesones de cocina Cali con instalación confiable y acabados de alto nivel, esta es la página correcta. Diseñamos y fabricamos encimeras de cocina Cali en cuarzo, granito y piedra sinterizada para proyectos residenciales y comerciales. Nuestro proceso integra medición técnica, selección de material y montaje profesional para reducir errores y garantizar un resultado durable. También atendemos remodelación de cocinas Cali con recomendaciones claras de mantenimiento y uso según el tipo de superficie.
         </p>
@@ -80,6 +105,7 @@ const faqs = [
           >
             Ver guía de precios
           </a>
+          </div>
         </div>
       </div>
     </section>

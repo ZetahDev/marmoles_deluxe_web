@@ -9,7 +9,7 @@ import GeoTrustSection from "../../components/GeoTrustSection.astro";
 import { listProviderGroupsFromCatalog } from "../../lib/utils/s3Utils";
 import { slugify } from "../../lib/utils";
 import { cloudinaryAssets } from "../../lib/images/cloudinaryAssets";
-import { buildSeoImageUrl } from "../../lib/images/cloudinary";
+import { buildSeoImageUrl, buildCloudinaryImageSet, CLOUDINARY_PRESETS } from "../../lib/images/cloudinary";
 import cloudinaryIndex from "../../data/cloudinary-index.json";
 
 // Define stone type features
@@ -21,7 +21,7 @@ interface StoneTypeFeatures {
 const useAnchorLinks = true;
 
 // Generate category descriptions for SEO (optimizado para búsquedas en Google)
-const categoryDescriptions = {
+const categoryDescriptions: Record<string, string> = {
   Altea:
     "Piedra sinterizada Altea en Cali | Material premium para encimeras de cocina y baños con 10 años de garantía. Resistencia superior a químicos, manchas y altas temperaturas. Distribuidor autorizado en Valle del Cauca | Instalación profesional | Precio competitivo.",
   Dekton:
@@ -279,7 +279,9 @@ if (!useAnchorLinks && categoryParam) {
 }
 
 // Default image for SEO
-const image = buildSeoImageUrl(cloudinaryAssets.seo.piedraSinterizada);
+const heroImageUrl = cloudinaryAssets.home.projectIslaInfinity;
+const heroImage = buildCloudinaryImageSet(heroImageUrl, CLOUDINARY_PRESETS.hero);
+const image = buildSeoImageUrl(heroImageUrl);
 const sinterizadaFaqs = [
   {
     question: "¿Qué ventajas tiene la piedra sinterizada frente a otras superficies?",
@@ -305,6 +307,13 @@ const sinterizadaFaqs = [
   enableSpeedInsights={false}
 >
   <Fragment slot="head">
+    <!-- Preload Hero Image -->
+    <link
+      rel="preload"
+      as="image"
+      href={heroImage.src}
+      fetchpriority="high"
+    />
     <!-- SEO Meta Tags -->
     <meta name="keywords" content={keywords} />
     <link rel="canonical" href={canonicalURL} />
@@ -353,11 +362,29 @@ const sinterizadaFaqs = [
 
   <CategoryFilter client:idle categories={providerNames} />
 
-  <!-- Hero Section optimizado para SEO -->
+  <!-- Hero Section optimizado para SEO con Imagen Real -->
   <section
-    class="relative py-16 bg-gradient-to-br from-marmoles-black to-gray-900 text-white"
+    class="relative py-20 bg-marmoles-black text-white overflow-hidden"
   >
-    <div class="container mx-auto px-4 text-center">
+    <!-- Background Image with Overlay -->
+    <div class="absolute inset-0 z-0">
+      <img
+        src={heroImage.src}
+        srcset={heroImage.srcSet}
+        sizes={heroImage.sizes}
+        alt="Isla de cocina de lujo revestida en Piedra Sinterizada Premium instalada en Cali"
+        class="w-full h-full object-cover opacity-45"
+        width="1920"
+        height="500"
+        fetchpriority="high"
+      />
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-marmoles-black via-marmoles-black/60 to-transparent"
+      >
+      </div>
+    </div>
+
+    <div class="container mx-auto px-4 text-center z-10 relative">
       <h1 class="text-4xl md:text-6xl font-bold mb-4">
         Piedra Sinterizada <span class="text-marmoles-gold">Premium</span>
       </h1>

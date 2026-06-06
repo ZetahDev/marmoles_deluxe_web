@@ -4,11 +4,13 @@ import ProductCard from "../components/ProductCard.tsx";
 import SEOSchemaData from "../components/SEOSchemaData.tsx";
 import { listStonesFromS3, type Stone } from "../lib/utils/s3Utils";
 import { cloudinaryAssets } from "../lib/images/cloudinaryAssets";
-import { buildSeoImageUrl } from "../lib/images/cloudinary";
+import { buildSeoImageUrl, buildCloudinaryImageSet, CLOUDINARY_PRESETS } from "../lib/images/cloudinary";
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const pageUrl = canonicalURL.toString();
-const metaImage = buildSeoImageUrl(cloudinaryAssets.seo.contact);
+const heroImageUrl = "https://res.cloudinary.com/dudv2dh4w/image/upload/marmoles-deluxe/catalog/quarstone/blanco_polar_desing";
+const heroImage = buildCloudinaryImageSet(heroImageUrl, CLOUDINARY_PRESETS.hero);
+const metaImage = buildSeoImageUrl(heroImageUrl);
 const title = "Quartzstone Cali - Mármoles Deluxe | Cuarzo de Ingeniería";
 const description =
   "Explora nuestra selección de cuarzo de ingeniería, un material no poroso, resistente a manchas y de bajo mantenimiento. Ideal para cocinas y baños de alta durabilidad.";
@@ -28,6 +30,13 @@ const schemaStones = quarstone.map((stone: Stone) => ({
 
 <Layout title={title} description={description}>
   <Fragment slot="head">
+    <!-- Preload Hero Image -->
+    <link
+      rel="preload"
+      as="image"
+      href={heroImage.src}
+      fetchpriority="high"
+    />
     <!-- SEO Meta Tags -->
     <meta name="keywords" content={keywords} />
     <link rel="canonical" href={canonicalURL} />
@@ -66,11 +75,31 @@ const schemaStones = quarstone.map((stone: Stone) => ({
     stones={schemaStones}
   />
 
-  <main class="py-20 pt-24">
-    <div class="container mx-auto px-4">
-      <h1 class="text-4xl md:text-5xl font-bold text-center mb-4">
-        Quartzstone
-      </h1>
+  <main class="pt-20">
+    <!-- Hero Banner con Imagen Real de Mesón en Quartzstone -->
+    <section class="relative h-80 md:h-[450px] flex items-center justify-center overflow-hidden bg-marmoles-black text-white mb-12">
+      <div class="absolute inset-0 z-0">
+        <img
+          src={heroImage.src}
+          srcset={heroImage.srcSet}
+          sizes={heroImage.sizes}
+          alt="Mesón de cocina instalado en cuarzo Quartzstone Blanco Polar de alta calidad en Cali"
+          class="w-full h-full object-cover opacity-50"
+          width="1200"
+          height="450"
+          fetchpriority="high"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-marmoles-black via-marmoles-black/40 to-transparent"></div>
+      </div>
+      <div class="container mx-auto px-4 z-10 text-center">
+        <h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-2">
+          Quartzstone
+        </h1>
+        <p class="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto font-light">
+          Cuarzo de ingeniería premium para cocinas y baños de alta durabilidad en Cali
+        </p>
+      </div>
+    </section>
 
       <!-- Features como subtítulo -->
       <div class="max-w-5xl mx-auto mb-12">
