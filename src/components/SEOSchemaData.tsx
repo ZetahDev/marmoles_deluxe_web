@@ -70,16 +70,11 @@ const createCollectionSchema = (props: SEOSchemaDataProps): SchemaData => {
         "@type": "ListItem",
         position: index + 1,
         item: {
-          "@type": "Product",
+          "@type": "Thing",
           name: stone.name,
           image: stone.image,
           description: `${category} - ${stone.name}`,
-          category,
           url: pageUrl,
-          brand: {
-            "@type": "Brand",
-            name: category,
-          },
         },
       })),
     },
