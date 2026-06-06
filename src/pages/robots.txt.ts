@@ -1,4 +1,4 @@
-const siteUrl = "https://marmolesdeluxe.com";
+const siteUrl = "https://www.marmolesdeluxe.com";
 
 export function GET() {
   const body = [
