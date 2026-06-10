@@ -1,4 +1,4 @@
-﻿import { fetchDesignImagesFromAdminApi } from "../api/adminCatalog";
+import { fetchDesignImagesFromAdminApi } from "../api/adminCatalog";
 import { normalizeText, slugify } from "../utils";
 import cloudinaryIndex from "../../data/cloudinary-index.json";
 
@@ -162,13 +162,30 @@ export async function fetchPublicCatalogData(): Promise<PublicCatalogData | null
       return null;
     }
     const payload = await response.json();
+    const data = payload?.data ?? null;
+    if (data) {
+      if (data.families && !data.categories) {
+        data.categories = data.families;
+      }
+      if (data.products && data.products.length > 0) {
+        data.products = data.products.map((p: any) => {
+          if (p.family_id && !p.category_id) {
+            return {
+              ...p,
+              category_id: p.family_id,
+            };
+          }
+          return p;
+        });
+      }
+    }
     console.log("[catalog] fetchPublicCatalogData:success", {
-      categories: payload?.data?.categories?.length ?? 0,
-      products: payload?.data?.products?.length ?? 0,
-      media: payload?.data?.media?.length ?? 0,
-      generatedAt: payload?.data?.generatedAt ?? null,
+      categories: data?.categories?.length ?? 0,
+      products: data?.products?.length ?? 0,
+      media: data?.media?.length ?? 0,
+      generatedAt: data?.generatedAt ?? null,
     });
-    return payload?.data ?? null;
+    return data;
   } catch (error) {
     console.error("[catalog] fetchPublicCatalogData:error", error);
     console.error("Error consultando catalogo API. Usando cloudinary-index.json:", error);
