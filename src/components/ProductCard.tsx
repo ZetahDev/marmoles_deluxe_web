@@ -73,7 +73,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   }, [materialLabel, metros, precioCalculado, unidad]);
 
   const handleWhatsAppClick = useCallback(() => {
-    const message = `Hola, estoy interesado en obtener mas informacion sobre la piedra sinterizada: ${materialLabel}.`;
+    const message = `Hola, quiero información sobre el siguiente material: ${materialLabel}.`;
 
     openWhatsAppTracked(
       `https://wa.me/+573132592793?text=${encodeURIComponent(message)}`,
